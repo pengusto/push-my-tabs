@@ -2,6 +2,8 @@
 
 Layout-aware keyboard shortcuts for switching and moving tabs in Chrome and Firefox.
 
+See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
+
 ## Current status
 
 The shared Manifest V3 core, Chrome package, Firefox manifest, popup, options page, presets, and local-only settings are implemented. Store icons, final branding, and manual browser QA remain before publishing.
@@ -17,6 +19,7 @@ The shared Manifest V3 core, Chrome package, Firefox manifest, popup, options pa
 
 ```sh
 node layout.test.mjs
+node api.test.mjs
 node background.test.mjs
 jq empty manifest.json manifest.firefox.json
 ```

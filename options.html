@@ -41,9 +41,9 @@
           <option value="custom">Benutzerdefiniert</option>
         </select>
       </label>
-      <label>
+      <label class="toggle-row">
         <span>Tabwechsel</span>
-        <span><input id="wrap" type="checkbox"> Am Listenende weiterspringen</span>
+        <span class="toggle-control"><input id="wrap" type="checkbox"> Am Listenende weiterspringen</span>
       </label>
       </div>
     </section>
@@ -54,14 +54,14 @@
         <p>Lege für beide Tab-Layouts eine eigene Richtung fest.</p>
       </div>
       <div class="grid">
-        <div>
-          <h2>Horizontal</h2>
+        <fieldset class="mapping-group">
+          <legend>Horizontal</legend>
           <div class="mapping" data-layout="horizontal"></div>
-        </div>
-        <div>
-          <h2>Vertikal</h2>
+        </fieldset>
+        <fieldset class="mapping-group">
+          <legend>Vertikal</legend>
           <div class="mapping" data-layout="vertical"></div>
-        </div>
+        </fieldset>
       </div>
     </section>
 
