@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "TabCompass",
+  "version": "0.1.0",
+  "description": "Switch and move tabs with arrow-key shortcuts that follow Chrome's tab layout.",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tab layout",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png"
+    }
+  },
+  "commands": {
+    "arrow-left": {
+      "suggested_key": {
+        "default": "Alt+Left",
+        "mac": "Command+Left"
+      },
+      "description": "Use the left arrow action"
+    },
+    "arrow-right": {
+      "suggested_key": {
+        "default": "Alt+Right",
+        "mac": "Command+Right"
+      },
+      "description": "Use the right arrow action"
+    },
+    "arrow-up": {
+      "suggested_key": {
+        "default": "Alt+Up",
+        "mac": "Command+Up"
+      },
+      "description": "Use the up arrow action"
+    },
+    "arrow-down": {
+      "suggested_key": {
+        "default": "Alt+Down",
+        "mac": "Command+Down"
+      },
+      "description": "Use the down arrow action"
+    }
+  }
+}

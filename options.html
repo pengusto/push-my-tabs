@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TabCompass – Einstellungen</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="options">
+    <header class="options-header">
+      <div class="brand">
+        <img class="brand-mark" src="assets/icons/icon-32.png" alt="">
+        <div>
+          <strong>TabCompass</strong>
+          <p>Tab-Navigation, die der Richtung folgt.</p>
+        </div>
+      </div>
+      <h1>Einstellungen</h1>
+    </header>
+
+    <section class="card">
+      <div class="section-heading">
+        <h2>Layout &amp; Verhalten</h2>
+        <p>Bestimme, wie Richtungstasten interpretiert werden.</p>
+      </div>
+      <div class="grid">
+      <label>
+        Layout-Modus
+        <select id="layout-mode">
+          <option value="auto">Automatisch</option>
+          <option value="horizontal">Horizontal</option>
+          <option value="vertical">Vertikal</option>
+        </select>
+      </label>
+      <label>
+        Shortcut-Preset
+        <select id="preset">
+          <option value="adaptive">Layout folgen</option>
+          <option value="horizontal">Immer horizontal</option>
+          <option value="vertical">Immer vertikal</option>
+          <option value="custom">Benutzerdefiniert</option>
+        </select>
+      </label>
+      <label>
+        <span>Tabwechsel</span>
+        <span><input id="wrap" type="checkbox"> Am Listenende weiterspringen</span>
+      </label>
+      </div>
+    </section>
+
+    <section class="card" id="custom-section">
+      <div class="section-heading">
+        <h2>Eigenes Preset</h2>
+        <p>Lege für beide Tab-Layouts eine eigene Richtung fest.</p>
+      </div>
+      <div class="grid">
+        <div>
+          <h2>Horizontal</h2>
+          <div class="mapping" data-layout="horizontal"></div>
+        </div>
+        <div>
+          <h2>Vertikal</h2>
+          <div class="mapping" data-layout="vertical"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <h2>Befehlstasten</h2>
+        <p id="shortcut-help"></p>
+      </div>
+      <div id="shortcuts"></div>
+      <button id="shortcut-settings">Befehlstasten ändern</button>
+      <p id="shortcut-status" class="status" role="status"></p>
+    </section>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

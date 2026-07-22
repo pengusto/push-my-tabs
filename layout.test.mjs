@@ -1,0 +1,33 @@
+import assert from "node:assert/strict";
+import { DEFAULT_SETTINGS, detectLayout, nextIndex, selectedAction } from "./layout.js";
+
+assert.equal(detectLayout(1400, 900, 1390, 780), "horizontal");
+assert.equal(detectLayout(1400, 900, 1160, 830), "vertical");
+assert.equal(selectedAction(DEFAULT_SETTINGS, "horizontal", "arrow-left"), "switchBackward");
+assert.equal(selectedAction(DEFAULT_SETTINGS, "vertical", "arrow-left"), "moveBackward");
+
+for (const command of ["arrow-left", "arrow-right", "arrow-up", "arrow-down"]) {
+  assert.equal(
+    selectedAction({ ...DEFAULT_SETTINGS, presetId: "horizontal" }, "vertical", command),
+    selectedAction(DEFAULT_SETTINGS, "horizontal", command)
+  );
+  assert.equal(
+    selectedAction({ ...DEFAULT_SETTINGS, presetId: "vertical" }, "horizontal", command),
+    selectedAction(DEFAULT_SETTINGS, "vertical", command)
+  );
+}
+
+const custom = {
+  ...DEFAULT_SETTINGS,
+  presetId: "custom",
+  customPreset: {
+    ...DEFAULT_SETTINGS.customPreset,
+    vertical: { ...DEFAULT_SETTINGS.customPreset.vertical, "arrow-left": "none" }
+  }
+};
+assert.equal(selectedAction(custom, "vertical", "arrow-left"), "none");
+assert.equal(nextIndex(0, -1, 4, true), 3);
+assert.equal(nextIndex(0, -1, 4, false), 0);
+assert.equal(nextIndex(3, 1, 4, false), 3);
+
+console.log("layout checks passed");

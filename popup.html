@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TabCompass</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="popup">
+    <header class="brand">
+      <img class="brand-mark" src="assets/icons/icon-32.png" alt="">
+      <strong>TabCompass</strong>
+    </header>
+
+    <p id="detected" class="layout-status">Layout wird erkannt …</p>
+
+    <label>
+      Layout-Modus
+      <select id="layout-mode">
+        <option value="auto">Automatisch</option>
+        <option value="horizontal">Horizontal</option>
+        <option value="vertical">Vertikal</option>
+      </select>
+    </label>
+
+    <label>
+      Shortcut-Preset
+      <select id="preset">
+        <option value="adaptive">Layout folgen</option>
+        <option value="horizontal">Immer horizontal</option>
+        <option value="vertical">Immer vertikal</option>
+        <option value="custom">Benutzerdefiniert</option>
+      </select>
+    </label>
+
+    <section class="mapping-preview" aria-label="Aktuelle Tastenbelegung">
+      <p>Aktuelle Zuordnung</p>
+      <div id="mapping-preview"></div>
+    </section>
+
+    <button id="options" class="secondary">Weitere Einstellungen</button>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
