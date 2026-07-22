@@ -8,6 +8,10 @@ See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 
 The shared Manifest V3 core, Chrome package, Firefox manifest, popup, options page, presets, and local-only settings are implemented. Store icons, final branding, and manual browser QA remain before publishing.
 
+## Languages
+
+Chrome and Firefox automatically select the extension language from the browser UI locale. The settings page also offers a manual language override. TabCompass includes English, German, Spanish, French, Brazilian Portuguese, Italian, Polish, Turkish, Japanese, Simplified Chinese, Arabic, Russian, Ukrainian, Kurdish (Kurmanji), and Dari Persian. Unsupported browser locales fall back to English.
+
 ## Local Chrome test
 
 1. Open `chrome://extensions`.
@@ -21,6 +25,7 @@ The shared Manifest V3 core, Chrome package, Firefox manifest, popup, options pa
 node layout.test.mjs
 node api.test.mjs
 node background.test.mjs
+node i18n.test.mjs
 jq empty manifest.json manifest.firefox.json
 ```
 

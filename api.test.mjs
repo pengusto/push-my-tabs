@@ -16,6 +16,7 @@ const { loadSettings } = await import("./api.js");
 const settings = await loadSettings();
 
 assert.equal(settings.layoutMode, "vertical");
+assert.equal(settings.locale, "browser");
 assert.equal(settings.presetId, DEFAULT_SETTINGS.presetId);
 assert.equal(settings.customPreset.horizontal["arrow-left"], "none");
 assert.equal(settings.customPreset.horizontal["arrow-right"], "switchForward");

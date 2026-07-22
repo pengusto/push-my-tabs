@@ -6,6 +6,7 @@ All notable user-facing changes to TabCompass are documented here.
 
 ### Added
 
+- Added automatic browser-language support and a manual language selector for 15 languages, including Arabic and Dari Persian with right-to-left layout and Kurdish (Kurmanji).
 - Switch or move tabs with four browser-managed directional shortcuts.
 - Choose automatic, forced horizontal, or forced vertical tab layout behavior.
 - Use three built-in shortcut presets or configure separate custom mappings for horizontal and vertical layouts.

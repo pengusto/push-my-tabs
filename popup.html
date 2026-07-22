@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TabCompass</title>
+    <title data-i18n="extensionName">TabCompass</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body class="popup">
@@ -12,33 +12,33 @@
       <strong>TabCompass</strong>
     </header>
 
-    <p id="detected" class="layout-status">Layout wird erkannt …</p>
+    <p id="detected" class="layout-status" data-i18n="layoutDetecting">Detecting layout…</p>
 
     <label>
-      Layout-Modus
+      <span>↔️ <span data-i18n="layoutModeLabel">Layout mode</span></span>
       <select id="layout-mode">
-        <option value="auto">Automatisch</option>
-        <option value="horizontal">Horizontal</option>
-        <option value="vertical">Vertikal</option>
+        <option value="auto" data-icon="✦" data-i18n="layoutAuto">Automatic</option>
+        <option value="horizontal" data-icon="↔" data-i18n="layoutHorizontal">Horizontal</option>
+        <option value="vertical" data-icon="↕" data-i18n="layoutVertical">Vertical</option>
       </select>
     </label>
 
     <label>
-      Shortcut-Preset
+      <span>⌨️ <span data-i18n="presetLabel">Shortcut preset</span></span>
       <select id="preset">
-        <option value="adaptive">Layout folgen</option>
-        <option value="horizontal">Immer horizontal</option>
-        <option value="vertical">Immer vertikal</option>
-        <option value="custom">Benutzerdefiniert</option>
+        <option value="adaptive" data-icon="✦" data-i18n="presetAdaptive">Follow layout</option>
+        <option value="horizontal" data-icon="↔" data-i18n="presetHorizontal">Always horizontal</option>
+        <option value="vertical" data-icon="↕" data-i18n="presetVertical">Always vertical</option>
+        <option value="custom" data-icon="⚙" data-i18n="presetCustom">Custom</option>
       </select>
     </label>
 
-    <section class="mapping-preview" aria-label="Aktuelle Tastenbelegung">
-      <p>Aktuelle Zuordnung</p>
+    <section class="mapping-preview" aria-label="Current key mapping" data-i18n-aria-label="currentMappingAriaLabel">
+      <p data-i18n="currentMapping">Current mapping</p>
       <div id="mapping-preview"></div>
     </section>
 
-    <button id="options" class="secondary">Weitere Einstellungen</button>
+    <button id="options" class="secondary" data-i18n="moreSettings">More settings</button>
     <script type="module" src="popup.js"></script>
   </body>
 </html>

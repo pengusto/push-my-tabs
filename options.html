@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TabCompass – Einstellungen</title>
+    <title data-i18n="optionsTitle">TabCompass – Settings</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body class="options">
@@ -12,54 +12,75 @@
         <img class="brand-mark" src="assets/icons/icon-32.png" alt="">
         <div>
           <strong>TabCompass</strong>
-          <p>Tab-Navigation, die der Richtung folgt.</p>
+          <p data-i18n="tagline">Tab navigation that follows direction.</p>
         </div>
       </div>
-      <h1>Einstellungen</h1>
+      <h1 data-i18n="settingsHeading">Settings</h1>
     </header>
 
     <section class="card">
       <div class="section-heading">
-        <h2>Layout &amp; Verhalten</h2>
-        <p>Bestimme, wie Richtungstasten interpretiert werden.</p>
+        <h2 data-i18n="layoutBehaviorHeading">Layout &amp; behavior</h2>
+        <p data-i18n="layoutBehaviorDescription">Choose how directional commands are interpreted.</p>
       </div>
       <div class="grid">
       <label>
-        Layout-Modus
-        <select id="layout-mode">
-          <option value="auto">Automatisch</option>
-          <option value="horizontal">Horizontal</option>
-          <option value="vertical">Vertikal</option>
+        <span class="field-label"><img src="assets/icons/language.svg" alt=""> <span data-i18n="languageLabel">Language</span> (Language)</span>
+        <select id="language" class="language-select">
+          <option value="browser" data-icon-src="assets/icons/browser-language.svg" data-i18n="languageBrowser">Browser language</option>
+          <option value="en" data-icon="🇬🇧">English</option>
+          <option value="de" data-icon="🇩🇪">Deutsch (German)</option>
+          <option value="es" data-icon="🇪🇸">Español (Spanish)</option>
+          <option value="fr" data-icon="🇫🇷">Français (French)</option>
+          <option value="pt_BR" data-icon="🇧🇷">Português, Brasil (Portuguese, Brazil)</option>
+          <option value="it" data-icon="🇮🇹">Italiano (Italian)</option>
+          <option value="pl" data-icon="🇵🇱">Polski (Polish)</option>
+          <option value="tr" data-icon="🇹🇷">Türkçe (Turkish)</option>
+          <option value="ja" data-icon="🇯🇵">日本語 (Japanese)</option>
+          <option value="zh_CN" data-icon="🇨🇳">简体中文 (Simplified Chinese)</option>
+          <option value="ar" data-icon="🇸🇦">العربية (Arabic)</option>
+          <option value="ru" data-icon="🇷🇺">Русский (Russian)</option>
+          <option value="uk" data-icon="🇺🇦">Українська (Ukrainian)</option>
+          <option value="ku" data-icon-src="assets/icons/kurdistan-language.png">Kurdî, Kurmancî (Kurdish, Kurmanji)</option>
+          <option value="fa" data-icon="🇦🇫">فارسی، دری (Dari Persian)</option>
         </select>
       </label>
       <label>
-        Shortcut-Preset
+        <span>↔️ <span data-i18n="layoutModeLabel">Layout mode</span></span>
+        <select id="layout-mode">
+          <option value="auto" data-icon="✦" data-i18n="layoutAuto">Automatic</option>
+          <option value="horizontal" data-icon="↔" data-i18n="layoutHorizontal">Horizontal</option>
+          <option value="vertical" data-icon="↕" data-i18n="layoutVertical">Vertical</option>
+        </select>
+      </label>
+      <label>
+        <span>⌨️ <span data-i18n="presetLabel">Shortcut preset</span></span>
         <select id="preset">
-          <option value="adaptive">Layout folgen</option>
-          <option value="horizontal">Immer horizontal</option>
-          <option value="vertical">Immer vertikal</option>
-          <option value="custom">Benutzerdefiniert</option>
+          <option value="adaptive" data-icon="✦" data-i18n="presetAdaptive">Follow layout</option>
+          <option value="horizontal" data-icon="↔" data-i18n="presetHorizontal">Always horizontal</option>
+          <option value="vertical" data-icon="↕" data-i18n="presetVertical">Always vertical</option>
+          <option value="custom" data-icon="⚙" data-i18n="presetCustom">Custom</option>
         </select>
       </label>
       <label class="toggle-row">
-        <span>Tabwechsel</span>
-        <span class="toggle-control"><input id="wrap" type="checkbox"> Am Listenende weiterspringen</span>
+        <span data-i18n="tabSwitchingLabel">Tab switching</span>
+        <span class="toggle-control"><input id="wrap" type="checkbox"> <span data-i18n="wrapSwitchingLabel">Wrap at the ends</span></span>
       </label>
       </div>
     </section>
 
     <section class="card" id="custom-section">
       <div class="section-heading">
-        <h2>Eigenes Preset</h2>
-        <p>Lege für beide Tab-Layouts eine eigene Richtung fest.</p>
+        <h2 data-i18n="customPresetHeading">Custom preset</h2>
+        <p data-i18n="customPresetDescription">Set a separate direction for each tab layout.</p>
       </div>
       <div class="grid">
         <fieldset class="mapping-group">
-          <legend>Horizontal</legend>
+          <legend data-i18n="layoutHorizontal">Horizontal</legend>
           <div class="mapping" data-layout="horizontal"></div>
         </fieldset>
         <fieldset class="mapping-group">
-          <legend>Vertikal</legend>
+          <legend data-i18n="layoutVertical">Vertical</legend>
           <div class="mapping" data-layout="vertical"></div>
         </fieldset>
       </div>
@@ -67,11 +88,11 @@
 
     <section class="card">
       <div class="section-heading">
-        <h2>Befehlstasten</h2>
+        <h2 data-i18n="shortcutsHeading">Command shortcuts</h2>
         <p id="shortcut-help"></p>
       </div>
       <div id="shortcuts"></div>
-      <button id="shortcut-settings">Befehlstasten ändern</button>
+      <button id="shortcut-settings" data-i18n="changeShortcuts">Change command shortcuts</button>
       <p id="shortcut-status" class="status" role="status"></p>
     </section>
 

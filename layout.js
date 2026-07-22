@@ -1,11 +1,11 @@
 export const COMMANDS = ["arrow-left", "arrow-right", "arrow-up", "arrow-down"];
 
 export const ACTIONS = {
-  switchBackward: "Vorherigen Tab aktivieren",
-  switchForward: "Nächsten Tab aktivieren",
-  moveBackward: "Tab zurück verschieben",
-  moveForward: "Tab vor verschieben",
-  none: "Keine Aktion"
+  switchBackward: "actionSwitchBackward",
+  switchForward: "actionSwitchForward",
+  moveBackward: "actionMoveBackward",
+  moveForward: "actionMoveForward",
+  none: "actionNone"
 };
 
 const horizontal = {
@@ -23,12 +23,13 @@ const vertical = {
 };
 
 export const PRESETS = {
-  adaptive: { name: "Layout folgen", horizontal, vertical },
-  horizontal: { name: "Immer horizontal", horizontal, vertical: horizontal },
-  vertical: { name: "Immer vertikal", horizontal: vertical, vertical }
+  adaptive: { horizontal, vertical },
+  horizontal: { horizontal, vertical: horizontal },
+  vertical: { horizontal: vertical, vertical }
 };
 
 export const DEFAULT_SETTINGS = {
+  locale: "browser",
   layoutMode: "auto",
   presetId: "adaptive",
   wrapSwitching: true,
