@@ -2,9 +2,9 @@
 
 ## URLs
 
-- Privacy: https://github.com/enis-uys/TabCompass/blob/main/PRIVACY.md
-- Support: https://github.com/enis-uys/TabCompass/issues
-- Source code: https://github.com/enis-uys/TabCompass
+- Privacy: https://github.com/enis-uys/push-my-tabs/blob/main/PRIVACY.md
+- Support: https://github.com/enis-uys/push-my-tabs/issues
+- Source code: https://github.com/enis-uys/push-my-tabs
 
 ## English
 

@@ -4,6 +4,8 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.0.0 - 2026-07-23
+
 ### Added
 
 - Added automatic browser-language support and a manual language selector for 15 languages, including Arabic and Dari Persian with right-to-left layout and Kurdish (Kurmanji).
