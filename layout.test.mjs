@@ -1,8 +1,17 @@
 import assert from "node:assert/strict";
 import { DEFAULT_SETTINGS, PRESETS, detectLayout, nextIndex, selectedAction } from "./layout.js";
 
-assert.equal(detectLayout(1400, 900, 1390, 780), "horizontal");
-assert.equal(detectLayout(1400, 900, 1160, 830), "vertical");
+const chromeGeometry = [
+  ["vertical expanded", 2560, 1410, 2320, 1329, "vertical"],
+  ["vertical expanded with side panel", 2560, 1410, 1934, 1321, "vertical"],
+  ["vertical collapsed", 2560, 1410, 2504, 1329, "vertical"],
+  ["vertical collapsed with side panel", 2560, 1410, 2118, 1321, "vertical"],
+  ["horizontal", 2560, 1410, 2560, 1289, "horizontal"],
+  ["horizontal with side panel", 2560, 1410, 2174, 1281, "horizontal"]
+];
+for (const [name, windowWidth, windowHeight, tabWidth, tabHeight, expected] of chromeGeometry) {
+  assert.equal(detectLayout(windowWidth, windowHeight, tabWidth, tabHeight), expected, name);
+}
 assert.equal(selectedAction(DEFAULT_SETTINGS, "horizontal", "arrow-left"), "switchBackward");
 assert.equal(selectedAction(DEFAULT_SETTINGS, "vertical", "arrow-left"), "moveBackward");
 

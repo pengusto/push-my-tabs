@@ -30,4 +30,12 @@ node ui.test.mjs
 jq empty manifest.json manifest.firefox.json
 ```
 
+## Chrome release
+
+Node.js 22, `zip`, and `unzip` are required. From a clean checkout, one command runs all checks and creates `dist/tabcompass-chrome-<version>.zip`:
+
+```sh
+./scripts/build-chrome.sh
+```
+
 The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code.
