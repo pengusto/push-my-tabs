@@ -27,7 +27,10 @@ export function enhanceSelect(select) {
   trigger.type = "button";
   trigger.className = "picker-trigger";
   trigger.setAttribute("popovertarget", id);
-  trigger.setAttribute("aria-label", select.getAttribute("aria-label") || select.previousElementSibling?.textContent || "");
+  trigger.setAttribute("aria-controls", id);
+  trigger.setAttribute("aria-expanded", "false");
+  trigger.setAttribute("aria-haspopup", "listbox");
+  const label = select.getAttribute("aria-label") || select.previousElementSibling?.textContent || "";
   const current = document.createElement("span");
   const arrow = document.createElement("span");
   arrow.textContent = "▾";
@@ -38,16 +41,19 @@ export function enhanceSelect(select) {
   menu.id = id;
   menu.className = "picker-menu";
   menu.popover = "auto";
+  menu.setAttribute("role", "listbox");
 
   const buttons = [...select.options].map((option) => {
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.value = option.value;
+    button.setAttribute("role", "option");
     button.append(optionContent(option));
     button.addEventListener("click", () => {
       select.value = option.value;
       select.dispatchEvent(new Event("change", { bubbles: true }));
       menu.hidePopover();
+      trigger.focus();
     });
     menu.append(button);
     return button;
@@ -56,15 +62,40 @@ export function enhanceSelect(select) {
   function sync() {
     const option = select.selectedOptions[0];
     current.replaceChildren(optionContent(option));
-    for (const button of buttons) button.toggleAttribute("aria-current", button.dataset.value === option.value);
+    trigger.setAttribute("aria-label", `${label}: ${option.textContent}`);
+    for (const button of buttons) button.setAttribute("aria-selected", String(button.dataset.value === option.value));
   }
 
-  trigger.addEventListener("click", () => {
+  function positionMenu() {
     const { bottom, left, top, width } = trigger.getBoundingClientRect();
     const menuHeight = Math.min(select.options.length * 40 + 12, 420);
-    menu.style.left = `${Math.max(16, Math.min(left, innerWidth - width - 16))}px`;
+    const menuWidth = Math.min(width, innerWidth - 32);
+    menu.style.left = `${Math.max(16, Math.min(left, innerWidth - menuWidth - 16))}px`;
     menu.style.top = `${bottom + menuHeight + 16 <= innerHeight ? bottom + 8 : Math.max(16, top - menuHeight - 8)}px`;
-    menu.style.width = `${width}px`;
+    menu.style.width = `${menuWidth}px`;
+  }
+
+  trigger.addEventListener("click", positionMenu);
+  trigger.addEventListener("keydown", (event) => {
+    if (!["ArrowDown", "ArrowUp"].includes(event.key)) return;
+    event.preventDefault();
+    positionMenu();
+    if (!menu.matches(":popover-open")) menu.showPopover();
+    buttons[event.key === "ArrowUp" ? buttons.length - 1 : 0].focus();
+  });
+  menu.addEventListener("keydown", (event) => {
+    const index = buttons.indexOf(document.activeElement);
+    const target = event.key === "Home" ? 0
+      : event.key === "End" ? buttons.length - 1
+        : event.key === "ArrowDown" ? (index + 1) % buttons.length
+          : event.key === "ArrowUp" ? (index - 1 + buttons.length) % buttons.length
+            : -1;
+    if (target < 0) return;
+    event.preventDefault();
+    buttons[target].focus();
+  });
+  menu.addEventListener("toggle", ({ newState }) => {
+    trigger.setAttribute("aria-expanded", String(newState === "open"));
   });
   select.addEventListener("change", sync);
   select.hidden = true;

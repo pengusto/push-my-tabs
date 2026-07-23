@@ -26,6 +26,7 @@ node layout.test.mjs
 node api.test.mjs
 node background.test.mjs
 node i18n.test.mjs
+node ui.test.mjs
 jq empty manifest.json manifest.firefox.json
 ```
 

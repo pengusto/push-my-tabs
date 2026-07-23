@@ -26,7 +26,7 @@ body {
 .popup {
   display: grid;
   gap: 16px;
-  width: 360px;
+  width: min(360px, 100vw);
   padding: 20px;
   border: 3px solid var(--line);
   background: var(--canvas);
@@ -158,7 +158,7 @@ select { width: 100%; }
 }
 
 .picker-menu button:hover { background: #292548; }
-.picker-menu button[aria-current="true"] { background: #7c6cff; color: #fff; }
+.picker-menu button[aria-selected="true"] { background: #7c6cff; color: #fff; }
 .picker-menu img, .picker-trigger img { height: 24px; object-fit: contain; width: 24px; }
 .picker-trigger [aria-hidden="true"]:first-child,
 .picker-menu button > [aria-hidden="true"]:first-child {
@@ -189,6 +189,7 @@ input[type="checkbox"] {
 
 input::placeholder { color: var(--muted); opacity: 1; }
 input[readonly] { color: var(--muted); background: var(--control-disabled); }
+.is-unassigned { border-color: var(--accent); border-style: dashed; color: #ddd9ff !important; }
 
 button {
   cursor: pointer;
@@ -206,6 +207,8 @@ button:active { box-shadow: 1px 1px 0 var(--shadow); transform: translate(2px, 2
   color: #fff;
   background: var(--accent-soft);
 }
+
+.shortcut-action { border-color: var(--accent); box-shadow: 4px 4px 0 var(--shadow); }
 
 .card {
   margin-top: 16px;

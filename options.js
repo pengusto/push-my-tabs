@@ -73,9 +73,12 @@ for (const command of commands.filter(({ name }) => COMMANDS.includes(name))) {
   row.className = "shortcut-row";
   row.textContent = commandLabels[command.name];
   const input = document.createElement("input");
-  input.value = command.shortcut || "";
+  const unassigned = !command.shortcut;
+  input.value = command.shortcut || (canEditHere ? "" : message("shortcutUnassigned"));
   input.placeholder = message("shortcutUnassigned");
   input.readOnly = !canEditHere;
+  input.classList.toggle("is-unassigned", unassigned);
+  input.setAttribute("aria-label", `${commandLabels[command.name]}: ${command.shortcut || message("shortcutUnassigned")}`);
   input.addEventListener("change", async () => {
     try {
       await api.commands.update({ name: command.name, shortcut: input.value });
