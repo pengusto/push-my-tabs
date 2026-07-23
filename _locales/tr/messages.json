@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Tarayıcının sekme düzenini izleyen yön kısayollarıyla sekmeler arasında geçiş yapın ve sekmeleri taşıyın." },
   "actionTitle": { "message": "Sekme düzeni" },
   "commandLeftDescription": { "message": "Sol ok eylemini kullan" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Geçerli tuş eşlemesi" },
   "currentMapping": { "message": "Geçerli eşleme" },
   "moreSettings": { "message": "Diğer ayarlar" },
-  "optionsTitle": { "message": "TabCompass – Ayarlar" },
+  "optionsTitle": { "message": "Push My Tabs – Ayarlar" },
   "tagline": { "message": "Yönü izleyen sekme gezintisi." },
   "settingsHeading": { "message": "Ayarlar" },
   "layoutBehaviorHeading": { "message": "Düzen ve davranış" },

@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Cambia e sposta le schede con scorciatoie direzionali che seguono il layout delle schede del browser." },
   "actionTitle": { "message": "Layout delle schede" },
   "commandLeftDescription": { "message": "Usa l’azione freccia sinistra" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Mappatura tasti attuale" },
   "currentMapping": { "message": "Mappatura attuale" },
   "moreSettings": { "message": "Altre impostazioni" },
-  "optionsTitle": { "message": "TabCompass – Impostazioni" },
+  "optionsTitle": { "message": "Push My Tabs – Impostazioni" },
   "tagline": { "message": "Navigazione tra schede che segue la direzione." },
   "settingsHeading": { "message": "Impostazioni" },
   "layoutBehaviorHeading": { "message": "Layout e comportamento" },

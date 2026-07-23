@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Changez et déplacez les onglets avec des raccourcis directionnels adaptés à la disposition du navigateur." },
   "actionTitle": { "message": "Disposition des onglets" },
   "commandLeftDescription": { "message": "Utiliser l’action de la flèche gauche" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Affectation actuelle des touches" },
   "currentMapping": { "message": "Affectation actuelle" },
   "moreSettings": { "message": "Plus de paramètres" },
-  "optionsTitle": { "message": "TabCompass – Paramètres" },
+  "optionsTitle": { "message": "Push My Tabs – Paramètres" },
   "tagline": { "message": "Une navigation par onglets qui suit la direction." },
   "settingsHeading": { "message": "Paramètres" },
   "layoutBehaviorHeading": { "message": "Disposition et comportement" },

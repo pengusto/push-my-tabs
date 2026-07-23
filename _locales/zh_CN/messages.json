@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "使用跟随浏览器标签页布局的方向快捷键切换和移动标签页。" },
   "actionTitle": { "message": "标签页布局" },
   "commandLeftDescription": { "message": "执行左箭头操作" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "当前按键映射" },
   "currentMapping": { "message": "当前映射" },
   "moreSettings": { "message": "更多设置" },
-  "optionsTitle": { "message": "TabCompass – 设置" },
+  "optionsTitle": { "message": "Push My Tabs – 设置" },
   "tagline": { "message": "顺应方向的标签页导航。" },
   "settingsHeading": { "message": "设置" },
   "layoutBehaviorHeading": { "message": "布局与行为" },

@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "بدّل علامات التبويب وانقلها باستخدام اختصارات اتجاهية تتبع تخطيط علامات التبويب في المتصفح." },
   "actionTitle": { "message": "تخطيط علامات التبويب" },
   "commandLeftDescription": { "message": "استخدام إجراء السهم الأيسر" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "تعيين المفاتيح الحالي" },
   "currentMapping": { "message": "التعيين الحالي" },
   "moreSettings": { "message": "المزيد من الإعدادات" },
-  "optionsTitle": { "message": "TabCompass – الإعدادات" },
+  "optionsTitle": { "message": "Push My Tabs – الإعدادات" },
   "tagline": { "message": "تنقل بين علامات التبويب يتبع الاتجاه." },
   "settingsHeading": { "message": "الإعدادات" },
   "layoutBehaviorHeading": { "message": "التخطيط والسلوك" },

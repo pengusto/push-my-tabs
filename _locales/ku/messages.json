@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Bi kurtebirên alî yên li gorî rêzkirina hilpekên gerokê, di nav hilpekan de biguhere û wan bibe." },
   "actionTitle": { "message": "Rêzkirina hilpekan" },
   "commandLeftDescription": { "message": "Çalakiya tîra çepê bi kar bîne" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Nexşeya niha ya bişkokan" },
   "currentMapping": { "message": "Nexşeya niha" },
   "moreSettings": { "message": "Mîhengên din" },
-  "optionsTitle": { "message": "TabCompass – Mîheng" },
+  "optionsTitle": { "message": "Push My Tabs – Mîheng" },
   "tagline": { "message": "Gerandina hilpekan ku alî dişopîne." },
   "settingsHeading": { "message": "Mîheng" },
   "layoutBehaviorHeading": { "message": "Rêzkirin û tevger" },

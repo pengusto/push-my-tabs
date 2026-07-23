@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Switch and move tabs with directional shortcuts that follow the browser's tab layout." },
   "actionTitle": { "message": "Tab layout" },
   "commandLeftDescription": { "message": "Use the left arrow action" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Current key mapping" },
   "currentMapping": { "message": "Current mapping" },
   "moreSettings": { "message": "More settings" },
-  "optionsTitle": { "message": "TabCompass – Settings" },
+  "optionsTitle": { "message": "Push My Tabs – Settings" },
   "tagline": { "message": "Tab navigation that follows direction." },
   "settingsHeading": { "message": "Settings" },
   "layoutBehaviorHeading": { "message": "Layout & behavior" },

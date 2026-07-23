@@ -1,4 +1,4 @@
-# TabCompass
+# Push My Tabs
 
 This context describes how users navigate and rearrange Chrome tabs with layout-aware keyboard shortcuts.
 

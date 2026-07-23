@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "ブラウザのタブ配置に合わせた方向キーのショートカットで、タブの切り替えと移動ができます。" },
   "actionTitle": { "message": "タブの配置" },
   "commandLeftDescription": { "message": "左矢印の操作を実行" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "現在のキー割り当て" },
   "currentMapping": { "message": "現在の割り当て" },
   "moreSettings": { "message": "その他の設定" },
-  "optionsTitle": { "message": "TabCompass – 設定" },
+  "optionsTitle": { "message": "Push My Tabs – 設定" },
   "tagline": { "message": "方向に沿ったタブ操作。" },
   "settingsHeading": { "message": "設定" },
   "layoutBehaviorHeading": { "message": "配置と動作" },

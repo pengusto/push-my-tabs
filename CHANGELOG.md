@@ -1,6 +1,6 @@
 # Changelog
 
-All notable user-facing changes to TabCompass are documented here.
+All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 

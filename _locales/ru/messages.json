@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Переключайте и перемещайте вкладки с помощью клавиш направления, следующих расположению вкладок браузера." },
   "actionTitle": { "message": "Расположение вкладок" },
   "commandLeftDescription": { "message": "Выполнить действие стрелки влево" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Текущее назначение клавиш" },
   "currentMapping": { "message": "Текущее назначение" },
   "moreSettings": { "message": "Другие настройки" },
-  "optionsTitle": { "message": "TabCompass – Настройки" },
+  "optionsTitle": { "message": "Push My Tabs – Настройки" },
   "tagline": { "message": "Навигация по вкладкам следует направлению." },
   "settingsHeading": { "message": "Настройки" },
   "layoutBehaviorHeading": { "message": "Расположение и поведение" },

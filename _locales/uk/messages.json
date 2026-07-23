@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Перемикайте й пересувайте вкладки за допомогою клавіш напрямку, що відповідають розташуванню вкладок браузера." },
   "actionTitle": { "message": "Розташування вкладок" },
   "commandLeftDescription": { "message": "Виконати дію стрілки вліво" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Поточне призначення клавіш" },
   "currentMapping": { "message": "Поточне призначення" },
   "moreSettings": { "message": "Інші налаштування" },
-  "optionsTitle": { "message": "TabCompass – Налаштування" },
+  "optionsTitle": { "message": "Push My Tabs – Налаштування" },
   "tagline": { "message": "Навігація вкладками відповідає напрямку." },
   "settingsHeading": { "message": "Налаштування" },
   "layoutBehaviorHeading": { "message": "Розташування та поведінка" },

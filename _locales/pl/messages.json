@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Przełączaj i przesuwaj karty skrótami kierunkowymi dopasowanymi do układu kart przeglądarki." },
   "actionTitle": { "message": "Układ kart" },
   "commandLeftDescription": { "message": "Użyj działania strzałki w lewo" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Bieżące przypisanie klawiszy" },
   "currentMapping": { "message": "Bieżące przypisanie" },
   "moreSettings": { "message": "Więcej ustawień" },
-  "optionsTitle": { "message": "TabCompass – Ustawienia" },
+  "optionsTitle": { "message": "Push My Tabs – Ustawienia" },
   "tagline": { "message": "Nawigacja po kartach zgodna z kierunkiem." },
   "settingsHeading": { "message": "Ustawienia" },
   "layoutBehaviorHeading": { "message": "Układ i zachowanie" },

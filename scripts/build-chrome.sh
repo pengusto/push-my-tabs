@@ -11,7 +11,7 @@ node ui.test.mjs
 node scripts/validate-release.mjs
 
 version=$(node -p 'require("./manifest.json").version')
-archive="dist/tabcompass-chrome-${version}.zip"
+archive="dist/push-my-tabs-chrome-${version}.zip"
 files=(
   manifest.json
   api.js background.js i18n.js layout.js options.js picker.js popup.js

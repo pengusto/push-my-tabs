@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Cambia y mueve pestañas con atajos direccionales que siguen el diseño de pestañas del navegador." },
   "actionTitle": { "message": "Diseño de pestañas" },
   "commandLeftDescription": { "message": "Usar la acción de flecha izquierda" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Asignación de teclas actual" },
   "currentMapping": { "message": "Asignación actual" },
   "moreSettings": { "message": "Más ajustes" },
-  "optionsTitle": { "message": "TabCompass – Ajustes" },
+  "optionsTitle": { "message": "Push My Tabs – Ajustes" },
   "tagline": { "message": "Navegación por pestañas que sigue la dirección." },
   "settingsHeading": { "message": "Ajustes" },
   "layoutBehaviorHeading": { "message": "Diseño y comportamiento" },

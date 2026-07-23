@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Alterne e move abas com atalhos direcionais que acompanham o layout de abas do navegador." },
   "actionTitle": { "message": "Layout das abas" },
   "commandLeftDescription": { "message": "Usar a ação da seta para a esquerda" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Mapeamento atual de teclas" },
   "currentMapping": { "message": "Mapeamento atual" },
   "moreSettings": { "message": "Mais configurações" },
-  "optionsTitle": { "message": "TabCompass – Configurações" },
+  "optionsTitle": { "message": "Push My Tabs – Configurações" },
   "tagline": { "message": "Navegação entre abas que acompanha a direção." },
   "settingsHeading": { "message": "Configurações" },
   "layoutBehaviorHeading": { "message": "Layout e comportamento" },

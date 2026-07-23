@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "با میان‌برهای جهت‌دار که از چیدمان برگه‌های مرورگر پیروی می‌کنند، میان برگه‌ها جابه‌جا شوید و آن‌ها را حرکت دهید." },
   "actionTitle": { "message": "چیدمان برگه‌ها" },
   "commandLeftDescription": { "message": "اجرای عمل پیکان چپ" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "نگاشت فعلی کلیدها" },
   "currentMapping": { "message": "نگاشت فعلی" },
   "moreSettings": { "message": "تنظیمات بیشتر" },
-  "optionsTitle": { "message": "TabCompass – تنظیمات" },
+  "optionsTitle": { "message": "Push My Tabs – تنظیمات" },
   "tagline": { "message": "پیمایش برگه‌ها مطابق جهت." },
   "settingsHeading": { "message": "تنظیمات" },
   "layoutBehaviorHeading": { "message": "چیدمان و رفتار" },

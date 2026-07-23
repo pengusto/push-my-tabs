@@ -1,5 +1,5 @@
 {
-  "extensionName": { "message": "TabCompass" },
+  "extensionName": { "message": "Push My Tabs" },
   "extensionDescription": { "message": "Wechsle und verschiebe Tabs mit Richtungstasten, die dem Tab-Layout des Browsers folgen." },
   "actionTitle": { "message": "Tab-Layout" },
   "commandLeftDescription": { "message": "Aktion für Pfeil links ausführen" },
@@ -21,7 +21,7 @@
   "currentMappingAriaLabel": { "message": "Aktuelle Tastenbelegung" },
   "currentMapping": { "message": "Aktuelle Zuordnung" },
   "moreSettings": { "message": "Weitere Einstellungen" },
-  "optionsTitle": { "message": "TabCompass – Einstellungen" },
+  "optionsTitle": { "message": "Push My Tabs – Einstellungen" },
   "tagline": { "message": "Tab-Navigation, die der Richtung folgt." },
   "settingsHeading": { "message": "Einstellungen" },
   "layoutBehaviorHeading": { "message": "Layout & Verhalten" },

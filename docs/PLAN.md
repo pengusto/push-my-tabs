@@ -21,7 +21,7 @@
 
 ## 3. Package the Chrome release
 
-- Confirm the final `TabCompass` name is safe enough to publish.
+- Confirm the final `Push My Tabs` name is safe enough to publish.
 - Finish Chrome store screenshots, descriptions, permission rationale, support, and privacy links.
 - Add a deterministic Chrome packaging command and CI checks.
 
@@ -41,7 +41,7 @@
 - Resolve reviewer findings against the same source of truth.
 - Verify the approved listing from a clean profile.
 
-**Gate:** TabCompass is live and installable from the Chrome Web Store.
+**Gate:** Push My Tabs is live and installable from the Chrome Web Store.
 
 ## 6. Deliver Firefox from the shared core
 
@@ -49,7 +49,7 @@
 - Package with pinned Mozilla linting without duplicating product source.
 - Submit the same proven behavior to Firefox Add-ons with its additional permission explained.
 
-**Gate:** TabCompass is live and installable from Firefox Add-ons.
+**Gate:** Push My Tabs is live and installable from Firefox Add-ons.
 
 ## Immediate next action
 

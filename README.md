@@ -1,4 +1,4 @@
-# TabCompass
+# Push My Tabs
 
 Layout-aware keyboard shortcuts for switching and moving tabs in Chrome and Firefox.
 
@@ -10,7 +10,7 @@ The shared Manifest V3 core, Chrome package, Firefox manifest, popup, options pa
 
 ## Languages
 
-Chrome and Firefox automatically select the extension language from the browser UI locale. The settings page also offers a manual language override. TabCompass includes English, German, Spanish, French, Brazilian Portuguese, Italian, Polish, Turkish, Japanese, Simplified Chinese, Arabic, Russian, Ukrainian, Kurdish (Kurmanji), and Dari Persian. Unsupported browser locales fall back to English.
+Chrome and Firefox automatically select the extension language from the browser UI locale. The settings page also offers a manual language override. Push My Tabs includes English, German, Spanish, French, Brazilian Portuguese, Italian, Polish, Turkish, Japanese, Simplified Chinese, Arabic, Russian, Ukrainian, Kurdish (Kurmanji), and Dari Persian. Unsupported browser locales fall back to English.
 
 ## Local Chrome test
 
@@ -32,7 +32,7 @@ jq empty manifest.json manifest.firefox.json
 
 ## Chrome release
 
-Node.js 22, `zip`, and `unzip` are required. From a clean checkout, one command runs all checks and creates `dist/tabcompass-chrome-<version>.zip`:
+Node.js 22, `zip`, and `unzip` are required. From a clean checkout, one command runs all checks and creates `dist/push-my-tabs-chrome-<version>.zip`:
 
 ```sh
 ./scripts/build-chrome.sh
