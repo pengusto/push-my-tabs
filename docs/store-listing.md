@@ -26,6 +26,8 @@ Chrome does not expose its tab-strip orientation to extensions. Automatic mode t
 
 Push My Tabs is free, advertising-free, local-only, and open source under the MIT License. It has no accounts, analytics, telemetry, remote code, host permissions, or content scripts. It does not read page content, URLs, or browsing history. Only extension settings are stored in local browser storage.
 
+Support: https://github.com/enis-uys/push-my-tabs/issues
+
 ### Permission explanations
 
 **Chrome — `storage`:** Saves the selected layout mode, shortcut preset, custom mapping, tab-switching preference, and language preference locally in the browser.
@@ -63,6 +65,8 @@ Push My Tabs gibt browserverwalteten Richtungstasten eine Belegung, die zum sich
 Chrome stellt Erweiterungen die Ausrichtung der Tab-Leiste nicht bereit. Der automatische Modus nutzt deshalb die Geometrie des Browserfensters und kann eine geöffnete Seitenleiste mit vertikalen Tabs verwechseln. In diesem Fall lässt sich im Popup Horizontal oder Vertikal fest vorgeben. Firefox liest stattdessen die offizielle Browser-Einstellung für vertikale Tabs.
 
 Push My Tabs ist kostenlos, werbefrei, lokal und unter der MIT-Lizenz quelloffen. Es gibt keine Konten, Analysen, Telemetrie, extern geladenen Code, Host-Berechtigungen oder Content-Skripte. Die Erweiterung liest weder Seiteninhalte noch URLs oder den Browserverlauf. Nur Erweiterungseinstellungen werden im lokalen Browser-Speicher abgelegt.
+
+Support: https://github.com/enis-uys/push-my-tabs/issues
 
 ### Erklärungen der Berechtigungen
 
