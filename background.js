@@ -6,11 +6,16 @@ api.commands.onCommand.addListener(async (command) => {
   if (!activeTab?.id || tabs.length < 2) return;
 
   if (settings.layoutMode === "auto" && isLayoutDetectionAmbiguous(window, activeTab)) {
+    if (!window.focused) {
+      await api.action.setBadgeText({ tabId: activeTab.id, text: "?" });
+      return;
+    }
+
     try {
-      await api.windows.update(window.id, { focused: true });
       await api.action.openPopup({ windowId: window.id });
     } catch (error) {
       console.warn("Could not open layout confirmation:", error);
+      await api.action.setBadgeText({ tabId: activeTab.id, text: "?" });
     }
     return;
   }

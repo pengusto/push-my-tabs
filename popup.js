@@ -19,6 +19,7 @@ const settings = await loadSettings();
 await initializeI18n(settings.locale);
 localizeDocument();
 const { window, activeTab } = await currentContext();
+if (activeTab?.id) await api.action.setBadgeText({ tabId: activeTab.id, text: "" });
 layoutMode.value = settings.layoutMode;
 preset.value = settings.presetId;
 for (const select of [layoutMode, preset]) enhanceSelect(select);
