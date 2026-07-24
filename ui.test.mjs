@@ -14,7 +14,7 @@ for (const name of ["layoutModeLabel", "presetLabel", "currentMappingAriaLabel"]
 assert.match(options, /id="shortcut-settings"/);
 assert.match(options, /data-i18n="changeShortcuts"/);
 assert.match(styles, /\.is-unassigned\s*{/);
-assert.match(styles, /width:\s*min\(360px, 100vw\)/);
+assert.match(styles, /\.popup\s*{[^}]*width:\s*360px/s);
 assert.match(styles, /:focus-visible\s*{/);
 assert.match(picker, /aria-haspopup/);
 assert.match(picker, /aria-selected/);
