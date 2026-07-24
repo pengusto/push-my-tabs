@@ -6,12 +6,17 @@ let tabs = [];
 let updates = [];
 let moves = [];
 let popupOpens = 0;
+let focusedWindows = [];
+let popupOptions;
 
 globalThis.chrome = {
-  action: { openPopup: async () => { popupOpens += 1; } },
+  action: { openPopup: async (options) => { popupOpens += 1; popupOptions = options; } },
   commands: { onCommand: { addListener: (value) => { listener = value; } } },
   storage: { local: { get: async (defaults) => ({ ...defaults, ...settings }) } },
-  windows: { getLastFocused: async () => ({ width: 1400, height: 900, tabs }) },
+  windows: {
+    getLastFocused: async () => ({ id: 42, width: 1400, height: 900, tabs }),
+    update: async (id, properties) => focusedWindows.push([id, properties])
+  },
   tabs: {
     update: async (id, properties) => updates.push([id, properties]),
     move: async (id, properties) => moves.push([id, properties])
@@ -64,6 +69,8 @@ setActive(1);
 tabs = tabs.map((tab) => ({ ...tab, width: 1200, height: 700 }));
 await listener("arrow-left");
 assert.equal(popupOpens, 1);
+assert.deepEqual(focusedWindows, [[42, { focused: true }]]);
+assert.deepEqual(popupOptions, { windowId: 42 });
 assert.deepEqual(updates, []);
 assert.deepEqual(moves, []);
 
