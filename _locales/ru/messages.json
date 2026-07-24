@@ -43,6 +43,8 @@
   "actionNone": { "message": "Нет действия" },
   "layoutDetected": { "message": "Определено расположение: $LAYOUT$", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "Задано расположение: $LAYOUT$", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Определение неточно. Рекомендуется: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Использовать" },
   "shortcutHelpFirefox": { "message": "Firefox позволяет изменять сочетания прямо здесь." },
   "shortcutHelpChrome": { "message": "Chrome управляет сочетаниями команд на странице расширений." },
   "shortcutUnassigned": { "message": "Не назначено" },

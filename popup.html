@@ -14,6 +14,15 @@
 
     <p id="detected" class="layout-status" data-i18n="layoutDetecting">Detecting layout…</p>
 
+    <section id="layout-confirmation" class="layout-choice" aria-live="polite" hidden>
+      <p id="layout-confirmation-text"></p>
+      <div>
+        <button type="button" data-layout="recommended"></button>
+        <button type="button" data-layout="vertical" data-i18n="layoutVertical">Vertical</button>
+        <button type="button" data-layout="horizontal" data-i18n="layoutHorizontal">Horizontal</button>
+      </div>
+    </section>
+
     <label>
       <span>↔️ <span data-i18n="layoutModeLabel">Layout mode</span></span>
       <select id="layout-mode">

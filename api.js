@@ -33,3 +33,15 @@ export async function detectedLayout(window, activeTab) {
 
   return detectLayout(window.width, window.height, activeTab.width, activeTab.height);
 }
+
+export function isLayoutDetectionAmbiguous(window, activeTab) {
+  if (api.browserSettings?.verticalTabs) return false;
+  if (window.width == null || window.height == null || activeTab?.width == null || activeTab.height == null) return true;
+
+  return window.width - activeTab.width >= 40 && window.height - activeTab.height > 100;
+}
+
+export function recommendedAmbiguousLayout(window, activeTab) {
+  const sideChrome = window.width - activeTab.width;
+  return sideChrome / window.width >= 0.16 ? "vertical" : "horizontal";
+}

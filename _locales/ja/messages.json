@@ -43,6 +43,8 @@
   "actionNone": { "message": "操作なし" },
   "layoutDetected": { "message": "$LAYOUT$配置を検出", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "$LAYOUT$配置に固定", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "判定が不確かです。推奨: $LAYOUT$。", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "推奨を使用" },
   "shortcutHelpFirefox": { "message": "Firefoxではここでショートカットを直接編集できます。" },
   "shortcutHelpChrome": { "message": "Chromeでは拡張機能ページでコマンドのショートカットを管理します。" },
   "shortcutUnassigned": { "message": "未割り当て" },

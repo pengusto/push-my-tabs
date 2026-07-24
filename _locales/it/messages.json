@@ -43,6 +43,8 @@
   "actionNone": { "message": "Nessuna azione" },
   "layoutDetected": { "message": "Layout $LAYOUT$ rilevato", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "Layout $LAYOUT$ forzato", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Rilevamento incerto. Consigliato: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Usa consiglio" },
   "shortcutHelpFirefox": { "message": "Firefox consente di modificare le scorciatoie direttamente qui." },
   "shortcutHelpChrome": { "message": "Chrome gestisce le scorciatoie dei comandi nella pagina delle estensioni." },
   "shortcutUnassigned": { "message": "Non assegnata" },

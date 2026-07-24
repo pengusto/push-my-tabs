@@ -11,6 +11,10 @@ const [popup, options, picker, styles] = await Promise.all([
 for (const name of ["layoutModeLabel", "presetLabel", "currentMappingAriaLabel"]) {
   assert.match(popup, new RegExp(name), `popup must expose ${name}`);
 }
+assert.match(popup, /id="layout-confirmation"/);
+assert.match(popup, /data-layout="recommended"/);
+assert.match(popup, /data-layout="vertical"/);
+assert.match(popup, /data-layout="horizontal"/);
 assert.match(options, /id="shortcut-settings"/);
 assert.match(options, /data-i18n="changeShortcuts"/);
 assert.match(styles, /\.is-unassigned\s*{/);

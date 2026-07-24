@@ -5,6 +5,7 @@ const chrome = JSON.parse(await readFile("manifest.json", "utf8"));
 const firefox = JSON.parse(await readFile("manifest.firefox.json", "utf8"));
 
 assert.deepEqual(chrome.permissions, ["storage"]);
+assert.equal(chrome.minimum_chrome_version, "127");
 assert.deepEqual(firefox.permissions, ["storage", "browserSettings"]);
 for (const manifest of [chrome, firefox]) {
   assert.equal(manifest.manifest_version, 3);

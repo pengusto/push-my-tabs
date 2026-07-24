@@ -1,9 +1,14 @@
-import { api, currentContext, detectedLayout, loadSettings } from "./api.js";
+import { api, currentContext, detectedLayout, isLayoutDetectionAmbiguous, loadSettings } from "./api.js";
 import { nextIndex, selectedAction } from "./layout.js";
 
 api.commands.onCommand.addListener(async (command) => {
   const [{ window, tabs, activeTab }, settings] = await Promise.all([currentContext(), loadSettings()]);
   if (!activeTab?.id || tabs.length < 2) return;
+
+  if (settings.layoutMode === "auto" && isLayoutDetectionAmbiguous(window, activeTab)) {
+    await api.action.openPopup().catch(() => {});
+    return;
+  }
 
   const layout = settings.layoutMode === "auto"
     ? await detectedLayout(window, activeTab)

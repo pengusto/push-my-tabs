@@ -43,6 +43,8 @@
   "actionNone": { "message": "Eylem yok" },
   "layoutDetected": { "message": "$LAYOUT$ düzen algılandı", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "$LAYOUT$ düzen zorlandı", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Algılama belirsiz. Önerilen: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Öneriyi kullan" },
   "shortcutHelpFirefox": { "message": "Firefox kısayolları doğrudan burada düzenlemenizi sağlar." },
   "shortcutHelpChrome": { "message": "Chrome komut kısayollarını uzantılar sayfasında yönetir." },
   "shortcutUnassigned": { "message": "Atanmamış" },

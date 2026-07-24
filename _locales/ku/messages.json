@@ -43,6 +43,8 @@
   "actionNone": { "message": "Çalakî tune" },
   "layoutDetected": { "message": "Rêzkirina $LAYOUT$ hat dîtin", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "Rêzkirina $LAYOUT$ hat sepandin", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Naskirin ne diyar e. Pêşniyar: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Pêşniyar bikar bîne" },
   "shortcutHelpFirefox": { "message": "Firefox dihêle ku hûn kurtebiran rasterast li vir biguherînin." },
   "shortcutHelpChrome": { "message": "Chrome kurtebirên fermanan di rûpela pêvekan de bi rê ve dibe." },
   "shortcutUnassigned": { "message": "Nehatiye destnîşankirin" },

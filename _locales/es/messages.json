@@ -43,6 +43,8 @@
   "actionNone": { "message": "Sin acción" },
   "layoutDetected": { "message": "Diseño $LAYOUT$ detectado", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "Diseño $LAYOUT$ forzado", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Detección incierta. Recomendado: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Usar recomendación" },
   "shortcutHelpFirefox": { "message": "Firefox permite editar los atajos directamente aquí." },
   "shortcutHelpChrome": { "message": "Chrome administra los atajos de comandos en su página de extensiones." },
   "shortcutUnassigned": { "message": "Sin asignar" },

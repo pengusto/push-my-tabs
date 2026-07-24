@@ -43,6 +43,8 @@
   "actionNone": { "message": "No action" },
   "layoutDetected": { "message": "$LAYOUT$ detected", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "$LAYOUT$ forced", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Detection uncertain. Recommended: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Use recommendation" },
   "shortcutHelpFirefox": { "message": "Firefox lets you edit shortcuts directly here." },
   "shortcutHelpChrome": { "message": "Chrome manages command shortcuts on its extensions page." },
   "shortcutUnassigned": { "message": "Not assigned" },

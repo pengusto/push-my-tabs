@@ -43,6 +43,8 @@
   "actionNone": { "message": "Без дії" },
   "layoutDetected": { "message": "Визначено розташування: $LAYOUT$", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "Задано розташування: $LAYOUT$", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Визначення неточне. Рекомендовано: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Застосувати" },
   "shortcutHelpFirefox": { "message": "Firefox дозволяє змінювати сполучення безпосередньо тут." },
   "shortcutHelpChrome": { "message": "Chrome керує сполученнями команд на сторінці розширень." },
   "shortcutUnassigned": { "message": "Не призначено" },

@@ -43,6 +43,8 @@
   "actionNone": { "message": "无操作" },
   "layoutDetected": { "message": "检测到$LAYOUT$布局", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "已强制使用$LAYOUT$布局", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "检测不确定。建议：$LAYOUT$。", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "使用建议" },
   "shortcutHelpFirefox": { "message": "Firefox允许直接在此编辑快捷键。" },
   "shortcutHelpChrome": { "message": "Chrome在扩展程序页面管理命令快捷键。" },
   "shortcutUnassigned": { "message": "未分配" },

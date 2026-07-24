@@ -43,6 +43,8 @@
   "actionNone": { "message": "Nenhuma ação" },
   "layoutDetected": { "message": "Layout $LAYOUT$ detectado", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "Layout $LAYOUT$ forçado", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Detecção incerta. Recomendado: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Usar recomendação" },
   "shortcutHelpFirefox": { "message": "O Firefox permite editar os atalhos diretamente aqui." },
   "shortcutHelpChrome": { "message": "O Chrome gerencia os atalhos de comando na página de extensões." },
   "shortcutUnassigned": { "message": "Não atribuído" },

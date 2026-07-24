@@ -5,8 +5,10 @@ let settings = { layoutMode: "horizontal", presetId: "adaptive", wrapSwitching: 
 let tabs = [];
 let updates = [];
 let moves = [];
+let popupOpens = 0;
 
 globalThis.chrome = {
+  action: { openPopup: async () => { popupOpens += 1; } },
   commands: { onCommand: { addListener: (value) => { listener = value; } } },
   storage: { local: { get: async (defaults) => ({ ...defaults, ...settings }) } },
   windows: { getLastFocused: async () => ({ width: 1400, height: 900, tabs }) },
@@ -54,6 +56,14 @@ assert.deepEqual(moves, []);
 setActive(0, 1);
 await listener("arrow-right");
 await listener("arrow-down");
+assert.deepEqual(updates, []);
+assert.deepEqual(moves, []);
+
+settings = { layoutMode: "auto", presetId: "adaptive", wrapSwitching: true };
+setActive(1);
+tabs = tabs.map((tab) => ({ ...tab, width: 1200, height: 700 }));
+await listener("arrow-left");
+assert.equal(popupOpens, 1);
 assert.deepEqual(updates, []);
 assert.deepEqual(moves, []);
 

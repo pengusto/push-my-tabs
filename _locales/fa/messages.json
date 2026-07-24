@@ -43,6 +43,8 @@
   "actionNone": { "message": "بدون عمل" },
   "layoutDetected": { "message": "چیدمان $LAYOUT$ تشخیص شد", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "چیدمان $LAYOUT$ اجباری شد", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "تشخیص نامطمئن است. پیشنهاد: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "استفاده از پیشنهاد" },
   "shortcutHelpFirefox": { "message": "Firefox اجازه می‌دهد میان‌برها را مستقیماً اینجا ویرایش کنید." },
   "shortcutHelpChrome": { "message": "Chrome میان‌برهای فرمان را در صفحه افزونه‌ها مدیریت می‌کند." },
   "shortcutUnassigned": { "message": "تعیین نشده" },

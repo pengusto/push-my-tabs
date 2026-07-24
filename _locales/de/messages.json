@@ -43,6 +43,8 @@
   "actionNone": { "message": "Keine Aktion" },
   "layoutDetected": { "message": "$LAYOUT$ erkannt", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "$LAYOUT$ erzwungen", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Erkennung unsicher. Empfohlen: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Empfehlung" },
   "shortcutHelpFirefox": { "message": "Firefox erlaubt die Bearbeitung direkt hier." },
   "shortcutHelpChrome": { "message": "Chrome verwaltet Befehlstasten auf seiner Erweiterungsseite." },
   "shortcutUnassigned": { "message": "Nicht belegt" },

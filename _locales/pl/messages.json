@@ -43,6 +43,8 @@
   "actionNone": { "message": "Brak działania" },
   "layoutDetected": { "message": "Wykryto układ: $LAYOUT$", "placeholders": { "layout": { "content": "$1" } } },
   "layoutForced": { "message": "Wymuszony układ: $LAYOUT$", "placeholders": { "layout": { "content": "$1" } } },
+  "layoutUncertain": { "message": "Wykrywanie niepewne. Zalecane: $LAYOUT$.", "placeholders": { "layout": { "content": "$1" } } },
+  "useRecommendation": { "message": "Użyj zalecenia" },
   "shortcutHelpFirefox": { "message": "Firefox pozwala edytować skróty bezpośrednio tutaj." },
   "shortcutHelpChrome": { "message": "Chrome zarządza skrótami poleceń na stronie rozszerzeń." },
   "shortcutUnassigned": { "message": "Nieprzypisany" },
