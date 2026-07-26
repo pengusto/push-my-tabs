@@ -1,6 +1,14 @@
-# Push My Tabs
-
-Layout-aware keyboard shortcuts for switching and moving tabs in Chrome and Firefox from one shared core.
+<table>
+  <tr>
+    <td width="184" align="center">
+      <img src="docs/assets/molebyte-pixel.gif" alt="Molebyte waves while holding a browser tab" width="168">
+    </td>
+    <td>
+      <h1>Push My Tabs</h1>
+      <p>Layout-aware keyboard shortcuts for switching and moving tabs in Chrome and Firefox from one shared core.</p>
+    </td>
+  </tr>
+</table>
 
 See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 

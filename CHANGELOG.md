@@ -4,6 +4,10 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Added
+
+- Introduce Molebyte as the Push My Tabs mascot in the README and optional Chrome Web Store promotional artwork.
+
 ## 1.0.2 - 2026-07-26
 
 ### Added
