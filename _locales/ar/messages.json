@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "يدير Chrome اختصارات الأوامر في صفحة الإضافات." },
   "shortcutUnassigned": { "message": "غير معيّن" },
   "shortcutSaved": { "message": "تم حفظ اختصار الأمر." },
-  "shortcutSaveFailed": { "message": "تعذر حفظ الاختصار: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "تعذر حفظ الاختصار: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "احفظ هذه الأبعاد للاكتشاف التلقائي." },
+  "rememberSite": { "message": "تذكر لـ $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "هذا المسار فقط" },
+  "learnedSitesHeading": { "message": "المواقع المتعلمة" },
+  "learnedSitesDescription": { "message": "الأبعاد المحفوظة المستخدمة للاكتشاف التلقائي." },
+  "geometryMeasure": { "message": "فارق المتصفح: جانبي $SIDE$ بكسل · علوي $TOP$ بكسل", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

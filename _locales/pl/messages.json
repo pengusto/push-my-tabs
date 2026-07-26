@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome zarządza skrótami poleceń na stronie rozszerzeń." },
   "shortcutUnassigned": { "message": "Nieprzypisany" },
   "shortcutSaved": { "message": "Skrót polecenia zapisany." },
-  "shortcutSaveFailed": { "message": "Nie udało się zapisać skrótu: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Nie udało się zapisać skrótu: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Zapisz te wymiary do automatycznego wykrywania." },
+  "rememberSite": { "message": "Zapamiętaj dla $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Tylko ta ścieżka" },
+  "learnedSitesHeading": { "message": "Zapamiętane witryny" },
+  "learnedSitesDescription": { "message": "Zapisane wymiary używane do automatycznego wykrywania." },
+  "geometryMeasure": { "message": "Odstęp przeglądarki: bok $SIDE$ px · góra $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

@@ -22,7 +22,7 @@ export function enhanceSelect(select) {
   const picker = document.createElement("div");
   picker.className = "picker";
   picker.classList.toggle("picker--language", select.classList.contains("language-select"));
-
+  picker.classList.toggle("picker--icon", select.classList.contains("icon-select"));
   const trigger = document.createElement("button");
   trigger.type = "button";
   trigger.className = "picker-trigger";

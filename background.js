@@ -1,11 +1,13 @@
-import { api, currentContext, detectedLayout, isLayoutDetectionAmbiguous, loadSettings } from "./api.js";
+import { api, currentContext, layoutDetection, loadSettings } from "./api.js";
 import { nextIndex, selectedAction } from "./layout.js";
 
 api.commands.onCommand.addListener(async (command) => {
   const [{ window, tabs, activeTab }, settings] = await Promise.all([currentContext(), loadSettings()]);
-  if (!activeTab?.id || tabs.length < 2) return;
+  if (!activeTab?.id) return;
+  const layoutMode = settings.layoutMode;
+  const detection = layoutMode === "auto" ? await layoutDetection(window, activeTab, settings) : null;
 
-  if (settings.layoutMode === "auto" && isLayoutDetectionAmbiguous(window, activeTab)) {
+  if (detection?.confidence === "uncertain") {
     if (!window.focused) {
       await api.action.setBadgeText({ tabId: activeTab.id, text: "?" });
       return;
@@ -20,9 +22,10 @@ api.commands.onCommand.addListener(async (command) => {
     return;
   }
 
-  const layout = settings.layoutMode === "auto"
-    ? await detectedLayout(window, activeTab)
-    : settings.layoutMode;
+  if (tabs.length < 2) return;
+
+  const layout = detection?.layout ?? layoutMode;
+  if (!layout) return;
   const action = selectedAction(settings, layout, command);
   const offset = action.endsWith("Backward") ? -1 : 1;
 

@@ -11,7 +11,7 @@
     "48": "assets/icons/icon-48.png",
     "128": "assets/icons/icon-128.png"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab"],
   "background": {
     "service_worker": "background.js",
     "type": "module"

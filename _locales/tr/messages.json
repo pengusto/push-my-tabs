@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome komut kısayollarını uzantılar sayfasında yönetir." },
   "shortcutUnassigned": { "message": "Atanmamış" },
   "shortcutSaved": { "message": "Komut kısayolu kaydedildi." },
-  "shortcutSaveFailed": { "message": "Kısayol kaydedilemedi: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Kısayol kaydedilemedi: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Bu ölçüleri otomatik algılama için kaydet." },
+  "rememberSite": { "message": "$SITE$ için hatırla", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Yalnızca bu yol" },
+  "learnedSitesHeading": { "message": "Öğrenilen siteler" },
+  "learnedSitesDescription": { "message": "Otomatik algılamada kullanılan kayıtlı ölçüler." },
+  "geometryMeasure": { "message": "Tarayıcı boşluğu: yan $SIDE$ px · üst $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

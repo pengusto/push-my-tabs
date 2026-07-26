@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chromeでは拡張機能ページでコマンドのショートカットを管理します。" },
   "shortcutUnassigned": { "message": "未割り当て" },
   "shortcutSaved": { "message": "コマンドのショートカットを保存しました。" },
-  "shortcutSaveFailed": { "message": "ショートカットを保存できませんでした: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "ショートカットを保存できませんでした: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "自動検出用にこの寸法を保存します。" },
+  "rememberSite": { "message": "$SITE$ 用に記憶", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "このパスのみ" },
+  "learnedSitesHeading": { "message": "学習済みサイト" },
+  "learnedSitesDescription": { "message": "自動検出に使用する保存済み寸法です。" },
+  "geometryMeasure": { "message": "ブラウザー差分: 横 $SIDE$ px・上 $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

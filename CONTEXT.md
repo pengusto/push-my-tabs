@@ -24,6 +24,14 @@ _Avoid_: Preset, tab position
 The horizontal or vertical orientation inferred from the current Chrome window and active tab geometry when Layout Mode is automatic.
 _Avoid_: Chrome setting, saved layout
 
+**Site Layout Profile**:
+A local mapping from rounded browser geometry to a confirmed layout for either an exact origin or an exact path. It improves automatic detection without overriding the global Layout Mode.
+_Avoid_: Forced site mode, URL history, content rule
+
+**Layout Hint**:
+A locally stored confirmation for one rounded Chrome window/tab geometry. A site or path profile takes precedence over a global hint; both can be removed from settings.
+_Avoid_: Guaranteed detection, forced site mode
+
 **Layout Mapping**:
 The horizontal or vertical half of a Shortcut Preset. Every preset contains both mappings, including the Custom Preset.
 _Avoid_: Layout mode, shortcut set

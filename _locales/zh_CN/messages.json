@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome在扩展程序页面管理命令快捷键。" },
   "shortcutUnassigned": { "message": "未分配" },
   "shortcutSaved": { "message": "命令快捷键已保存。" },
-  "shortcutSaveFailed": { "message": "无法保存快捷键：$ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "无法保存快捷键：$ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "保存这些尺寸以用于自动检测。" },
+  "rememberSite": { "message": "记住 $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "仅此路径" },
+  "learnedSitesHeading": { "message": "已学习的网站" },
+  "learnedSitesDescription": { "message": "用于自动检测的已保存尺寸。" },
+  "geometryMeasure": { "message": "浏览器间距：侧边 $SIDE$ px · 顶部 $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

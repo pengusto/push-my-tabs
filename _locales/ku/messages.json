@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome kurtebirên fermanan di rûpela pêvekan de bi rê ve dibe." },
   "shortcutUnassigned": { "message": "Nehatiye destnîşankirin" },
   "shortcutSaved": { "message": "Kurtebira fermanê hat tomarkirin." },
-  "shortcutSaveFailed": { "message": "Kurtebir nehat tomarkirin: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Kurtebir nehat tomarkirin: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Van pîvanan ji bo tespîtkirina bixweber tomar bike." },
+  "rememberSite": { "message": "Ji bo $SITE$ bi bîr bîne", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Tenê vê rêçê" },
+  "learnedSitesHeading": { "message": "Malperên hînbûyî" },
+  "learnedSitesDescription": { "message": "Pîvanên tomarkirî ji bo tespîtkirina bixweber." },
+  "geometryMeasure": { "message": "Navbera gerokê: kêlek $SIDE$ px · jor $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

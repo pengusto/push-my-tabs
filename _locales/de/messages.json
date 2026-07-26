@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome verwaltet Befehlstasten auf seiner Erweiterungsseite." },
   "shortcutUnassigned": { "message": "Nicht belegt" },
   "shortcutSaved": { "message": "Befehlstaste gespeichert." },
-  "shortcutSaveFailed": { "message": "Befehlstaste konnte nicht gespeichert werden: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Befehlstaste konnte nicht gespeichert werden: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Diese Maße für die automatische Erkennung speichern." },
+  "rememberSite": { "message": "Für $SITE$ merken", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Gesamten Pfad" },
+  "learnedSitesHeading": { "message": "Gelernte Seiten" },
+  "learnedSitesDescription": { "message": "Gespeicherte Maße für die automatische Erkennung." },
+  "geometryMeasure": { "message": "Browser-Abstand: seitlich $SIDE$ px · oben $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

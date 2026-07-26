@@ -28,6 +28,7 @@ Chrome and Firefox automatically select the extension language from the browser 
 node layout.test.mjs
 node api.test.mjs
 node background.test.mjs
+node firefox.test.mjs
 node i18n.test.mjs
 node ui.test.mjs
 jq empty manifest.json manifest.firefox.json
@@ -43,4 +44,4 @@ Node.js 22, `zip`, and `unzip` are required. From a clean checkout, one command 
 
 Tagged releases and their matching Chrome archives are available on the [GitHub Releases page](https://github.com/enis-uys/push-my-tabs/releases).
 
-The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code.
+The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code. Its `activeTab` permission temporarily exposes only the current tab after a shortcut or popup action, allowing local geometry profiles for its origin or exact path.

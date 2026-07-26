@@ -12,7 +12,7 @@ globalThis.chrome = {
   }
 };
 
-const { isLayoutDetectionAmbiguous, loadSettings, recommendedAmbiguousLayout } = await import("./api.js");
+const { detectedLayout, isLayoutDetectionAmbiguous, layoutDetection, loadSettings, recommendedAmbiguousLayout } = await import("./api.js");
 const settings = await loadSettings();
 
 assert.equal(settings.layoutMode, "vertical");
@@ -37,5 +37,23 @@ assert.equal(recommendedAmbiguousLayout(
   { width: 2560 },
   { width: 2174 }
 ), "horizontal");
+assert.equal(await detectedLayout({ width: 1400, height: 900 }, { width: undefined, height: undefined }), null);
+assert.equal(recommendedAmbiguousLayout({ width: 1400 }, { width: undefined }), null);
+assert.deepEqual(await layoutDetection(
+  { width: 1512, height: 864 },
+  { width: 1156, height: 661 },
+  { layoutHints: { "360:200": "horizontal" } }
+), { layout: "horizontal", confidence: "remembered", key: "360:200" });
+assert.deepEqual(await layoutDetection(
+  { width: 1512, height: 864 },
+  { width: 1156, height: 661, url: "https://example.com/a" },
+  {
+    layoutHints: { "360:200": "horizontal" },
+    siteProfiles: {
+      "https://example.com": { "360:200": "vertical" },
+      "https://example.com/a": { "360:200": "horizontal" }
+    }
+  }
+), { layout: "horizontal", confidence: "remembered", key: "360:200" });
 
 console.log("settings checks passed");

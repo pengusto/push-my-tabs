@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome gestisce le scorciatoie dei comandi nella pagina delle estensioni." },
   "shortcutUnassigned": { "message": "Non assegnata" },
   "shortcutSaved": { "message": "Scorciatoia del comando salvata." },
-  "shortcutSaveFailed": { "message": "Impossibile salvare la scorciatoia: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Impossibile salvare la scorciatoia: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Salva queste dimensioni per il rilevamento automatico." },
+  "rememberSite": { "message": "Ricorda per $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Solo questo percorso" },
+  "learnedSitesHeading": { "message": "Siti appresi" },
+  "learnedSitesDescription": { "message": "Dimensioni salvate per il rilevamento automatico." },
+  "geometryMeasure": { "message": "Spazio del browser: laterale $SIDE$ px · superiore $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

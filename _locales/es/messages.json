@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome administra los atajos de comandos en su página de extensiones." },
   "shortcutUnassigned": { "message": "Sin asignar" },
   "shortcutSaved": { "message": "Atajo de comando guardado." },
-  "shortcutSaveFailed": { "message": "No se pudo guardar el atajo: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "No se pudo guardar el atajo: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Guardar estas dimensiones para la detección automática." },
+  "rememberSite": { "message": "Recordar para $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Solo esta ruta" },
+  "learnedSitesHeading": { "message": "Sitios aprendidos" },
+  "learnedSitesDescription": { "message": "Dimensiones guardadas para la detección automática." },
+  "geometryMeasure": { "message": "Margen del navegador: lateral $SIDE$ px · superior $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

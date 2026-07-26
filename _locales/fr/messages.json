@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome gère les raccourcis de commande sur sa page des extensions." },
   "shortcutUnassigned": { "message": "Non attribué" },
   "shortcutSaved": { "message": "Raccourci de commande enregistré." },
-  "shortcutSaveFailed": { "message": "Impossible d’enregistrer le raccourci : $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Impossible d’enregistrer le raccourci : $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Enregistrer ces dimensions pour la détection automatique." },
+  "rememberSite": { "message": "Mémoriser pour $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Uniquement ce chemin" },
+  "learnedSitesHeading": { "message": "Sites mémorisés" },
+  "learnedSitesDescription": { "message": "Dimensions enregistrées pour la détection automatique." },
+  "geometryMeasure": { "message": "Écart du navigateur : côté $SIDE$ px · haut $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

@@ -6,6 +6,7 @@ cd "$(dirname "$0")/.."
 node layout.test.mjs
 node api.test.mjs
 node background.test.mjs
+node firefox.test.mjs
 node i18n.test.mjs
 node ui.test.mjs
 node scripts/validate-release.mjs

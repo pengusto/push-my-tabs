@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome manages command shortcuts on its extensions page." },
   "shortcutUnassigned": { "message": "Not assigned" },
   "shortcutSaved": { "message": "Command shortcut saved." },
-  "shortcutSaveFailed": { "message": "Could not save shortcut: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Could not save shortcut: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Save these dimensions for automatic detection." },
+  "rememberSite": { "message": "Remember for $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Only this path" },
+  "learnedSitesHeading": { "message": "Learned sites" },
+  "learnedSitesDescription": { "message": "Saved dimensions used by automatic detection." },
+  "geometryMeasure": { "message": "Browser gap: side $SIDE$ px · top $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

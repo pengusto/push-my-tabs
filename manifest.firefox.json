@@ -10,7 +10,7 @@
     "48": "assets/icons/icon-48.png",
     "128": "assets/icons/icon-128.png"
   },
-  "permissions": ["storage", "browserSettings"],
+  "permissions": ["storage", "activeTab", "browserSettings"],
   "background": {
     "scripts": ["background.js"],
     "type": "module"

@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "O Chrome gerencia os atalhos de comando na página de extensões." },
   "shortcutUnassigned": { "message": "Não atribuído" },
   "shortcutSaved": { "message": "Atalho de comando salvo." },
-  "shortcutSaveFailed": { "message": "Não foi possível salvar o atalho: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Não foi possível salvar o atalho: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Salvar estas dimensões para detecção automática." },
+  "rememberSite": { "message": "Lembrar para $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Somente este caminho" },
+  "learnedSitesHeading": { "message": "Sites aprendidos" },
+  "learnedSitesDescription": { "message": "Dimensões salvas usadas pela detecção automática." },
+  "geometryMeasure": { "message": "Espaço do navegador: lateral $SIDE$ px · superior $TOP$ px", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

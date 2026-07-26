@@ -32,6 +32,32 @@
       </select>
     </label>
 
+    <section id="site-learning" class="site-learning" hidden>
+      <p id="site-learning-copy"></p>
+      <div class="site-scope" data-scope="origin">
+        <button id="remember-site" type="button"></button>
+        <div class="site-profile-edit" hidden>
+          <span class="site-profile-label"></span>
+          <select class="icon-select" aria-label="Site layout">
+            <option value="horizontal">↔</option>
+            <option value="vertical">↕</option>
+          </select>
+          <button class="remove-profile" type="button">×</button>
+        </div>
+      </div>
+      <div class="site-scope" data-scope="path">
+        <button id="remember-path" type="button" data-i18n="rememberPath">Only this path</button>
+        <div class="site-profile-edit" hidden>
+          <span class="site-profile-label"></span>
+          <select class="icon-select" aria-label="Path layout">
+            <option value="horizontal">↔</option>
+            <option value="vertical">↕</option>
+          </select>
+          <button class="remove-profile" type="button">×</button>
+        </div>
+      </div>
+    </section>
+
     <label>
       <span>⌨️ <span data-i18n="presetLabel">Shortcut preset</span></span>
       <select id="preset">

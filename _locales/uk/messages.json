@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome керує сполученнями команд на сторінці розширень." },
   "shortcutUnassigned": { "message": "Не призначено" },
   "shortcutSaved": { "message": "Сполучення команди збережено." },
-  "shortcutSaveFailed": { "message": "Не вдалося зберегти сполучення: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Не вдалося зберегти сполучення: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Зберегти ці розміри для автоматичного визначення." },
+  "rememberSite": { "message": "Запам’ятати для $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Лише цей шлях" },
+  "learnedSitesHeading": { "message": "Вивчені сайти" },
+  "learnedSitesDescription": { "message": "Збережені розміри для автоматичного визначення." },
+  "geometryMeasure": { "message": "Відступ браузера: збоку $SIDE$ пкс · зверху $TOP$ пкс", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

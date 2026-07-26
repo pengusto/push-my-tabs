@@ -4,6 +4,23 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Added
+
+- Remember the current browser geometry for a whole site or only the current path directly from the popup.
+- Reuse site and path confirmations in automatic mode and manage learned profiles in settings.
+
+### Fixed
+
+- Keep uncertain New-Tab geometry from silently falling back to horizontal or losing its popup/badge recovery path when only one tab is open.
+- Keep the site and path learning buttons visible for forced layouts and while confirming an uncertain automatic result.
+- Edit or remove the current site and path profile directly in the popup with compact layout arrows.
+- Keep the popup stable instead of reloading and resizing when its first site profile is saved.
+- Align layout status arrows with the text and save the current geometry together with the active layout setting.
+- Remove the redundant status dot and increase the centered layout arrow for readability.
+- Show every saved profile's geometry and layout in settings instead of hiding it behind a count.
+- Show the current saved geometry directly in the extension popup's site and path editor.
+- Label saved geometry as browser side and top gaps instead of presenting it as a page size.
+
 ## 1.0.0 - 2026-07-23
 
 ### Added

@@ -36,6 +36,45 @@ preset.addEventListener("change", async () => {
 wrap.addEventListener("change", () => api.storage.local.set({ wrapSwitching: wrap.checked }));
 for (const select of [language, layoutMode, preset]) enhanceSelect(select);
 
+const siteProfiles = document.querySelector("#site-profiles");
+for (const [profile, hints] of Object.entries(settings.siteProfiles).sort(([a], [b]) => a.localeCompare(b))) {
+  const row = document.createElement("div");
+  row.className = "site-profile";
+  const data = document.createElement("div");
+  data.className = "site-profile-data";
+  const name = document.createElement("code");
+  name.textContent = profile;
+  const dimensions = document.createElement("div");
+  dimensions.className = "site-profile-dimensions";
+  for (const [key, layout] of Object.entries(hints)) {
+    const dimension = document.createElement("span");
+    dimension.textContent = `${layout === "vertical" ? "↕" : "↔"} ${message("geometryMeasure", key.split(":"))}`;
+    dimensions.append(dimension);
+  }
+  data.append(name, dimensions);
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.textContent = "×";
+  remove.setAttribute("aria-label", `${profile} ×`);
+  remove.addEventListener("click", async () => {
+    delete settings.siteProfiles[profile];
+    await api.storage.local.set({ siteProfiles: settings.siteProfiles });
+    row.remove();
+    document.querySelector("#site-profiles-section").hidden = siteProfiles.children.length === 0;
+  });
+  row.append(data, remove);
+  siteProfiles.append(row);
+}
+document.querySelector("#site-profiles-section").hidden = siteProfiles.children.length === 0;
+
+const autoDetectionSection = document.querySelector("#auto-detection-section");
+autoDetectionSection.hidden = Object.keys(settings.layoutHints).length === 0;
+document.querySelector("#clear-layout-hints").addEventListener("click", async () => {
+  settings.layoutHints = {};
+  await api.storage.local.set({ layoutHints: {} });
+  autoDetectionSection.hidden = true;
+});
+
 for (const layout of ["horizontal", "vertical"]) {
   const container = document.querySelector(`[data-layout="${layout}"]`);
   for (const command of COMMANDS) {

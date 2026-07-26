@@ -24,7 +24,7 @@ Push My Tabs gives browser-managed arrow-key shortcuts a direction that matches 
 
 Chrome does not expose its tab-strip orientation to extensions. Automatic mode therefore uses browser-window geometry and can mistake an open side panel for vertical tabs. If that happens, choose Horizontal or Vertical in the popup. Firefox reads the browser's official vertical-tabs setting instead.
 
-Push My Tabs is free, advertising-free, local-only, and open source under the MIT License. It has no accounts, analytics, telemetry, remote code, host permissions, or content scripts. It does not read page content, URLs, or browsing history. Only extension settings are stored in local browser storage.
+Push My Tabs is free, advertising-free, local-only, and open source under the MIT License. It has no accounts, analytics, telemetry, remote code, host permissions, or content scripts. It reads the active site's origin or exact path only after a shortcut or popup action to apply a local geometry profile; it does not read page content, query parameters, fragments, or browsing history. Only extension settings are stored in local browser storage.
 
 Support: https://github.com/enis-uys/push-my-tabs/issues
 
@@ -32,7 +32,11 @@ Support: https://github.com/enis-uys/push-my-tabs/issues
 
 **Chrome — `storage`:** Saves the selected layout mode, shortcut preset, custom mapping, tab-switching preference, and language preference locally in the browser.
 
+**Chrome — `activeTab`:** Temporarily exposes the current tab's origin or exact path only after a shortcut or popup action so the user can save a local geometry profile. Page content, query parameters, fragments, and browsing history are not read.
+
 **Firefox — `storage`:** Saves the same extension settings locally in the browser.
+
+**Firefox — `activeTab`:** Provides the same temporary current-tab access for local site and path geometry profiles.
 
 **Firefox — `browserSettings`:** Reads Firefox's official vertical-tabs setting so Automatic mode can select the correct horizontal or vertical mapping. Push My Tabs does not change browser settings.
 
@@ -64,7 +68,7 @@ Push My Tabs gibt browserverwalteten Richtungstasten eine Belegung, die zum sich
 
 Chrome stellt Erweiterungen die Ausrichtung der Tab-Leiste nicht bereit. Der automatische Modus nutzt deshalb die Geometrie des Browserfensters und kann eine geöffnete Seitenleiste mit vertikalen Tabs verwechseln. In diesem Fall lässt sich im Popup Horizontal oder Vertikal fest vorgeben. Firefox liest stattdessen die offizielle Browser-Einstellung für vertikale Tabs.
 
-Push My Tabs ist kostenlos, werbefrei, lokal und unter der MIT-Lizenz quelloffen. Es gibt keine Konten, Analysen, Telemetrie, extern geladenen Code, Host-Berechtigungen oder Content-Skripte. Die Erweiterung liest weder Seiteninhalte noch URLs oder den Browserverlauf. Nur Erweiterungseinstellungen werden im lokalen Browser-Speicher abgelegt.
+Push My Tabs ist kostenlos, werbefrei, lokal und unter der MIT-Lizenz quelloffen. Es gibt keine Konten, Analysen, Telemetrie, extern geladenen Code, Host-Berechtigungen oder Content-Skripte. Origin oder exakter Pfad des aktiven Tabs werden nur nach einem Shortcut oder dem Öffnen des Popups gelesen, um ein lokales Geometrieprofil anzuwenden. Seiteninhalte, Query-Parameter, Fragmente und Browserverlauf werden nicht gelesen. Nur Erweiterungseinstellungen werden lokal gespeichert.
 
 Support: https://github.com/enis-uys/push-my-tabs/issues
 
@@ -72,7 +76,11 @@ Support: https://github.com/enis-uys/push-my-tabs/issues
 
 **Chrome — `storage`:** Speichert Layout-Modus, Shortcut-Preset, eigene Zuordnung, Tabwechsel-Einstellung und Spracheinstellung lokal im Browser.
 
+**Chrome — `activeTab`:** Gibt Origin oder exakten Pfad des aktuellen Tabs nur nach einem Shortcut oder einer Popup-Aktion vorübergehend frei, damit der Nutzer ein lokales Geometrieprofil speichern kann. Seiteninhalte, Query-Parameter, Fragmente und Browserverlauf werden nicht gelesen.
+
 **Firefox — `storage`:** Speichert dieselben Erweiterungseinstellungen lokal im Browser.
+
+**Firefox — `activeTab`:** Gewährt denselben vorübergehenden Zugriff auf den aktuellen Tab für lokale Site- und Pfad-Geometrieprofile.
 
 **Firefox — `browserSettings`:** Liest die offizielle Firefox-Einstellung für vertikale Tabs, damit der automatische Modus die passende horizontale oder vertikale Zuordnung wählen kann. Push My Tabs verändert keine Browser-Einstellungen.
 

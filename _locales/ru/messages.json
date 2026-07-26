@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome управляет сочетаниями команд на странице расширений." },
   "shortcutUnassigned": { "message": "Не назначено" },
   "shortcutSaved": { "message": "Сочетание команды сохранено." },
-  "shortcutSaveFailed": { "message": "Не удалось сохранить сочетание: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "Не удалось сохранить сочетание: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "Сохранить эти размеры для автоматического определения." },
+  "rememberSite": { "message": "Запомнить для $SITE$", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "Только этот путь" },
+  "learnedSitesHeading": { "message": "Изученные сайты" },
+  "learnedSitesDescription": { "message": "Сохранённые размеры для автоматического определения." },
+  "geometryMeasure": { "message": "Отступ браузера: сбоку $SIDE$ пкс · сверху $TOP$ пкс", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }

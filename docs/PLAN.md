@@ -53,4 +53,4 @@
 
 ## Immediate next action
 
-Finish the remaining Chrome boundary and preset smoke matrix, then capture real horizontal and vertical geometry for Auto calibration.
+Push the reviewed release candidate, wait for CI, then complete the human release gates: public repository visibility, clean-profile Chrome smoke for the new site-profile flow, refreshed store screenshots, annotated `v1.0.0` tag, GitHub release artifact, and Chrome Web Store submission.

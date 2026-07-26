@@ -49,5 +49,11 @@
   "shortcutHelpChrome": { "message": "Chrome میان‌برهای فرمان را در صفحه افزونه‌ها مدیریت می‌کند." },
   "shortcutUnassigned": { "message": "تعیین نشده" },
   "shortcutSaved": { "message": "میان‌بر فرمان ذخیره شد." },
-  "shortcutSaveFailed": { "message": "ذخیره میان‌بر ممکن نشد: $ERROR$", "placeholders": { "error": { "content": "$1" } } }
+  "shortcutSaveFailed": { "message": "ذخیره میان‌بر ممکن نشد: $ERROR$", "placeholders": { "error": { "content": "$1" } } },
+  "learnLayoutDescription": { "message": "این ابعاد برای تشخیص خودکار ذخیره شوند." },
+  "rememberSite": { "message": "برای $SITE$ به خاطر بسپار", "placeholders": { "site": { "content": "$1" } } },
+  "rememberPath": { "message": "فقط این مسیر" },
+  "learnedSitesHeading": { "message": "سایت‌های یادگرفته‌شده" },
+  "learnedSitesDescription": { "message": "ابعاد ذخیره‌شده برای تشخیص خودکار." },
+  "geometryMeasure": { "message": "فاصله مرورگر: کناری $SIDE$ پیکسل · بالا $TOP$ پیکسل", "placeholders": { "side": { "content": "$1" }, "top": { "content": "$2" } } }
 }
