@@ -36,8 +36,6 @@ Support: https://github.com/pengusto/push-my-tabs/issues
 
 **Firefox — `storage`:** Saves the same extension settings locally in the browser.
 
-**Firefox — `activeTab`:** Provides the same temporary current-tab access for local site and path geometry profiles.
-
 **Firefox — `browserSettings`:** Reads Firefox's official vertical-tabs setting so Automatic mode can select the correct horizontal or vertical mapping. Push My Tabs does not change browser settings.
 
 ### Reviewer instructions
@@ -79,8 +77,6 @@ Support: https://github.com/pengusto/push-my-tabs/issues
 **Chrome — `activeTab`:** Gibt Origin oder exakten Pfad des aktuellen Tabs nur nach einem Shortcut oder einer Popup-Aktion vorübergehend frei, damit der Nutzer ein lokales Geometrieprofil speichern kann. Seiteninhalte, Query-Parameter, Fragmente und Browserverlauf werden nicht gelesen.
 
 **Firefox — `storage`:** Speichert dieselben Erweiterungseinstellungen lokal im Browser.
-
-**Firefox — `activeTab`:** Gewährt denselben vorübergehenden Zugriff auf den aktuellen Tab für lokale Site- und Pfad-Geometrieprofile.
 
 **Firefox — `browserSettings`:** Liest die offizielle Firefox-Einstellung für vertikale Tabs, damit der automatische Modus die passende horizontale oder vertikale Zuordnung wählen kann. Push My Tabs verändert keine Browser-Einstellungen.
 
