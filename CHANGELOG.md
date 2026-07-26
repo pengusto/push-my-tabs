@@ -6,7 +6,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ### Added
 
-- Add an imprint page to the project website.
+- Add imprint and website privacy pages to the project website.
 - Add Firefox 142+ packaging with exact vertical-tab detection and direct command-shortcut editing.
 
 ### Changed
