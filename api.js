@@ -16,6 +16,10 @@ export async function loadSettings() {
   };
 }
 
+export function updateCommandShortcut(name, shortcut) {
+  return api.commands.update({ name, shortcut });
+}
+
 export async function currentContext() {
   const window = await api.windows.getLastFocused({ populate: true });
   const tabs = window.tabs ?? [];

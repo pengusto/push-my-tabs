@@ -1,4 +1,4 @@
-import { api, loadSettings } from "./api.js";
+import { api, loadSettings, updateCommandShortcut } from "./api.js";
 import { initializeI18n, localizeDocument, message } from "./i18n.js";
 import { ACTIONS, COMMANDS } from "./layout.js";
 import { enhanceSelect } from "./picker.js";
@@ -120,7 +120,7 @@ for (const command of commands.filter(({ name }) => COMMANDS.includes(name))) {
   input.setAttribute("aria-label", `${commandLabels[command.name]}: ${command.shortcut || message("shortcutUnassigned")}`);
   input.addEventListener("change", async () => {
     try {
-      await api.commands.update({ name: command.name, shortcut: input.value });
+      await updateCommandShortcut(command.name, input.value);
       document.querySelector("#shortcut-status").textContent = message("shortcutSaved");
     } catch (error) {
       document.querySelector("#shortcut-status").textContent = message("shortcutSaveFailed", error.message);

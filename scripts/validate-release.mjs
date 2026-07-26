@@ -6,7 +6,14 @@ const firefox = JSON.parse(await readFile("manifest.firefox.json", "utf8"));
 
 assert.deepEqual(chrome.permissions, ["storage", "activeTab"]);
 assert.equal(chrome.minimum_chrome_version, "127");
-assert.deepEqual(firefox.permissions, ["storage", "activeTab", "browserSettings"]);
+assert.deepEqual(firefox.permissions, ["storage", "browserSettings"]);
+assert.deepEqual(firefox.browser_specific_settings, {
+  gecko: {
+    id: "push-my-tabs@pengusto.github.io",
+    strict_min_version: "142.0",
+    data_collection_permissions: { required: ["none"] }
+  }
+});
 for (const manifest of [chrome, firefox]) {
   assert.equal(manifest.manifest_version, 3);
   assert.deepEqual(Object.keys(manifest.commands).sort(), ["arrow-down", "arrow-left", "arrow-right", "arrow-up"]);

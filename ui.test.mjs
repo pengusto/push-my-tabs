@@ -34,6 +34,9 @@ assert.doesNotMatch(optionsScript, /Object\.keys\(hints\)\.length/, "internal ge
 assert.match(optionsScript, /message\("geometryMeasure", key\.split\(":"\)\)/, "saved browser gaps must be explained in settings");
 assert.match(optionsScript, /layout === "vertical" \? "↕" : "↔"/);
 assert.match(options, /data-i18n="changeShortcuts"/);
+assert.match(optionsScript, /updateCommandShortcut\(command\.name, input\.value\)/);
+assert.match(optionsScript, /shortcutSaveFailed", error\.message/);
+assert.match(optionsScript, /api\.commands\.openShortcutSettings/);
 assert.match(styles, /\.is-unassigned\s*{/);
 assert.match(styles, /\.popup\s*{[^}]*width:\s*360px/s);
 assert.match(styles, /:focus-visible\s*{/);

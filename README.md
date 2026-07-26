@@ -1,6 +1,6 @@
 # Push My Tabs
 
-Layout-aware keyboard shortcuts for switching and moving tabs in Chrome. Firefox support follows from the same shared core.
+Layout-aware keyboard shortcuts for switching and moving tabs in Chrome and Firefox from one shared core.
 
 See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 
@@ -10,7 +10,7 @@ See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 
 ## Current status
 
-The Chrome extension, release package, branding, store assets, and clean-profile browser QA are ready for release. The shared core and Firefox manifest exist, but Firefox-specific packaging and real-browser validation are still planned.
+Chrome and Firefox release packages share the same tested source. Firefox 142 or newer uses the browser's exact vertical-tabs setting and lets users edit supported command shortcuts directly in the settings page.
 
 ## Languages
 
@@ -43,6 +43,14 @@ Node.js 22, `zip`, and `unzip` are required. From a clean checkout, one command 
 ./scripts/build-chrome.sh
 ```
 
+## Firefox release
+
+Firefox 142 or newer, Node.js 22, `npx`, `zip`, and `unzip` are required. The build runs pinned Mozilla `web-ext` lint. The Firefox package requests only `storage` and `browserSettings`; it declares that no data is collected or transmitted.
+
+```sh
+./scripts/build-firefox.sh
+```
+
 Tagged releases and their matching Chrome archives are available on the [GitHub Releases page](https://github.com/pengusto/push-my-tabs/releases).
 
-The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code. Its `activeTab` permission temporarily exposes only the current tab after a shortcut or popup action, allowing local geometry profiles for its origin or exact path.
+The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code. Chrome's `activeTab` permission temporarily exposes only the current tab after a shortcut or popup action, allowing local geometry profiles for its origin or exact path. Firefox does not request that permission or read page data.
