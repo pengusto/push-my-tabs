@@ -5,7 +5,7 @@ Layout-aware keyboard shortcuts for switching and moving tabs in Chrome. Firefox
 See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 
 - [Privacy](PRIVACY.md)
-- [Support](https://github.com/enis-uys/push-my-tabs/issues)
+- [Support](https://github.com/pengusto/push-my-tabs/issues)
 
 ## Current status
 
@@ -42,6 +42,6 @@ Node.js 22, `zip`, and `unzip` are required. From a clean checkout, one command 
 ./scripts/build-chrome.sh
 ```
 
-Tagged releases and their matching Chrome archives are available on the [GitHub Releases page](https://github.com/enis-uys/push-my-tabs/releases).
+Tagged releases and their matching Chrome archives are available on the [GitHub Releases page](https://github.com/pengusto/push-my-tabs/releases).
 
 The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code. Its `activeTab` permission temporarily exposes only the current tab after a shortcut or popup action, allowing local geometry profiles for its origin or exact path.

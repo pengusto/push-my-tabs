@@ -2,9 +2,9 @@
 
 ## URLs
 
-- Privacy: https://github.com/enis-uys/push-my-tabs/blob/main/PRIVACY.md
-- Support: https://github.com/enis-uys/push-my-tabs/issues
-- Source code: https://github.com/enis-uys/push-my-tabs
+- Privacy: https://github.com/pengusto/push-my-tabs/blob/main/PRIVACY.md
+- Support: https://github.com/pengusto/push-my-tabs/issues
+- Source code: https://github.com/pengusto/push-my-tabs
 
 ## English
 
@@ -26,7 +26,7 @@ Chrome does not expose its tab-strip orientation to extensions. Automatic mode t
 
 Push My Tabs is free, advertising-free, local-only, and open source under the MIT License. It has no accounts, analytics, telemetry, remote code, host permissions, or content scripts. It reads the active site's origin or exact path only after a shortcut or popup action to apply a local geometry profile; it does not read page content, query parameters, fragments, or browsing history. Only extension settings are stored in local browser storage.
 
-Support: https://github.com/enis-uys/push-my-tabs/issues
+Support: https://github.com/pengusto/push-my-tabs/issues
 
 ### Permission explanations
 
@@ -70,7 +70,7 @@ Chrome stellt Erweiterungen die Ausrichtung der Tab-Leiste nicht bereit. Der aut
 
 Push My Tabs ist kostenlos, werbefrei, lokal und unter der MIT-Lizenz quelloffen. Es gibt keine Konten, Analysen, Telemetrie, extern geladenen Code, Host-Berechtigungen oder Content-Skripte. Origin oder exakter Pfad des aktiven Tabs werden nur nach einem Shortcut oder dem Öffnen des Popups gelesen, um ein lokales Geometrieprofil anzuwenden. Seiteninhalte, Query-Parameter, Fragmente und Browserverlauf werden nicht gelesen. Nur Erweiterungseinstellungen werden lokal gespeichert.
 
-Support: https://github.com/enis-uys/push-my-tabs/issues
+Support: https://github.com/pengusto/push-my-tabs/issues
 
 ### Erklärungen der Berechtigungen
 
