@@ -4,6 +4,14 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Added
+
+- Add an imprint page to the project website.
+
+### Changed
+
+- Refresh the extension, website, favicon, and store artwork with the new directional key logo.
+
 ## 1.0.1 - 2026-07-26
 
 ### Added

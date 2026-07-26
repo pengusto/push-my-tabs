@@ -249,6 +249,15 @@ footer p { text-align: center; }
 footer > div { display: flex; justify-content: flex-end; gap: 22px; }
 footer a:hover { color: var(--ink); }
 
+.legal-main { width: min(760px, calc(100% - 40px)); min-height: calc(100vh - 190px); margin: 0 auto; padding: 100px 0 130px; }
+.legal-main h1 { font-size: clamp(48px, 8vw, 76px); }
+.legal-copy { margin-top: 60px; padding-top: 34px; border-top: 1px solid var(--line); }
+.legal-copy h2 { margin: 36px 0 14px; font-size: 22px; letter-spacing: -0.02em; }
+.legal-copy address, .legal-copy p { margin: 0; color: var(--muted); font-style: normal; }
+.legal-copy a { color: var(--violet-bright); }
+.legal-copy a:hover { color: var(--signal); }
+.legal-copy .legal-updated { margin-top: 36px; font: 12px var(--mono); }
+
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; padding-top: 70px; }
   .hero-copy { max-width: 760px; }
@@ -287,6 +296,7 @@ footer a:hover { color: var(--ink); }
   footer { grid-template-columns: 1fr; }
   footer p { text-align: left; }
   footer > div { justify-content: flex-start; }
+  .legal-main { width: min(100% - 28px, 760px); padding: 72px 0 92px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
