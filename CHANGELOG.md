@@ -4,6 +4,8 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.0.2 - 2026-07-26
+
 ### Added
 
 - Add imprint and website privacy pages to the project website.

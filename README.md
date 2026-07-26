@@ -51,6 +51,6 @@ Firefox 142 or newer, Node.js 22, `npx`, `zip`, and `unzip` are required. The bu
 ./scripts/build-firefox.sh
 ```
 
-Tagged releases and their matching Chrome archives are available on the [GitHub Releases page](https://github.com/pengusto/push-my-tabs/releases).
+Tagged releases and their matching Chrome and Firefox archives are available on the [GitHub Releases page](https://github.com/pengusto/push-my-tabs/releases).
 
 The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code. Chrome's `activeTab` permission temporarily exposes only the current tab after a shortcut or popup action, allowing local geometry profiles for its origin or exact path. Firefox does not request that permission or read page data.
