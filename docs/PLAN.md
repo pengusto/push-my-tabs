@@ -31,7 +31,7 @@
 
 - Review the initial history for secrets, local scratch files, and machine-specific paths.
 - Make the repository public under `pengusto` and run CI from a clean checkout.
-- Tag `v1.0.0` and attach the reproducible Chrome archive.
+- Tag each release and attach its reproducible Chrome archive.
 
 **Gate:** public tagged source and the attached Chrome artifact match.
 
@@ -53,4 +53,4 @@
 
 ## Immediate next action
 
-Complete the remaining human release gates: public repository visibility, annotated `v1.0.0` tag, GitHub release artifact, and Chrome Web Store submission.
+Submit the latest tagged Chrome archive to the Chrome Web Store.

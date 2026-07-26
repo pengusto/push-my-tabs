@@ -4,6 +4,8 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.0.1 - 2026-07-26
+
 ### Added
 
 - Remember the current browser geometry for a whole site or only the current path directly from the popup.
@@ -20,6 +22,11 @@ All notable user-facing changes to Push My Tabs are documented here.
 - Show every saved profile's geometry and layout in settings instead of hiding it behind a count.
 - Show the current saved geometry directly in the extension popup's site and path editor.
 - Label saved geometry as browser side and top gaps instead of presenting it as a page size.
+
+### Improved
+
+- Replace the original arrow tile with one clean, small-size-safe logo across the extension, website, favicon, screenshots, and store artwork.
+- Add the interactive GitHub Pages project website.
 
 ## 1.0.0 - 2026-07-23
 
