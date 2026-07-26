@@ -6,6 +6,7 @@ See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 
 - [Privacy](PRIVACY.md)
 - [Support](https://github.com/pengusto/push-my-tabs/issues)
+- [Website](https://pengusto.github.io/push-my-tabs/)
 
 ## Current status
 
