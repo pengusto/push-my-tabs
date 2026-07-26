@@ -30,7 +30,7 @@
 ## 4. Publish the source on GitHub
 
 - Review the initial history for secrets, local scratch files, and machine-specific paths.
-- Publish the repository under `enis-uys` and run CI from a clean checkout.
+- Make the repository public under `pengusto` and run CI from a clean checkout.
 - Tag `v1.0.0` and attach the reproducible Chrome archive.
 
 **Gate:** public tagged source and the attached Chrome artifact match.
@@ -53,4 +53,4 @@
 
 ## Immediate next action
 
-Push the reviewed release candidate, wait for CI, then complete the human release gates: public repository visibility, clean-profile Chrome smoke for the new site-profile flow, refreshed store screenshots, annotated `v1.0.0` tag, GitHub release artifact, and Chrome Web Store submission.
+Complete the remaining human release gates: public repository visibility, annotated `v1.0.0` tag, GitHub release artifact, and Chrome Web Store submission.

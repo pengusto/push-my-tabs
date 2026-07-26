@@ -12,7 +12,9 @@ node ui.test.mjs
 node scripts/validate-release.mjs
 
 version=$(node -p 'require("./manifest.json").version')
-archive="dist/push-my-tabs-chrome-${version}.zip"
+repo_root=$PWD
+archive_rel="dist/push-my-tabs-chrome-${version}.zip"
+archive="$repo_root/$archive_rel"
 files=(
   manifest.json
   api.js background.js i18n.js layout.js options.js picker.js popup.js
@@ -22,15 +24,22 @@ files=(
   _locales/*/messages.json
 )
 
-mkdir -p dist
+mkdir -p "$repo_root/dist"
 rm -f "$archive"
-zip -X -q "$archive" "${files[@]}"
 
+stage=$(mktemp -d)
 expected=$(mktemp)
 actual=$(mktemp)
-trap 'rm -f "$expected" "$actual"' EXIT
+trap 'rm -rf "$stage"; rm -f "$expected" "$actual"' EXIT
+for file in "${files[@]}"; do
+  mkdir -p "$stage/$(dirname "$file")"
+  cp "$file" "$stage/$file"
+  touch -t 200001010000 "$stage/$file"
+done
+(cd "$stage" && zip -X -q "$archive" "${files[@]}")
+
 printf '%s\n' "${files[@]}" | LC_ALL=C sort > "$expected"
 unzip -Z1 "$archive" | LC_ALL=C sort > "$actual"
 diff -u "$expected" "$actual"
 
-echo "built $archive"
+echo "built $archive_rel"
