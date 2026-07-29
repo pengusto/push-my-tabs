@@ -16,7 +16,12 @@ assert.deepEqual(firefox.browser_specific_settings, {
 });
 for (const manifest of [chrome, firefox]) {
   assert.equal(manifest.manifest_version, 3);
-  assert.deepEqual(Object.keys(manifest.commands).sort(), ["arrow-down", "arrow-left", "arrow-right", "arrow-up"]);
+  assert.deepEqual(Object.keys(manifest.commands).sort(), [
+    "arrow-down", "arrow-left", "arrow-right", "arrow-up",
+    "history-back", "history-forward",
+    "new-tab-after", "new-tab-before", "new-tab-end",
+    "recent-tab-quick-switch", "recent-tab-switch", "recent-tab-switch-reverse"
+  ]);
   assert.ok(!manifest.host_permissions);
   assert.ok(!manifest.content_scripts);
   assert.ok(!manifest.externally_connectable);

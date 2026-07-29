@@ -1,10 +1,15 @@
 export const COMMANDS = ["arrow-left", "arrow-right", "arrow-up", "arrow-down"];
+export const HISTORY_COMMANDS = ["history-back", "history-forward"];
+export const TAB_CREATION_COMMANDS = ["new-tab-before", "new-tab-after", "new-tab-end"];
+export const RECENT_TAB_COMMANDS = ["recent-tab-quick-switch", "recent-tab-switch", "recent-tab-switch-reverse"];
 
 export const ACTIONS = {
   switchBackward: "actionSwitchBackward",
   switchForward: "actionSwitchForward",
   moveBackward: "actionMoveBackward",
   moveForward: "actionMoveForward",
+  historyBack: "actionHistoryBack",
+  historyForward: "actionHistoryForward",
   none: "actionNone"
 };
 
@@ -35,6 +40,7 @@ export const DEFAULT_SETTINGS = {
   siteProfiles: {},
   presetId: "adaptive",
   wrapSwitching: true,
+  closeDirection: "forward",
   customPreset: {
     horizontal: { ...horizontal },
     vertical: { ...vertical }

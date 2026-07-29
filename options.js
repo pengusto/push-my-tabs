@@ -1,6 +1,6 @@
 import { api, loadSettings, updateCommandShortcut } from "./api.js";
 import { initializeI18n, localizeDocument, message } from "./i18n.js";
-import { ACTIONS, COMMANDS } from "./layout.js";
+import { ACTIONS, COMMANDS, HISTORY_COMMANDS, RECENT_TAB_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
 import { enhanceSelect } from "./picker.js";
 
 const settings = await loadSettings();
@@ -8,21 +8,23 @@ await initializeI18n(settings.locale);
 localizeDocument();
 
 const commandLabels = {
-  "arrow-left": `← ${message("directionLeft")}`,
-  "arrow-right": `→ ${message("directionRight")}`,
-  "arrow-up": `↑ ${message("directionUp")}`,
-  "arrow-down": `↓ ${message("directionDown")}`
+  "arrow-left": `← ${message("directionLeft")} — ${message("commandLeftDescription")}`,
+  "arrow-right": `→ ${message("directionRight")} — ${message("commandRightDescription")}`,
+  "arrow-up": `↑ ${message("directionUp")} — ${message("commandUpDescription")}`,
+  "arrow-down": `↓ ${message("directionDown")} — ${message("commandDownDescription")}`
 };
 
 const language = document.querySelector("#language");
 const layoutMode = document.querySelector("#layout-mode");
 const preset = document.querySelector("#preset");
 const wrap = document.querySelector("#wrap");
+const closeDirection = document.querySelector("#close-direction");
 language.querySelector('[value="browser"]').textContent = `${message("languageBrowser").replace(/^🌐\s*/, "")} (Browser language)`;
 language.value = settings.locale;
 layoutMode.value = settings.layoutMode;
 preset.value = settings.presetId;
 wrap.checked = settings.wrapSwitching;
+closeDirection.value = settings.closeDirection;
 
 language.addEventListener("change", async () => {
   await api.storage.local.set({ locale: language.value });
@@ -34,7 +36,8 @@ preset.addEventListener("change", async () => {
   showCustomPreset();
 });
 wrap.addEventListener("change", () => api.storage.local.set({ wrapSwitching: wrap.checked }));
-for (const select of [language, layoutMode, preset]) enhanceSelect(select);
+closeDirection.addEventListener("change", () => api.storage.local.set({ closeDirection: closeDirection.value }));
+for (const select of [language, layoutMode, preset, closeDirection]) enhanceSelect(select);
 
 const siteProfiles = document.querySelector("#site-profiles");
 for (const [profile, hints] of Object.entries(settings.siteProfiles).sort(([a], [b]) => a.localeCompare(b))) {
@@ -103,21 +106,54 @@ showCustomPreset();
 const commands = await api.commands.getAll();
 const shortcuts = document.querySelector("#shortcuts");
 const canEditHere = typeof api.commands.update === "function";
+const isMac = navigator.platform.toLowerCase().includes("mac");
+const recommendedShortcuts = isMac ? {
+  "arrow-left": "⌘←",
+  "arrow-right": "⌘→",
+  "arrow-up": "⌘↑",
+  "arrow-down": "⌘↓",
+  "history-back": "⌘⌥↓",
+  "history-forward": "⌘⌥↑",
+  "new-tab-before": "⌥H",
+  "new-tab-after": "⌥T",
+  "new-tab-end": "⌥E",
+  "recent-tab-quick-switch": "⌥W",
+  "recent-tab-switch": "⌥S",
+  "recent-tab-switch-reverse": "⌥⇧S"
+} : {
+  "arrow-left": "Alt+Left",
+  "arrow-right": "Alt+Right",
+  "arrow-up": "Alt+Up",
+  "arrow-down": "Alt+Down",
+  "history-back": "Alt+Shift+Down",
+  "history-forward": "Alt+Shift+Up",
+  "new-tab-before": "Alt+H",
+  "new-tab-after": "Alt+T",
+  "new-tab-end": "Alt+E",
+  "recent-tab-quick-switch": "Alt+W",
+  "recent-tab-switch": "Alt+S",
+  "recent-tab-switch-reverse": "Alt+Shift+S"
+};
 document.querySelector("#shortcut-help").textContent = canEditHere
   ? message("shortcutHelpFirefox")
   : message("shortcutHelpChrome");
 
-for (const command of commands.filter(({ name }) => COMMANDS.includes(name))) {
+for (const command of commands.filter(({ name }) => [...COMMANDS, ...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...RECENT_TAB_COMMANDS].includes(name))) {
   const row = document.createElement("label");
   row.className = "shortcut-row";
-  row.textContent = commandLabels[command.name];
+  const name = document.createElement("span");
+  name.className = "shortcut-name";
+  name.textContent = commandLabels[command.name] ?? command.description;
+  const recommendation = document.createElement("small");
+  recommendation.textContent = `${message("useRecommendation")}: ${recommendedShortcuts[command.name]}`;
+  name.append(recommendation);
   const input = document.createElement("input");
   const unassigned = !command.shortcut;
   input.value = command.shortcut || (canEditHere ? "" : message("shortcutUnassigned"));
   input.placeholder = message("shortcutUnassigned");
   input.readOnly = !canEditHere;
   input.classList.toggle("is-unassigned", unassigned);
-  input.setAttribute("aria-label", `${commandLabels[command.name]}: ${command.shortcut || message("shortcutUnassigned")}`);
+  input.setAttribute("aria-label", `${commandLabels[command.name] ?? command.description}: ${command.shortcut || message("shortcutUnassigned")}`);
   input.addEventListener("change", async () => {
     try {
       await updateCommandShortcut(command.name, input.value);
@@ -126,7 +162,7 @@ for (const command of commands.filter(({ name }) => COMMANDS.includes(name))) {
       document.querySelector("#shortcut-status").textContent = message("shortcutSaveFailed", error.message);
     }
   });
-  row.append(input);
+  row.append(name, input);
   shortcuts.append(row);
 }
 

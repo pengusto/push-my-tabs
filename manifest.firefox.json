@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "default_locale": "en",
   "name": "__MSG_extensionName__",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "__MSG_extensionDescription__",
   "icons": {
     "16": "assets/icons/icon-16.png",
@@ -50,6 +50,30 @@
     "arrow-down": {
       "suggested_key": { "default": "Ctrl+Down" },
       "description": "__MSG_commandDownDescription__"
+    },
+    "new-tab-before": {
+      "description": "__MSG_commandNewTabBeforeDescription__"
+    },
+    "new-tab-after": {
+      "description": "__MSG_commandNewTabAfterDescription__"
+    },
+    "new-tab-end": {
+      "description": "__MSG_commandNewTabEndDescription__"
+    },
+    "history-back": {
+      "description": "__MSG_actionHistoryBack__"
+    },
+    "history-forward": {
+      "description": "__MSG_actionHistoryForward__"
+    },
+    "recent-tab-quick-switch": {
+      "description": "__MSG_commandRecentTabQuickDescription__"
+    },
+    "recent-tab-switch": {
+      "description": "__MSG_commandRecentTabDescription__"
+    },
+    "recent-tab-switch-reverse": {
+      "description": "__MSG_commandRecentTabReverseDescription__"
     }
   }
 }

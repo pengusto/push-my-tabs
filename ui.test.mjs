@@ -14,6 +14,7 @@ for (const name of ["layoutModeLabel", "presetLabel", "currentMappingAriaLabel"]
   assert.match(popup, new RegExp(name), `popup must expose ${name}`);
 }
 assert.match(popup, /id="layout-confirmation"/);
+assert.match(options, /id="close-direction"/);
 assert.match(popup, /data-layout="recommended"/);
 assert.match(popup, /data-layout="vertical"/);
 assert.match(popup, /data-layout="horizontal"/);
@@ -35,6 +36,10 @@ assert.match(optionsScript, /message\("geometryMeasure", key\.split\(":"\)\)/, "
 assert.match(optionsScript, /layout === "vertical" \? "↕" : "↔"/);
 assert.match(options, /data-i18n="changeShortcuts"/);
 assert.match(optionsScript, /updateCommandShortcut\(command\.name, input\.value\)/);
+assert.match(optionsScript, /TAB_CREATION_COMMANDS/);
+assert.match(optionsScript, /recommendedShortcuts/);
+assert.match(optionsScript, /⌘⌥↓/);
+assert.match(styles, /\.shortcut-name small/);
 assert.match(optionsScript, /shortcutSaveFailed", error\.message/);
 assert.match(optionsScript, /api\.commands\.openShortcutSettings/);
 assert.match(styles, /\.is-unassigned\s*{/);

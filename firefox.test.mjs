@@ -6,6 +6,7 @@ let verticalTabs = true;
 let settings = { ...DEFAULT_SETTINGS };
 let updates = [];
 let moves = [];
+let creations = [];
 const shortcutUpdates = [];
 const tabs = [
   { id: 10, index: 0, active: false },
@@ -24,8 +25,17 @@ globalThis.browser = {
     }
   },
   storage: { local: { get: async (defaults) => ({ ...defaults, ...settings }) } },
-  windows: { getLastFocused: async () => ({ id: 42, focused: true, tabs }) },
+  windows: {
+    getAll: async () => [{ id: 42, tabs }],
+    getLastFocused: async () => ({ id: 42, focused: true, tabs }),
+    update: async () => {}
+  },
   tabs: {
+    get: async (id) => tabs.find((tab) => tab.id === id),
+    onActivated: { addListener: () => {} },
+    onRemoved: { addListener: () => {} },
+    query: async () => tabs,
+    create: async (properties) => creations.push(properties),
     update: async (id, properties) => updates.push([id, properties]),
     move: async (id, properties) => moves.push([id, properties])
   }
@@ -41,10 +51,14 @@ await import("./background.js?firefox-test");
 async function command(name) {
   updates = [];
   moves = [];
+  creations = [];
   await listener(name);
 }
 
 settings = { ...DEFAULT_SETTINGS, presetId: "adaptive" };
+await command("new-tab-after");
+assert.deepEqual(creations, [{ windowId: 42, index: 2 }]);
+
 verticalTabs = false;
 await command("arrow-left");
 assert.deepEqual(updates, [[10, { active: true }]], "adaptive horizontal activates previous tab");

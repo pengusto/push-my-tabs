@@ -14,6 +14,7 @@ for (const [name, windowWidth, windowHeight, tabWidth, tabHeight, expected] of c
 }
 assert.equal(selectedAction(DEFAULT_SETTINGS, "horizontal", "arrow-left"), "switchBackward");
 assert.equal(selectedAction(DEFAULT_SETTINGS, "vertical", "arrow-left"), "moveBackward");
+assert.equal(selectedAction({ ...DEFAULT_SETTINGS, presetId: "custom", customPreset: { ...DEFAULT_SETTINGS.customPreset, horizontal: { ...DEFAULT_SETTINGS.customPreset.horizontal, "arrow-left": "historyBack" } } }, "horizontal", "arrow-left"), "historyBack");
 
 for (const [presetId, preset] of Object.entries(PRESETS)) {
   for (const layout of ["horizontal", "vertical"]) {

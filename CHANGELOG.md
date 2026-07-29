@@ -4,9 +4,16 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.1.0 - 2026-07-29
+
 ### Added
 
 - Introduce Molebyte as the Push My Tabs mascot in the README and optional Chrome Web Store promotional artwork.
+- Choose whether closing the active tab selects the tab before or after it.
+- Assign dedicated shortcuts for browser history back and forward.
+- Open a new tab before, after, or at the end of the current tab strip.
+- Show platform-specific recommended shortcuts alongside the current assignments.
+- Cycle through recently used tabs across browser windows with quick, normal, and reverse commands.
 
 ## 1.0.2 - 2026-07-26
 

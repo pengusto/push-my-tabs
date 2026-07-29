@@ -18,6 +18,7 @@ const settings = await loadSettings();
 assert.equal(settings.layoutMode, "vertical");
 assert.equal(settings.locale, "browser");
 assert.equal(settings.presetId, DEFAULT_SETTINGS.presetId);
+assert.equal(settings.closeDirection, "forward");
 assert.equal(settings.customPreset.horizontal["arrow-left"], "none");
 assert.equal(settings.customPreset.horizontal["arrow-right"], "switchForward");
 assert.deepEqual(settings.customPreset.vertical, DEFAULT_SETTINGS.customPreset.vertical);

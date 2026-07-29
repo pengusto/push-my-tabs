@@ -51,6 +51,9 @@ Node.js 22, `zip`, and `unzip` are required. From a clean checkout, one command 
 ./scripts/build-chrome.sh
 ```
 
+For a permanently loaded development copy, select `dist/chrome-dev` once in
+`chrome://extensions` and refresh it after running `./scripts/build-chrome-dev.sh`.
+
 ## Firefox release
 
 Firefox 142 or newer, Node.js 22, `npx`, `zip`, and `unzip` are required. The build runs pinned Mozilla `web-ext` lint. The Firefox package requests only `storage` and `browserSettings`; it declares that no data is collected or transmitted.
