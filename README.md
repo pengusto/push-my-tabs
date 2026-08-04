@@ -65,6 +65,12 @@ Firefox 142 or newer, Node.js 22, `npx`, `zip`, and `unzip` are required. The bu
 ./scripts/build-firefox.sh
 ```
 
+## Manual GitHub release
+
+Releases are not created on every push. From the GitHub Actions **Create release** workflow, choose the exact branch or commit, enter a tag matching both manifests (for example `v1.1.0`), and optionally mark it as a pre-release. The workflow runs both package builds and attaches the Chrome and Firefox ZIPs to one GitHub Release.
+
+Store publication remains a separate manual step: Chrome Web Store and Firefox Add-ons can then review and publish the matching archives, after which the browsers can manage user updates.
+
 Tagged releases and their matching Chrome and Firefox archives are available on the [GitHub Releases page](https://github.com/pengusto/push-my-tabs/releases).
 
 The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code. Chrome's `activeTab` permission temporarily exposes only the current tab after a shortcut or popup action, allowing local geometry profiles for its origin or exact path. Firefox does not request that permission or read page data.

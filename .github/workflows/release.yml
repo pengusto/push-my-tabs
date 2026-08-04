@@ -1,0 +1,64 @@
+name: Create release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag, for example v1.1.0"
+        required: true
+        type: string
+      prerelease:
+        description: "Mark this GitHub release as a pre-release"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate release metadata
+        id: metadata
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          version=$(node -p "require('./manifest.json').version")
+          firefox_version=$(node -p "require('./manifest.firefox.json').version")
+          test "$RELEASE_TAG" = "v$version"
+          test "$version" = "$firefox_version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build Chrome package
+        run: ./scripts/build-chrome.sh
+
+      - name: Build Firefox package
+        run: ./scripts/build-firefox.sh
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          PRERELEASE: ${{ inputs.prerelease }}
+          VERSION: ${{ steps.metadata.outputs.version }}
+        run: |
+          set -euo pipefail
+          release_args=(--title "$RELEASE_TAG" --generate-notes --target "$GITHUB_SHA")
+          if [[ "$PRERELEASE" == "true" ]]; then
+            release_args+=(--prerelease)
+          fi
+          gh release create "$RELEASE_TAG" \
+            "dist/push-my-tabs-chrome-$VERSION.zip" \
+            "dist/push-my-tabs-firefox-$VERSION.zip" \
+            "${release_args[@]}"
