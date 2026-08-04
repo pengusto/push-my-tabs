@@ -4,6 +4,25 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Added
+
+- Show a shortcut assignment summary and include all tab commands in the settings page.
+- Add popup quick actions for first/last tab navigation, moving, duplicating, pinning, muting, and moving a tab to a new window.
+- Add matching Chrome and Firefox commands for the new tab actions.
+- Add next/previous window switching and moving the current tab to the next window.
+
+### Fixed
+
+- Prefer the tab that opened a newly closed active tab, with the configured previous/next tab as fallback.
+- Constrain the Chrome popup root so no oversized blank extension area appears to its right.
+- Show a thin dark/violet popup scrollbar on the right inside the frame without an outer gutter.
+- Keep the popup at its normal content height and scroll only after Chrome's 600px limit.
+- Keep the popup size stable after saving a site layout profile.
+- Close the popup after opening the full settings page to avoid two extension surfaces overlapping.
+- Keep Chrome extension settings in the shared Incognito storage context and explain the user-controlled Incognito permission when it is missing.
+- Use Chrome's command tab context so shortcuts continue to target the correct window, including Incognito and multi-window use.
+- Ignore missing-window/tab races during startup and activation instead of surfacing them as extension errors.
+
 ## 1.1.0 - 2026-07-29
 
 ### Added

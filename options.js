@@ -1,6 +1,6 @@
 import { api, loadSettings, updateCommandShortcut } from "./api.js";
 import { initializeI18n, localizeDocument, message } from "./i18n.js";
-import { ACTIONS, COMMANDS, HISTORY_COMMANDS, RECENT_TAB_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
+import { ACTIONS, COMMANDS, HISTORY_COMMANDS, RECENT_TAB_COMMANDS, TAB_ACTION_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
 import { enhanceSelect } from "./picker.js";
 
 const settings = await loadSettings();
@@ -106,6 +106,13 @@ showCustomPreset();
 const commands = await api.commands.getAll();
 const shortcuts = document.querySelector("#shortcuts");
 const canEditHere = typeof api.commands.update === "function";
+const supportedCommands = commands.filter(({ name }) => [
+  ...COMMANDS, ...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...RECENT_TAB_COMMANDS, ...TAB_ACTION_COMMANDS
+].includes(name));
+const unassignedCount = supportedCommands.filter(({ shortcut }) => !shortcut).length;
+document.querySelector("#shortcut-summary").textContent = unassignedCount
+  ? `${unassignedCount} × ${message("shortcutUnassigned")}`
+  : message("shortcutAllAssigned");
 const isMac = navigator.platform.toLowerCase().includes("mac");
 const recommendedShortcuts = isMac ? {
   "arrow-left": "⌘←",
@@ -138,7 +145,7 @@ document.querySelector("#shortcut-help").textContent = canEditHere
   ? message("shortcutHelpFirefox")
   : message("shortcutHelpChrome");
 
-for (const command of commands.filter(({ name }) => [...COMMANDS, ...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...RECENT_TAB_COMMANDS].includes(name))) {
+for (const command of supportedCommands) {
   const row = document.createElement("label");
   row.className = "shortcut-row";
   const name = document.createElement("span");

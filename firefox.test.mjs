@@ -36,9 +36,11 @@ globalThis.browser = {
     onRemoved: { addListener: () => {} },
     query: async () => tabs,
     create: async (properties) => creations.push(properties),
+    duplicate: async () => {},
     update: async (id, properties) => updates.push([id, properties]),
     move: async (id, properties) => moves.push([id, properties])
-  }
+  },
+  runtime: { onMessage: { addListener: () => {} } }
 };
 
 const { layoutDetection, updateCommandShortcut } = await import("./api.js?firefox-test");
@@ -57,7 +59,7 @@ async function command(name) {
 
 settings = { ...DEFAULT_SETTINGS, presetId: "adaptive" };
 await command("new-tab-after");
-assert.deepEqual(creations, [{ windowId: 42, index: 2 }]);
+assert.deepEqual(creations, [{ windowId: 42, index: 2, openerTabId: 11 }]);
 
 verticalTabs = false;
 await command("arrow-left");

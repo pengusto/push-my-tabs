@@ -20,10 +20,19 @@ export function updateCommandShortcut(name, shortcut) {
   return api.commands.update({ name, shortcut });
 }
 
-export async function currentContext() {
-  const window = await api.windows.getLastFocused({ populate: true });
+export async function isIncognitoAllowed(tab) {
+  if (!tab?.incognito || !api.extension?.isAllowedIncognitoAccess) return true;
+  return api.extension.isAllowedIncognitoAccess().catch(() => true);
+}
+
+export async function currentContext(tab) {
+  const window = tab?.windowId != null
+    ? await api.windows.get(tab.windowId, { populate: true })
+    : await api.windows.getLastFocused({ populate: true });
   const tabs = window.tabs ?? [];
-  const activeTab = tabs.find((tab) => tab.active);
+  const activeTab = tab?.id != null
+    ? tabs.find(({ id }) => id === tab.id) ?? tab
+    : tabs.find((tab) => tab.active);
   return { window, tabs, activeTab };
 }
 

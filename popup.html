@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html class="popup-root" lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,11 @@
     </header>
 
     <p id="detected" class="layout-status" data-i18n="layoutDetecting">Detecting layout…</p>
+
+    <aside id="incognito-warning" class="incognito-warning" aria-live="polite" hidden>
+      <p data-i18n="incognitoWarning">Chrome does not currently allow this extension to run in Incognito.</p>
+      <button id="incognito-settings" type="button" data-i18n="openExtensionSettings">Open extension details</button>
+    </aside>
 
     <section id="layout-confirmation" class="layout-choice" aria-live="polite" hidden>
       <p id="layout-confirmation-text"></p>
@@ -36,25 +41,9 @@
       <p id="site-learning-copy"></p>
       <div class="site-scope" data-scope="origin">
         <button id="remember-site" type="button"></button>
-        <div class="site-profile-edit" hidden>
-          <span class="site-profile-label"></span>
-          <select class="icon-select" aria-label="Site layout">
-            <option value="horizontal">↔</option>
-            <option value="vertical">↕</option>
-          </select>
-          <button class="remove-profile" type="button">×</button>
-        </div>
       </div>
       <div class="site-scope" data-scope="path">
         <button id="remember-path" type="button" data-i18n="rememberPath">Only this path</button>
-        <div class="site-profile-edit" hidden>
-          <span class="site-profile-label"></span>
-          <select class="icon-select" aria-label="Path layout">
-            <option value="horizontal">↔</option>
-            <option value="vertical">↕</option>
-          </select>
-          <button class="remove-profile" type="button">×</button>
-        </div>
       </div>
     </section>
 
@@ -72,6 +61,11 @@
       <p data-i18n="currentMapping">Current mapping</p>
       <div id="mapping-preview"></div>
     </section>
+
+    <details class="quick-actions">
+      <summary data-i18n="shortcutsHeading">Command shortcuts</summary>
+      <div id="quick-actions"></div>
+    </details>
 
     <button id="options" class="secondary" data-i18n="moreSettings">More settings</button>
     <script type="module" src="popup.js"></script>

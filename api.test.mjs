@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { DEFAULT_SETTINGS } from "./layout.js";
 
 globalThis.chrome = {
+  extension: { isAllowedIncognitoAccess: async () => false },
   storage: {
     local: {
       get: async () => ({
@@ -12,16 +13,18 @@ globalThis.chrome = {
   }
 };
 
-const { detectedLayout, isLayoutDetectionAmbiguous, layoutDetection, loadSettings, recommendedAmbiguousLayout } = await import("./api.js");
+const { detectedLayout, isIncognitoAllowed, isLayoutDetectionAmbiguous, layoutDetection, loadSettings, recommendedAmbiguousLayout } = await import("./api.js");
 const settings = await loadSettings();
 
 assert.equal(settings.layoutMode, "vertical");
 assert.equal(settings.locale, "browser");
 assert.equal(settings.presetId, DEFAULT_SETTINGS.presetId);
-assert.equal(settings.closeDirection, "forward");
+assert.equal(settings.closeDirection, "opener-forward");
 assert.equal(settings.customPreset.horizontal["arrow-left"], "none");
 assert.equal(settings.customPreset.horizontal["arrow-right"], "switchForward");
 assert.deepEqual(settings.customPreset.vertical, DEFAULT_SETTINGS.customPreset.vertical);
+assert.equal(await isIncognitoAllowed({ incognito: true }), false);
+assert.equal(await isIncognitoAllowed({ incognito: false }), true);
 assert.equal(isLayoutDetectionAmbiguous(
   { width: 1512, height: 864 },
   { width: 1156, height: 661 }

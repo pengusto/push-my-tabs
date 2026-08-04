@@ -5,6 +5,7 @@
   "name": "__MSG_extensionName__",
   "version": "1.1.0",
   "description": "__MSG_extensionDescription__",
+  "incognito": "spanning",
   "icons": {
     "16": "assets/icons/icon-16.png",
     "32": "assets/icons/icon-32.png",
@@ -80,6 +81,39 @@
     },
     "recent-tab-switch-reverse": {
       "description": "__MSG_commandRecentTabReverseDescription__"
+    },
+    "switch-first": {
+      "description": "__MSG_commandSwitchFirstDescription__"
+    },
+    "switch-last": {
+      "description": "__MSG_commandSwitchLastDescription__"
+    },
+    "move-first": {
+      "description": "__MSG_commandMoveFirstDescription__"
+    },
+    "move-last": {
+      "description": "__MSG_commandMoveLastDescription__"
+    },
+    "duplicate-tab": {
+      "description": "__MSG_commandDuplicateDescription__"
+    },
+    "toggle-pin": {
+      "description": "__MSG_commandTogglePinDescription__"
+    },
+    "toggle-mute": {
+      "description": "__MSG_commandToggleMuteDescription__"
+    },
+    "move-to-new-window": {
+      "description": "__MSG_commandMoveToWindowDescription__"
+    },
+    "switch-next-window": {
+      "description": "__MSG_commandSwitchNextWindowDescription__"
+    },
+    "switch-previous-window": {
+      "description": "__MSG_commandSwitchPreviousWindowDescription__"
+    },
+    "move-to-next-window": {
+      "description": "__MSG_commandMoveNextWindowDescription__"
     }
   }
 }

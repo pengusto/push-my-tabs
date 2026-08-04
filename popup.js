@@ -1,12 +1,13 @@
 import {
   api,
   currentContext,
+  isIncognitoAllowed,
   layoutDetection,
   loadSettings,
   recommendedAmbiguousLayout
 } from "./api.js";
 import { initializeI18n, localizeDocument, message } from "./i18n.js";
-import { ACTIONS, COMMANDS, saveSiteLayoutHint, selectedAction, siteProfileKey } from "./layout.js";
+import { ACTIONS, COMMANDS, saveSiteLayoutHint, selectedAction, siteProfileKey, TAB_ACTION_COMMANDS } from "./layout.js";
 import { enhanceSelect } from "./picker.js";
 
 const layoutMode = document.querySelector("#layout-mode");
@@ -19,6 +20,12 @@ await initializeI18n(settings.locale);
 localizeDocument();
 const { window, activeTab } = await currentContext();
 if (activeTab?.id) await api.action.setBadgeText({ tabId: activeTab.id, text: "" });
+if (activeTab?.incognito && !(await isIncognitoAllowed(activeTab))) {
+  document.querySelector("#incognito-warning").hidden = false;
+  document.querySelector("#incognito-settings").addEventListener("click", async () => {
+    if (api.runtime?.id) await api.tabs.create({ url: `chrome://extensions/?id=${api.runtime.id}` });
+  });
+}
 layoutMode.value = settings.layoutMode;
 preset.value = settings.presetId;
 for (const select of [layoutMode, preset]) enhanceSelect(select);
@@ -72,39 +79,16 @@ if (canLearn) {
     [siteButton, "origin", originProfile, host],
     [pathButton, "path", pathProfile, new URL(activeTab.url).pathname]
   ]) {
-    const editor = document.querySelector(`[data-scope="${scope}"] .site-profile-edit`);
-    const select = editor.querySelector("select");
-    const remove = editor.querySelector(".remove-profile");
+    const buttonLabel = scope === "origin" ? message("rememberSite", label) : message("rememberPath");
     const savedLayout = settings.siteProfiles[profile]?.[detection.key];
-    button.hidden = Boolean(savedLayout);
-    editor.hidden = !savedLayout;
-    const profileLabel = editor.querySelector(".site-profile-label");
-    const profileName = document.createElement("span");
-    const dimensions = document.createElement("small");
-    profileName.textContent = label;
-    dimensions.textContent = message("geometryMeasure", detection.key.split(":"));
-    profileLabel.replaceChildren(profileName, dimensions);
-    select.value = savedLayout ?? profileLayout;
-    select.setAttribute("aria-label", `${message("layoutModeLabel")}: ${label}`);
-    remove.setAttribute("aria-label", `${label} ×`);
-    enhanceSelect(select);
+    button.textContent = `${savedLayout ? "✓ " : ""}${buttonLabel}`;
+    button.disabled = Boolean(savedLayout);
 
     button.addEventListener("click", async () => {
       saveSiteLayoutHint(settings, activeTab, detection.key, profileLayout, scope);
       await api.storage.local.set({ siteProfiles: settings.siteProfiles });
-      button.hidden = true;
-      editor.hidden = false;
-    });
-    select.addEventListener("change", async () => {
-      saveSiteLayoutHint(settings, activeTab, detection.key, select.value, scope);
-      await api.storage.local.set({ siteProfiles: settings.siteProfiles });
-    });
-    remove.addEventListener("click", async () => {
-      delete settings.siteProfiles[profile][detection.key];
-      if (Object.keys(settings.siteProfiles[profile]).length === 0) delete settings.siteProfiles[profile];
-      await api.storage.local.set({ siteProfiles: settings.siteProfiles });
-      editor.hidden = true;
-      button.hidden = false;
+      button.textContent = `✓ ${buttonLabel}`;
+      button.disabled = true;
     });
   }
 }
@@ -150,4 +134,25 @@ preset.addEventListener("change", () => {
   showLayout();
   api.storage.local.set({ presetId: preset.value });
 });
-document.querySelector("#options").addEventListener("click", () => api.runtime.openOptionsPage());
+document.querySelector("#options").addEventListener("click", async () => {
+  try {
+    await api.runtime.openOptionsPage();
+  } catch (error) {
+    console.warn("Could not open settings:", error);
+  }
+  window.close();
+});
+
+const quickActions = document.querySelector("#quick-actions");
+const commands = await api.commands.getAll();
+for (const command of commands.filter(({ name }) => TAB_ACTION_COMMANDS.includes(name))) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "quick-action";
+  button.textContent = command.description;
+  button.addEventListener("click", async () => {
+    await api.runtime.sendMessage({ type: "run-command", command: command.name });
+    window.close();
+  });
+  quickActions.append(button);
+}

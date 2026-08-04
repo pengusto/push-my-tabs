@@ -1,5 +1,5 @@
 import { api, currentContext, layoutDetection, loadSettings } from "./api.js";
-import { HISTORY_COMMANDS, nextIndex, RECENT_TAB_COMMANDS, selectedAction, TAB_CREATION_COMMANDS } from "./layout.js";
+import { HISTORY_COMMANDS, nextIndex, RECENT_TAB_COMMANDS, selectedAction, TAB_ACTION_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
 
 const activeTabs = new Map();
 const recentTabIds = [];
@@ -14,11 +14,14 @@ const tabTrackingReady = api.windows.getAll({ populate: true }).then((windows) =
     .flatMap(({ tabs = [] }) => tabs)
     .sort((a, b) => (b.lastAccessed ?? 0) - (a.lastAccessed ?? 0))
     .map(({ id }) => id));
-});
+}).catch(() => {});
 
 api.tabs.onActivated.addListener(async ({ tabId, windowId }) => {
-  const tab = await api.tabs.get(tabId);
-  if (tab) activeTabs.set(windowId, tab);
+  try {
+    activeTabs.set(windowId, await api.tabs.get(tabId));
+  } catch {
+    activeTabs.delete(windowId);
+  }
   rememberTab(tabId);
 });
 
@@ -33,32 +36,74 @@ api.tabs.onRemoved.addListener(async (tabId, { isWindowClosing, windowId }) => {
     loadSettings(),
     api.tabs.query({ windowId })
   ]);
-  const target = tabs.find(({ index }) => index === closedTab.index - (closeDirection === "backward" ? 1 : 0));
+  const useOpener = typeof closeDirection === "string" && closeDirection.startsWith("opener-");
+  const direction = typeof closeDirection === "string" && closeDirection.endsWith("backward") ? "backward" : "forward";
+  const target = (useOpener ? tabs.find(({ id }) => id === closedTab.openerTabId) : null)
+    ?? tabs.find(({ index }) => index === closedTab.index - (direction === "backward" ? 1 : 0));
   if (target?.id) await api.tabs.update(target.id, { active: true });
 });
 
-api.commands.onCommand.addListener(async (command) => {
+api.commands.onCommand.addListener((command, commandTab) => executeCommand(command, commandTab));
+api.runtime?.onMessage?.addListener((message, sender) => {
+  if (message?.type !== "run-command" || !TAB_ACTION_COMMANDS.includes(message.command)) return;
+  return executeCommand(message.command, sender.tab);
+});
+
+async function executeCommand(command, commandTab) {
   if (RECENT_TAB_COMMANDS.includes(command)) {
     await switchRecentTab(command);
     return;
   }
 
   if (HISTORY_COMMANDS.includes(command)) {
-    const { activeTab } = await currentContext();
+    const { activeTab } = await currentContext(commandTab);
     if (activeTab) await api.tabs[command === "history-back" ? "goBack" : "goForward"](activeTab.id).catch(() => {});
     return;
   }
 
   if (TAB_CREATION_COMMANDS.includes(command)) {
-    const { activeTab, window } = await currentContext();
+    const { activeTab, window } = await currentContext(commandTab);
     if (!activeTab) return;
     await api.tabs.create(command === "new-tab-end"
-      ? { windowId: window.id }
-      : { windowId: window.id, index: activeTab.index + (command === "new-tab-after" ? 1 : 0) });
+      ? { windowId: window.id, openerTabId: activeTab.id }
+      : { windowId: window.id, index: activeTab.index + (command === "new-tab-after" ? 1 : 0), openerTabId: activeTab.id });
     return;
   }
 
-  const [{ window, tabs, activeTab }, settings] = await Promise.all([currentContext(), loadSettings()]);
+  if (TAB_ACTION_COMMANDS.includes(command)) {
+    const { activeTab, tabs, window } = await currentContext(commandTab);
+    if (!activeTab?.id) return;
+
+    if (command === "switch-first" || command === "switch-last") {
+      const target = command === "switch-first" ? tabs[0] : tabs.at(-1);
+      if (target?.id && target.id !== activeTab.id) await api.tabs.update(target.id, { active: true }).catch(() => {});
+    } else if (command === "move-first" || command === "move-last") {
+      const index = command === "move-first" ? 0 : Math.max(0, tabs.length - 1);
+      if (index !== activeTab.index) await api.tabs.move(activeTab.id, { index }).catch(() => {});
+    } else if (command === "duplicate-tab") {
+      if (api.tabs.duplicate) await api.tabs.duplicate(activeTab.id).catch(() => {});
+    } else if (command === "toggle-pin") {
+      await api.tabs.update(activeTab.id, { pinned: !activeTab.pinned }).catch(() => {});
+    } else if (command === "toggle-mute") {
+      await api.tabs.update(activeTab.id, { muted: !activeTab.mutedInfo?.muted }).catch(() => {});
+    } else if (command === "move-to-new-window") {
+      if (api.windows.create) await api.windows.create({ tabId: activeTab.id }).catch(() => {});
+    } else if (command === "switch-next-window" || command === "switch-previous-window") {
+      const target = await adjacentWindow(window.id, command === "switch-next-window" ? 1 : -1);
+      const targetTab = target?.tabs?.find(({ active }) => active) ?? target?.tabs?.[0];
+      if (target?.id != null) await api.windows.update(target.id, { focused: true }).catch(() => {});
+      if (targetTab?.id != null) await api.tabs.update(targetTab.id, { active: true }).catch(() => {});
+    } else if (command === "move-to-next-window") {
+      const target = await adjacentWindow(window.id, 1);
+      if (target?.id != null) {
+        await api.tabs.move(activeTab.id, { windowId: target.id, index: -1 }).catch(() => {});
+        await api.windows.update(target.id, { focused: true }).catch(() => {});
+      }
+    }
+    return;
+  }
+
+  const [{ window, tabs, activeTab }, settings] = await Promise.all([currentContext(commandTab), loadSettings()]);
   if (!activeTab?.id) return;
   const layoutMode = settings.layoutMode;
   const detection = layoutMode === "auto" ? await layoutDetection(window, activeTab, settings) : null;
@@ -95,7 +140,16 @@ api.commands.onCommand.addListener(async (command) => {
     const index = nextIndex(activeTab.index, offset, tabs.length, false);
     if (index !== activeTab.index) await api.tabs.move(activeTab.id, { index });
   }
-});
+}
+
+async function adjacentWindow(currentWindowId, direction) {
+  const windows = await api.windows.getAll({ populate: true }).catch(() => []);
+  const candidates = windows.filter(({ type }) => !type || type === "normal");
+  if (candidates.length < 2) return null;
+  const currentIndex = candidates.findIndex(({ id }) => id === currentWindowId);
+  if (currentIndex === -1) return candidates[direction === 1 ? 0 : candidates.length - 1];
+  return candidates[(currentIndex + direction + candidates.length) % candidates.length];
+}
 
 function rememberTab(tabId) {
   if (tabId == null) return;
