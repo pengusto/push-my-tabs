@@ -53,4 +53,4 @@
 
 ## Immediate next action
 
-Submit the latest tagged Chrome archive to the Chrome Web Store.
+Submit `push-my-tabs-chrome-1.1.0.zip` from the `v1.1.0` GitHub release to the Chrome Web Store.
