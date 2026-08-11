@@ -4,12 +4,20 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.1.0 - 2026-08-11
+
 ### Added
 
 - Show a shortcut assignment summary and include all tab commands in the settings page.
 - Add popup quick actions for first/last tab navigation, moving, duplicating, pinning, muting, and moving a tab to a new window.
 - Add matching Chrome and Firefox commands for the new tab actions.
 - Add next/previous window switching and moving the current tab to the next window.
+- Introduce Molebyte as the Push My Tabs mascot in the README and optional Chrome Web Store promotional artwork.
+- Choose whether closing the active tab selects the tab before or after it.
+- Assign dedicated shortcuts for browser history back and forward.
+- Open a new tab before, after, or at the end of the current tab strip.
+- Show platform-specific recommended shortcuts alongside the current assignments.
+- Cycle through recently used tabs across browser windows with quick, normal, and reverse commands.
 
 ### Fixed
 
@@ -22,17 +30,6 @@ All notable user-facing changes to Push My Tabs are documented here.
 - Keep Chrome extension settings in the shared Incognito storage context and explain the user-controlled Incognito permission when it is missing.
 - Use Chrome's command tab context so shortcuts continue to target the correct window, including Incognito and multi-window use.
 - Ignore missing-window/tab races during startup and activation instead of surfacing them as extension errors.
-
-## 1.1.0 - 2026-07-29
-
-### Added
-
-- Introduce Molebyte as the Push My Tabs mascot in the README and optional Chrome Web Store promotional artwork.
-- Choose whether closing the active tab selects the tab before or after it.
-- Assign dedicated shortcuts for browser history back and forward.
-- Open a new tab before, after, or at the end of the current tab strip.
-- Show platform-specific recommended shortcuts alongside the current assignments.
-- Cycle through recently used tabs across browser windows with quick, normal, and reverse commands.
 
 ## 1.0.2 - 2026-07-26
 
