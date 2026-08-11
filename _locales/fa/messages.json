@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "افقی" },
   "layoutVertical": { "message": "عمودی" },
   "presetLabel": { "message": "پیش‌تنظیم میان‌برها" },
+  "nativeLayoutHelpHeading": { "message": "چیدمان زبانه‌های Chrome" },
+  "nativeLayoutHelp": { "message": "Chrome نوار زبانه قابل مشاهده را کنترل می‌کند. برای جمع یا باز کردن زبانه‌های عمودی از Ctrl+Shift+L (Windows/Linux) یا ⌘+Shift+L (macOS) استفاده کنید. جابه‌جایی بین زبانه‌های افقی و عمودی از منوی زمینه نوار زبانه انجام می‌شود." },
   "presetAdaptive": { "message": "پیروی از چیدمان" },
   "presetHorizontal": { "message": "همیشه افقی" },
   "presetVertical": { "message": "همیشه عمودی" },

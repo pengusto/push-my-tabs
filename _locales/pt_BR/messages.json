@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Horizontal" },
   "layoutVertical": { "message": "Vertical" },
   "presetLabel": { "message": "Predefinição de atalhos" },
+  "nativeLayoutHelpHeading": { "message": "Layout das abas do Chrome" },
+  "nativeLayoutHelp": { "message": "O Chrome controla a barra de abas visível. Use Ctrl+Shift+L (Windows/Linux) ou ⌘+Shift+L (macOS) para recolher ou expandir as abas verticais. Alterne entre abas horizontais e verticais no menu de contexto da barra de abas." },
   "presetAdaptive": { "message": "Seguir o layout" },
   "presetHorizontal": { "message": "Sempre horizontal" },
   "presetVertical": { "message": "Sempre vertical" },

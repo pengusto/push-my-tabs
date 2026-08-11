@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "水平" },
   "layoutVertical": { "message": "垂直" },
   "presetLabel": { "message": "快捷键预设" },
+  "nativeLayoutHelpHeading": { "message": "Chrome 标签页布局" },
+  "nativeLayoutHelp": { "message": "Chrome 控制可见的标签栏。使用 Ctrl+Shift+L（Windows/Linux）或 ⌘+Shift+L（macOS）可折叠或展开垂直标签页。请通过标签栏的上下文菜单在水平和垂直标签页之间切换。" },
   "presetAdaptive": { "message": "跟随布局" },
   "presetHorizontal": { "message": "始终水平" },
   "presetVertical": { "message": "始终垂直" },

@@ -97,6 +97,18 @@ body.popup::-webkit-scrollbar-thumb:hover { background: var(--line); }
 
 .layout-status-icon { display: inline-grid; width: 1em; height: 1em; place-items: center; font-size: 16px; line-height: 1; }
 
+.native-layout-help {
+  display: grid;
+  gap: 4px;
+  padding: 11px;
+  border: 2px solid #555765;
+  border-radius: 5px;
+  background: var(--surface);
+}
+
+.native-layout-help strong { color: #ddd9ff; font-size: 12px; }
+.native-layout-help p { margin: 0; font-size: 12px; }
+
 .incognito-warning {
   display: grid;
   gap: 10px;

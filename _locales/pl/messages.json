@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Poziomy" },
   "layoutVertical": { "message": "Pionowy" },
   "presetLabel": { "message": "Ustawienie skrótów" },
+  "nativeLayoutHelpHeading": { "message": "Układ kart Chrome" },
+  "nativeLayoutHelp": { "message": "Chrome steruje widocznym paskiem kart. Użyj Ctrl+Shift+L (Windows/Linux) lub ⌘+Shift+L (macOS), aby zwinąć albo rozwinąć karty pionowe. Przełączaj karty poziome i pionowe z menu kontekstowego paska kart." },
   "presetAdaptive": { "message": "Dopasuj do układu" },
   "presetHorizontal": { "message": "Zawsze poziomy" },
   "presetVertical": { "message": "Zawsze pionowy" },

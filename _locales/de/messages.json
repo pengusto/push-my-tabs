@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Horizontal" },
   "layoutVertical": { "message": "Vertikal" },
   "presetLabel": { "message": "Shortcut-Preset" },
+  "nativeLayoutHelpHeading": { "message": "Chrome-Tab-Leiste" },
+  "nativeLayoutHelp": { "message": "Chrome steuert die sichtbare Tab-Leiste. Mit Ctrl+Shift+L (Windows/Linux) oder ⌘+Shift+L (macOS) klappst du vertikale Tabs ein oder aus. Zwischen horizontalen und vertikalen Tabs wechselst du über das Kontextmenü der Tab-Leiste." },
   "presetAdaptive": { "message": "Layout folgen" },
   "presetHorizontal": { "message": "Immer horizontal" },
   "presetVertical": { "message": "Immer vertikal" },

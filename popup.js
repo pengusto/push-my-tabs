@@ -18,6 +18,7 @@ const confirmation = document.querySelector("#layout-confirmation");
 const settings = await loadSettings();
 await initializeI18n(settings.locale);
 localizeDocument();
+document.querySelector("#native-layout-help").hidden = Boolean(api.browserSettings?.verticalTabs);
 const { window, activeTab } = await currentContext();
 if (activeTab?.id) await api.action.setBadgeText({ tabId: activeTab.id, text: "" });
 if (activeTab?.incognito && !(await isIncognitoAllowed(activeTab))) {

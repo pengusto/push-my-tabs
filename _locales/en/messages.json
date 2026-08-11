@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Horizontal" },
   "layoutVertical": { "message": "Vertical" },
   "presetLabel": { "message": "Shortcut preset" },
+  "nativeLayoutHelpHeading": { "message": "Chrome tab layout" },
+  "nativeLayoutHelp": { "message": "Chrome controls the visible tab strip. Use Ctrl+Shift+L (Windows/Linux) or ⌘+Shift+L (macOS) to collapse or expand vertical tabs. Switch between horizontal and vertical tabs from the tab-strip context menu." },
   "presetAdaptive": { "message": "Follow layout" },
   "presetHorizontal": { "message": "Always horizontal" },
   "presetVertical": { "message": "Always vertical" },

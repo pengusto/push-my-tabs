@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Orizzontale" },
   "layoutVertical": { "message": "Verticale" },
   "presetLabel": { "message": "Preimpostazione scorciatoie" },
+  "nativeLayoutHelpHeading": { "message": "Layout delle schede di Chrome" },
+  "nativeLayoutHelp": { "message": "Chrome controlla la barra delle schede visibile. Usa Ctrl+Shift+L (Windows/Linux) o ⌘+Shift+L (macOS) per comprimere o espandere le schede verticali. Passa tra schede orizzontali e verticali dal menu contestuale della barra delle schede." },
   "presetAdaptive": { "message": "Segui il layout" },
   "presetHorizontal": { "message": "Sempre orizzontale" },
   "presetVertical": { "message": "Sempre verticale" },

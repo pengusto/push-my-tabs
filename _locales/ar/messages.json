@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "أفقي" },
   "layoutVertical": { "message": "عمودي" },
   "presetLabel": { "message": "إعداد الاختصارات" },
+  "nativeLayoutHelpHeading": { "message": "تخطيط علامات تبويب Chrome" },
+  "nativeLayoutHelp": { "message": "يتحكم Chrome في شريط علامات التبويب المرئي. استخدم Ctrl+Shift+L (Windows/Linux) أو ⌘+Shift+L (macOS) لطي علامات التبويب العمودية أو توسيعها. بدّل بين علامات التبويب الأفقية والعمودية من قائمة سياق شريط علامات التبويب." },
   "presetAdaptive": { "message": "اتباع التخطيط" },
   "presetHorizontal": { "message": "أفقي دائمًا" },
   "presetVertical": { "message": "عمودي دائمًا" },

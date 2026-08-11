@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Horizontale" },
   "layoutVertical": { "message": "Verticale" },
   "presetLabel": { "message": "Préréglage des raccourcis" },
+  "nativeLayoutHelpHeading": { "message": "Disposition des onglets Chrome" },
+  "nativeLayoutHelp": { "message": "Chrome contrôle la barre d’onglets visible. Utilisez Ctrl+Shift+L (Windows/Linux) ou ⌘+Shift+L (macOS) pour réduire ou développer les onglets verticaux. Basculez entre les onglets horizontaux et verticaux depuis le menu contextuel de la barre d’onglets." },
   "presetAdaptive": { "message": "Suivre la disposition" },
   "presetHorizontal": { "message": "Toujours horizontale" },
   "presetVertical": { "message": "Toujours verticale" },

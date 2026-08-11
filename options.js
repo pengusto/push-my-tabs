@@ -6,6 +6,7 @@ import { enhanceSelect } from "./picker.js";
 const settings = await loadSettings();
 await initializeI18n(settings.locale);
 localizeDocument();
+document.querySelector("#native-layout-help").hidden = Boolean(api.browserSettings?.verticalTabs);
 
 const commandLabels = {
   "arrow-left": `← ${message("directionLeft")} — ${message("commandLeftDescription")}`,

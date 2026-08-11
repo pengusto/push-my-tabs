@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Horizontal" },
   "layoutVertical": { "message": "Vertical" },
   "presetLabel": { "message": "Preajuste de atajos" },
+  "nativeLayoutHelpHeading": { "message": "Diseño de pestañas de Chrome" },
+  "nativeLayoutHelp": { "message": "Chrome controla la barra de pestañas visible. Usa Ctrl+Shift+L (Windows/Linux) o ⌘+Shift+L (macOS) para contraer o expandir las pestañas verticales. Cambia entre pestañas horizontales y verticales desde el menú contextual de la barra de pestañas." },
   "presetAdaptive": { "message": "Seguir el diseño" },
   "presetHorizontal": { "message": "Siempre horizontal" },
   "presetVertical": { "message": "Siempre vertical" },
