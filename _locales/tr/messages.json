@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Yatay" },
   "layoutVertical": { "message": "Dikey" },
   "presetLabel": { "message": "Kısayol ön ayarı" },
+  "nativeLayoutHelpHeading": { "message": "Chrome sekme düzeni" },
+  "nativeLayoutHelp": { "message": "Chrome, görünen sekme çubuğunu yönetir. Dikey sekmeleri daraltmak veya genişletmek için Windows/Linux'ta Ctrl+Shift+L, macOS'ta ⌘+Shift+L kullanın. Yatay ve dikey sekmeler arasında sekme çubuğunun bağlam menüsünden geçiş yapın." },
   "presetAdaptive": { "message": "Düzeni izle" },
   "presetHorizontal": { "message": "Her zaman yatay" },
   "presetVertical": { "message": "Her zaman dikey" },

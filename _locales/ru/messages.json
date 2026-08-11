@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Горизонтально" },
   "layoutVertical": { "message": "Вертикально" },
   "presetLabel": { "message": "Набор сочетаний" },
+  "nativeLayoutHelpHeading": { "message": "Расположение вкладок Chrome" },
+  "nativeLayoutHelp": { "message": "Chrome управляет видимой панелью вкладок. Используйте Ctrl+Shift+L (Windows/Linux) или ⌘+Shift+L (macOS), чтобы свернуть или развернуть вертикальные вкладки. Переключайтесь между горизонтальными и вертикальными вкладками через контекстное меню панели вкладок." },
   "presetAdaptive": { "message": "Следовать расположению" },
   "presetHorizontal": { "message": "Всегда горизонтально" },
   "presetVertical": { "message": "Всегда вертикально" },

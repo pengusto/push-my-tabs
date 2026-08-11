@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "Asoyî" },
   "layoutVertical": { "message": "Stûnî" },
   "presetLabel": { "message": "Pêşsazkirina kurtebirê" },
+  "nativeLayoutHelpHeading": { "message": "Rêza hilpekên Chrome" },
+  "nativeLayoutHelp": { "message": "Chrome panela hilpekên xuya kontrol dike. Ji bo komkirin an vekirina hilpekên stûnî Ctrl+Shift+L (Windows/Linux) an ⌘+Shift+L (macOS) bikar bîne. Di navbera hilpekên berfireh û stûnî de ji menuya kontekstê ya panela hilpekan biguhere." },
   "presetAdaptive": { "message": "Li pey rêzkirinê" },
   "presetHorizontal": { "message": "Her dem asoyî" },
   "presetVertical": { "message": "Her dem stûnî" },

@@ -15,7 +15,11 @@ for (const name of ["layoutModeLabel", "presetLabel", "currentMappingAriaLabel"]
 }
 assert.match(popup, /id="layout-confirmation"/);
 assert.match(popup, /id="incognito-warning"/);
+assert.match(popup, /id="native-layout-help"/);
+assert.match(options, /id="native-layout-help"/);
 assert.match(popupScript, /isIncognitoAllowed/);
+assert.match(popupScript, /api\.browserSettings\?\.verticalTabs/);
+assert.match(optionsScript, /api\.browserSettings\?\.verticalTabs/);
 assert.match(options, /id="close-direction"/);
 assert.match(popup, /data-layout="recommended"/);
 assert.match(popup, /data-layout="vertical"/);

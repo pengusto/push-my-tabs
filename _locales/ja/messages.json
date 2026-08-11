@@ -20,6 +20,8 @@
   "layoutHorizontal": { "message": "横" },
   "layoutVertical": { "message": "縦" },
   "presetLabel": { "message": "ショートカット設定" },
+  "nativeLayoutHelpHeading": { "message": "Chrome のタブレイアウト" },
+  "nativeLayoutHelp": { "message": "表示されるタブバーは Chrome が管理します。縦型タブを折りたたむ、または展開するには Ctrl+Shift+L（Windows/Linux）または ⌘+Shift+L（macOS）を使います。横型タブと縦型タブの切り替えは、タブバーのコンテキストメニューから行います。" },
   "presetAdaptive": { "message": "配置に合わせる" },
   "presetHorizontal": { "message": "常に横" },
   "presetVertical": { "message": "常に縦" },
