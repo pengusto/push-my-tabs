@@ -1,0 +1,12 @@
+{
+  "strictness": 2,
+  "commentTypes": ["logic", "syntax"],
+  "triggerOnUpdates": true,
+  "ignorePatterns": "dist/**\n.scratch/**\nstore-assets/**\ndocs/assets/**\ndocs/design/**\nassets/**\n**/*.png\n**/*.gif\n**/*.jpg\n**/*.jpeg\n**/*.webp\n**/*.zip\n.DS_Store",
+  "summarySection": {
+    "included": true,
+    "collapsible": true,
+    "defaultOpen": false
+  },
+  "instructions": "Review changed files for actionable correctness, security, privacy, permission, browser-compatibility, accessibility, and release-contract problems. Use .greptile/rules.md and the scoped files in .greptile/files.json as repository context. Do not report style preferences, informational notes, or speculative refactors."
+}

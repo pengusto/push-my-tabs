@@ -1,0 +1,44 @@
+{
+  "files": [
+    {
+      "path": "CONTEXT.md",
+      "description": "Canonical domain vocabulary for presets, layout modes, layout mappings, tab actions, and command shortcuts",
+      "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "**/*.css", "manifest*.json"]
+    },
+    {
+      "path": "README.md",
+      "description": "Supported browsers, permissions, user-visible behavior, local checks, and release commands",
+      "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "**/*.css", "scripts/**", "manifest*.json"]
+    },
+    {
+      "path": "docs/agents/domain.md",
+      "description": "Repository rule to use CONTEXT.md and relevant ADRs as the domain source of truth",
+      "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "**/*.css", "scripts/**", "manifest*.json"]
+    },
+    {
+      "path": "docs/adr/0001-use-chrome-managed-command-shortcuts.md",
+      "description": "Command shortcuts are browser-managed; the extension owns command behavior, not arbitrary key capture",
+      "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "manifest*.json"]
+    },
+    {
+      "path": "docs/adr/0002-detect-layout-from-window-geometry.md",
+      "description": "Layout detection uses window and active-tab geometry with explicit manual overrides",
+      "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.css"]
+    },
+    {
+      "path": "docs/adr/0003-keep-version-one-local-only.md",
+      "description": "Privacy boundary: no accounts, servers, analytics, telemetry, browsing content, or unnecessary permissions",
+      "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "manifest*.json"]
+    },
+    {
+      "path": "docs/adr/0004-share-a-core-across-chrome-and-firefox.md",
+      "description": "Shared WebExtension core with thin browser-specific manifests and adapters",
+      "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "scripts/**", "manifest*.json"]
+    },
+    {
+      "path": "scripts/validate-release.mjs",
+      "description": "Executable manifest, permission, command, and remote-code release invariants",
+      "scope": ["**/*.js", "**/*.mjs", "scripts/**", "manifest*.json"]
+    }
+  ]
+}
