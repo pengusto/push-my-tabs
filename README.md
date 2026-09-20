@@ -16,6 +16,11 @@ See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 - [Support](https://github.com/pengusto/push-my-tabs/issues)
 - [Website](https://pengusto.github.io/push-my-tabs/)
 
+## Install
+
+- [Chrome Web Store](https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik) for Chrome 127 or newer
+- [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/push-my-tabs/) for Firefox 142 or newer
+
 ## Current status
 
 Chrome and Firefox release packages share the same tested source. Firefox 142 or newer uses the browser's exact vertical-tabs setting and lets users edit supported command shortcuts directly in the settings page.
@@ -72,5 +77,7 @@ Releases are not created on every push. From the GitHub Actions **Create release
 Store publication remains a separate manual step: Chrome Web Store and Firefox Add-ons can then review and publish the matching archives, after which the browsers can manage user updates.
 
 Tagged releases and their matching Chrome and Firefox archives are available on the [GitHub Releases page](https://github.com/pengusto/push-my-tabs/releases).
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to work on Push My Tabs and [SECURITY.md](SECURITY.md) to report a vulnerability privately.
 
 The extension uses no host permissions, content scripts, accounts, analytics, advertising, or remote code. Chrome's `activeTab` permission temporarily exposes only the current tab after a shortcut or popup action, allowing local geometry profiles for its origin or exact path. Firefox does not request that permission or read page data.

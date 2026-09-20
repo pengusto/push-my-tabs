@@ -4,6 +4,10 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Improved
+
+- Link directly to the Chrome Web Store and Firefox Add-ons from the project website and README.
+
 ## 1.2.0 - 2026-09-20
 
 ### Changed
