@@ -5,17 +5,17 @@ cd "$(dirname "$0")/.."
 
 browser=${1:?browser required}
 case "$browser" in
-  chrome) manifest=manifest.json ;;
-  firefox) manifest=manifest.firefox.json ;;
+  chrome) manifest=manifests/chrome.json ;;
+  firefox) manifest=manifests/firefox.json ;;
   *) echo "unsupported browser: $browser" >&2; exit 2 ;;
 esac
 
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
 node scripts/validate-release.mjs
 
 version=$(node -p "require('./$manifest').version")
@@ -27,8 +27,11 @@ files=(
   options.html popup.html styles.css
   assets/icons/icon-16.png assets/icons/icon-32.png assets/icons/icon-48.png assets/icons/icon-128.png
   assets/icons/browser-language.svg assets/icons/language.svg assets/icons/kurdistan-language.png
-  _locales/*/messages.json
 )
+source_root=src
+for locale_file in "$source_root"/_locales/*/messages.json; do
+  files+=("${locale_file#"$source_root"/}")
+done
 
 mkdir -p "$repo_root/dist"
 rm -f "$archive"
@@ -41,7 +44,7 @@ cp "$manifest" "$stage/manifest.json"
 touch -t 200001010000 "$stage/manifest.json"
 for file in "${files[@]}"; do
   mkdir -p "$stage/$(dirname "$file")"
-  cp "$file" "$stage/$file"
+  cp "$source_root/$file" "$stage/$file"
   touch -t 200001010000 "$stage/$file"
 done
 if [[ "$browser" == firefox ]]; then

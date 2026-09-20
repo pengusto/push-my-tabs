@@ -10,7 +10,7 @@
 ## Extension architecture
 
 - Chrome and Firefox use one shared core. Changes to commands, tab actions, presets, settings, or UI contracts must remain valid in both browsers and must not assume an API present in only one adapter.
-- New or changed commands must stay consistent across `layout.js`, command handling, both manifests, and the options UI. Keep `scripts/validate-release.mjs` invariants intact.
+- New or changed commands must stay consistent across `src/layout.js`, command handling, both files under `manifests/`, and the options UI. Keep `scripts/validate-release.mjs` invariants intact.
 - Preserve the tab/window context passed into command execution. Multi-window and Incognito behavior must not silently fall back to a different window or tab.
 - Command shortcuts are browser-managed through the Commands API. Do not introduce arbitrary key capture or content-script keyboard handling. Browser-reserved shortcuts remain unavailable to the extension.
 - Layout detection is intentionally geometry-based and may be overridden by explicit horizontal/vertical settings or stored site hints. Do not replace this with polling, page inspection, or a broader permission model.
@@ -31,5 +31,5 @@
 
 - For JavaScript behavior changes, check the affected `*.test.mjs` path and look for a regression test when a branch, parser, command route, or permission contract changes.
 - For manifest or release changes, check both manifests and `node scripts/validate-release.mjs`; packaging changes also require the relevant `scripts/build-*.sh` path.
-- For localization changes, check `node i18n.test.mjs`. For UI changes, check `node ui.test.mjs` and the affected runtime path.
+- For localization changes, check `node tests/i18n.test.mjs`. For UI changes, check `node tests/ui.test.mjs` and the affected runtime path.
 - Do not demand the full release build for docs-only or asset-only changes. Do not treat a static test as proof of Chrome/Firefox runtime behavior; call out manual browser QA when it is the remaining gate.

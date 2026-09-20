@@ -57,7 +57,7 @@ globalThis.chrome = {
   }
 };
 
-await import("./background.js");
+await import("../src/background.js");
 
 function setActive(index, length = 3) {
   tabs = Array.from({ length }, (_, tabIndex) => ({

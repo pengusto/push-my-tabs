@@ -1,13 +1,13 @@
 import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
-import { ACTIONS } from "./layout.js";
+import { ACTIONS } from "../src/layout.js";
 
-const localeNames = (await readdir("_locales")).sort();
+const localeNames = (await readdir("src/_locales")).sort();
 assert.deepEqual(localeNames, ["ar", "de", "en", "es", "fa", "fr", "it", "ja", "ku", "pl", "pt_BR", "ru", "tr", "uk", "zh_CN"]);
 
 const locales = Object.fromEntries(await Promise.all(localeNames.map(async (locale) => [
   locale,
-  JSON.parse(await readFile(`_locales/${locale}/messages.json`, "utf8"))
+  JSON.parse(await readFile(`src/_locales/${locale}/messages.json`, "utf8"))
 ])));
 const fallbackKeys = Object.keys(locales.en).sort();
 
@@ -29,7 +29,7 @@ for (const messageName of Object.values(ACTIONS)) {
   assert.ok(locales.en[messageName], `layout action references missing message ${messageName}`);
 }
 
-for (const file of ["manifest.json", "manifest.firefox.json", "popup.html", "options.html"]) {
+for (const file of ["manifests/chrome.json", "manifests/firefox.json", "src/popup.html", "src/options.html"]) {
   const content = await readFile(file, "utf8");
   const references = [...content.matchAll(/(?:__MSG_|data-i18n(?:-aria-label)?=")([A-Za-z][A-Za-z0-9]*)/g)];
   for (const [, name] of references) {
@@ -38,7 +38,7 @@ for (const file of ["manifest.json", "manifest.firefox.json", "popup.html", "opt
   }
 }
 
-for (const file of ["popup.js", "options.js"]) {
+for (const file of ["src/popup.js", "src/options.js"]) {
   const content = await readFile(file, "utf8");
   for (const [, name] of content.matchAll(/message\("([A-Za-z][A-Za-z0-9]*)"/g)) {
     assert.ok(locales.en[name], `${file} references missing message ${name}`);
@@ -52,10 +52,10 @@ globalThis.chrome = {
     getMessage: () => "",
     getUILanguage: () => "de-DE"
   },
-  runtime: { getURL: (path) => path }
+  runtime: { getURL: (path) => `src/${path}` }
 };
 globalThis.fetch = async (path) => ({ json: async () => JSON.parse(await readFile(path, "utf8")) });
-const { initializeI18n, localizeDocument, LOCALES, message, resolveLocale } = await import("./i18n.js");
+const { initializeI18n, localizeDocument, LOCALES, message, resolveLocale } = await import("../src/i18n.js");
 assert.deepEqual([...LOCALES].sort(), localeNames);
 assert.equal(resolveLocale("pt-PT"), "pt_BR");
 assert.equal(resolveLocale("zh-Hans"), "zh_CN");

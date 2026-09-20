@@ -27,21 +27,27 @@ Chrome과 Firefox는 브라우저 UI 언어에 따라 확장 프로그램 언어
 
 ## Chrome 로컬 테스트
 
+먼저 압축 해제된 개발 사본을 만듭니다.
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. `chrome://extensions`를 열고 **개발자 모드**를 켭니다.
-2. **압축해제된 확장 프로그램을 로드합니다**를 선택하고 이 디렉터리를 지정합니다.
+2. **압축해제된 확장 프로그램을 로드합니다**를 선택하고 `dist/chrome-dev`를 지정합니다.
 3. 네 방향 단축키를 확인하고 `chrome://extensions/shortcuts`에서 필요한 선택 단축키를 할당합니다.
 4. 시크릿 모드에서 사용하려면 확장 프로그램 세부정보에서 **시크릿 모드에서 허용**을 켭니다. `⌘T`는 Chrome의 기본 새 탭 단축키이므로 탭 위치 지정에는 할당된 새 탭 명령(권장: `⌥T`)을 사용하세요.
 
 ## 검사
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Chrome 및 Firefox 릴리스

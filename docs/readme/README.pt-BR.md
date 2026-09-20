@@ -27,21 +27,27 @@ Chrome e Firefox escolhem o idioma da extensão com base na interface do navegad
 
 ## Teste local no Chrome
 
+Primeiro, gere a cópia de desenvolvimento descompactada:
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. Abra `chrome://extensions` e ative o **Modo do desenvolvedor**.
-2. Escolha **Carregar sem compactação** e selecione este diretório.
+2. Escolha **Carregar sem compactação** e selecione `dist/chrome-dev`.
 3. Confirme os quatro atalhos de direção e atribua os opcionais em `chrome://extensions/shortcuts`.
 4. Para usar no modo anônimo, abra os detalhes e ative **Permitir no modo anônimo**. `⌘T` continua sendo o atalho nativo para uma nova aba; use o comando atribuído (recomendado: `⌥T`) para posicioná-la.
 
 ## Verificações
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Versões para Chrome e Firefox

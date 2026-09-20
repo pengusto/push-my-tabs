@@ -34,8 +34,8 @@ jobs:
           RELEASE_TAG: ${{ inputs.release_tag }}
         run: |
           set -euo pipefail
-          version=$(node -p "require('./manifest.json').version")
-          firefox_version=$(node -p "require('./manifest.firefox.json').version")
+          version=$(node -p "require('./manifests/chrome.json').version")
+          firefox_version=$(node -p "require('./manifests/firefox.json').version")
           test "$RELEASE_TAG" = "v$version"
           test "$version" = "$firefox_version"
           echo "version=$version" >> "$GITHUB_OUTPUT"

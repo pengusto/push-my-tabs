@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { DEFAULT_SETTINGS, PRESETS, detectLayout, geometryKey, nextIndex, saveSiteLayoutHint, selectedAction, siteLayoutHint, siteOrigin, siteProfileKey } from "./layout.js";
+import { DEFAULT_SETTINGS, PRESETS, detectLayout, geometryKey, nextIndex, saveSiteLayoutHint, selectedAction, siteLayoutHint, siteOrigin, siteProfileKey } from "../src/layout.js";
 
 const chromeGeometry = [
   ["vertical expanded", 2560, 1410, 2320, 1329, "vertical"],

@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 ./scripts/build-chrome.sh
-version=$(node -p "require('./manifest.json').version")
+version=$(node -p "require('./manifests/chrome.json').version")
 dev_dir="$PWD/dist/chrome-dev"
 
 rm -rf "$dev_dir"

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { DEFAULT_SETTINGS } from "./layout.js";
+import { DEFAULT_SETTINGS } from "../src/layout.js";
 
 let listener;
 let verticalTabs = true;
@@ -43,12 +43,12 @@ globalThis.browser = {
   runtime: { onMessage: { addListener: () => {} } }
 };
 
-const { layoutDetection, updateCommandShortcut } = await import("./api.js?firefox-test");
+const { layoutDetection, updateCommandShortcut } = await import("../src/api.js?firefox-test");
 assert.deepEqual(await layoutDetection({}, null), { layout: "vertical", confidence: "exact", key: null });
 verticalTabs = false;
 assert.deepEqual(await layoutDetection({}, null), { layout: "horizontal", confidence: "exact", key: null });
 
-await import("./background.js?firefox-test");
+await import("../src/background.js?firefox-test");
 
 async function command(name) {
   updates = [];

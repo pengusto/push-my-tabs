@@ -27,21 +27,27 @@ Chrome y Firefox eligen el idioma según la interfaz del navegador. También pue
 
 ## Prueba local en Chrome
 
+Primero crea la copia de desarrollo descomprimida:
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. Abre `chrome://extensions` y activa el **Modo desarrollador**.
-2. Elige **Cargar descomprimida** y selecciona este directorio.
+2. Elige **Cargar descomprimida** y selecciona `dist/chrome-dev`.
 3. Comprueba los cuatro atajos de dirección y asigna los opcionales en `chrome://extensions/shortcuts`.
 4. Para usar el modo incógnito, abre los detalles y activa **Permitir en incógnito**. `⌘T` sigue siendo el atajo nativo para una pestaña nueva; usa el comando asignado (recomendado: `⌥T`) para colocarla.
 
 ## Comprobaciones
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Versiones para Chrome y Firefox

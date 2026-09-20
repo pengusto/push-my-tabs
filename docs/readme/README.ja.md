@@ -37,22 +37,28 @@ Chrome と Firefox はブラウザーの表示言語から拡張機能の言語�
 
 ## Chrome でのローカルテスト
 
+最初に展開済みの開発用コピーを作成します。
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. `chrome://extensions` を開きます。
 2. **デベロッパーモード**を有効にします。
-3. **パッケージ化されていない拡張機能を読み込む**を選び、このディレクトリを指定します。
+3. **パッケージ化されていない拡張機能を読み込む**を選び、`dist/chrome-dev` を指定します。
 4. 4 方向のショートカットを確認し、必要な任意コマンドを `chrome://extensions/shortcuts` で割り当てます。
 5. シークレットモードで使う場合は拡張機能の詳細を開き、**シークレット モードでの実行を許可する**を有効にします。設定がない場合はポップアップに説明が表示されます。`⌘T` は Chrome 標準の新規タブ用ショートカットです。タブの配置には、割り当てた新規タブコマンド（推奨：`⌥T`）を使用してください。
 
 ## チェック
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Chrome リリース

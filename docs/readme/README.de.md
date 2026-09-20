@@ -37,22 +37,28 @@ Chrome und Firefox wählen die Sprache der Erweiterung automatisch anhand der Br
 
 ## Lokaler Chrome-Test
 
+Erstelle zuerst die entpackte Entwicklungsversion:
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. Öffne `chrome://extensions`.
 2. Aktiviere den **Entwicklermodus**.
-3. Wähle **Entpackte Erweiterung laden** und dann dieses Verzeichnis.
+3. Wähle **Entpackte Erweiterung laden** und dann `dist/chrome-dev`.
 4. Prüfe die vier Richtungskürzel und weise optionale Kürzel unter `chrome://extensions/shortcuts` zu.
 5. Öffne für die Nutzung im Inkognitomodus die Erweiterungsdetails und aktiviere **Im Inkognitomodus zulassen**. Das Popup erklärt dies, wenn die Einstellung fehlt. `⌘T` bleibt Chromes systemeigenes Kürzel für einen neuen Tab; verwende für die Tab-Positionierung den zugewiesenen Befehl für neue Tabs (empfohlen: `⌥T`).
 
 ## Prüfungen
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Chrome-Release

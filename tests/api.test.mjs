@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { DEFAULT_SETTINGS } from "./layout.js";
+import { DEFAULT_SETTINGS } from "../src/layout.js";
 
 globalThis.chrome = {
   extension: { isAllowedIncognitoAccess: async () => false },
@@ -14,7 +14,7 @@ globalThis.chrome = {
   }
 };
 
-const { detectedLayout, isIncognitoAllowed, isLayoutDetectionAmbiguous, layoutDetection, loadSettings, recommendedAmbiguousLayout } = await import("./api.js");
+const { detectedLayout, isIncognitoAllowed, isLayoutDetectionAmbiguous, layoutDetection, loadSettings, recommendedAmbiguousLayout } = await import("../src/api.js");
 const settings = await loadSettings();
 
 assert.equal(settings.layoutMode, "vertical");

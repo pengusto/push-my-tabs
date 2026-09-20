@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const chrome = JSON.parse(await readFile("manifest.json", "utf8"));
-const firefox = JSON.parse(await readFile("manifest.firefox.json", "utf8"));
+const chrome = JSON.parse(await readFile("manifests/chrome.json", "utf8"));
+const firefox = JSON.parse(await readFile("manifests/firefox.json", "utf8"));
 const changelog = await readFile("CHANGELOG.md", "utf8");
 
 assert.equal(chrome.version, firefox.version);
@@ -36,8 +36,10 @@ for (const manifest of [chrome, firefox]) {
 }
 
 for (const file of [
-  "manifest.json", "manifest.firefox.json", "options.html", "popup.html", "styles.css",
-  "api.js", "background.js", "i18n.js", "layout.js", "options.js", "picker.js", "popup.js"
+  "manifests/chrome.json", "manifests/firefox.json",
+  "src/options.html", "src/popup.html", "src/styles.css",
+  "src/api.js", "src/background.js", "src/i18n.js", "src/layout.js",
+  "src/options.js", "src/picker.js", "src/popup.js"
 ]) {
   assert.doesNotMatch(await readFile(file, "utf8"), /(?:https?|wss?):\/\/(?!\$\{)/, `${file} contains remote code or an endpoint`);
 }

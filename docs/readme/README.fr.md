@@ -27,21 +27,27 @@ Chrome et Firefox choisissent automatiquement la langue selon l’interface du n
 
 ## Test local dans Chrome
 
+Créez d’abord la copie de développement non empaquetée :
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. Ouvrez `chrome://extensions` et activez le **Mode développeur**.
-2. Choisissez **Charger l’extension non empaquetée**, puis ce répertoire.
+2. Choisissez **Charger l’extension non empaquetée**, puis `dist/chrome-dev`.
 3. Vérifiez les quatre raccourcis directionnels et attribuez les raccourcis facultatifs dans `chrome://extensions/shortcuts`.
 4. Pour le mode navigation privée, ouvrez les détails et activez **Autoriser en navigation privée**. `⌘T` reste le raccourci natif de Chrome pour un nouvel onglet ; utilisez la commande attribuée (recommandation : `⌥T`) pour le positionner.
 
 ## Vérifications
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Versions Chrome et Firefox

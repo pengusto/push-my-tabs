@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const [popup, popupScript, options, optionsScript, picker, styles] = await Promise.all([
-  readFile("popup.html", "utf8"),
-  readFile("popup.js", "utf8"),
-  readFile("options.html", "utf8"),
-  readFile("options.js", "utf8"),
-  readFile("picker.js", "utf8"),
-  readFile("styles.css", "utf8")
+  readFile("src/popup.html", "utf8"),
+  readFile("src/popup.js", "utf8"),
+  readFile("src/options.html", "utf8"),
+  readFile("src/options.js", "utf8"),
+  readFile("src/picker.js", "utf8"),
+  readFile("src/styles.css", "utf8")
 ]);
 
 for (const name of ["layoutModeLabel", "presetLabel", "currentMappingAriaLabel"]) {

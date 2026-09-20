@@ -35,22 +35,28 @@ Chrome and Firefox automatically select the extension language from the browser 
 
 ## Local Chrome test
 
+Build the unpacked development copy first:
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. Open `chrome://extensions`.
 2. Enable **Developer mode**.
-3. Choose **Load unpacked** and select this directory.
+3. Choose **Load unpacked** and select `dist/chrome-dev`.
 4. Confirm the four direction shortcuts, then assign any optional shortcut you want at `chrome://extensions/shortcuts`.
 5. To use the extension in Incognito, open its details and enable **Allow in Incognito**. The popup explains this when the setting is missing. `⌘T` remains Chrome's native new-tab shortcut; use the assigned new-tab command (recommended: `⌥T`) for tab placement.
 
 ## Checks
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Chrome release

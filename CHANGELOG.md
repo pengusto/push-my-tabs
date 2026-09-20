@@ -8,6 +8,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 - Link directly to the Chrome Web Store and Firefox Add-ons from the project website and README.
 - Add linked README translations under `docs/readme/` for German, Simplified Chinese, Japanese, Spanish, Korean, Brazilian Portuguese, and French.
+- Organize extension source, tests, and browser manifests into dedicated directories without changing release-package paths.
 
 ## 1.2.0 - 2026-09-20
 

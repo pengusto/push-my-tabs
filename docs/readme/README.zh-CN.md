@@ -37,22 +37,28 @@ Chrome 和 Firefox 会根据浏览器界面语言自动选择扩展语言，也�
 
 ## 在本地测试 Chrome 版本
 
+请先生成解压后的开发版本：
+
+```sh
+./scripts/build-chrome-dev.sh
+```
+
 1. 打开 `chrome://extensions`。
 2. 启用**开发者模式**。
-3. 选择**加载已解压的扩展程序**，然后选择本目录。
+3. 选择**加载已解压的扩展程序**，然后选择 `dist/chrome-dev`。
 4. 确认四个方向快捷键，并在 `chrome://extensions/shortcuts` 中为需要的可选命令分配快捷键。
 5. 如需在无痕模式中使用，请打开扩展详情并启用**在无痕模式下启用**。缺少此设置时，弹出窗口会给出说明。`⌘T` 仍是 Chrome 原生的新建标签页快捷键；请使用已分配的新建标签页命令（建议：`⌥T`）控制标签页位置。
 
 ## 检查
 
 ```sh
-node layout.test.mjs
-node api.test.mjs
-node background.test.mjs
-node firefox.test.mjs
-node i18n.test.mjs
-node ui.test.mjs
-jq empty manifest.json manifest.firefox.json
+node tests/layout.test.mjs
+node tests/api.test.mjs
+node tests/background.test.mjs
+node tests/firefox.test.mjs
+node tests/i18n.test.mjs
+node tests/ui.test.mjs
+jq empty manifests/chrome.json manifests/firefox.json
 ```
 
 ## Chrome 发布包
