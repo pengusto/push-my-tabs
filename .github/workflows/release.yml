@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: "Release tag, for example v1.1.0"
+        description: "Release tag, for example v1.2.0"
         required: true
         type: string
       prerelease:
@@ -54,7 +54,16 @@ jobs:
           VERSION: ${{ steps.metadata.outputs.version }}
         run: |
           set -euo pipefail
-          release_args=(--title "$RELEASE_TAG" --generate-notes --target "$GITHUB_SHA")
+          notes="$RUNNER_TEMP/release-notes.md"
+          awk -v version="$VERSION" '
+            index($0, "## " version " - ") == 1 { found=1; next }
+            found && /^## / { exit }
+            found { print }
+            END { if (!found) exit 1 }
+          ' CHANGELOG.md > "$notes"
+          test -s "$notes"
+
+          release_args=(--title "$RELEASE_TAG" --notes-file "$notes" --target "$GITHUB_SHA")
           if [[ "$PRERELEASE" == "true" ]]; then
             release_args+=(--prerelease)
           fi

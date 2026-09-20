@@ -63,12 +63,15 @@
     </label>
 
     <section class="mapping-preview" aria-label="Current key mapping" data-i18n-aria-label="currentMappingAriaLabel">
-      <p data-i18n="currentMapping">Current mapping</p>
+      <div class="mapping-preview-heading">
+        <p data-i18n="currentMapping">Direction shortcuts</p>
+        <span id="direction-shortcut-status" class="shortcut-summary" role="status"></span>
+      </div>
       <div id="mapping-preview"></div>
     </section>
 
     <details class="quick-actions">
-      <summary data-i18n="shortcutsHeading">Command shortcuts</summary>
+      <summary data-i18n="moreActions">More actions</summary>
       <div id="quick-actions"></div>
     </details>
 

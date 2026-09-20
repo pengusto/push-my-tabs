@@ -69,8 +69,7 @@
       <label>
         <span data-i18n="closeDirectionLabel">After closing the active tab</span>
         <select id="close-direction">
-          <option value="opener-backward" data-i18n="closeDirectionOpenerBackward">Select opener, otherwise previous tab (← / ↑)</option>
-          <option value="opener-forward" data-i18n="closeDirectionOpenerForward">Select opener, otherwise next tab (→ / ↓)</option>
+          <option value="browser" data-i18n="closeDirectionBrowser">Let browser choose</option>
           <option value="backward" data-i18n="closeDirectionBackward">Select previous tab (← / ↑)</option>
           <option value="forward" data-i18n="closeDirectionForward">Select next tab (→ / ↓)</option>
         </select>
@@ -116,11 +115,15 @@
 
     <section class="card">
       <div class="section-heading">
-        <h2 data-i18n="shortcutsHeading">Command shortcuts</h2>
+        <h2 data-i18n="currentMapping">Direction shortcuts</h2>
         <p id="shortcut-help"></p>
         <p id="shortcut-summary" class="shortcut-summary" role="status"></p>
       </div>
       <div id="shortcuts"></div>
+      <details class="optional-shortcuts">
+        <summary data-i18n="shortcutsHeading">More shortcuts (optional)</summary>
+        <div id="optional-shortcuts"></div>
+      </details>
       <button id="shortcut-settings" class="shortcut-action" data-i18n="changeShortcuts">Change command shortcuts</button>
       <p id="shortcut-status" class="status" role="status"></p>
     </section>

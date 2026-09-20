@@ -4,6 +4,18 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.2.0 - 2026-09-20
+
+### Changed
+
+- Use the browser's native post-close tab selection by default, replacing the opener-based options while retaining previous and next overrides.
+- Separate the four ready-to-use direction shortcuts from optional commands and show their actual browser assignments in the popup.
+- Explain Chrome's native vertical-tab controls in the popup and settings.
+
+### Fixed
+
+- Hide missing shortcut recommendations instead of showing an undefined value.
+
 ## 1.1.0 - 2026-08-11
 
 ### Added

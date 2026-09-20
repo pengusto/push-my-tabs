@@ -106,14 +106,14 @@ showCustomPreset();
 
 const commands = await api.commands.getAll();
 const shortcuts = document.querySelector("#shortcuts");
+const optionalShortcuts = document.querySelector("#optional-shortcuts");
 const canEditHere = typeof api.commands.update === "function";
 const supportedCommands = commands.filter(({ name }) => [
   ...COMMANDS, ...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...RECENT_TAB_COMMANDS, ...TAB_ACTION_COMMANDS
 ].includes(name));
-const unassignedCount = supportedCommands.filter(({ shortcut }) => !shortcut).length;
-document.querySelector("#shortcut-summary").textContent = unassignedCount
-  ? `${unassignedCount} × ${message("shortcutUnassigned")}`
-  : message("shortcutAllAssigned");
+const assignedCoreCount = supportedCommands.filter(({ name, shortcut }) => COMMANDS.includes(name) && shortcut).length;
+document.querySelector("#shortcut-summary").textContent =
+  assignedCoreCount === COMMANDS.length ? `✓ ${assignedCoreCount}/${COMMANDS.length}` : `${assignedCoreCount}/${COMMANDS.length}`;
 const isMac = navigator.platform.toLowerCase().includes("mac");
 const recommendedShortcuts = isMac ? {
   "arrow-left": "⌘←",
@@ -152,9 +152,11 @@ for (const command of supportedCommands) {
   const name = document.createElement("span");
   name.className = "shortcut-name";
   name.textContent = commandLabels[command.name] ?? command.description;
-  const recommendation = document.createElement("small");
-  recommendation.textContent = `${message("useRecommendation")}: ${recommendedShortcuts[command.name]}`;
-  name.append(recommendation);
+  if (recommendedShortcuts[command.name]) {
+    const recommendation = document.createElement("small");
+    recommendation.textContent = `${message("useRecommendation")}: ${recommendedShortcuts[command.name]}`;
+    name.append(recommendation);
+  }
   const input = document.createElement("input");
   const unassigned = !command.shortcut;
   input.value = command.shortcut || (canEditHere ? "" : message("shortcutUnassigned"));
@@ -171,7 +173,7 @@ for (const command of supportedCommands) {
     }
   });
   row.append(name, input);
-  shortcuts.append(row);
+  (COMMANDS.includes(command.name) ? shortcuts : optionalShortcuts).append(row);
 }
 
 document.querySelector("#shortcut-settings").addEventListener("click", async () => {

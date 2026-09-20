@@ -7,6 +7,7 @@ export async function loadSettings() {
   return {
     ...DEFAULT_SETTINGS,
     ...saved,
+    closeDirection: ["backward", "forward"].includes(saved.closeDirection) ? saved.closeDirection : DEFAULT_SETTINGS.closeDirection,
     layoutHints: { ...DEFAULT_SETTINGS.layoutHints, ...saved.layoutHints },
     siteProfiles: { ...DEFAULT_SETTINGS.siteProfiles, ...saved.siteProfiles },
     customPreset: {

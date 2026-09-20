@@ -20,7 +20,7 @@ See [CHANGELOG.md](CHANGELOG.md) for user-facing changes.
 
 Chrome and Firefox release packages share the same tested source. Firefox 142 or newer uses the browser's exact vertical-tabs setting and lets users edit supported command shortcuts directly in the settings page.
 
-The settings page shows every command, its current assignment, and the number of missing shortcuts. The popup also offers quick actions for switching to the first or last tab, moving the current tab, duplicating, pinning, muting, or moving it to a new window.
+The popup and settings page show the four direction shortcuts with their current browser assignments. Optional shortcuts stay in a separate collapsed section. The popup also offers quick actions for switching to the first or last tab, moving the current tab, duplicating, pinning, muting, or moving it to a new window.
 
 ## Languages
 
@@ -31,7 +31,7 @@ Chrome and Firefox automatically select the extension language from the browser 
 1. Open `chrome://extensions`.
 2. Enable **Developer mode**.
 3. Choose **Load unpacked** and select this directory.
-4. Open `chrome://extensions/shortcuts` and assign any shortcut Chrome did not accept by default.
+4. Confirm the four direction shortcuts, then assign any optional shortcut you want at `chrome://extensions/shortcuts`.
 5. To use the extension in Incognito, open its details and enable **Allow in Incognito**. The popup explains this when the setting is missing. `⌘T` remains Chrome's native new-tab shortcut; use the assigned new-tab command (recommended: `⌥T`) for tab placement.
 
 ## Checks
@@ -67,7 +67,7 @@ Firefox 142 or newer, Node.js 22, `npx`, `zip`, and `unzip` are required. The bu
 
 ## Manual GitHub release
 
-Releases are not created on every push. From the GitHub Actions **Create release** workflow, choose the exact branch or commit, enter a tag matching both manifests (for example `v1.1.0`), and optionally mark it as a pre-release. The workflow runs both package builds and attaches the Chrome and Firefox ZIPs to one GitHub Release.
+Releases are not created on every push. From the GitHub Actions **Create release** workflow, choose the exact branch or commit, enter a tag matching both manifests (for example `v1.2.0`), and optionally mark it as a pre-release. The workflow runs both package builds and attaches the Chrome and Firefox ZIPs to one GitHub Release.
 
 Store publication remains a separate manual step: Chrome Web Store and Firefox Add-ons can then review and publish the matching archives, after which the browsers can manage user updates.
 

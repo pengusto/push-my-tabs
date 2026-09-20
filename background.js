@@ -32,14 +32,11 @@ api.tabs.onRemoved.addListener(async (tabId, { isWindowClosing, windowId }) => {
   const closedTab = activeTabs.get(windowId);
   if (isWindowClosing || closedTab?.id !== tabId) return;
 
-  const [{ closeDirection }, tabs] = await Promise.all([
-    loadSettings(),
-    api.tabs.query({ windowId })
-  ]);
-  const useOpener = typeof closeDirection === "string" && closeDirection.startsWith("opener-");
-  const direction = typeof closeDirection === "string" && closeDirection.endsWith("backward") ? "backward" : "forward";
-  const target = (useOpener ? tabs.find(({ id }) => id === closedTab.openerTabId) : null)
-    ?? tabs.find(({ index }) => index === closedTab.index - (direction === "backward" ? 1 : 0));
+  const { closeDirection } = await loadSettings();
+  if (closeDirection === "browser") return;
+
+  const tabs = await api.tabs.query({ windowId });
+  const target = tabs.find(({ index }) => index === closedTab.index - (closeDirection === "backward" ? 1 : 0));
   if (target?.id) await api.tabs.update(target.id, { active: true });
 });
 

@@ -3,7 +3,10 @@ import { readFile } from "node:fs/promises";
 
 const chrome = JSON.parse(await readFile("manifest.json", "utf8"));
 const firefox = JSON.parse(await readFile("manifest.firefox.json", "utf8"));
+const changelog = await readFile("CHANGELOG.md", "utf8");
 
+assert.equal(chrome.version, firefox.version);
+assert.match(changelog, new RegExp(`^## ${chrome.version} - \\d{4}-\\d{2}-\\d{2}$`, "m"));
 assert.deepEqual(chrome.permissions, ["storage", "activeTab"]);
 assert.equal(chrome.minimum_chrome_version, "127");
 assert.equal(chrome.incognito, "spanning");

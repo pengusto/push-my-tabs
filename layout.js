@@ -53,7 +53,7 @@ export const DEFAULT_SETTINGS = {
   siteProfiles: {},
   presetId: "adaptive",
   wrapSwitching: true,
-  closeDirection: "opener-forward",
+  closeDirection: "browser",
   customPreset: {
     horizontal: { ...horizontal },
     vertical: { ...vertical }

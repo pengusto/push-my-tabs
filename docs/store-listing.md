@@ -41,7 +41,7 @@ Support: https://github.com/pengusto/push-my-tabs/issues
 ### Reviewer instructions
 
 1. Open the extension settings and verify the Layout mode and Shortcut preset controls.
-2. Assign any unassigned command shortcuts. In Chrome, use `chrome://extensions/shortcuts`; in Firefox, edit supported shortcuts directly in the settings page.
+2. Confirm the four direction shortcuts and assign any optional shortcuts you want. In Chrome, use `chrome://extensions/shortcuts`; in Firefox, edit supported shortcuts directly in the settings page.
 3. Open several tabs and invoke the four directional commands. The Follow layout preset switches tabs on the visible layout axis and moves tabs on the other axis.
 4. Change Layout mode to Horizontal or Vertical to verify the manual override.
 5. In Chrome, note that Automatic mode is a geometry-based heuristic; an open side panel can require the manual override. In Firefox, Automatic mode reads the official vertical-tabs setting.
@@ -83,7 +83,7 @@ Support: https://github.com/pengusto/push-my-tabs/issues
 ### Hinweise für die Prüfung
 
 1. Erweiterungseinstellungen öffnen und die Steuerelemente für Layout-Modus und Shortcut-Preset prüfen.
-2. Nicht belegte Befehlstasten zuweisen. In Chrome dafür `chrome://extensions/shortcuts` verwenden; in Firefox lassen sich unterstützte Befehlstasten direkt in den Einstellungen bearbeiten.
+2. Die vier Richtungstasten prüfen und bei Bedarf optionale Shortcuts belegen. In Chrome dafür `chrome://extensions/shortcuts` verwenden; in Firefox lassen sich unterstützte Shortcuts direkt in den Einstellungen bearbeiten.
 3. Mehrere Tabs öffnen und die vier Richtungsbefehle ausführen. Das Preset Layout folgen wechselt Tabs auf der sichtbaren Layout-Achse und verschiebt Tabs auf der anderen Achse.
 4. Den Layout-Modus auf Horizontal oder Vertikal stellen, um die manuelle Vorgabe zu prüfen.
 5. In Chrome ist der automatische Modus eine Geometrie-Heuristik; eine geöffnete Seitenleiste kann die manuelle Vorgabe erfordern. In Firefox liest der automatische Modus die offizielle Einstellung für vertikale Tabs.

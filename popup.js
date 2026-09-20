@@ -18,6 +18,8 @@ const confirmation = document.querySelector("#layout-confirmation");
 const settings = await loadSettings();
 await initializeI18n(settings.locale);
 localizeDocument();
+const commands = await api.commands.getAll();
+const commandShortcuts = new Map(commands.map(({ name, shortcut }) => [name, shortcut]));
 document.querySelector("#native-layout-help").hidden = Boolean(api.browserSettings?.verticalTabs);
 const { window, activeTab } = await currentContext();
 if (activeTab?.id) await api.action.setBadgeText({ tabId: activeTab.id, text: "" });
@@ -115,10 +117,14 @@ function showLayout() {
 
   const previewSettings = { ...settings, presetId: preset.value };
   const preview = document.querySelector("#mapping-preview");
+  const assignedCount = COMMANDS.filter((command) => commandShortcuts.get(command)).length;
+  document.querySelector("#direction-shortcut-status").textContent =
+    assignedCount === COMMANDS.length ? `✓ ${assignedCount}/${COMMANDS.length}` : `${assignedCount}/${COMMANDS.length}`;
   preview.replaceChildren(...COMMANDS.map((command) => {
     const row = document.createElement("div");
     const key = document.createElement("kbd");
-    key.textContent = { "arrow-left": "←", "arrow-right": "→", "arrow-up": "↑", "arrow-down": "↓" }[command];
+    key.textContent = commandShortcuts.get(command) || message("shortcutUnassigned");
+    key.classList.toggle("is-unassigned", !commandShortcuts.get(command));
     const action = document.createElement("span");
     action.textContent = message(ACTIONS[selectedAction(previewSettings, activeLayout ?? "horizontal", command)]);
     row.append(key, action);
@@ -145,7 +151,6 @@ document.querySelector("#options").addEventListener("click", async () => {
 });
 
 const quickActions = document.querySelector("#quick-actions");
-const commands = await api.commands.getAll();
 for (const command of commands.filter(({ name }) => TAB_ACTION_COMMANDS.includes(name))) {
   const button = document.createElement("button");
   button.type = "button";

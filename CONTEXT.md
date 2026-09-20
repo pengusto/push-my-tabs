@@ -41,5 +41,5 @@ A behavior assigned to a directional command: activate the previous or next tab,
 _Avoid_: Shortcut, key binding
 
 **Command Shortcut**:
-A Chrome-managed key combination that invokes one directional command. The extension displays it as a “Befehlstaste”; users edit it in Chrome while presets determine its behavior.
+A browser-managed key combination that invokes one command. The extension calls it a “Shortcut” or “Tastenkombination”; users edit it in the browser while presets determine the behavior of the four direction shortcuts.
 _Avoid_: Hotkey, app-managed shortcut

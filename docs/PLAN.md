@@ -53,4 +53,4 @@
 
 ## Immediate next action
 
-Submit `push-my-tabs-chrome-1.1.0.zip` from the `v1.1.0` GitHub release to the Chrome Web Store.
+Review the generated 1.2.0 store assets, commit and tag the tested source, then submit the matching archives.

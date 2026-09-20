@@ -3,7 +3,7 @@
   "minimum_chrome_version": "127",
   "default_locale": "en",
   "name": "__MSG_extensionName__",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "__MSG_extensionDescription__",
   "incognito": "spanning",
   "icons": {

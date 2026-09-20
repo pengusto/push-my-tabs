@@ -144,38 +144,21 @@ await runtimeListener({ type: "run-command", command: "switch-first" }, { tab: t
 assert.deepEqual(updates, [[10, { active: true }]], "popup commands use the sender tab context");
 
 setActive(1);
-settings.closeDirection = "opener-forward";
+settings.closeDirection = "browser";
 tabs[1].openerTabId = 10;
 await activatedListener({ tabId: 11, windowId: 42 });
 tabs.splice(1, 1);
 tabs[1].index = 1;
 await removedListener(11, { isWindowClosing: false, windowId: 42 });
-assert.deepEqual(updates, [[10, { active: true }]], "closing an active child tab returns to its opener");
+assert.deepEqual(updates, [], "Chrome keeps control of native close selection by default");
 
 setActive(1);
-settings.closeDirection = "opener-backward";
-tabs[1].openerTabId = 12;
+settings.closeDirection = "forward";
 await activatedListener({ tabId: 11, windowId: 42 });
 tabs.splice(1, 1);
 tabs[1].index = 1;
 await removedListener(11, { isWindowClosing: false, windowId: 42 });
-assert.deepEqual(updates, [[12, { active: true }]], "the opener wins over the configured fallback direction");
-
-setActive(1);
-settings.closeDirection = "opener-forward";
-tabs[1].openerTabId = 999;
-await activatedListener({ tabId: 11, windowId: 42 });
-tabs.splice(1, 1);
-tabs[1].index = 1;
-await removedListener(11, { isWindowClosing: false, windowId: 42 });
-assert.deepEqual(updates, [[12, { active: true }]], "missing openers use the configured fallback direction");
-
-setActive(1);
-await activatedListener({ tabId: 11, windowId: 42 });
-tabs.splice(1, 1);
-tabs[1].index = 1;
-await removedListener(11, { isWindowClosing: false, windowId: 42 });
-assert.deepEqual(updates, [[12, { active: true }]], "closing the active tab selects right/down by default");
+assert.deepEqual(updates, [[12, { active: true }]], "closing the active tab can select right/down");
 
 settings.closeDirection = "backward";
 setActive(1);

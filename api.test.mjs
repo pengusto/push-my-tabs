@@ -7,6 +7,7 @@ globalThis.chrome = {
     local: {
       get: async () => ({
         layoutMode: "vertical",
+        closeDirection: "opener-forward",
         customPreset: { horizontal: { "arrow-left": "none" } }
       })
     }
@@ -19,7 +20,7 @@ const settings = await loadSettings();
 assert.equal(settings.layoutMode, "vertical");
 assert.equal(settings.locale, "browser");
 assert.equal(settings.presetId, DEFAULT_SETTINGS.presetId);
-assert.equal(settings.closeDirection, "opener-forward");
+assert.equal(settings.closeDirection, "browser", "legacy opener modes fall back to Chrome's native behavior");
 assert.equal(settings.customPreset.horizontal["arrow-left"], "none");
 assert.equal(settings.customPreset.horizontal["arrow-right"], "switchForward");
 assert.deepEqual(settings.customPreset.vertical, DEFAULT_SETTINGS.customPreset.vertical);

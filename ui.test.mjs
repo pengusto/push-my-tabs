@@ -27,7 +27,10 @@ assert.match(popup, /data-layout="horizontal"/);
 assert.match(popup, /id="remember-site"/);
 assert.match(popup, /id="remember-path"/);
 assert.match(popup, /class="quick-actions"/);
+assert.match(popup, /id="direction-shortcut-status"/);
+assert.match(popup, /data-i18n="moreActions"/);
 assert.match(popupScript, /run-command/);
+assert.match(popupScript, /commandShortcuts\.get\(command\) \|\| message\("shortcutUnassigned"\)/);
 assert.doesNotMatch(popup, /class="icon-select"/);
 assert.doesNotMatch(popup, /class="remove-profile"/);
 assert.doesNotMatch(popupScript, /delete settings\.siteProfiles\[profile\]\[detection\.key\]/);
@@ -37,6 +40,7 @@ assert.match(popupScript, /const layoutIcon = activeLayout === "vertical" \? "�
 assert.match(popupScript, /icon\.className = "layout-status-icon"/);
 assert.doesNotMatch(popupScript, /settings\.layoutMode === "auto" && originProfile/, "site buttons must also work with a forced global mode");
 assert.match(options, /id="shortcut-settings"/);
+assert.match(options, /id="optional-shortcuts"/);
 assert.match(options, /id="site-profiles"/);
 assert.match(options, /id="clear-layout-hints"/);
 assert.doesNotMatch(optionsScript, /Object\.keys\(hints\)\.length/, "internal geometry count must not be shown as an unexplained 1×");
@@ -47,6 +51,7 @@ assert.match(optionsScript, /updateCommandShortcut\(command\.name, input\.value\
 assert.match(optionsScript, /TAB_CREATION_COMMANDS/);
 assert.match(optionsScript, /TAB_ACTION_COMMANDS/);
 assert.match(optionsScript, /recommendedShortcuts/);
+assert.match(optionsScript, /if \(recommendedShortcuts\[command\.name\]\)/, "missing recommendations must not render as undefined");
 assert.match(optionsScript, /⌘⌥↓/);
 assert.match(styles, /\.shortcut-name small/);
 assert.match(optionsScript, /shortcutSaveFailed", error\.message/);
