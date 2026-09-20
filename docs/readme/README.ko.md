@@ -1,14 +1,14 @@
-[English](README.md) · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · 한국어 · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
+[English](../../README.md) · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · 한국어 · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
 
-> 이 번역은 기계의 도움으로 작성되었으며 아직 원어민 검수를 받지 않았습니다. 내용이 다를 경우 [영문 README](README.md)를 기준으로 합니다.
+> 이 번역은 기계의 도움으로 작성되었으며 아직 원어민 검수를 받지 않았습니다. 내용이 다를 경우 [영문 README](../../README.md)를 기준으로 합니다.
 
 # Push My Tabs
 
 하나의 공통 코어로 Chrome과 Firefox에서 레이아웃을 인식하는 키보드 단축키와 빠른 탭 작업을 제공합니다.
 
-사용자 대상 변경 사항은 [CHANGELOG.md](CHANGELOG.md)를 확인하세요.
+사용자 대상 변경 사항은 [CHANGELOG.md](../../CHANGELOG.md)를 확인하세요.
 
-- [개인정보 보호](PRIVACY.md) · [지원](https://github.com/pengusto/push-my-tabs/issues) · [웹사이트](https://pengusto.github.io/push-my-tabs/)
+- [개인정보 보호](../../PRIVACY.md) · [지원](https://github.com/pengusto/push-my-tabs/issues) · [웹사이트](https://pengusto.github.io/push-my-tabs/)
 
 ## 설치
 
@@ -59,6 +59,6 @@ Chrome 개발 사본은 `dist/chrome-dev`를 한 번 로드한 뒤 `./scripts/bu
 
 GitHub Actions의 **Create release** 워크플로에서 정확한 브랜치나 커밋을 선택하고 두 매니페스트와 일치하는 태그(예: `v1.2.0`)를 입력합니다. 워크플로는 두 패키지를 빌드해 하나의 GitHub Release에 ZIP 파일을 첨부합니다. Chrome 웹 스토어와 Firefox Add-ons 게시는 별도의 수동 단계입니다.
 
-태그된 릴리스는 [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases)에서 확인할 수 있습니다. 기여 방법은 [CONTRIBUTING.md](CONTRIBUTING.md), 비공개 취약점 신고 방법은 [SECURITY.md](SECURITY.md)를 참고하세요.
+태그된 릴리스는 [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases)에서 확인할 수 있습니다. 기여 방법은 [CONTRIBUTING.md](../../CONTRIBUTING.md), 비공개 취약점 신고 방법은 [SECURITY.md](../../SECURITY.md)를 참고하세요.
 
 이 확장 프로그램은 호스트 권한, 콘텐츠 스크립트, 계정, 분석, 광고 또는 원격 코드를 사용하지 않습니다. Chrome의 `activeTab` 권한은 단축키나 팝업 작업 후 현재 탭만 잠시 노출해 출처나 정확한 경로에 로컬 위치 프로필을 적용합니다. Firefox는 이 권한을 요청하거나 페이지 데이터를 읽지 않습니다.

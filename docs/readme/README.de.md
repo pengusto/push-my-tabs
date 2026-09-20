@@ -1,11 +1,11 @@
-[English](README.md) · Deutsch · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
+[English](../../README.md) · Deutsch · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
 
-> Diese Übersetzung wurde maschinell unterstützt und noch nicht von einer muttersprachlichen Person geprüft. Bei Abweichungen gilt die [englische README](README.md).
+> Diese Übersetzung wurde maschinell unterstützt und noch nicht von einer muttersprachlichen Person geprüft. Bei Abweichungen gilt die [englische README](../../README.md).
 
 <table>
   <tr>
     <td width="184" align="center">
-      <img src="docs/assets/molebyte-pixel.gif" alt="Molebyte winkt und hält dabei einen Browser-Tab" width="168">
+      <img src="../assets/molebyte-pixel.gif" alt="Molebyte winkt und hält dabei einen Browser-Tab" width="168">
     </td>
     <td>
       <h1>Push My Tabs</h1>
@@ -14,9 +14,9 @@
   </tr>
 </table>
 
-Nutzerrelevante Änderungen stehen in der [CHANGELOG.md](CHANGELOG.md).
+Nutzerrelevante Änderungen stehen in der [CHANGELOG.md](../../CHANGELOG.md).
 
-- [Datenschutz](PRIVACY.md)
+- [Datenschutz](../../PRIVACY.md)
 - [Support](https://github.com/pengusto/push-my-tabs/issues)
 - [Website](https://pengusto.github.io/push-my-tabs/)
 
@@ -81,6 +81,6 @@ Die Veröffentlichung in den Stores bleibt ein separater manueller Schritt. Chro
 
 Getaggte Releases und die zugehörigen Chrome- und Firefox-Archive findest du auf der [GitHub-Releases-Seite](https://github.com/pengusto/push-my-tabs/releases).
 
-Wie du mitarbeitest, steht in der [CONTRIBUTING.md](CONTRIBUTING.md). Sicherheitslücken meldest du privat nach der [SECURITY.md](SECURITY.md).
+Wie du mitarbeitest, steht in der [CONTRIBUTING.md](../../CONTRIBUTING.md). Sicherheitslücken meldest du privat nach der [SECURITY.md](../../SECURITY.md).
 
 Die Erweiterung verwendet keine Host-Berechtigungen, Content-Skripte, Konten, Analysen, Werbung oder Remote-Code. Chromes Berechtigung `activeTab` gibt nach einem Tastenkürzel oder einer Popup-Aktion vorübergehend nur den aktuellen Tab frei, damit lokale Geometrieprofile für dessen Ursprung oder genauen Pfad angewendet werden können. Firefox fordert diese Berechtigung nicht an und liest keine Seitendaten.

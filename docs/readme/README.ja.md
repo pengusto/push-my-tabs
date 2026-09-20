@@ -1,11 +1,11 @@
-[English](README.md) · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md) · 日本語 · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
+[English](../../README.md) · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md) · 日本語 · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
 
-> この翻訳は機械翻訳の支援を受けて作成され、母語話者による確認はまだ行われていません。内容に相違がある場合は、[英語版 README](README.md) を正とします。
+> この翻訳は機械翻訳の支援を受けて作成され、母語話者による確認はまだ行われていません。内容に相違がある場合は、[英語版 README](../../README.md) を正とします。
 
 <table>
   <tr>
     <td width="184" align="center">
-      <img src="docs/assets/molebyte-pixel.gif" alt="ブラウザータブを持って手を振る Molebyte" width="168">
+      <img src="../assets/molebyte-pixel.gif" alt="ブラウザータブを持って手を振る Molebyte" width="168">
     </td>
     <td>
       <h1>Push My Tabs</h1>
@@ -14,9 +14,9 @@
   </tr>
 </table>
 
-ユーザー向けの変更点は [CHANGELOG.md](CHANGELOG.md) を参照してください。
+ユーザー向けの変更点は [CHANGELOG.md](../../CHANGELOG.md) を参照してください。
 
-- [プライバシー](PRIVACY.md)
+- [プライバシー](../../PRIVACY.md)
 - [サポート](https://github.com/pengusto/push-my-tabs/issues)
 - [ウェブサイト](https://pengusto.github.io/push-my-tabs/)
 
@@ -81,6 +81,6 @@ Firefox 142 以降、Node.js 22、`npx`、`zip`、`unzip` が必要です。ビ�
 
 タグ付き Release と対応する Chrome、Firefox のアーカイブは [GitHub Releases ページ](https://github.com/pengusto/push-my-tabs/releases)にあります。
 
-参加方法は [CONTRIBUTING.md](CONTRIBUTING.md)、脆弱性を非公開で報告する方法は [SECURITY.md](SECURITY.md) を参照してください。
+参加方法は [CONTRIBUTING.md](../../CONTRIBUTING.md)、脆弱性を非公開で報告する方法は [SECURITY.md](../../SECURITY.md) を参照してください。
 
 この拡張機能は、ホスト権限、コンテンツスクリプト、アカウント、分析、広告、リモートコードを使用しません。Chrome の `activeTab` 権限は、ショートカットまたはポップアップ操作の後に現在のタブだけを一時的に公開し、そのオリジンまたは正確なパスにローカルのジオメトリープロファイルを適用できるようにします。Firefox はこの権限を要求せず、ページデータを読み取りません。

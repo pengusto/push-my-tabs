@@ -1,14 +1,14 @@
-[English](README.md) · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · Português (Brasil) · [Français](README.fr.md)
+[English](../../README.md) · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · Português (Brasil) · [Français](README.fr.md)
 
-> Esta tradução foi produzida com assistência automática e ainda não foi revisada por uma pessoa fluente. Em caso de diferença, o [README em inglês](README.md) prevalece.
+> Esta tradução foi produzida com assistência automática e ainda não foi revisada por uma pessoa fluente. Em caso de diferença, o [README em inglês](../../README.md) prevalece.
 
 # Push My Tabs
 
 Atalhos de teclado que entendem o layout e ações rápidas para abas no Chrome e Firefox usando o mesmo núcleo.
 
-Consulte [CHANGELOG.md](CHANGELOG.md) para ver as mudanças voltadas aos usuários.
+Consulte [CHANGELOG.md](../../CHANGELOG.md) para ver as mudanças voltadas aos usuários.
 
-- [Privacidade](PRIVACY.md) · [Suporte](https://github.com/pengusto/push-my-tabs/issues) · [Site](https://pengusto.github.io/push-my-tabs/)
+- [Privacidade](../../PRIVACY.md) · [Suporte](https://github.com/pengusto/push-my-tabs/issues) · [Site](https://pengusto.github.io/push-my-tabs/)
 
 ## Instalação
 
@@ -59,6 +59,6 @@ Para manter uma cópia de desenvolvimento no Chrome, carregue `dist/chrome-dev` 
 
 No fluxo **Create release** do GitHub Actions, escolha o branch ou commit exato e informe uma tag correspondente aos dois manifestos, como `v1.2.0`. O fluxo gera os dois pacotes e anexa os arquivos ZIP a uma única publicação. A publicação na Chrome Web Store e no Firefox Add-ons continua sendo uma etapa manual separada.
 
-As versões com tag ficam em [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases). Consulte [CONTRIBUTING.md](CONTRIBUTING.md) para contribuir e [SECURITY.md](SECURITY.md) para relatar uma vulnerabilidade em particular.
+As versões com tag ficam em [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases). Consulte [CONTRIBUTING.md](../../CONTRIBUTING.md) para contribuir e [SECURITY.md](../../SECURITY.md) para relatar uma vulnerabilidade em particular.
 
 A extensão não usa permissões de host, scripts de conteúdo, contas, análise, publicidade ou código remoto. A permissão `activeTab` do Chrome expõe temporariamente apenas a aba atual após um atalho ou ação do popup para aplicar perfis locais de geometria à origem ou ao caminho exato. O Firefox não solicita essa permissão nem lê dados da página.

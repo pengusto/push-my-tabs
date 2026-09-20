@@ -1,11 +1,11 @@
-[English](README.md) · [Deutsch](README.de.md) · 简体中文 · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
+[English](../../README.md) · [Deutsch](README.de.md) · 简体中文 · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
 
-> 本译文由机器辅助生成，尚未经过母语使用者审校。如有差异，请以[英文 README](README.md) 为准。
+> 本译文由机器辅助生成，尚未经过母语使用者审校。如有差异，请以[英文 README](../../README.md) 为准。
 
 <table>
   <tr>
     <td width="184" align="center">
-      <img src="docs/assets/molebyte-pixel.gif" alt="Molebyte 挥手并拿着一个浏览器标签页" width="168">
+      <img src="../assets/molebyte-pixel.gif" alt="Molebyte 挥手并拿着一个浏览器标签页" width="168">
     </td>
     <td>
       <h1>Push My Tabs</h1>
@@ -14,9 +14,9 @@
   </tr>
 </table>
 
-面向用户的更新记录请参阅 [CHANGELOG.md](CHANGELOG.md)。
+面向用户的更新记录请参阅 [CHANGELOG.md](../../CHANGELOG.md)。
 
-- [隐私](PRIVACY.md)
+- [隐私](../../PRIVACY.md)
 - [支持](https://github.com/pengusto/push-my-tabs/issues)
 - [网站](https://pengusto.github.io/push-my-tabs/)
 
@@ -81,6 +81,6 @@ jq empty manifest.json manifest.firefox.json
 
 带标签的 Release 及对应的 Chrome 和 Firefox 归档位于 [GitHub Releases 页面](https://github.com/pengusto/push-my-tabs/releases)。
 
-参与项目请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)，私下报告安全漏洞请参阅 [SECURITY.md](SECURITY.md)。
+参与项目请参阅 [CONTRIBUTING.md](../../CONTRIBUTING.md)，私下报告安全漏洞请参阅 [SECURITY.md](../../SECURITY.md)。
 
 本扩展不使用主机权限、内容脚本、账户、分析、广告或远程代码。Chrome 的 `activeTab` 权限仅在用户触发快捷键或弹出窗口操作后短暂公开当前标签页，以便为其来源或准确路径应用本地几何配置。Firefox 不申请此权限，也不读取页面数据。
