@@ -1,8 +1,8 @@
 {
   "files": [
     {
-      "path": "CONTEXT.md",
-      "description": "Canonical domain vocabulary for presets, layout modes, layout mappings, tab actions, and command shortcuts",
+      "path": "GLOSSARY.md",
+      "description": "Canonical glossary for presets, layout modes, layout mappings, tab actions, and command shortcuts",
       "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "**/*.css", "manifests/*.json"]
     },
     {
@@ -12,7 +12,7 @@
     },
     {
       "path": "docs/agents/domain.md",
-      "description": "Repository rule to use CONTEXT.md and relevant ADRs as the domain source of truth",
+      "description": "Repository rule to use GLOSSARY.md and relevant ADRs as the domain source of truth",
       "scope": ["**/*.js", "**/*.mjs", "**/*.html", "**/*.json", "**/*.css", "scripts/**", "manifests/*.json"]
     },
     {

@@ -5,7 +5,7 @@
 - Review the changed lines and their real callers. Report only concrete, actionable defects.
 - Prioritize runtime bugs, security/privacy regressions, permission changes, browser incompatibilities, accessibility regressions, broken release invariants, and missing regression coverage for changed behavior.
 - Do not report formatting, naming preferences, harmless duplication, documentation style, speculative refactors, or informational observations.
-- Every finding must explain the user-visible or release-visible failure and point to the smallest safe fix. Do not invent requirements that are absent from `CONTEXT.md`, the ADRs, or the existing implementation.
+- Every finding must explain the user-visible or release-visible failure and point to the smallest safe fix. Do not invent requirements that are absent from `GLOSSARY.md`, the ADRs, or the existing implementation.
 
 ## Extension architecture
 

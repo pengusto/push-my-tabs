@@ -12,7 +12,7 @@ Use the five canonical Matt Pocock triage labels. See `docs/agents/triage-labels
 
 ### Domain docs
 
-This is a single-context repository using root `CONTEXT.md` and `docs/adr/`. See `docs/agents/domain.md`.
+This repository has one domain glossary in root `GLOSSARY.md` and decisions in `docs/adr/`. See `docs/agents/domain.md`.
 
 ## Changelog and version notes
 
