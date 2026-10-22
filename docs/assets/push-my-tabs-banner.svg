@@ -1,8 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="440" viewBox="0 0 1400 440" role="img" aria-label="Push My Tabs. Tabs that follow your direction.">
-<rect width="1400" height="440" rx="24" fill="#11131e"/>
-<path d="M1000 0V440M1120 0V440M1240 0V440M0 110H1400M0 220H1400M0 330H1400" stroke="#232339"/>
-<text x="65" y="82" fill="#b9a4ff" font-family="Arial,sans-serif" font-size="18" letter-spacing="4">A SMALL TOOL FOR A BETTER BROWSER</text>
-<text x="60" y="194" fill="#f6f4ff" font-family="Arial,sans-serif" font-size="88" font-weight="700">Push My Tabs</text>
-<text x="65" y="256" fill="#c3c2d6" font-family="Arial,sans-serif" font-size="30">Tabs that follow your direction.</text>
-<text x="65" y="356" fill="#b9a4ff" font-family="Arial,sans-serif" font-size="18">CHROME + FIREFOX   /   HORIZONTAL + VERTICAL</text>
-<g transform="translate(1005 110)"><rect width="270" height="194" rx="19" fill="#201b35" stroke="#aa8cff" stroke-width="3"/><path d="M0 42H270" stroke="#aa8cff"/><circle cx="22" cy="22" r="5" fill="#aa8cff"/><circle cx="40" cy="22" r="5" fill="#aa8cff"/><path d="M55 117H210M173 80L210 117L173 154" stroke="#beabff" stroke-width="17" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="320" viewBox="0 0 600 320" role="img" aria-label="Push My Tabs. Tabs that follow your direction.">
+  <rect width="600" height="320" rx="24" fill="#11131e"/>
+  <path d="M0 80H600M0 160H600M0 240H600M450 0V320" stroke="#232339"/>
+  <g fill="#f6f4ff" font-family="Arial,sans-serif" font-size="66" font-weight="700">
+    <text x="32" y="92">Push My Tabs</text>
+  </g>
+  <g fill="#d8d3e8" font-family="Arial,sans-serif" font-size="42">
+    <text x="32" y="175">Tabs that follow</text>
+    <text x="32" y="228">your direction.</text>
+  </g>
+  <path d="M462 250H548M517 219L548 250L517 281" stroke="#beabff" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
