@@ -2,28 +2,54 @@
 
 > 本译文由机器辅助生成，尚未经过母语使用者审校。如有差异，请以[英文 README](../../README.md) 为准。
 
-<table>
-  <tr>
-    <td width="184" align="center">
-      <img src="../assets/molebyte-pixel.gif" alt="Molebyte 挥手并拿着一个浏览器标签页" width="168">
-    </td>
-    <td>
-      <h1>Push My Tabs</h1>
-      <p>为 Chrome 和 Firefox 提供可感知布局的键盘快捷键与快捷标签页操作，共用同一套核心代码。</p>
-    </td>
-  </tr>
-</table>
+![Push My Tabs](../assets/push-my-tabs-banner.svg)
 
-面向用户的更新记录请参阅 [CHANGELOG.md](../../CHANGELOG.md)。
+# Push My Tabs
 
-- [隐私](../../PRIVACY.md)
-- [支持](https://github.com/pengusto/push-my-tabs/issues)
-- [网站](https://pengusto.github.io/push-my-tabs/)
+**按照标签页的排列方式切换和移动。**
+
+适合希望用键盘操作横向或纵向标签页的用户。
 
 ## 安装
 
 - [Chrome 网上应用店](https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik)，支持 Chrome 127 及更高版本
 - [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/push-my-tabs/)，支持 Firefox 142 及更高版本
+
+[网站](https://pengusto.github.io/push-my-tabs/)
+
+## 找到你的操作节奏
+
+![切换标签页 → 移动当前标签页](../assets/tabs-demo.gif)
+
+*这是自适应预设的功能示意图，不是屏幕录像。图中文字为英文；方向代表扩展命令。请在浏览器中分配自己喜欢的快捷键。*
+
+[查看静态示意图](../assets/tabs-demo-poster.png)
+
+| 横向标签页 | 纵向标签页 |
+| :--- | :--- |
+| **左 / 右** → 切换标签页 | **上 / 下** → 切换标签页 |
+| **上 / 下** → 移动当前标签页 | **左 / 右** → 移动当前标签页 |
+
+快捷操作：复制、固定、静音、切换到首个或末个标签页，或移至新窗口。可以配置布局、预设和可选快捷键。
+
+<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+
+## 开始使用
+
+1. 通过上方商店链接安装扩展。
+2. 打开弹出面板，查看四个方向命令及其当前快捷键。
+3. 在浏览器中调整快捷键。从自适应预设开始，必要时手动选择布局。
+
+Chrome 根据窗口几何信息估算布局；打开侧边栏可能影响识别。Firefox 142 及以上直接读取其纵向标签页设置。
+
+## 标签页信息留在本地
+
+无需账户，无分析、广告或远程代码。设置保存在浏览器中。Chrome 使用临时 `activeTab` 权限处理本地布局配置；Firefox 使用 `storage` 和 `browserSettings`，不读取页面数据。
+
+[隐私](../../PRIVACY.md) · [支持](https://github.com/pengusto/push-my-tabs/issues) · [发布版本](https://github.com/pengusto/push-my-tabs/releases) · [更新日志](../../CHANGELOG.md)
+
+<details>
+<summary><strong>语言、开发与发布详情</strong></summary>
 
 ## 当前状态
 
@@ -38,6 +64,8 @@ Chrome 和 Firefox 会根据浏览器界面语言自动选择扩展语言，也�
 ## 在本地测试 Chrome 版本
 
 请先生成解压后的开发版本：
+
+在仓库根目录运行，需要 Node.js 22、`zip` 和 `unzip`，无需安装依赖包。
 
 ```sh
 ./scripts/build-chrome-dev.sh
@@ -90,3 +118,9 @@ jq empty manifests/chrome.json manifests/firefox.json
 参与项目请参阅 [CONTRIBUTING.md](../../CONTRIBUTING.md)，私下报告安全漏洞请参阅 [SECURITY.md](../../SECURITY.md)。
 
 本扩展不使用主机权限、内容脚本、账户、分析、广告或远程代码。Chrome 的 `activeTab` 权限仅在用户触发快捷键或弹出窗口操作后短暂公开当前标签页，以便为其来源或准确路径应用本地几何配置。Firefox 不申请此权限，也不读取页面数据。
+
+</details>
+
+## 许可证
+
+[MIT](../../LICENSE) · [README 图片来源](../assets/README.md)

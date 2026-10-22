@@ -2,28 +2,54 @@
 
 > この翻訳は機械翻訳の支援を受けて作成され、母語話者による確認はまだ行われていません。内容に相違がある場合は、[英語版 README](../../README.md) を正とします。
 
-<table>
-  <tr>
-    <td width="184" align="center">
-      <img src="../assets/molebyte-pixel.gif" alt="ブラウザータブを持って手を振る Molebyte" width="168">
-    </td>
-    <td>
-      <h1>Push My Tabs</h1>
-      <p>Chrome と Firefox で共通のコアを使う、レイアウト対応キーボードショートカットとタブのクイック操作。</p>
-    </td>
-  </tr>
-</table>
+![Push My Tabs](../assets/push-my-tabs-banner.svg)
 
-ユーザー向けの変更点は [CHANGELOG.md](../../CHANGELOG.md) を参照してください。
+# Push My Tabs
 
-- [プライバシー](../../PRIVACY.md)
-- [サポート](https://github.com/pengusto/push-my-tabs/issues)
-- [ウェブサイト](https://pengusto.github.io/push-my-tabs/)
+**タブの並びに合わせて切り替え、移動。**
+
+横並び・縦並びのタブをキーボードで操作したい方へ。
 
 ## インストール
 
 - [Chrome ウェブストア](https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik)：Chrome 127 以降
 - [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/push-my-tabs/)：Firefox 142 以降
+
+[ウェブサイト](https://pengusto.github.io/push-my-tabs/)
+
+## 自分に合う操作へ
+
+![タブを切り替え → アクティブなタブを移動](../assets/tabs-demo.gif)
+
+*適応型プリセットの動作を示すイラストです。画面録画ではありません。画像内の文字は英語です。方向は拡張機能のコマンドを表します。キーの組み合わせはブラウザーで設定してください。*
+
+[静止画を見る](../assets/tabs-demo-poster.png)
+
+| 横並びのタブ | 縦並びのタブ |
+| :--- | :--- |
+| **左 / 右** → タブを切り替え | **上 / 下** → タブを切り替え |
+| **上 / 下** → アクティブなタブを移動 | **左 / 右** → アクティブなタブを移動 |
+
+クイック操作：複製、固定、ミュート、最初・最後のタブへの切り替え、新しいウィンドウへの移動。レイアウト、プリセット、任意のショートカットを設定できます。
+
+<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+
+## 使い始める
+
+1. 上のストアリンクから拡張機能をインストールします。
+2. ポップアップを開き、4方向のコマンドと現在のキー割り当てを確認します。
+3. ブラウザーでショートカットを調整します。適応型プリセットから始め、必要ならレイアウトを手動で指定します。
+
+Chrome はウィンドウの形状からレイアウトを推定します。サイドパネルが開いていると判定に影響する場合があります。Firefox 142 以降は縦型タブの設定を直接読み取ります。
+
+## タブの情報は手元に
+
+アカウント、解析、広告、リモートコードはありません。設定はブラウザー内に保存されます。Chrome はローカルのレイアウトプロファイルに一時的な `activeTab` アクセスを使います。Firefox は `storage` と `browserSettings` を使い、ページデータは読み取りません。
+
+[プライバシー](../../PRIVACY.md) · [サポート](https://github.com/pengusto/push-my-tabs/issues) · [リリース](https://github.com/pengusto/push-my-tabs/releases) · [変更履歴](../../CHANGELOG.md)
+
+<details>
+<summary><strong>言語・開発・リリースの詳細</strong></summary>
 
 ## 現在の状態
 
@@ -38,6 +64,8 @@ Chrome と Firefox はブラウザーの表示言語から拡張機能の言語�
 ## Chrome でのローカルテスト
 
 最初に展開済みの開発用コピーを作成します。
+
+リポジトリのルートで実行します。Node.js 22、`zip`、`unzip` が必要です。パッケージのインストール手順はありません。
 
 ```sh
 ./scripts/build-chrome-dev.sh
@@ -90,3 +118,9 @@ Firefox 142 以降、Node.js 22、`npx`、`zip`、`unzip` が必要です。ビ�
 参加方法は [CONTRIBUTING.md](../../CONTRIBUTING.md)、脆弱性を非公開で報告する方法は [SECURITY.md](../../SECURITY.md) を参照してください。
 
 この拡張機能は、ホスト権限、コンテンツスクリプト、アカウント、分析、広告、リモートコードを使用しません。Chrome の `activeTab` 権限は、ショートカットまたはポップアップ操作の後に現在のタブだけを一時的に公開し、そのオリジンまたは正確なパスにローカルのジオメトリープロファイルを適用できるようにします。Firefox はこの権限を要求せず、ページデータを読み取りません。
+
+</details>
+
+## ライセンス
+
+[MIT](../../LICENSE) · [README 画像の出典](../assets/README.md)

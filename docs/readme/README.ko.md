@@ -2,18 +2,54 @@
 
 > 이 번역은 기계의 도움으로 작성되었으며 아직 원어민 검수를 받지 않았습니다. 내용이 다를 경우 [영문 README](../../README.md)를 기준으로 합니다.
 
+![Push My Tabs](../assets/push-my-tabs-banner.svg)
+
 # Push My Tabs
 
-하나의 공통 코어로 Chrome과 Firefox에서 레이아웃을 인식하는 키보드 단축키와 빠른 탭 작업을 제공합니다.
+**탭 배치에 맞춰 전환하고 이동하세요.**
 
-사용자 대상 변경 사항은 [CHANGELOG.md](../../CHANGELOG.md)를 확인하세요.
-
-- [개인정보 보호](../../PRIVACY.md) · [지원](https://github.com/pengusto/push-my-tabs/issues) · [웹사이트](https://pengusto.github.io/push-my-tabs/)
+가로 탭과 세로 탭을 키보드로 다루고 싶은 분을 위한 확장 기능입니다.
 
 ## 설치
 
 - Chrome 127 이상: [Chrome 웹 스토어](https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik)
 - Firefox 142 이상: [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/push-my-tabs/)
+
+[웹사이트](https://pengusto.github.io/push-my-tabs/)
+
+## 나에게 맞는 흐름
+
+![탭 전환 → 활성 탭 이동](../assets/tabs-demo.gif)
+
+*적응형 프리셋의 동작을 보여 주는 일러스트이며 화면 녹화가 아닙니다. 이미지의 문구는 영어입니다. 방향은 확장 기능의 명령을 뜻합니다. 키 조합은 브라우저에서 지정하세요.*
+
+[정지 이미지 보기](../assets/tabs-demo-poster.png)
+
+| 가로 탭 | 세로 탭 |
+| :--- | :--- |
+| **왼쪽 / 오른쪽** → 탭 전환 | **위 / 아래** → 탭 전환 |
+| **위 / 아래** → 활성 탭 이동 | **왼쪽 / 오른쪽** → 활성 탭 이동 |
+
+빠른 작업: 복제, 고정, 음소거, 첫 탭이나 마지막 탭으로 전환, 새 창으로 이동. 레이아웃, 프리셋 및 선택 단축키를 설정할 수 있습니다.
+
+<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+
+## 시작하기
+
+1. 위의 스토어 링크에서 확장 기능을 설치하세요.
+2. 팝업을 열어 네 방향 명령과 현재 키 할당을 확인하세요.
+3. 브라우저에서 단축키를 조정하세요. 적응형 프리셋으로 시작하고 필요하면 레이아웃을 직접 선택하세요.
+
+Chrome은 창의 크기 차이로 레이아웃을 추정하므로 열린 사이드 패널이 감지에 영향을 줄 수 있습니다. Firefox 142 이상은 세로 탭 설정을 직접 읽습니다.
+
+## 탭 정보는 내 브라우저에
+
+계정, 분석, 광고 및 원격 코드가 없습니다. 설정은 브라우저에 저장됩니다. Chrome은 로컬 레이아웃 프로필에 임시 `activeTab` 접근을 사용합니다. Firefox는 `storage`와 `browserSettings`를 사용하며 페이지 데이터를 읽지 않습니다.
+
+[개인정보 보호](../../PRIVACY.md) · [지원](https://github.com/pengusto/push-my-tabs/issues) · [릴리스](https://github.com/pengusto/push-my-tabs/releases) · [변경 기록](../../CHANGELOG.md)
+
+<details>
+<summary><strong>언어, 개발 및 릴리스 세부 정보</strong></summary>
 
 ## 현재 상태
 
@@ -28,6 +64,8 @@ Chrome과 Firefox는 브라우저 UI 언어에 따라 확장 프로그램 언어
 ## Chrome 로컬 테스트
 
 먼저 압축 해제된 개발 사본을 만듭니다.
+
+저장소 루트에서 실행하세요. Node.js 22, `zip`, `unzip`이 필요하며 패키지 설치 단계는 없습니다.
 
 ```sh
 ./scripts/build-chrome-dev.sh
@@ -68,3 +106,9 @@ GitHub Actions의 **Create release** 워크플로에서 정확한 브랜치나 �
 태그된 릴리스는 [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases)에서 확인할 수 있습니다. 기여 방법은 [CONTRIBUTING.md](../../CONTRIBUTING.md), 비공개 취약점 신고 방법은 [SECURITY.md](../../SECURITY.md)를 참고하세요.
 
 이 확장 프로그램은 호스트 권한, 콘텐츠 스크립트, 계정, 분석, 광고 또는 원격 코드를 사용하지 않습니다. Chrome의 `activeTab` 권한은 단축키나 팝업 작업 후 현재 탭만 잠시 노출해 출처나 정확한 경로에 로컬 위치 프로필을 적용합니다. Firefox는 이 권한을 요청하거나 페이지 데이터를 읽지 않습니다.
+
+</details>
+
+## 라이선스
+
+[MIT](../../LICENSE) · [README 이미지 출처](../assets/README.md)

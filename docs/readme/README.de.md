@@ -2,28 +2,54 @@
 
 > Diese Übersetzung wurde maschinell unterstützt und noch nicht von einer muttersprachlichen Person geprüft. Bei Abweichungen gilt die [englische README](../../README.md).
 
-<table>
-  <tr>
-    <td width="184" align="center">
-      <img src="../assets/molebyte-pixel.gif" alt="Molebyte winkt und hält dabei einen Browser-Tab" width="168">
-    </td>
-    <td>
-      <h1>Push My Tabs</h1>
-      <p>Layoutabhängige Tastenkürzel und schnelle Tab-Aktionen für Chrome und Firefox aus einem gemeinsamen Kern.</p>
-    </td>
-  </tr>
-</table>
+![Push My Tabs](../assets/push-my-tabs-banner.svg)
 
-Nutzerrelevante Änderungen stehen in der [CHANGELOG.md](../../CHANGELOG.md).
+# Push My Tabs
 
-- [Datenschutz](../../PRIVACY.md)
-- [Support](https://github.com/pengusto/push-my-tabs/issues)
-- [Website](https://pengusto.github.io/push-my-tabs/)
+**Tabs wechseln und verschieben, wie sie angeordnet sind.**
+
+Für alle, die horizontale oder vertikale Tabs lieber per Tastatur bedienen.
 
 ## Installation
 
 - [Chrome Web Store](https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik) für Chrome 127 oder neuer
 - [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/push-my-tabs/) für Firefox 142 oder neuer
+
+[Website](https://pengusto.github.io/push-my-tabs/)
+
+## Finde deinen Rhythmus
+
+![Tabs wechseln → Aktiven Tab verschieben](../assets/tabs-demo.gif)
+
+*Schematische Funktionsillustration des adaptiven Presets, keine Bildschirmaufnahme. Die Grafik enthält englische Beschriftungen; die Richtungen bezeichnen Erweiterungsbefehle. Weise deine bevorzugten Tastenkombinationen im Browser zu.*
+
+[Statische Illustration](../assets/tabs-demo-poster.png)
+
+| Horizontale Tabs | Vertikale Tabs |
+| :--- | :--- |
+| **Links / Rechts** → Tabs wechseln | **Oben / Unten** → Tabs wechseln |
+| **Oben / Unten** → Aktiven Tab verschieben | **Links / Rechts** → Aktiven Tab verschieben |
+
+Schnellaktionen: duplizieren, anheften, stummschalten, zum ersten oder letzten Tab wechseln oder in ein neues Fenster verschieben. Layout, Preset und optionale Tastenkürzel sind konfigurierbar.
+
+<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+
+## Loslegen
+
+1. Installiere die Erweiterung über einen der Store-Links oben.
+2. Öffne das Popup: Es zeigt die vier Richtungsbefehle und ihre aktuellen Tastenkombinationen.
+3. Passe die Kürzel im Browser an. Beginne mit dem adaptiven Preset und wähle bei Bedarf ein manuelles Layout.
+
+Chrome schätzt das Layout anhand der Fenstergeometrie; eine offene Seitenleiste kann die Erkennung beeinflussen. Firefox 142+ liest seine Einstellung für vertikale Tabs direkt.
+
+## Deine Tabs bleiben bei dir
+
+Keine Konten, Analysen, Werbung oder Remote-Code. Einstellungen bleiben lokal im Browser. Chrome nutzt vorübergehend `activeTab` für lokale Layoutprofile; Firefox nutzt `storage` und `browserSettings`, ohne Seitendaten zu lesen.
+
+[Datenschutz](../../PRIVACY.md) · [Support](https://github.com/pengusto/push-my-tabs/issues) · [Releases](https://github.com/pengusto/push-my-tabs/releases) · [Changelog](../../CHANGELOG.md)
+
+<details>
+<summary><strong>Sprachen, Entwicklung und Releases</strong></summary>
 
 ## Aktueller Stand
 
@@ -38,6 +64,8 @@ Chrome und Firefox wählen die Sprache der Erweiterung automatisch anhand der Br
 ## Lokaler Chrome-Test
 
 Erstelle zuerst die entpackte Entwicklungsversion:
+
+Im Repository-Hauptverzeichnis werden Node.js 22, `zip` und `unzip` benötigt. Eine Paketinstallation ist nicht nötig.
 
 ```sh
 ./scripts/build-chrome-dev.sh
@@ -90,3 +118,9 @@ Getaggte Releases und die zugehörigen Chrome- und Firefox-Archive findest du au
 Wie du mitarbeitest, steht in der [CONTRIBUTING.md](../../CONTRIBUTING.md). Sicherheitslücken meldest du privat nach der [SECURITY.md](../../SECURITY.md).
 
 Die Erweiterung verwendet keine Host-Berechtigungen, Content-Skripte, Konten, Analysen, Werbung oder Remote-Code. Chromes Berechtigung `activeTab` gibt nach einem Tastenkürzel oder einer Popup-Aktion vorübergehend nur den aktuellen Tab frei, damit lokale Geometrieprofile für dessen Ursprung oder genauen Pfad angewendet werden können. Firefox fordert diese Berechtigung nicht an und liest keine Seitendaten.
+
+</details>
+
+## Lizenz
+
+[MIT](../../LICENSE) · [Herkunft der README-Grafiken](../assets/README.md)

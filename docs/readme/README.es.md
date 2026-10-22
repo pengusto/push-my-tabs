@@ -2,18 +2,54 @@
 
 > Esta traducción se generó con ayuda automática y aún no la ha revisado una persona nativa. Si hay diferencias, prevalece el [README en inglés](../../README.md).
 
+![Push My Tabs](../assets/push-my-tabs-banner.svg)
+
 # Push My Tabs
 
-Atajos de teclado que se adaptan al diseño y acciones rápidas para pestañas en Chrome y Firefox desde un núcleo compartido.
+**Cambia y mueve pestañas según su disposición.**
 
-Consulta [CHANGELOG.md](../../CHANGELOG.md) para ver los cambios dirigidos a usuarios.
-
-- [Privacidad](../../PRIVACY.md) · [Soporte](https://github.com/pengusto/push-my-tabs/issues) · [Sitio web](https://pengusto.github.io/push-my-tabs/)
+Para quienes navegan con el teclado, con pestañas horizontales o verticales.
 
 ## Instalación
 
 - [Chrome Web Store](https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik) para Chrome 127 o posterior
 - [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/push-my-tabs/) para Firefox 142 o posterior
+
+[Sitio web](https://pengusto.github.io/push-my-tabs/)
+
+## Encuentra tu ritmo
+
+![Cambiar de pestaña → Mover la pestaña activa](../assets/tabs-demo.gif)
+
+*Ilustración del preajuste adaptativo, no una grabación de pantalla. La imagen tiene texto en inglés; las direcciones indican comandos de la extensión. Asigna tus propios atajos en el navegador.*
+
+[Ilustración estática](../assets/tabs-demo-poster.png)
+
+| Pestañas horizontales | Pestañas verticales |
+| :--- | :--- |
+| **Izquierda / Derecha** → Cambiar de pestaña | **Arriba / Abajo** → Cambiar de pestaña |
+| **Arriba / Abajo** → Mover la pestaña activa | **Izquierda / Derecha** → Mover la pestaña activa |
+
+Acciones rápidas: duplicar, fijar, silenciar, ir a la primera o última pestaña o moverla a una ventana nueva. Puedes configurar la disposición, el preajuste y los atajos opcionales.
+
+<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+
+## Primeros pasos
+
+1. Instala la extensión desde uno de los enlaces de las tiendas de arriba.
+2. Abre el panel para ver los cuatro comandos direccionales y sus atajos actuales.
+3. Ajusta los atajos en el navegador. Empieza con el preajuste adaptativo y elige una disposición manual si es necesario.
+
+Chrome estima la disposición a partir de la geometría de la ventana; un panel lateral abierto puede afectar la detección. Firefox 142+ lee directamente su ajuste de pestañas verticales.
+
+## Tus pestañas siguen siendo tuyas
+
+Sin cuentas, analíticas, publicidad ni código remoto. Los ajustes permanecen en el navegador. Chrome usa acceso temporal `activeTab` para perfiles locales; Firefox usa `storage` y `browserSettings` sin leer datos de las páginas.
+
+[Privacidad](../../PRIVACY.md) · [Ayuda](https://github.com/pengusto/push-my-tabs/issues) · [Versiones](https://github.com/pengusto/push-my-tabs/releases) · [Registro de cambios](../../CHANGELOG.md)
+
+<details>
+<summary><strong>Idiomas, desarrollo y versiones</strong></summary>
 
 ## Estado actual
 
@@ -28,6 +64,8 @@ Chrome y Firefox eligen el idioma según la interfaz del navegador. También pue
 ## Prueba local en Chrome
 
 Primero crea la copia de desarrollo descomprimida:
+
+Desde la raíz del repositorio, necesitas Node.js 22, `zip` y `unzip`. No hay un paso de instalación de paquetes.
 
 ```sh
 ./scripts/build-chrome-dev.sh
@@ -68,3 +106,9 @@ En el flujo **Create release** de GitHub Actions, selecciona la rama o el commit
 Las versiones etiquetadas están en [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases). Consulta [CONTRIBUTING.md](../../CONTRIBUTING.md) para colaborar y [SECURITY.md](../../SECURITY.md) para informar de una vulnerabilidad en privado.
 
 La extensión no usa permisos de host, scripts de contenido, cuentas, analítica, publicidad ni código remoto. El permiso `activeTab` de Chrome expone temporalmente solo la pestaña actual después de un atajo o una acción emergente para aplicar perfiles geométricos locales a su origen o ruta exacta. Firefox no solicita ese permiso ni lee datos de la página.
+
+</details>
+
+## Licencia
+
+[MIT](../../LICENSE) · [Procedencia de las ilustraciones](../assets/README.md)

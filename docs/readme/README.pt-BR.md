@@ -2,18 +2,54 @@
 
 > Esta tradução foi produzida com assistência automática e ainda não foi revisada por uma pessoa fluente. Em caso de diferença, o [README em inglês](../../README.md) prevalece.
 
+![Push My Tabs](../assets/push-my-tabs-banner.svg)
+
 # Push My Tabs
 
-Atalhos de teclado que entendem o layout e ações rápidas para abas no Chrome e Firefox usando o mesmo núcleo.
+**Alterne e mova abas conforme sua disposição.**
 
-Consulte [CHANGELOG.md](../../CHANGELOG.md) para ver as mudanças voltadas aos usuários.
-
-- [Privacidade](../../PRIVACY.md) · [Suporte](https://github.com/pengusto/push-my-tabs/issues) · [Site](https://pengusto.github.io/push-my-tabs/)
+Para quem navega pelo teclado com abas horizontais ou verticais.
 
 ## Instalação
 
 - [Chrome Web Store](https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik) para Chrome 127 ou mais recente
 - [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/push-my-tabs/) para Firefox 142 ou mais recente
+
+[Site](https://pengusto.github.io/push-my-tabs/)
+
+## Encontre seu ritmo
+
+![Alternar abas → Mover a aba ativa](../assets/tabs-demo.gif)
+
+*Ilustração da predefinição adaptativa, não uma gravação de tela. A imagem contém texto em inglês; as direções indicam comandos da extensão. Atribua seus atalhos no navegador.*
+
+[Ilustração estática](../assets/tabs-demo-poster.png)
+
+| Abas horizontais | Abas verticais |
+| :--- | :--- |
+| **Esquerda / Direita** → Alternar abas | **Cima / Baixo** → Alternar abas |
+| **Cima / Baixo** → Mover a aba ativa | **Esquerda / Direita** → Mover a aba ativa |
+
+Ações rápidas: duplicar, fixar, silenciar, ir à primeira ou última aba ou mover para uma nova janela. O layout, a predefinição e os atalhos opcionais são configuráveis.
+
+<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+
+## Primeiros passos
+
+1. Instale a extensão usando um dos links das lojas acima.
+2. Abra o painel para ver os quatro comandos direcionais e os atalhos atuais.
+3. Ajuste os atalhos no navegador. Comece com a predefinição adaptativa e escolha um layout manual se necessário.
+
+O Chrome estima o layout pela geometria da janela; um painel lateral aberto pode afetar a detecção. O Firefox 142+ lê diretamente sua configuração de abas verticais.
+
+## Suas abas continuam suas
+
+Sem contas, análises, publicidade ou código remoto. As configurações ficam no navegador. O Chrome usa acesso temporário `activeTab` para perfis locais; o Firefox usa `storage` e `browserSettings` sem ler dados das páginas.
+
+[Privacidade](../../PRIVACY.md) · [Suporte](https://github.com/pengusto/push-my-tabs/issues) · [Versões](https://github.com/pengusto/push-my-tabs/releases) · [Histórico de alterações](../../CHANGELOG.md)
+
+<details>
+<summary><strong>Idiomas, desenvolvimento e versões</strong></summary>
 
 ## Estado atual
 
@@ -28,6 +64,8 @@ Chrome e Firefox escolhem o idioma da extensão com base na interface do navegad
 ## Teste local no Chrome
 
 Primeiro, gere a cópia de desenvolvimento descompactada:
+
+Na raiz do repositório, são necessários Node.js 22, `zip` e `unzip`. Não há etapa de instalação de pacotes.
 
 ```sh
 ./scripts/build-chrome-dev.sh
@@ -68,3 +106,9 @@ No fluxo **Create release** do GitHub Actions, escolha o branch ou commit exato 
 As versões com tag ficam em [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases). Consulte [CONTRIBUTING.md](../../CONTRIBUTING.md) para contribuir e [SECURITY.md](../../SECURITY.md) para relatar uma vulnerabilidade em particular.
 
 A extensão não usa permissões de host, scripts de conteúdo, contas, análise, publicidade ou código remoto. A permissão `activeTab` do Chrome expõe temporariamente apenas a aba atual após um atalho ou ação do popup para aplicar perfis locais de geometria à origem ou ao caminho exato. O Firefox não solicita essa permissão nem lê dados da página.
+
+</details>
+
+## Licença
+
+[MIT](../../LICENSE) · [Origem das ilustrações](../assets/README.md)
