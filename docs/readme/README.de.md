@@ -1,8 +1,8 @@
+![Push My Tabs](../assets/push-my-tabs-banner.svg)
+
 [English](../../README.md) · Deutsch · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
 
 > Diese Übersetzung wurde maschinell unterstützt und noch nicht von einer muttersprachlichen Person geprüft. Bei Abweichungen gilt die [englische README](../../README.md).
-
-![Push My Tabs](../assets/push-my-tabs-banner.svg)
 
 # Push My Tabs
 

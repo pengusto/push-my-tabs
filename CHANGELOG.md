@@ -6,6 +6,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ### Improved
 
+- Place language links directly below the banner in every README.
 - Make README banner and demo labels readable on narrow screens with larger text and a compact illustration.
 - Refresh the README and its seven translations with a clearer getting-started flow, illustrated tab actions, and collapsible development details.
 - Link directly to the Chrome Web Store and Firefox Add-ons from the project website and README.
