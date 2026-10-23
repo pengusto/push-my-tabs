@@ -6,6 +6,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ### Improved
 
+- Scale the README banner to the full content width on desktop while preserving its proportions on mobile.
 - Add a landing-page sitemap and link the project to its Pengusto author identity. Set the website’s canonical URL.
 - Place language links directly below the banner in every README.
 - Make README banner and demo labels readable on narrow screens with larger text and a compact illustration.

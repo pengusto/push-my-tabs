@@ -11,3 +11,5 @@ The banner, demo, and poster originated in the maintainer's reviewed README draf
 `render-demo.py` draws the illustration from text and shapes; it does not edit browser recordings. With Python 3 and Pillow available, run `python3 docs/assets/render-demo.py --font <bold-font.ttf>`. Supply a local bold TrueType font (the current artwork uses Arial Bold); the font file is not distributed. The script writes the GIF and static poster beside itself.
 
 Check the actual GitHub README at 320 px and 390 px viewport widths as well as desktop width. At 320 px, GitHub leaves about 256 px for the illustration: labels must therefore be at least 40 px on the 600 px source canvas (about 17 px when displayed). Avoid small decorative captions in the banner. Keep detailed explanations in README text so they reflow and remain accessible. Recheck the animation's switching and movement against `src/layout.js`, and keep the poster and provenance in sync.
+
+Embed the banner with `width="100%"` in every README so its 600 px intrinsic width does not leave unused space on desktop. Keep the height automatic to preserve its proportions.
