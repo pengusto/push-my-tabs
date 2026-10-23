@@ -33,7 +33,29 @@ for (const manifest of [chrome, firefox]) {
   assert.ok(!manifest.host_permissions);
   assert.ok(!manifest.content_scripts);
   assert.ok(!manifest.externally_connectable);
+  for (const [size, path] of Object.entries(manifest.icons)) {
+    await checkPng(`src/${path}`, Number(size));
+  }
+  for (const [size, path] of Object.entries(manifest.action.default_icon)) {
+    await checkPng(`src/${path}`, Number(size));
+  }
 }
+
+async function checkPng(path, size) {
+  const data = await readFile(path);
+  assert.equal(data.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", `${path} must be PNG`);
+  assert.equal(data.readUInt32BE(16), size, `${path} width`);
+  assert.equal(data.readUInt32BE(20), size, `${path} height`);
+}
+
+for (const [path, size] of Object.entries({
+  "website/logo-128.png": 128,
+  "website/favicon-32.png": 32,
+  "website/apple-touch-icon.png": 180,
+  "website/icon-192.png": 192,
+  "website/icon-512.png": 512,
+  "website/maskable-512.png": 512
+})) await checkPng(path, size);
 
 for (const file of [
   "manifests/chrome.json", "manifests/firefox.json",

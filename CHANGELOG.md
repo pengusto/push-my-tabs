@@ -6,6 +6,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ### Improved
 
+- Refresh the extension and website with the purple Push P logo, clearer small-size icons, and a complete logo kit.
 - Match README banners to light and dark themes, with clearer compositions for narrow screens.
 - Introduce the tab air-traffic-control README banner while retaining the previous stone-island artwork.
 - Unify README illustrations, mascot, social preview, and optional store artwork around the penguin character while retaining original assets and UI screenshots.

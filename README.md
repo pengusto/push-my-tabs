@@ -129,6 +129,10 @@ The extension uses no host permissions, content scripts, accounts, analytics, ad
 
 </details>
 
+## Brand assets
+
+[Logo kit and usage guide](docs/branding/README.md): SVG logos, app icons, favicons, and the purple Push P identity.
+
 ## License
 
 [MIT](LICENSE). See [asset provenance](docs/assets/README.md) for the README illustrations.

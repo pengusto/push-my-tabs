@@ -1,0 +1,53 @@
+{
+  "brand": "Push My Tabs",
+  "tagline": "Tabs that follow your direction.",
+  "brief": "Layout-aware tab shortcuts for Chrome and Firefox. A compact P and a forward arrow express the name in one silhouette.",
+  "adjectives": [
+    "precise",
+    "compact",
+    "friendly",
+    "directional"
+  ],
+  "criteria": "Readable in the browser toolbar at 16 px; one-colour and reversed; preserve the established purple.",
+  "industry": "software",
+  "mockups": [
+    "readme",
+    "app-icon",
+    "website",
+    "terminal",
+    "sticker",
+    "favicon-tab"
+  ],
+  "nav": [
+    "Features",
+    "Privacy",
+    "Install"
+  ],
+  "brand_color": "#8167FF",
+  "tile_color": "#0B0B10",
+  "greyscale": false,
+  "final": true,
+  "concepts": [
+    {
+      "name": "Push P",
+      "symbol": "source/symbol-color.svg",
+      "lockup": "source/horizontal-color.svg",
+      "stacked": "source/stacked-color.svg",
+      "avatar": "source/social-avatar.svg",
+      "symbol_on_tile": "source/symbol-color.svg",
+      "symbol_on_dark": "source/symbol-color.svg",
+      "lockup_on_dark": "source/horizontal-color.svg",
+      "idea": "A P whose counter pushes forward.",
+      "rationale": [
+        "A single initial replaces four competing direction keys.",
+        "The transparent arrow survives monochrome reproduction.",
+        "The established purple connects the mark to the existing product."
+      ]
+    }
+  ],
+  "recommendation": "Approved direction B, refined in the existing purple.",
+  "next_steps": [
+    "Use transparent small-size icons in the browser toolbar.",
+    "Use the dark tile for app and touch contexts."
+  ]
+}

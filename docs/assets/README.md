@@ -28,7 +28,7 @@ The maintainer approved this banner after reviewing the local draft. It was the 
 - `../../store-assets/penguin/promo/`: two new Imagegen illustrations and exports at 440 × 280 and 1400 × 560 (PNG and JPEG). Generated sources are retained; the existing promo files are untouched. No store upload has been performed.
 - `../../store-assets/penguin/marketing/`: five 1280 × 800 product cards. The character is generated; the UI comes from the existing `store-assets/screenshots/*.png`, cropped and scaled without changing labels, controls, or values. These inherited screenshots have not been recaptured against a live installed extension in this task. Their existing icon is intentionally preserved.
 
-All new painted assets use the same approved character, plum background and lavender accents. No new browser logos or third-party artwork were introduced. Existing license and rights limits remain unchanged. UI icons, favicons, and original screenshots are retained to avoid silently changing the extension's functional visual identity.
+All new painted assets use the same approved character, plum background and lavender accents. No new browser logos or third-party artwork were introduced. Existing license and rights limits remain unchanged. This illustration refresh originally retained the UI icons, favicons, and original screenshots. The later approved Push P identity replaces the runtime icons; the previous files and original screenshots remain preserved. See the [logo kit](../branding/README.md).
 
 ### Reproduction and acceptance
 
@@ -47,3 +47,7 @@ Character consistency does not require repeating scenery, composition, or a fixe
 `banner-themes/air-traffic-light.png` is a light-mode edit of the approved air-traffic banner. `air-traffic-mobile-dark.png` and `air-traffic-mobile-light.png` recompose the same penguin and scene for small screens at a 3:2 ratio. All three were created with built-in Imagegen on 2026-10-23 using the existing project artwork as actual image references. Existing selected banners remain unchanged. Opaque backgrounds keep contrast predictable; the light artwork uses navy lettering and contours instead of a color inversion.
 
 All eight READMEs use native `<picture>`/`<source>` markup: narrow-screen sources precede wide sources and combine `(max-width: 600px)` with `prefers-color-scheme`. The fallback is the existing dark wide banner at full content width with automatic height. Preview fixtures explicitly select each theme to test both branches at 320 px, 390 px, and desktop widths; they do not replace a live GitHub acceptance check. Theme variants must be reviewed together when selected artwork changes. No daily image generation, status metrics, or automation is added.
+
+## Push P identity (2026-10-24)
+
+The user selected concept B, a P with a transparent forward arrow, and requested the complete kit in the existing purple. The [logo kit and usage guide](../branding/README.md) contains SVG masters, outlined wordmarks, monochrome/reversed variants, raster exports, favicons, context mockups, and the preserved earlier icons. Extension and website runtime paths now use Push P. Painted README artwork and original UI screenshots remain unchanged.
