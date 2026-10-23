@@ -18,7 +18,7 @@ Embed the banner with `width="100%"` in every README so intrinsic image dimensio
 
 `push-my-tabs-penguin.png` is an AI-generated illustration created with the built-in Imagegen tool on 2026-10-23, using the maintainer-supplied purple profile banner as the visual reference. It depicts the same penguin sliding a stylized tab to the right in a plum-and-lavender island workshop. The cards are abstract illustration, not product screenshots; no browser logos or real page content were used. Existing assets and license terms remain unchanged; this note is provenance, not an independent rights clearance.
 
-The maintainer approved this banner after reviewing the local draft. All eight READMEs embed it at full content width with automatic height; language links remain immediately below. The previous SVG is retained as an original asset. The local draft was checked at 390 px content width and desktop width; local HTML previews are only approximations of GitHub rendering.
+The maintainer approved this banner after reviewing the local draft. It was the first published penguin banner and remains available as an alternative. The previous SVG is retained as an original asset. The local draft was checked at 390 px content width and desktop width; local HTML previews are only approximations of GitHub rendering.
 
 ## Penguin asset family (2026-10-23)
 
@@ -35,3 +35,9 @@ All new painted assets use the same approved character, plum background and lave
 Product cards are authored in `store-assets/penguin/marketing/cards.json` and `render-cards.mjs`; run `node store-assets/penguin/marketing/render-cards.mjs` to rebuild their HTML. Capture the 1280 × 800 card area: full-page screenshots may include viewport padding, so verify exported pixel dimensions and content bounds instead of assuming screenshot size equals layout size. The UI crop is deterministic CSS; do not regenerate UI text with an image model.
 
 Preview the README and gallery locally at 390 px content width. Check command semantics against `src/layout.js`, readable text, transparent mascot edges, all image links, and preserved source screenshot hashes. Images with English text share the existing translated explanations in the seven localized READMEs. GitHub rendering and store acceptance remain separate from the local preview.
+
+## Selected banner: tab air-traffic control
+
+`push-my-tabs-air-traffic.png` was generated with built-in Imagegen on 2026-10-23. The supplied profile banner was used only as the penguin character reference. The new setting is a midnight-teal control tower with coral, mint, and lavender browser cards following horizontal and vertical flight lanes. It is conceptual illustration, not a product screenshot. The maintainer selected this variant after comparing both options. All eight READMEs embed it at full content width with automatic height; language links remain immediately below. The previous stone-island banner (`push-my-tabs-penguin.png`) and all other original artwork remain available.
+
+Character consistency does not require repeating scenery, composition, or a fixed purple palette. For future variants, derive the environment and action from the project's function and keep the title readable on mobile. Compare alternatives locally before changing the selected banner.

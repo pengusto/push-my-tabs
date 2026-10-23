@@ -1,4 +1,4 @@
-<img src="docs/assets/push-my-tabs-penguin.png" alt="Push My Tabs — Tabs that follow your direction." width="100%">
+<img src="docs/assets/push-my-tabs-air-traffic.png" alt="Push My Tabs — Tabs that follow your direction." width="100%">
 
 English · [Deutsch](docs/readme/README.de.md) · [简体中文](docs/readme/README.zh-CN.md) · [日本語](docs/readme/README.ja.md) · [Español](docs/readme/README.es.md) · [한국어](docs/readme/README.ko.md) · [Português (Brasil)](docs/readme/README.pt-BR.md) · [Français](docs/readme/README.fr.md)
 
