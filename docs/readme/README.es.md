@@ -19,11 +19,11 @@ Para quienes navegan con el teclado, con pestañas horizontales o verticales.
 
 ## Encuentra tu ritmo
 
-![Cambiar de pestaña → Mover la pestaña activa](../assets/tabs-demo.gif)
+![Cambiar de pestaña → Mover la pestaña activa](../assets/penguin/tabs-demo.gif)
 
 *Ilustración del preajuste adaptativo, no una grabación de pantalla. La imagen tiene texto en inglés; las direcciones indican comandos de la extensión. Asigna tus propios atajos en el navegador.*
 
-[Ilustración estática](../assets/tabs-demo-poster.png)
+[Ilustración estática](../assets/penguin/tabs-demo-poster.png)
 
 | Pestañas horizontales | Pestañas verticales |
 | :--- | :--- |
@@ -32,7 +32,7 @@ Para quienes navegan con el teclado, con pestañas horizontales o verticales.
 
 Acciones rápidas: duplicar, fijar, silenciar, ir a la primera o última pestaña o moverla a una ventana nueva. Puedes configurar la disposición, el preajuste y los atajos opcionales.
 
-<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+<p align="center"><img src="../assets/penguin/mascot.png" width="132" alt="Un pingüino sostiene una pestaña con una flecha"></p>
 
 ## Primeros pasos
 

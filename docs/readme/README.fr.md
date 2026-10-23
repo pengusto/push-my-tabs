@@ -19,11 +19,11 @@ Pour naviguer au clavier avec des onglets horizontaux ou verticaux.
 
 ## Trouvez votre rythme
 
-![Changer d’onglet → Déplacer l’onglet actif](../assets/tabs-demo.gif)
+![Changer d’onglet → Déplacer l’onglet actif](../assets/penguin/tabs-demo.gif)
 
 *Illustration du préréglage adaptatif, pas une capture vidéo. L’image contient du texte anglais ; les directions désignent les commandes de l’extension. Attribuez vos raccourcis dans le navigateur.*
 
-[Illustration statique](../assets/tabs-demo-poster.png)
+[Illustration statique](../assets/penguin/tabs-demo-poster.png)
 
 | Onglets horizontaux | Onglets verticaux |
 | :--- | :--- |
@@ -32,7 +32,7 @@ Pour naviguer au clavier avec des onglets horizontaux ou verticaux.
 
 Actions rapides : dupliquer, épingler, couper le son, aller au premier ou dernier onglet ou déplacer un onglet dans une nouvelle fenêtre. La disposition, le préréglage et les raccourcis facultatifs sont configurables.
 
-<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+<p align="center"><img src="../assets/penguin/mascot.png" width="132" alt="Un pingouin tient un onglet avec une flèche"></p>
 
 ## Premiers pas
 

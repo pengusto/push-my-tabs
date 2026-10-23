@@ -1,0 +1,7 @@
+[
+ {"file":"01-move-the-way-they-look","title":"Follow your direction.","description":"Switch and move tabs with commands that follow your layout.","source":"01-horizontal-mapping.png","kind":"popup"},
+ {"file":"02-horizontal-or-vertical","title":"Horizontal. Vertical. Yours.","description":"Choose a layout or let the browser-specific automatic mode guide you.","source":"02-vertical-mapping.png","kind":"popup"},
+ {"file":"03-automatic-with-control","title":"Automatic, with control.","description":"Check the detected layout. Override it whenever your setup needs it.","source":"03-auto-detected.png","kind":"popup"},
+ {"file":"04-remember-each-site","title":"Remember your setup.","description":"Save local layout profiles for a site or a specific path in Chrome.","source":"04-learned-sites.png","kind":"settings"},
+ {"file":"05-make-it-yours","title":"Make every direction yours.","description":"Set separate custom actions for horizontal and vertical tabs.","source":"05-custom-preset.png","kind":"settings"}
+]

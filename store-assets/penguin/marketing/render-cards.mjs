@@ -1,0 +1,10 @@
+// Generate local product-card layouts. Capture each HTML page at 1280 × 800.
+import fs from 'node:fs';
+const base=new URL('./',import.meta.url);
+const cards=JSON.parse(fs.readFileSync(new URL('cards.json',base),'utf8'));
+for(const c of cards){
+ const settings=c.kind==='settings';
+ const css=settings?'width:660px;height:600px;right:36px;top:144px':'width:376px;height:800px;right:108px;top:0;transform:scale(.86);transform-origin:top center';
+ const image=settings?'width:960px;left:-153px':'width:1280px;left:-452px';
+ fs.writeFileSync(new URL(c.file+'.html',base),`<!doctype html><meta charset="utf-8"><title>${c.title}</title><style>*{box-sizing:border-box}html,body{margin:0;width:1280px;height:800px;overflow:hidden}body{position:relative;font-family:Arial,sans-serif;color:#f6f0ff;background:radial-gradient(ellipse at 15% 80%,#382348,#131119 65%)}.brand{position:absolute;left:48px;top:40px;font-size:25px;font-weight:bold;display:flex;align-items:center;gap:14px}.brand img{width:38px}.copy{position:absolute;left:48px;top:168px;width:${settings?'470':'580'}px}h1{font-size:58px;line-height:1.07;letter-spacing:-2px;margin:0 0 26px}p{color:#e7caff;font-size:26px;line-height:1.4;margin:0}.mascot{position:absolute;left:58px;bottom:54px;width:210px;height:210px;object-fit:contain}.screen{position:absolute;${css};overflow:hidden;border:2px solid #bd93f9;border-radius:20px;background:#0d0e12;box-shadow:14px 14px 0 #291e3c}.screen img{position:absolute;${image};top:0;height:auto;max-width:none}.caption{position:absolute;bottom:18px;right:30px;font-size:17px;color:#d4c6e5}</style><div class="brand"><img src="../../../src/assets/icons/logo.svg">Push My Tabs</div><section class="copy"><h1>${c.title}</h1><p>${c.description}</p></section><img class="mascot" src="../../../docs/assets/penguin/mascot.png" alt="Penguin mascot illustration"><div class="screen"><img src="../../screenshots/${c.source}" alt="Existing product screenshot"></div><div class="caption">Existing product screenshot · illustrated mascot</div>`);
+}

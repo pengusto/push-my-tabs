@@ -19,3 +19,19 @@ Embed the banner with `width="100%"` in every README so intrinsic image dimensio
 `push-my-tabs-penguin.png` is an AI-generated illustration created with the built-in Imagegen tool on 2026-10-23, using the maintainer-supplied purple profile banner as the visual reference. It depicts the same penguin sliding a stylized tab to the right in a plum-and-lavender island workshop. The cards are abstract illustration, not product screenshots; no browser logos or real page content were used. Existing assets and license terms remain unchanged; this note is provenance, not an independent rights clearance.
 
 The maintainer approved this banner after reviewing the local draft. All eight READMEs embed it at full content width with automatic height; language links remain immediately below. The previous SVG is retained as an original asset. The local draft was checked at 390 px content width and desktop width; local HTML previews are only approximations of GitHub rendering.
+
+## Penguin asset family (2026-10-23)
+
+- `penguin/mascot.png`: transparent full-body penguin holding a tab tile. Generated with built-in Imagegen using the approved penguin banner as the actual identity reference. Replaces the displayed Molebyte in the READMEs; the original remains untouched.
+- `penguin/01-horizontal.png`, `02-vertical.png`, `03-move.png`: generated explanatory scenes for the adaptive preset. Labels identify extension commands, not hard-coded shortcut assignments. The scenes depict selecting tab 3 in a horizontal row, selecting tab 3 in a vertical stack, and moving active tab 2 to the end (order 1,3,2). These are illustrations, not UI recordings or new integration-test evidence.
+- `penguin/tabs-demo.gif`: a three-scene explanatory slideshow, three seconds per scene. It does not show continuous in-app motion. `penguin/tabs-demo-poster.png` is its first scene. FFmpeg encodes the generated scenes at 600 × 600; no generated screenshot substitutes are used. Original demo files and generator remain available.
+- `../../store-assets/penguin/promo/`: two new Imagegen illustrations and exports at 440 × 280 and 1400 × 560 (PNG and JPEG). Generated sources are retained; the existing promo files are untouched. No store upload has been performed.
+- `../../store-assets/penguin/marketing/`: five 1280 × 800 product cards. The character is generated; the UI comes from the existing `store-assets/screenshots/*.png`, cropped and scaled without changing labels, controls, or values. These inherited screenshots have not been recaptured against a live installed extension in this task. Their existing icon is intentionally preserved.
+
+All new painted assets use the same approved character, plum background and lavender accents. No new browser logos or third-party artwork were introduced. Existing license and rights limits remain unchanged. UI icons, favicons, and original screenshots are retained to avoid silently changing the extension's functional visual identity.
+
+### Reproduction and acceptance
+
+Product cards are authored in `store-assets/penguin/marketing/cards.json` and `render-cards.mjs`; run `node store-assets/penguin/marketing/render-cards.mjs` to rebuild their HTML. Capture the 1280 × 800 card area: full-page screenshots may include viewport padding, so verify exported pixel dimensions and content bounds instead of assuming screenshot size equals layout size. The UI crop is deterministic CSS; do not regenerate UI text with an image model.
+
+Preview the README and gallery locally at 390 px content width. Check command semantics against `src/layout.js`, readable text, transparent mascot edges, all image links, and preserved source screenshot hashes. Images with English text share the existing translated explanations in the seven localized READMEs. GitHub rendering and store acceptance remain separate from the local preview.

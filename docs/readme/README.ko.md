@@ -19,11 +19,11 @@
 
 ## 나에게 맞는 흐름
 
-![탭 전환 → 활성 탭 이동](../assets/tabs-demo.gif)
+![탭 전환 → 활성 탭 이동](../assets/penguin/tabs-demo.gif)
 
 *적응형 프리셋의 동작을 보여 주는 일러스트이며 화면 녹화가 아닙니다. 이미지의 문구는 영어입니다. 방향은 확장 기능의 명령을 뜻합니다. 키 조합은 브라우저에서 지정하세요.*
 
-[정지 이미지 보기](../assets/tabs-demo-poster.png)
+[정지 이미지 보기](../assets/penguin/tabs-demo-poster.png)
 
 | 가로 탭 | 세로 탭 |
 | :--- | :--- |
@@ -32,7 +32,7 @@
 
 빠른 작업: 복제, 고정, 음소거, 첫 탭이나 마지막 탭으로 전환, 새 창으로 이동. 레이아웃, 프리셋 및 선택 단축키를 설정할 수 있습니다.
 
-<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+<p align="center"><img src="../assets/penguin/mascot.png" width="132" alt="방향 화살표가 있는 탭을 든 펭귄"></p>
 
 ## 시작하기
 

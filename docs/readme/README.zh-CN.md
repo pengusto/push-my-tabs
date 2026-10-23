@@ -19,11 +19,11 @@
 
 ## 找到你的操作节奏
 
-![切换标签页 → 移动当前标签页](../assets/tabs-demo.gif)
+![切换标签页 → 移动当前标签页](../assets/penguin/tabs-demo.gif)
 
 *这是自适应预设的功能示意图，不是屏幕录像。图中文字为英文；方向代表扩展命令。请在浏览器中分配自己喜欢的快捷键。*
 
-[查看静态示意图](../assets/tabs-demo-poster.png)
+[查看静态示意图](../assets/penguin/tabs-demo-poster.png)
 
 | 横向标签页 | 纵向标签页 |
 | :--- | :--- |
@@ -32,7 +32,7 @@
 
 快捷操作：复制、固定、静音、切换到首个或末个标签页，或移至新窗口。可以配置布局、预设和可选快捷键。
 
-<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+<p align="center"><img src="../assets/penguin/mascot.png" width="132" alt="企鹅拿着带方向箭头的标签页"></p>
 
 ## 开始使用
 

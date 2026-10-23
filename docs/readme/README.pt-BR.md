@@ -19,11 +19,11 @@ Para quem navega pelo teclado com abas horizontais ou verticais.
 
 ## Encontre seu ritmo
 
-![Alternar abas → Mover a aba ativa](../assets/tabs-demo.gif)
+![Alternar abas → Mover a aba ativa](../assets/penguin/tabs-demo.gif)
 
 *Ilustração da predefinição adaptativa, não uma gravação de tela. A imagem contém texto em inglês; as direções indicam comandos da extensão. Atribua seus atalhos no navegador.*
 
-[Ilustração estática](../assets/tabs-demo-poster.png)
+[Ilustração estática](../assets/penguin/tabs-demo-poster.png)
 
 | Abas horizontais | Abas verticais |
 | :--- | :--- |
@@ -32,7 +32,7 @@ Para quem navega pelo teclado com abas horizontais ou verticais.
 
 Ações rápidas: duplicar, fixar, silenciar, ir à primeira ou última aba ou mover para uma nova janela. O layout, a predefinição e os atalhos opcionais são configuráveis.
 
-<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+<p align="center"><img src="../assets/penguin/mascot.png" width="132" alt="Um pinguim segura uma aba com uma seta"></p>
 
 ## Primeiros passos
 

@@ -19,11 +19,11 @@ Für alle, die horizontale oder vertikale Tabs lieber per Tastatur bedienen.
 
 ## Finde deinen Rhythmus
 
-![Tabs wechseln → Aktiven Tab verschieben](../assets/tabs-demo.gif)
+![Tabs wechseln → Aktiven Tab verschieben](../assets/penguin/tabs-demo.gif)
 
 *Schematische Funktionsillustration des adaptiven Presets, keine Bildschirmaufnahme. Die Grafik enthält englische Beschriftungen; die Richtungen bezeichnen Erweiterungsbefehle. Weise deine bevorzugten Tastenkombinationen im Browser zu.*
 
-[Statische Illustration](../assets/tabs-demo-poster.png)
+[Statische Illustration](../assets/penguin/tabs-demo-poster.png)
 
 | Horizontale Tabs | Vertikale Tabs |
 | :--- | :--- |
@@ -32,7 +32,7 @@ Für alle, die horizontale oder vertikale Tabs lieber per Tastatur bedienen.
 
 Schnellaktionen: duplizieren, anheften, stummschalten, zum ersten oder letzten Tab wechseln oder in ein neues Fenster verschieben. Layout, Preset und optionale Tastenkürzel sind konfigurierbar.
 
-<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+<p align="center"><img src="../assets/penguin/mascot.png" width="132" alt="Ein Pinguin hält einen Tab mit einem Richtungspfeil"></p>
 
 ## Loslegen
 

@@ -19,11 +19,11 @@
 
 ## 自分に合う操作へ
 
-![タブを切り替え → アクティブなタブを移動](../assets/tabs-demo.gif)
+![タブを切り替え → アクティブなタブを移動](../assets/penguin/tabs-demo.gif)
 
 *適応型プリセットの動作を示すイラストです。画面録画ではありません。画像内の文字は英語です。方向は拡張機能のコマンドを表します。キーの組み合わせはブラウザーで設定してください。*
 
-[静止画を見る](../assets/tabs-demo-poster.png)
+[静止画を見る](../assets/penguin/tabs-demo-poster.png)
 
 | 横並びのタブ | 縦並びのタブ |
 | :--- | :--- |
@@ -32,7 +32,7 @@
 
 クイック操作：複製、固定、ミュート、最初・最後のタブへの切り替え、新しいウィンドウへの移動。レイアウト、プリセット、任意のショートカットを設定できます。
 
-<p align="center"><img src="../assets/molebyte-pixel.gif" width="132" alt="Molebyte"></p>
+<p align="center"><img src="../assets/penguin/mascot.png" width="132" alt="矢印付きのタブを持つペンギン"></p>
 
 ## 使い始める
 

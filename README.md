@@ -17,9 +17,9 @@ For keyboard-first browsing with horizontal or vertical tabs.
 Horizontal tabs? Switch left and right. Vertical tabs? Switch up and down.
 The adaptive preset maps the four direction commands to your tab layout, so switching and moving tabs stay easy to understand.
 
-![Animated illustration: switch right with horizontal tabs, switch down with vertical tabs, then move the active horizontal tab forward.](docs/assets/tabs-demo.gif)
+![Animated illustration: switch right with horizontal tabs, switch down with vertical tabs, then move the active horizontal tab forward.](docs/assets/penguin/tabs-demo.gif)
 
-[View the static illustration](docs/assets/tabs-demo-poster.png).
+[View the static illustration](docs/assets/penguin/tabs-demo-poster.png).
 
 *Function illustration of the adaptive preset, not a screen recording. Direction labels refer to extension commands; assign your preferred keyboard shortcuts in your browser.*
 
@@ -34,7 +34,7 @@ The adaptive preset maps the four direction commands to your tab layout, so swit
 - **Keep quick actions close.** Duplicate, pin, mute, jump to the first or last tab, or move a tab to a new window.
 - **Make it yours.** Choose your layout and shortcut assignments. Keep optional commands out of the way until you need them.
 
-<p align="center"><img src="docs/assets/molebyte-pixel.gif" width="132" alt="Molebyte waves while holding a browser tab"></p>
+<p align="center"><img src="docs/assets/penguin/mascot.png" width="132" alt="A penguin waves while holding a browser tab"></p>
 
 ## Get started
 
