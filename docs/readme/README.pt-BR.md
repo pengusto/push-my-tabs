@@ -1,4 +1,4 @@
-<img src="../assets/push-my-tabs-banner.svg" alt="Push My Tabs" width="100%">
+<img src="../assets/push-my-tabs-penguin.png" alt="Push My Tabs" width="100%">
 
 [English](../../README.md) · [Deutsch](README.de.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · Português (Brasil) · [Français](README.fr.md)
 

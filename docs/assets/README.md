@@ -12,4 +12,10 @@ The banner, demo, and poster originated in the maintainer's reviewed README draf
 
 Check the actual GitHub README at 320 px and 390 px viewport widths as well as desktop width. At 320 px, GitHub leaves about 256 px for the illustration: labels must therefore be at least 40 px on the 600 px source canvas (about 17 px when displayed). Avoid small decorative captions in the banner. Keep detailed explanations in README text so they reflow and remain accessible. Recheck the animation's switching and movement against `src/layout.js`, and keep the poster and provenance in sync.
 
-Embed the banner with `width="100%"` in every README so its 600 px intrinsic width does not leave unused space on desktop. Keep the height automatic to preserve its proportions.
+Embed the banner with `width="100%"` in every README so intrinsic image dimensions do not leave unused space on desktop. Keep the height automatic to preserve its proportions.
+
+## Penguin banner
+
+`push-my-tabs-penguin.png` is an AI-generated illustration created with the built-in Imagegen tool on 2026-10-23, using the maintainer-supplied purple profile banner as the visual reference. It depicts the same penguin sliding a stylized tab to the right in a plum-and-lavender island workshop. The cards are abstract illustration, not product screenshots; no browser logos or real page content were used. Existing assets and license terms remain unchanged; this note is provenance, not an independent rights clearance.
+
+The maintainer approved this banner after reviewing the local draft. All eight READMEs embed it at full content width with automatic height; language links remain immediately below. The previous SVG is retained as an original asset. The local draft was checked at 390 px content width and desktop width; local HTML previews are only approximations of GitHub rendering.
