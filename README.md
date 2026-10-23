@@ -1,4 +1,10 @@
-<img src="docs/assets/push-my-tabs-air-traffic.png" alt="Push My Tabs — Tabs that follow your direction." width="100%">
+<picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="docs/assets/banner-themes/air-traffic-mobile-dark.png">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="docs/assets/banner-themes/air-traffic-mobile-light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/push-my-tabs-air-traffic.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/banner-themes/air-traffic-light.png">
+  <img src="docs/assets/push-my-tabs-air-traffic.png" alt="Push My Tabs — Tabs that follow your direction." width="100%">
+</picture>
 
 English · [Deutsch](docs/readme/README.de.md) · [简体中文](docs/readme/README.zh-CN.md) · [日本語](docs/readme/README.ja.md) · [Español](docs/readme/README.es.md) · [한국어](docs/readme/README.ko.md) · [Português (Brasil)](docs/readme/README.pt-BR.md) · [Français](docs/readme/README.fr.md)
 

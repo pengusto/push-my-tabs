@@ -6,6 +6,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ### Improved
 
+- Match README banners to light and dark themes, with clearer compositions for narrow screens.
 - Introduce the tab air-traffic-control README banner while retaining the previous stone-island artwork.
 - Unify README illustrations, mascot, social preview, and optional store artwork around the penguin character while retaining original assets and UI screenshots.
 - Add a shared penguin banner illustrating directional tab navigation across all README languages.

@@ -1,4 +1,10 @@
-<img src="../assets/push-my-tabs-air-traffic.png" alt="Push My Tabs" width="100%">
+<picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="../assets/banner-themes/air-traffic-mobile-dark.png">
+  <source media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="../assets/banner-themes/air-traffic-mobile-light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="../assets/push-my-tabs-air-traffic.png">
+  <source media="(prefers-color-scheme: light)" srcset="../assets/banner-themes/air-traffic-light.png">
+  <img src="../assets/push-my-tabs-air-traffic.png" alt="Push My Tabs" width="100%">
+</picture>
 
 [English](../../README.md) · [Deutsch](README.de.md) · 简体中文 · [日本語](README.ja.md) · [Español](README.es.md) · [한국어](README.ko.md) · [Português (Brasil)](README.pt-BR.md) · [Français](README.fr.md)
 
