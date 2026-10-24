@@ -1,12 +1,13 @@
 # Push My Tabs branding
 
-The extension now uses the approved dark **Wingman** penguin app icon, including
+The extension and website use the approved dark **Wingman** penguin app icon, including
 a separately drawn 16 px cut. See [the Wingman sources and rebuild guide](wingman/README.md).
 The previous extension icons are retained byte-for-byte in `previous-push-p/extension/`,
-with SHA-256 hashes in `previous-push-p/SHA256.json`. The website and the historical
-Push P logo kit below retain their existing artwork. No store artwork is changed here.
+with SHA-256 hashes in `previous-push-p/SHA256.json`. Previous website icons are
+retained in `previous-push-p/website/`. The historical Push P logo kit below remains
+available as source artwork. No store artwork is changed here.
 
-## Previous Push P logo kit / current website identity
+## Previous Push P logo kit
 
 Approved direction B, **Push P**, 2026-10-24. The arrow is a transparent counter inside a P: the name and a forward push share one silhouette. The existing purple is retained. All SVG masters contain outlined paths, with no external fonts, rasters, filters or scripts.
 
@@ -41,7 +42,7 @@ Approved direction B, **Push P**, 2026-10-24. The arrow is a transparent counter
 
 ## Integration and rebuilding
 
-The extension paths `src/assets/icons/logo.svg` and `icon-16/32/48/128/1024.png` now use Wingman. Both manifests, the popup and settings reference those PNG paths. The website continues to use the Push P `website/logo.svg` in every header/footer, the small cut for its favicon, and tile icons for touch/web metadata. The web manifest describes icons only; it does not add a service worker or offline behaviour.
+The extension paths `src/assets/icons/logo.svg` and `icon-16/32/48/128/1024.png` use Wingman. Both manifests, the popup and settings reference those PNG paths. The website also uses Wingman for `website/logo.svg`, its SVG/PNG/ICO favicons, touch icons and web-manifest icons. The SVG favicon and 16 px ICO frame use the independent small cut. The web manifest describes icons only; it does not add a service worker or offline behaviour.
 
 The SVGs under `source/` are authoritative. To change a master, render the six square masters (`symbol-color`, `symbol-small`, `symbol-white`, `app-icon`, `social-avatar`, `icon-maskable`) at **exactly 1024 × 1024**, with transparency and no added padding, into `digital/<name>-1024.png`. Render `horizontal-color.svg` at 1260 × 256 into `digital/horizontal-color.png`. Any conforming SVG renderer can be used; do not capture a tiny browser viewport, since browser minimum viewport sizes can silently change export dimensions.
 

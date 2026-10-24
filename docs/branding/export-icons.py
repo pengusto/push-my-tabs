@@ -30,29 +30,8 @@ black = Image.new("RGBA", (1024, 1024), "black")
 black.putalpha(master("symbol-color").getchannel("A"))
 black.save(DIGITAL / "symbol-black-1024.png")
 
-# The website retains Push P; rebuilding its kit must preserve the current
-# Wingman extension identity and its independently drawn 16 px cut.
+# Both deployed identities use Wingman; retain historical Push P masters above.
 runpy.run_path("docs/branding/wingman/export-icons.py", run_name="__main__")
-for size in [16, 32, 48]:
-    export("symbol-small", DIGITAL / f"favicon-{size}.png", size)
-master("symbol-small").save(
-    DIGITAL / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)], bitmap_format="png"
-)
-for name, size, source in [
-    ("apple-touch-icon", 180, "app-icon"),
-    ("icon-192", 192, "app-icon"),
-    ("icon-512", 512, "app-icon"),
-    ("maskable-512", 512, "icon-maskable"),
-    ("logo-128", 128, "symbol-color"),
-]:
-    export(source, WEBSITE / f"{name}.png", size)
-for name in ["favicon.ico", "favicon-32.png"]:
-    shutil.copyfile(DIGITAL / name, WEBSITE / name)
-for name in [
-    "apple-touch-icon.png", "icon-192.png", "icon-512.png", "maskable-512.png",
-    "site.webmanifest", "favicon.svg",
-]:
-    shutil.copyfile(WEBSITE / name, DIGITAL / name)
 (DIGITAL / "head-snippet.html").write_text(
     '<link rel="icon" type="image/svg+xml" href="favicon.svg">\n'
     '<link rel="icon" href="favicon.ico" sizes="any">\n'
@@ -67,7 +46,7 @@ background.save(DIGITAL / "horizontal-on-white.jpg", quality=95)
 # Pixel inspection: magnifications use nearest-neighbour, not new raster masters.
 board = Image.new("RGB", (1000, 420), "#F5F4FF")
 draw = ImageDraw.Draw(board)
-draw.text((24, 18), "Push My Tabs / Push P / #8167FF", fill="#0B0B10")
+draw.text((24, 18), "Push My Tabs / Wingman / #8167FF", fill="#0B0B10")
 for index, color in enumerate(["#FFFFFF", "#0B0B10"]):
     left = 20 + index * 490
     draw.rectangle((left, 55, left + 470, 405), fill=color)
