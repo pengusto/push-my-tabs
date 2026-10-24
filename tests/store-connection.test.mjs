@@ -47,7 +47,8 @@ test('Cloud setup limits federation to this release workflow and creates no proj
   const create=calls.find(a=>a.includes('create-oidc'));
   assert.ok(create);
   const condition=create.find(a=>a.startsWith('--attribute-condition='));
-  for(const requirement of ["assertion.repository_id == '1309289503'","assertion.repository_owner_id == '106893073'",'repo:pengusto/push-my-tabs:environment:chrome-web-store','.github/workflows/release.yml@refs/heads/main','.github/workflows/release.yml@refs/tags/v',"assertion.event_name == 'push'","assertion.event_name == 'workflow_dispatch'"]) assert.ok(condition.includes(requirement),requirement);
+  for(const requirement of ["assertion.repository_id == '1309289503'","assertion.repository_owner_id == '106893073'",'repo:pengusto@106893073/push-my-tabs@1309289503:environment:chrome-web-store','.github/workflows/release.yml@refs/heads/main','.github/workflows/release.yml@refs/tags/v',"assertion.event_name == 'push'","assertion.event_name == 'workflow_dispatch'"]) assert.ok(condition.includes(requirement),requirement);
+  assert.equal(condition.includes("assertion.sub == 'repo:pengusto/push-my-tabs:"),false,'the live repository uses immutable OIDC subjects, not name-only subjects');
   const grant=calls.find(a=>a.includes('add-iam-policy-binding'));
   assert.equal(grant[0],'iam');
   assert.equal(grant[1],'service-accounts');

@@ -8,6 +8,9 @@ expected_account=${2:?Pass the explicitly approved Google account email}
 repo=pengusto/push-my-tabs
 repo_id=1309289503
 owner_id=106893073
+# Verified with GitHub's actions/oidc/customization/sub endpoint; this repository
+# uses immutable subjects. Do not fall back to a name-only subject.
+subject_prefix="repo:pengusto@$owner_id/push-my-tabs@$repo_id"
 pool_id=github-releases
 provider_id=github
 service_account="cws-publisher@$project_id.iam.gserviceaccount.com"
@@ -28,7 +31,7 @@ if ! gcloud iam workload-identity-pools describe "$pool_id" --location=global --
   gcloud iam workload-identity-pools create "$pool_id" --location=global --display-name='Push My Tabs releases' --project="$project_id"
 fi
 
-condition="assertion.repository_id == '$repo_id' && assertion.repository_owner_id == '$owner_id' && assertion.sub == 'repo:$repo:environment:chrome-web-store' && (assertion.workflow_ref == '$repo/.github/workflows/release.yml@refs/heads/main' || assertion.workflow_ref.startsWith('$repo/.github/workflows/release.yml@refs/tags/v')) && (assertion.event_name == 'push' || assertion.event_name == 'workflow_dispatch')"
+condition="assertion.repository_id == '$repo_id' && assertion.repository_owner_id == '$owner_id' && assertion.sub == '$subject_prefix:environment:chrome-web-store' && (assertion.workflow_ref == '$repo/.github/workflows/release.yml@refs/heads/main' || assertion.workflow_ref.startsWith('$repo/.github/workflows/release.yml@refs/tags/v')) && (assertion.event_name == 'push' || assertion.event_name == 'workflow_dispatch')"
 mapping='google.subject=assertion.sub,attribute.repository_id=assertion.repository_id,attribute.repository_owner_id=assertion.repository_owner_id,attribute.workflow_ref=assertion.workflow_ref,attribute.event_name=assertion.event_name'
 if gcloud iam workload-identity-pools providers describe "$provider_id" --workload-identity-pool="$pool_id" --location=global --project="$project_id" >/dev/null 2>&1; then
   existing_condition=$(gcloud iam workload-identity-pools providers describe "$provider_id" --workload-identity-pool="$pool_id" --location=global --project="$project_id" --format='value(attributeCondition)')

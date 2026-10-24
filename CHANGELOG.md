@@ -11,6 +11,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 ### Fixed
 
 - Resume release retries from their exact tag and recreate temporary CI artifacts without replacing published packages.
+- Match GitHub's immutable repository identity when authenticating automated Chrome Store releases.
 
 ## 1.3.0 - 2026-10-24
 ### Changed
