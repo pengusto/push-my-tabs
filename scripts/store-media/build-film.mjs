@@ -1,0 +1,36 @@
+import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+const root = 'brag-output/composition';
+await mkdir(`${root}/compositions`, {recursive:true});
+await mkdir(`${root}/assets/recordings`, {recursive:true});
+// Reuse the already verified, unmodified 1.3.0 UI recordings. These are a
+// product walkthrough, not footage of native tab-bar movement.
+for (const view of ['navigation','tabloop','layout','shortcuts','settings']) {
+  const source = `${process.env.RECORDINGS_DIR || `${root}/assets/recordings`}/${view}.mp4`;
+  const target = `${root}/assets/recordings/${view}.mp4`;
+  if (resolve(source) !== resolve(target)) await copyFile(source,target);
+}
+const audio = JSON.parse(await readFile(`${root}/assets/music/audio-data.json`));
+const scenes = [
+  {id:'intro',start:0,duration:2.5,title:'Deine Tabs.<br>Im Fluss.',sub:'Push My Tabs für Chrome und Firefox.',view:'navigation'},
+  {id:'navigation',start:2.5,duration:3.5,title:'Deine Richtung.',sub:'Wechseln und verschieben.<br>Mit vier Richtungstasten.',view:'navigation'},
+  {id:'tabloop',start:6,duration:3.5,title:'Zurück im Flow.',sub:'Mit TabLoop durch zuletzt verwendete,<br>noch offene Tabs wechseln.',view:'tabloop'},
+  {id:'layout',start:9.5,duration:3.5,title:'Deine Anordnung.',sub:'Nativ erkannt, automatisch geschätzt<br>oder manuell festgelegt.',view:'layout'},
+  {id:'shortcuts',start:13,duration:3.5,title:'Deine Tasten.',sub:'Passend zu deinem System.',view:'shortcuts'},
+  {id:'settings',start:16.5,duration:2.5,title:'Ganz bei dir.',sub:'Sprache und Tab-Verhalten.<br>Einstellungen bleiben lokal.',view:'settings'},
+  {id:'outro',start:19,duration:2.5,title:'Push My Tabs',sub:'Für Chrome und Firefox.',view:'navigation'},
+];
+const css=`*{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#14131b;color:#f4f2fa;font-family:Inter,Arial,sans-serif}.clip{position:absolute;inset:0}#root{position:absolute;inset:0}.inner{position:absolute;inset:0}.brand{position:absolute;left:140px;top:170px;display:flex;align-items:center;gap:22px;font-size:36px;font-weight:600;letter-spacing:-1px}.brand img{width:70px;height:70px}.title{position:absolute;left:140px;top:320px;width:960px;font-size:100px;line-height:1.08;letter-spacing:-4px;font-weight:600;margin:0}.description{position:absolute;left:145px;top:595px;width:970px;color:#c8c3d7;font-size:35px;line-height:1.55;margin:0}.product{position:absolute;left:1190px;top:95px;width:580px;height:812px;object-fit:fill;border:1px solid #71638b;border-radius:20px;background:#14131b}.foot{position:absolute;left:145px;top:975px;font-size:28px;color:#b4b0c4;margin:0}.keys{position:absolute;left:145px;top:680px;display:grid;grid-template-columns:170px 1fr;gap:10px 18px;align-items:center;font-size:28px;color:#c8c3d7}.keys kbd{font:32px Arial,sans-serif;border:1px solid #62576f;background:#211f2a;padding:7px 16px;border-radius:8px;color:#f4f2fa}.key-note{position:absolute;left:145px;top:885px;color:#b4b0c4;font-size:28px}.url{position:absolute;left:145px;top:745px;color:#b9aaff;font-size:35px}.accent-line{position:absolute;left:145px;top:900px;width:90px;height:4px;background:#a394ff}`;
+for(const s of scenes){
+  const media=s.id==='intro'||s.id==='outro'?`<img id="${s.id}-product" class="product" src="assets/screens/${s.view}.png" alt="Navigation in der echten Erweiterung">`:`<video id="${s.id}-product" class="product clip" data-start="0" data-duration="${s.duration}" data-track-index="2" src="assets/recordings/${s.view}.mp4" muted playsinline></video>`;
+  const extra=s.id==='shortcuts'?'<div class="keys"><span>Mac</span><kbd>⌥⇧→</kbd><span>Windows</span><kbd>Alt+Shift+→</kbd><span>Linux</span><kbd>Alt+Shift+→</kbd></div><p class="key-note">Darstellungsbeispiel · frei belegbar</p>':s.id==='outro'?'<p class="url">pengusto.github.io/push-my-tabs</p>':'<div class="accent-line"></div>';
+  const frames=audio.frames.slice(Math.floor(s.start*30),Math.floor((s.start+s.duration)*30));
+  // Audio-reactive: a maximum 0.5% product-panel scale change, never text.
+  const animation=frames.filter((_,i)=>i%5===0).map((f,i)=>`tl.to('#${s.id}-product',{scale:${(1+f.rms*.005).toFixed(5)},duration:0.1667,ease:'none'},${(i/6).toFixed(4)});`).join('');
+  await writeFile(`${root}/compositions/${s.id}.html`,`<template><div id="root" data-composition-id="${s.id}" data-width="1920" data-height="1080"><div id="${s.id}-graphics" class="clip" data-start="0" data-duration="${s.duration}" data-track-index="1" data-hold><div class="inner" id="${s.id}-copy"><div class="brand"><img src="assets/logo.png" alt="">Push My Tabs</div><h1 class="title">${s.title}</h1><p class="description">${s.sub}</p>${extra}<p class="foot">Originaloberfläche · Chrome auf macOS · v1.3.0</p></div></div>${media}</div><script>const tl=gsap.timeline({paused:true});tl.fromTo('#${s.id}-copy',{opacity:.5,x:-16},{opacity:1,x:0,duration:.35,ease:'power4.out'},0);${animation}window.__timelines['${s.id}']=tl;</script></template>`);
+}
+const mounts=scenes.map(s=>`<div id="${s.id}" class="clip" data-composition-id="${s.id}" data-composition-src="compositions/${s.id}.html" data-start="${s.start}" data-duration="${s.duration}" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="${s.id}"></div>`).join('');
+await writeFile(`${root}/index.html`,`<!doctype html><html lang="de"><meta charset="utf-8"><title>Push My Tabs · Im Fluss</title><meta name="viewport" content="width=1920,height=1080"><script src="assets/gsap.min.js"></script><style>${css}</style><body><div id="root" data-composition-id="main" data-start="0" data-duration="21.5" data-width="1920" data-height="1080">${mounts}<audio id="music" class="clip" data-start="0" data-duration="21.5" data-track-index="10" data-volume="0.25" data-fade-in="0.25" data-fade-out="1.2" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"></audio><audio id="logo-accent" class="clip" data-start="19" data-duration="0.18" data-track-index="11" data-volume="0.3" src="assets/sfx/impactSoft_medium_001.ogg"></audio></div><script>window.__timelines=window.__timelines||{};window.__timelines.main=gsap.timeline({paused:true});</script></body></html>`);
+await writeFile('brag-output/share-copy.txt','Deine Tabs. Im Fluss. Mit Push My Tabs wechselst und verschiebst du Tabs per Richtungstaste — und springst mit TabLoop zurück. Für Chrome und Firefox.\n');
+await writeFile(`${root}/assets/SOURCES.md`,'# Media sources\n\nUI and logo: Push My Tabs 1.3.0, repository source. UI clips come from the verified isolated Chrome/macOS capture; these show UI interaction, not native tab movement. Mac is captured; Windows/Linux labels are formatting examples.\n\nMusic: bundled Brag vol-12, Happy Beats / Business Moves by ende.app. SFX: Kenney impactSoft_medium_001, CC0, bundled with Brag. No narration or generated third-party footage.\n\nRecordly capture was attempted but its source picker was empty after permission setup. A UI MP4 import reported success but did not load in the editor. No Recordly recording or export is claimed for these clips.\n');
+console.log('Built editable 21.5-second five-view product film.');

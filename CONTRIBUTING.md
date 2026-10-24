@@ -17,6 +17,7 @@ node tests/ui-flow.test.mjs
 node tests/shortcuts.test.mjs
 node tests/release.test.mjs
 node tests/store-publishing.test.mjs
+node tests/store-connection.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

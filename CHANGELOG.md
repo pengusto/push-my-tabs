@@ -4,6 +4,10 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Added
+
+- Add a purple five-screen store kit and a 21-second product walkthrough with Mac, Windows and Linux key-format examples.
+
 ### Fixed
 
 - Resume release retries from their exact tag and recreate temporary CI artifacts without replacing published packages.

@@ -55,4 +55,8 @@ Use the [store listing copy](store-listing.md) and [media plan](store-media.md) 
 
 ## Verification and current gate
 
+The GitHub environments `chrome-web-store` and `firefox-addons` are now created with custom deployment rules for the `main` branch and `v*` tags only. Creating the environments does not connect publisher credentials. The dedicated Cloud project has been created; Google reauthentication and the Chrome publisher link remain necessary. The Mozilla API page still requires its API-access email confirmation before its key can be provisioned.
+
+`scripts/connect-google-cloud.sh PROJECT_ID EXPECTED_GOOGLE_ACCOUNT` prepares the dedicated keyless Google identity from an authenticated Google Cloud CLI or Cloud Shell. It verifies the account and disabled billing, enables the required APIs, creates a dedicated service account without project roles, and restricts GitHub federation to this repository's numeric owner/repository IDs, release workflow, Chrome environment, and approved release sources. It creates no service-account key. This helper has not been run against the live project; its completion is a separate gate from the existing GitHub release pipeline.
+
 Unit tests cover version/changelog preparation, asynchronous Chrome uploads, failed uploads, duplicate submissions, warning/review states, and Firefox authentication/status handling. Local builds and a GitHub-only release run validate packaging separately from store acceptance. The live store jobs are unverified until the one-time account connection is configured and a release submission is observed.

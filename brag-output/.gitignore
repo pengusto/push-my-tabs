@@ -1,0 +1,14 @@
+composition/.hyperframes/
+composition/output/
+store-images/*.html
+brag.raw.mp4
+recordly-navigation-export.mp4
+composition/assets/music/*.mp3
+composition/assets/music/audio-data.json
+composition/assets/gsap.min.js
+composition/.thumbnails/
+composition/.waveforms/
+composition/meta.json
+composition/hyperframes.lock.json
+composition/assets/music/*.music-cues.json
+composition/.waveform-cache/

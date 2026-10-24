@@ -1,0 +1,152 @@
+{
+  "manifest": "1.3.0",
+  "platform": {
+    "arch": "arm64",
+    "nacl_arch": "arm",
+    "os": "mac"
+  },
+  "commands": [
+    {
+      "description": "",
+      "name": "_execute_action",
+      "shortcut": ""
+    },
+    {
+      "description": "Aktion für Pfeil unten ausführen",
+      "name": "arrow-down",
+      "shortcut": "⌘↓"
+    },
+    {
+      "description": "Aktion für Pfeil links ausführen",
+      "name": "arrow-left",
+      "shortcut": "⌘←"
+    },
+    {
+      "description": "Aktion für Pfeil rechts ausführen",
+      "name": "arrow-right",
+      "shortcut": "⌘→"
+    },
+    {
+      "description": "Aktion für Pfeil oben ausführen",
+      "name": "arrow-up",
+      "shortcut": "⌘↑"
+    },
+    {
+      "description": "Aktuellen Tab duplizieren",
+      "name": "duplicate-tab",
+      "shortcut": ""
+    },
+    {
+      "description": "Browser zurück",
+      "name": "history-back",
+      "shortcut": ""
+    },
+    {
+      "description": "Browser vor",
+      "name": "history-forward",
+      "shortcut": ""
+    },
+    {
+      "description": "Aktuellen Tab an den Anfang verschieben",
+      "name": "move-first",
+      "shortcut": ""
+    },
+    {
+      "description": "Aktuellen Tab ans Ende verschieben",
+      "name": "move-last",
+      "shortcut": ""
+    },
+    {
+      "description": "Aktuellen Tab in ein neues Fenster verschieben",
+      "name": "move-to-new-window",
+      "shortcut": ""
+    },
+    {
+      "description": "Aktuellen Tab ins nächste Fenster verschieben",
+      "name": "move-to-next-window",
+      "shortcut": ""
+    },
+    {
+      "description": "Neuen Tab nach dem aktuellen öffnen",
+      "name": "new-tab-after",
+      "shortcut": ""
+    },
+    {
+      "description": "Neuen Tab vor dem aktuellen öffnen",
+      "name": "new-tab-before",
+      "shortcut": ""
+    },
+    {
+      "description": "Neuen Tab ganz am Ende öffnen",
+      "name": "new-tab-end",
+      "shortcut": ""
+    },
+    {
+      "description": "Schnell durch zuletzt verwendete Tabs wechseln",
+      "name": "recent-tab-quick-switch",
+      "shortcut": ""
+    },
+    {
+      "description": "Durch zuletzt verwendete Tabs wechseln",
+      "name": "recent-tab-switch",
+      "shortcut": ""
+    },
+    {
+      "description": "Rückwärts durch zuletzt verwendete Tabs wechseln",
+      "name": "recent-tab-switch-reverse",
+      "shortcut": ""
+    },
+    {
+      "description": "Zum ersten Tab wechseln",
+      "name": "switch-first",
+      "shortcut": ""
+    },
+    {
+      "description": "Zum letzten Tab wechseln",
+      "name": "switch-last",
+      "shortcut": ""
+    },
+    {
+      "description": "Zum nächsten Fenster wechseln",
+      "name": "switch-next-window",
+      "shortcut": ""
+    },
+    {
+      "description": "Zum vorherigen Fenster wechseln",
+      "name": "switch-previous-window",
+      "shortcut": ""
+    },
+    {
+      "description": "Aktuellen Tab stummschalten oder Ton aktivieren",
+      "name": "toggle-mute",
+      "shortcut": ""
+    },
+    {
+      "description": "Aktuellen Tab anheften oder lösen",
+      "name": "toggle-pin",
+      "shortcut": ""
+    }
+  ],
+  "views": [
+    {
+      "view": "navigation",
+      "heading": "Navigation"
+    },
+    {
+      "view": "tabloop",
+      "heading": "TabLoop"
+    },
+    {
+      "view": "layout",
+      "heading": "Anordnung"
+    },
+    {
+      "view": "shortcuts",
+      "heading": "Tastenbelegung"
+    },
+    {
+      "view": "settings",
+      "heading": "Einstellungen"
+    }
+  ]
+}
