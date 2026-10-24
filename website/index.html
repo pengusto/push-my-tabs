@@ -19,6 +19,69 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://pengusto.github.io/push-my-tabs/#website",
+          "name": "Push My Tabs",
+          "url": "https://pengusto.github.io/push-my-tabs/",
+          "inLanguage": "en",
+          "mainEntity": {
+            "@id": "https://pengusto.github.io/push-my-tabs/#app"
+          },
+          "about": {
+            "@id": "https://pengusto.github.io/push-my-tabs/#brand"
+          },
+          "image": {
+            "@id": "https://pengusto.github.io/push-my-tabs/#logo"
+          }
+        },
+        {
+          "@type": "Brand",
+          "@id": "https://pengusto.github.io/push-my-tabs/#brand",
+          "name": "Push My Tabs",
+          "url": "https://pengusto.github.io/push-my-tabs/",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://pengusto.github.io/push-my-tabs/#logo",
+            "name": "Push My Tabs — Wingman logo",
+            "contentUrl": "https://pengusto.github.io/push-my-tabs/icon-512.png",
+            "url": "https://pengusto.github.io/push-my-tabs/icon-512.png",
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://pengusto.github.io/push-my-tabs/#app",
+          "name": "Push My Tabs",
+          "url": "https://pengusto.github.io/push-my-tabs/",
+          "description": "Direction-aware keyboard shortcuts for switching and moving browser tabs.",
+          "applicationCategory": "BrowserApplication",
+          "softwareRequirements": "Chrome 127+ or Firefox 142+",
+          "image": {
+            "@id": "https://pengusto.github.io/push-my-tabs/#logo"
+          },
+          "installUrl": [
+            "https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik",
+            "https://addons.mozilla.org/firefox/addon/push-my-tabs/"
+          ],
+          "isPartOf": {
+            "@id": "https://pengusto.github.io/push-my-tabs/#website"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Pengusto",
+            "url": "https://github.com/pengusto"
+          },
+          "license": "https://github.com/pengusto/push-my-tabs/blob/main/LICENSE"
+        }
+      ]
+    }
+    </script>
     <script src="app.js" defer></script>
   </head>
   <body>

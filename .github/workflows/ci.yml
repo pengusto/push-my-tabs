@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: 22
       - run: ./scripts/build-chrome.sh
+      - run: node tests/website-schema.test.mjs
 
   firefox-release:
     runs-on: ubuntu-latest

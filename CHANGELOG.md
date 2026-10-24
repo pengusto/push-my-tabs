@@ -8,6 +8,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 - Use the purple Wingman penguin on a dark app-icon tile, with a simplified 16-pixel toolbar icon; retain the previous icons for rollback.
 - Match the website logo, favicons and touch/web icons to Wingman, preserving the previous website icons.
+- Describe the website, browser extension and Wingman brand logo with structured data.
 
 ### Added
 
