@@ -6,6 +6,13 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ### Improved
 
+- Distinguish native detection, automatic estimates, and manually set layouts, including saved confirmations.
+- Handle Zen separately: request confirmation instead of trusting its inherited Firefox vertical-tabs setting.
+- Put direction shortcuts first in the popup, with direct setup and collapsible layout help.
+- Keep shortcuts, settings, and permission warnings available during uncertain layout detection; explain where confirmations are saved.
+- Show effective direction actions in settings, and add one-click shortcut suggestions in Firefox.
+- Give recently used tab cycling (CLUT) its own popup and settings section.
+- Confirm settings changes, serialize saves, and offer retry after failed saves or navigation.
 - Refresh the extension and website with the purple Push P logo, clearer small-size icons, and a complete logo kit.
 - Match README banners to light and dark themes, with clearer compositions for narrow screens.
 - Introduce the tab air-traffic-control README banner while retaining the previous stone-island artwork.

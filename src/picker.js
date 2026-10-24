@@ -102,4 +102,5 @@ export function enhanceSelect(select) {
   select.after(picker);
   picker.append(trigger, menu);
   sync();
+  return sync;
 }

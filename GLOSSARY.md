@@ -1,6 +1,6 @@
 # Push My Tabs
 
-This context describes how users navigate and rearrange Chrome tabs with layout-aware keyboard shortcuts.
+This context describes how users navigate and rearrange browser tabs with layout-aware keyboard shortcuts.
 
 ## Language
 
@@ -21,7 +21,7 @@ The selected source of tab-strip orientation: automatically detected, forced hor
 _Avoid_: Preset, tab position
 
 **Detected Layout**:
-The horizontal or vertical orientation inferred from the current Chrome window and active tab geometry when Layout Mode is automatic.
+The horizontal or vertical orientation obtained from Firefox’s native setting or estimated from window and active-tab geometry when Layout Mode is automatic. The popup states its source; user-confirmed geometry and site profiles are manually set, even in automatic mode.
 _Avoid_: Chrome setting, saved layout
 
 **Site Layout Profile**:
@@ -29,7 +29,7 @@ A local mapping from rounded browser geometry to a confirmed layout for either a
 _Avoid_: Forced site mode, URL history, content rule
 
 **Layout Hint**:
-A locally stored confirmation for one rounded Chrome window/tab geometry. A site or path profile takes precedence over a global hint; both can be removed from settings.
+A locally stored confirmation for one rounded browser window/tab geometry. A site or path profile takes precedence over a global hint; both can be removed from settings.
 _Avoid_: Guaranteed detection, forced site mode
 
 **Layout Mapping**:

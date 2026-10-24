@@ -38,9 +38,9 @@ for (const file of ["manifests/chrome.json", "manifests/firefox.json", "src/popu
   }
 }
 
-for (const file of ["src/popup.js", "src/options.js"]) {
+for (const file of ["src/popup.js", "src/options.js", "src/ui.js"]) {
   const content = await readFile(file, "utf8");
-  for (const [, name] of content.matchAll(/message\("([A-Za-z][A-Za-z0-9]*)"/g)) {
+  for (const [, name] of content.matchAll(/(?:message\(|success\s*=|failure\s*=|success:|failure:)\s*"([A-Za-z][A-Za-z0-9]*)"/g)) {
     assert.ok(locales.en[name], `${file} references missing message ${name}`);
     referencedMessages.add(name);
   }
@@ -63,7 +63,7 @@ assert.equal(resolveLocale("en-US"), "en");
 assert.equal(resolveLocale("nl-NL"), "en");
 await initializeI18n("browser");
 assert.equal(message("layoutModeLabel"), "Layout-Modus");
-assert.equal(message("layoutDetected", "Vertikal"), "Vertikal erkannt");
+assert.equal(message("layoutDetected", "Vertikal"), "Nativ erkannt: Vertikal");
 await initializeI18n("en");
 assert.equal(message("layoutModeLabel"), "Layout mode");
 assert.equal(message("missing"), "");

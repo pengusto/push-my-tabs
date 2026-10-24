@@ -37,6 +37,7 @@ The adaptive preset maps the four direction commands to your tab layout, so swit
 ## Small actions. Fewer interruptions.
 
 - **Navigate by direction.** Switch tabs or move the active tab with the adaptive preset.
+- **Cycle last used tabs (CLUT).** Switch across windows in last-used order, forward or backward. Assign the normal cycle shortcut first; quick cycling is optional.
 - **Keep quick actions close.** Duplicate, pin, mute, jump to the first or last tab, or move a tab to a new window.
 - **Make it yours.** Choose your layout and shortcut assignments. Keep optional commands out of the way until you need them.
 
@@ -45,10 +46,10 @@ The adaptive preset maps the four direction commands to your tab layout, so swit
 ## Get started
 
 1. Install from the Chrome Web Store or Firefox Add-ons using the links above.
-2. Open the extension popup to see your four direction commands and their current assignments.
+2. Open the extension popup to see your four direction commands and their current assignments. Use **Change command shortcuts** to open Chrome’s shortcut editor or jump to the editable Firefox settings.
 3. Set or adjust your shortcuts in your browser. Start with the adaptive preset; choose a manual layout if automatic detection does not match your setup.
 
-Chrome estimates the layout from window geometry; an open side panel can affect detection. Firefox 142+ reads its vertical-tabs setting directly.
+The popup distinguishes **Natively detected**, **Automatically estimated**, and **Manually set** layouts. Chrome estimates from window geometry; an open side panel can affect the result. Firefox 142+ reads its vertical-tabs setting directly. Zen uses its own tab bar, so its inherited Firefox setting is ignored: confirm the estimated layout or choose a manual layout. Saved confirmations are shown as manually set.
 
 ## Your tabs stay yours
 
@@ -93,6 +94,7 @@ node tests/background.test.mjs
 node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
+node tests/ui-flow.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

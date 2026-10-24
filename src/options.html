@@ -18,6 +18,31 @@
       <h1 data-i18n="settingsHeading">Settings</h1>
     </header>
 
+    <div class="feedback settings-feedback">
+      <p id="save-status" class="status" role="status" aria-live="polite" hidden></p>
+      <button id="retry-save" type="button" data-i18n="tryAgain" hidden>Try again</button>
+    </div>
+
+    <section class="card" id="direction-shortcuts">
+      <div class="section-heading">
+        <h2 data-i18n="currentMapping">Direction shortcuts</h2>
+        <p id="shortcut-help"></p>
+        <p id="shortcut-summary" class="shortcut-summary" role="status"></p>
+      </div>
+      <button id="shortcut-settings" class="shortcut-action" data-i18n="changeShortcuts">Change command shortcuts</button>
+      <div id="shortcuts"></div>
+      <section id="recent-shortcuts" class="recent-settings">
+        <h2 data-i18n="recentTabsHeading">Recently used tabs (CLUT)</h2>
+        <p data-i18n="recentTabsHelp">Press again within one second to keep cycling; pause to start from the most recently used tab.</p>
+        <div id="recent-commands"></div>
+      </section>
+      <details class="optional-shortcuts">
+        <summary data-i18n="shortcutsHeading">More shortcuts (optional)</summary>
+        <div id="optional-shortcuts"></div>
+      </details>
+    </section>
+
+
     <section class="card">
       <div class="section-heading">
         <h2 data-i18n="layoutBehaviorHeading">Layout &amp; behavior</h2>
@@ -113,20 +138,6 @@
       </div>
     </section>
 
-    <section class="card">
-      <div class="section-heading">
-        <h2 data-i18n="currentMapping">Direction shortcuts</h2>
-        <p id="shortcut-help"></p>
-        <p id="shortcut-summary" class="shortcut-summary" role="status"></p>
-      </div>
-      <div id="shortcuts"></div>
-      <details class="optional-shortcuts">
-        <summary data-i18n="shortcutsHeading">More shortcuts (optional)</summary>
-        <div id="optional-shortcuts"></div>
-      </details>
-      <button id="shortcut-settings" class="shortcut-action" data-i18n="changeShortcuts">Change command shortcuts</button>
-      <p id="shortcut-status" class="status" role="status"></p>
-    </section>
 
     <script type="module" src="options.js"></script>
   </body>

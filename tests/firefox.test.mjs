@@ -40,7 +40,7 @@ globalThis.browser = {
     update: async (id, properties) => updates.push([id, properties]),
     move: async (id, properties) => moves.push([id, properties])
   },
-  runtime: { onMessage: { addListener: () => {} } }
+  runtime: { getBrowserInfo: async () => ({ name: "Firefox" }), onMessage: { addListener: () => {} } }
 };
 
 const { layoutDetection, updateCommandShortcut } = await import("../src/api.js?firefox-test");
@@ -97,4 +97,34 @@ await updateCommandShortcut("arrow-left", "Ctrl+Shift+Left");
 assert.deepEqual(shortcutUpdates, [{ name: "arrow-left", shortcut: "Ctrl+Shift+Left" }]);
 await assert.rejects(updateCommandShortcut("arrow-left", "invalid"), /Invalid shortcut/);
 
-console.log("Firefox layout, command, and shortcut checks passed");
+// Zen retains the Firefox name and API, but uses a different tab-bar setting.
+const geometryWindow = { width: 1400, height: 900 };
+const geometryTab = { width: 1390, height: 780 };
+const nativeGet = browser.browserSettings.verticalTabs.get;
+let nativeReads = 0;
+browser.runtime.getBrowserInfo = async () => ({ name: "Firefox", zen: { version: "1.23.4b" } });
+browser.browserSettings.verticalTabs.get = async () => { nativeReads += 1; return { value: false }; };
+assert.deepEqual(await layoutDetection(geometryWindow, geometryTab), {
+  layout: "horizontal", confidence: "uncertain", key: "20:120"
+}, "Zen must request confirmation even for otherwise confident geometry");
+assert.equal(nativeReads, 0, "Zen must not use the inherited Firefox tab-layout setting");
+assert.deepEqual(await layoutDetection(geometryWindow, geometryTab, {
+  ...DEFAULT_SETTINGS, layoutHints: { "20:120": "vertical" }
+}), { layout: "vertical", confidence: "remembered", key: "20:120" });
+assert.deepEqual(await layoutDetection({}, null), { layout: null, confidence: "uncertain", key: null });
+
+browser.runtime.getBrowserInfo = async () => ({ name: "Firefox" });
+const warn = console.warn;
+console.warn = () => {};
+try {
+  browser.browserSettings.verticalTabs.get = async () => { throw new Error("Unavailable"); };
+  assert.equal((await layoutDetection(geometryWindow, geometryTab)).confidence, "uncertain", "native read failures require confirmation");
+  browser.browserSettings.verticalTabs.get = async () => ({ value: undefined });
+  assert.equal((await layoutDetection(geometryWindow, geometryTab)).confidence, "uncertain", "invalid native values must not mean horizontal");
+  browser.runtime.getBrowserInfo = async () => { throw new Error("Identity unavailable"); };
+  assert.equal((await layoutDetection(geometryWindow, geometryTab)).confidence, "uncertain");
+} finally {
+  console.warn = warn;
+  browser.browserSettings.verticalTabs.get = nativeGet;
+}
+console.log("Firefox native layout, Zen confirmation, native-failure fallback, command, and shortcut checks passed");

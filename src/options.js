@@ -1,19 +1,35 @@
 import { api, loadSettings, updateCommandShortcut } from "./api.js";
 import { initializeI18n, localizeDocument, message } from "./i18n.js";
-import { ACTIONS, COMMANDS, HISTORY_COMMANDS, RECENT_TAB_COMMANDS, TAB_ACTION_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
+import { ACTIONS, COMMANDS, HISTORY_COMMANDS, RECENT_TAB_COMMANDS, selectedAction, TAB_ACTION_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
 import { enhanceSelect } from "./picker.js";
 
+import { createTaskRunner, recommendedShortcuts } from "./ui.js";
+
+const run = createTaskRunner(document.querySelector("#save-status"), document.querySelector("#retry-save"));
+const effectLabels = new Map();
+const shortcutInputs = new Map();
 const settings = await loadSettings();
 await initializeI18n(settings.locale);
 localizeDocument();
 document.querySelector("#native-layout-help").hidden = Boolean(api.browserSettings?.verticalTabs);
 
 const commandLabels = {
-  "arrow-left": `← ${message("directionLeft")} — ${message("commandLeftDescription")}`,
-  "arrow-right": `→ ${message("directionRight")} — ${message("commandRightDescription")}`,
-  "arrow-up": `↑ ${message("directionUp")} — ${message("commandUpDescription")}`,
-  "arrow-down": `↓ ${message("directionDown")} — ${message("commandDownDescription")}`
+  "arrow-left": `← ${message("directionLeft")}`,
+  "arrow-right": `→ ${message("directionRight")}`,
+  "arrow-up": `↑ ${message("directionUp")}`,
+  "arrow-down": `↓ ${message("directionDown")}`
 };
+
+function showEffects() {
+  for (const [command, label] of effectLabels) {
+    const horizontal = message(ACTIONS[selectedAction(settings, "horizontal", command)]);
+    const vertical = message(ACTIONS[selectedAction(settings, "vertical", command)]);
+    label.textContent = settings.layoutMode === "horizontal" ? horizontal
+      : settings.layoutMode === "vertical" ? vertical
+      : horizontal === vertical ? horizontal
+      : `${message("layoutHorizontal")}: ${horizontal} · ${message("layoutVertical")}: ${vertical}`;
+  }
+}
 
 const language = document.querySelector("#language");
 const layoutMode = document.querySelector("#layout-mode");
@@ -27,18 +43,25 @@ preset.value = settings.presetId;
 wrap.checked = settings.wrapSwitching;
 closeDirection.value = settings.closeDirection;
 
-language.addEventListener("change", async () => {
-  await api.storage.local.set({ locale: language.value });
-  location.reload();
-});
-layoutMode.addEventListener("change", () => api.storage.local.set({ layoutMode: layoutMode.value }));
-preset.addEventListener("change", async () => {
-  await api.storage.local.set({ presetId: preset.value });
-  showCustomPreset();
-});
-wrap.addEventListener("change", () => api.storage.local.set({ wrapSwitching: wrap.checked }));
-closeDirection.addEventListener("change", () => api.storage.local.set({ closeDirection: closeDirection.value }));
-for (const select of [language, layoutMode, preset, closeDirection]) enhanceSelect(select);
+function saveSetting(control, key, reload = false) {
+  control.addEventListener("change", () => {
+    const value = control.type === "checkbox" ? control.checked : control.value;
+    run(async () => {
+      await api.storage.local.set({ [key]: value });
+      settings[key] = value;
+      showCustomPreset();
+      showEffects();
+      if (reload) location.reload();
+    });
+  });
+}
+saveSetting(language, "locale", true);
+saveSetting(layoutMode, "layoutMode");
+saveSetting(preset, "presetId");
+saveSetting(wrap, "wrapSwitching");
+saveSetting(closeDirection, "closeDirection");
+const syncPreset = enhanceSelect(preset);
+for (const select of [language, layoutMode, closeDirection]) enhanceSelect(select);
 
 const siteProfiles = document.querySelector("#site-profiles");
 for (const [profile, hints] of Object.entries(settings.siteProfiles).sort(([a], [b]) => a.localeCompare(b))) {
@@ -60,12 +83,14 @@ for (const [profile, hints] of Object.entries(settings.siteProfiles).sort(([a], 
   remove.type = "button";
   remove.textContent = "×";
   remove.setAttribute("aria-label", `${profile} ×`);
-  remove.addEventListener("click", async () => {
-    delete settings.siteProfiles[profile];
-    await api.storage.local.set({ siteProfiles: settings.siteProfiles });
+  remove.addEventListener("click", () => run(async () => {
+    const nextProfiles = { ...settings.siteProfiles };
+    delete nextProfiles[profile];
+    await api.storage.local.set({ siteProfiles: nextProfiles });
+    settings.siteProfiles = nextProfiles;
     row.remove();
     document.querySelector("#site-profiles-section").hidden = siteProfiles.children.length === 0;
-  });
+  }));
   row.append(data, remove);
   siteProfiles.append(row);
 }
@@ -73,11 +98,11 @@ document.querySelector("#site-profiles-section").hidden = siteProfiles.children.
 
 const autoDetectionSection = document.querySelector("#auto-detection-section");
 autoDetectionSection.hidden = Object.keys(settings.layoutHints).length === 0;
-document.querySelector("#clear-layout-hints").addEventListener("click", async () => {
-  settings.layoutHints = {};
+document.querySelector("#clear-layout-hints").addEventListener("click", () => run(async () => {
   await api.storage.local.set({ layoutHints: {} });
+  settings.layoutHints = {};
   autoDetectionSection.hidden = true;
-});
+}));
 
 for (const layout of ["horizontal", "vertical"]) {
   const container = document.querySelector(`[data-layout="${layout}"]`);
@@ -87,11 +112,21 @@ for (const layout of ["horizontal", "vertical"]) {
     const select = document.createElement("select");
     for (const [value, messageName] of Object.entries(ACTIONS)) select.add(new Option(message(messageName), value));
     select.value = settings.customPreset[layout][command];
-    select.addEventListener("change", async () => {
-      settings.customPreset[layout][command] = select.value;
-      await api.storage.local.set({ customPreset: settings.customPreset });
-      preset.value = "custom";
-      preset.dispatchEvent(new Event("change"));
+    select.addEventListener("change", () => {
+      const value = select.value;
+      run(async () => {
+        const customPreset = {
+          ...settings.customPreset,
+          [layout]: { ...settings.customPreset[layout], [command]: value }
+        };
+        await api.storage.local.set({ customPreset, presetId: "custom" });
+        settings.customPreset = customPreset;
+        settings.presetId = "custom";
+        preset.value = "custom";
+        syncPreset();
+        showCustomPreset();
+        showEffects();
+      });
     });
     label.append(select);
     container.append(label);
@@ -108,40 +143,16 @@ const commands = await api.commands.getAll();
 const shortcuts = document.querySelector("#shortcuts");
 const optionalShortcuts = document.querySelector("#optional-shortcuts");
 const canEditHere = typeof api.commands.update === "function";
-const supportedCommands = commands.filter(({ name }) => [
-  ...COMMANDS, ...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...RECENT_TAB_COMMANDS, ...TAB_ACTION_COMMANDS
-].includes(name));
-const assignedCoreCount = supportedCommands.filter(({ name, shortcut }) => COMMANDS.includes(name) && shortcut).length;
-document.querySelector("#shortcut-summary").textContent =
-  assignedCoreCount === COMMANDS.length ? `✓ ${assignedCoreCount}/${COMMANDS.length}` : `${assignedCoreCount}/${COMMANDS.length}`;
-const isMac = navigator.platform.toLowerCase().includes("mac");
-const recommendedShortcuts = isMac ? {
-  "arrow-left": "⌘←",
-  "arrow-right": "⌘→",
-  "arrow-up": "⌘↑",
-  "arrow-down": "⌘↓",
-  "history-back": "⌘⌥↓",
-  "history-forward": "⌘⌥↑",
-  "new-tab-before": "⌥H",
-  "new-tab-after": "⌥T",
-  "new-tab-end": "⌥E",
-  "recent-tab-quick-switch": "⌥W",
-  "recent-tab-switch": "⌥S",
-  "recent-tab-switch-reverse": "⌥⇧S"
-} : {
-  "arrow-left": "Alt+Left",
-  "arrow-right": "Alt+Right",
-  "arrow-up": "Alt+Up",
-  "arrow-down": "Alt+Down",
-  "history-back": "Alt+Shift+Down",
-  "history-forward": "Alt+Shift+Up",
-  "new-tab-before": "Alt+H",
-  "new-tab-after": "Alt+T",
-  "new-tab-end": "Alt+E",
-  "recent-tab-quick-switch": "Alt+W",
-  "recent-tab-switch": "Alt+S",
-  "recent-tab-switch-reverse": "Alt+Shift+S"
-};
+const supportedCommands = [
+  ...COMMANDS, ...RECENT_TAB_COMMANDS, ...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...TAB_ACTION_COMMANDS
+].map((name) => commands.find((command) => command.name === name)).filter(Boolean);
+function showShortcutSummary() {
+  const assignedCoreCount = supportedCommands.filter(({ name, shortcut }) => COMMANDS.includes(name) && shortcut).length;
+  document.querySelector("#shortcut-summary").textContent =
+    assignedCoreCount === COMMANDS.length ? `✓ ${assignedCoreCount}/${COMMANDS.length}` : `${assignedCoreCount}/${COMMANDS.length}`;
+}
+showShortcutSummary();
+const suggestions = recommendedShortcuts(navigator.platform);
 document.querySelector("#shortcut-help").textContent = canEditHere
   ? message("shortcutHelpFirefox")
   : message("shortcutHelpChrome");
@@ -152,31 +163,75 @@ for (const command of supportedCommands) {
   const name = document.createElement("span");
   name.className = "shortcut-name";
   name.textContent = commandLabels[command.name] ?? command.description;
-  if (recommendedShortcuts[command.name]) {
+  if (suggestions[command.name]) {
     const recommendation = document.createElement("small");
-    recommendation.textContent = `${message("useRecommendation")}: ${recommendedShortcuts[command.name]}`;
+    recommendation.textContent = `${message("useRecommendation")}: ${suggestions[command.name]}`;
     name.append(recommendation);
+  }
+  if (COMMANDS.includes(command.name)) {
+    const effect = document.createElement("small");
+    effect.className = "effective-action";
+    effectLabels.set(command.name, effect);
+    name.insertBefore(effect, name.querySelector("small"));
   }
   const input = document.createElement("input");
   const unassigned = !command.shortcut;
   input.value = command.shortcut || (canEditHere ? "" : message("shortcutUnassigned"));
   input.placeholder = message("shortcutUnassigned");
   input.readOnly = !canEditHere;
+  shortcutInputs.set(command.name, input);
   input.classList.toggle("is-unassigned", unassigned);
   input.setAttribute("aria-label", `${commandLabels[command.name] ?? command.description}: ${command.shortcut || message("shortcutUnassigned")}`);
-  input.addEventListener("change", async () => {
-    try {
-      await updateCommandShortcut(command.name, input.value);
-      document.querySelector("#shortcut-status").textContent = message("shortcutSaved");
-    } catch (error) {
-      document.querySelector("#shortcut-status").textContent = message("shortcutSaveFailed", error.message);
-    }
-  });
-  row.append(name, input);
-  (COMMANDS.includes(command.name) ? shortcuts : optionalShortcuts).append(row);
+  function saveShortcut(value) {
+    return run(async () => {
+      await updateCommandShortcut(command.name, value);
+      command.shortcut = value;
+      showShortcutSummary();
+      input.value = value;
+      input.classList.toggle("is-unassigned", !value);
+      input.setAttribute("aria-label", `${commandLabels[command.name] ?? command.description}: ${value || message("shortcutUnassigned")}`);
+    }, { success: "shortcutSaved", failure: "shortcutSaveFailed" });
+  }
+  input.addEventListener("change", () => saveShortcut(input.value));
+  const controls = document.createElement("div");
+  controls.className = "shortcut-controls";
+  controls.append(input);
+  if (canEditHere && suggestions[command.name]) {
+    const use = document.createElement("button");
+    use.type = "button";
+    use.textContent = message("useShortcutSuggestion");
+    use.addEventListener("click", () => saveShortcut(suggestions[command.name]));
+    controls.append(use);
+  }
+  row.append(name, controls);
+  const container = COMMANDS.includes(command.name) ? shortcuts
+    : RECENT_TAB_COMMANDS.includes(command.name) ? document.querySelector("#recent-commands")
+    : optionalShortcuts;
+  container.append(row);
 }
 
-document.querySelector("#shortcut-settings").addEventListener("click", async () => {
-  if (api.commands.openShortcutSettings) await api.commands.openShortcutSettings();
-  else await api.tabs.create({ url: "chrome://extensions/shortcuts" });
+showEffects();
+const shortcutSettings = document.querySelector("#shortcut-settings");
+shortcutSettings.hidden = canEditHere;
+shortcutSettings.addEventListener("click", () => run(async () => {
+  await api.tabs.create({ url: "chrome://extensions/shortcuts" });
+}, { success: null, failure: "actionFailed" }));
+
+// Chrome edits happen in another tab; refresh assignments when the user returns.
+window.addEventListener("focus", async () => {
+  try {
+    const currentCommands = await api.commands.getAll();
+    for (const current of currentCommands) {
+      const command = supportedCommands.find(({ name }) => name === current.name);
+      const input = shortcutInputs.get(current.name);
+      if (!command || !input || document.activeElement === input) continue;
+      command.shortcut = current.shortcut;
+      input.value = current.shortcut || (canEditHere ? "" : message("shortcutUnassigned"));
+      input.classList.toggle("is-unassigned", !current.shortcut);
+      input.setAttribute("aria-label", `${commandLabels[current.name] ?? current.description}: ${current.shortcut || message("shortcutUnassigned")}`);
+    }
+    showShortcutSummary();
+  } catch (error) {
+    console.warn("Could not refresh shortcuts:", error);
+  }
 });

@@ -42,9 +42,22 @@ export async function detectedLayout(window, activeTab) {
 }
 
 export async function layoutDetection(window, activeTab, settings = DEFAULT_SETTINGS) {
+  let zen = false;
+  let nativeFailed = false;
   if (api.browserSettings?.verticalTabs) {
-    const { value } = await api.browserSettings.verticalTabs.get({});
-    return { layout: value ? "vertical" : "horizontal", confidence: "exact", key: null };
+    try {
+      // Zen identifies as Firefox, but its own tab bar does not use Firefox's setting.
+      const info = await api.runtime.getBrowserInfo();
+      zen = info.zen != null;
+      if (!zen) {
+        const { value } = await api.browserSettings.verticalTabs.get({});
+        if (typeof value !== "boolean") throw new Error("Invalid native tab-layout value");
+        return { layout: value ? "vertical" : "horizontal", confidence: "exact", key: null };
+      }
+    } catch (error) {
+      console.warn("Could not read native tab layout:", error);
+      nativeFailed = true;
+    }
   }
 
   const key = geometryKey(window, activeTab);
@@ -55,13 +68,12 @@ export async function layoutDetection(window, activeTab, settings = DEFAULT_SETT
 
   return {
     layout: detectLayout(window.width, window.height, activeTab.width, activeTab.height),
-    confidence: isLayoutDetectionAmbiguous(window, activeTab) ? "uncertain" : "confident",
+    confidence: zen || nativeFailed || isLayoutDetectionAmbiguous(window, activeTab) ? "uncertain" : "confident",
     key
   };
 }
 
 export function isLayoutDetectionAmbiguous(window, activeTab) {
-  if (api.browserSettings?.verticalTabs) return false;
   if (window.width == null || window.height == null || activeTab?.width == null || activeTab.height == null) return true;
 
   return window.width - activeTab.width >= 40 && window.height - activeTab.height > 100;

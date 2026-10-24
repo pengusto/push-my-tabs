@@ -147,8 +147,6 @@ body.popup::-webkit-scrollbar-thumb:hover { background: var(--line); }
 .site-scope:first-of-type > button { border-color: var(--accent); background: var(--accent-soft); }
 button:disabled { cursor: default; opacity: .65; }
 
-.popup.is-confirming { gap: 12px; padding: 16px; }
-.popup.is-confirming > :not(.brand):not(.layout-choice):not(.site-learning) { display: none; }
 
 .options-header {
   display: grid;
@@ -437,3 +435,24 @@ kbd {
   .site-profile { grid-template-columns: minmax(0, 1fr) 44px; }
   .mapping label, .shortcut-row { grid-template-columns: 1fr; }
 }
+
+/* Daily-use controls stay visible even when layout detection needs confirmation. */
+.detection-settings, .recent-tabs { padding: 10px 12px; border: 2px solid #555765; border-radius: 5px; background: var(--surface); }
+.detection-settings > summary, .recent-tabs > summary { cursor: pointer; font-weight: 750; color: #ddd9ff; }
+.detection-settings[open] > :not(summary), .recent-tabs[open] > :not(summary) { margin-top: 12px; }
+.mapping-preview > button { margin-top: 12px; font-size: 12px; }
+#mapping-preview > div, .popup #recent-shortcuts > div { grid-template-columns: minmax(70px, max-content) minmax(0, 1fr); }
+#mapping-preview kbd, .popup #recent-shortcuts kbd { height: auto; min-height: 30px; font-size: 13px; overflow-wrap: anywhere; }
+.popup #recent-shortcuts { display: grid; gap: 8px; }
+.popup #recent-shortcuts > div { display: grid; gap: 10px; align-items: center; }
+.popup #recent-shortcuts span, .recent-tabs p { font-size: 12px; }
+.feedback:has(.status[hidden]) { display: none; }
+.feedback .status { margin: 0; }
+.feedback button { margin-top: 8px; }
+.settings-feedback { position: sticky; top: 12px; z-index: 2; padding: 12px; background: var(--surface); border: 2px solid var(--line); border-radius: 5px; }
+.recent-settings { margin-top: 24px; scroll-margin-top: 16px; }
+.shortcut-controls { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.shortcut-controls input { flex: 1 1 140px; min-width: 0; width: auto; }
+.shortcut-controls button { flex: 0 1 auto; width: auto; font-size: 12px; }
+.shortcut-name .effective-action { font-size: 13px; font-weight: 500; color: #d8dae2; }
+.shortcut-row:focus-within { outline-offset: 4px; }

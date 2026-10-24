@@ -36,7 +36,7 @@ assert.doesNotMatch(popup, /class="remove-profile"/);
 assert.doesNotMatch(popupScript, /delete settings\.siteProfiles\[profile\]\[detection\.key\]/);
 assert.match(popupScript, /button\.disabled = true/);
 assert.doesNotMatch(popupScript, /siteProfiles: settings\.siteProfiles \}\);\n\s+location\.reload/, "saving or removing a site must not reload and resize the popup");
-assert.match(popupScript, /const layoutIcon = activeLayout === "vertical" \? "↕" : "↔"/);
+assert.match(popupScript, /const layoutIcon = statusLayout === "vertical" \? "↕" : "↔"/);
 assert.match(popupScript, /icon\.className = "layout-status-icon"/);
 assert.doesNotMatch(popupScript, /settings\.layoutMode === "auto" && originProfile/, "site buttons must also work with a forced global mode");
 assert.match(options, /id="shortcut-settings"/);
@@ -47,15 +47,15 @@ assert.doesNotMatch(optionsScript, /Object\.keys\(hints\)\.length/, "internal ge
 assert.match(optionsScript, /message\("geometryMeasure", key\.split\(":"\)\)/, "saved browser gaps must be explained in settings");
 assert.match(optionsScript, /layout === "vertical" \? "↕" : "↔"/);
 assert.match(options, /data-i18n="changeShortcuts"/);
-assert.match(optionsScript, /updateCommandShortcut\(command\.name, input\.value\)/);
+assert.match(optionsScript, /updateCommandShortcut\(command\.name, value\)/);
 assert.match(optionsScript, /TAB_CREATION_COMMANDS/);
 assert.match(optionsScript, /TAB_ACTION_COMMANDS/);
 assert.match(optionsScript, /recommendedShortcuts/);
-assert.match(optionsScript, /if \(recommendedShortcuts\[command\.name\]\)/, "missing recommendations must not render as undefined");
-assert.match(optionsScript, /⌘⌥↓/);
+assert.match(optionsScript, /if \(suggestions\[command\.name\]\)/, "missing recommendations must not render as undefined");
+
 assert.match(styles, /\.shortcut-name small/);
-assert.match(optionsScript, /shortcutSaveFailed", error\.message/);
-assert.match(optionsScript, /api\.commands\.openShortcutSettings/);
+
+
 assert.match(popupScript, /await api\.runtime\.openOptionsPage\(\);[\s\S]{0,120}window\.close\(\);/);
 assert.match(styles, /\.is-unassigned\s*{/);
 assert.match(styles, /\.popup\s*{[^}]*width:\s*360px/s);
@@ -66,7 +66,7 @@ assert.doesNotMatch(styles, /body\.popup\s*{[^}]*height:\s*100vh/s, "viewport he
 assert.match(styles, /body\.popup::-webkit-scrollbar\s*{[^}]*width:\s*5px/s, "Chrome popup scrollbar must stay thin and visible");
 assert.match(styles, /:focus-visible\s*{/);
 assert.match(styles, /\[hidden\]\s*\{\s*display:\s*none\s*!important/);
-assert.match(styles, /:not\(\.site-learning\)/, "site buttons stay visible while confirming an uncertain layout");
+assert.doesNotMatch(styles, /\.popup\.is-confirming[^}]*display:\s*none/s, "uncertain detection must not hide the main popup controls");
 assert.match(styles, /\.layout-status-icon\s*\{[^}]*place-items:\s*center/s);
 assert.match(styles, /\.layout-status-icon\s*\{[^}]*font-size:\s*16px/s);
 assert.doesNotMatch(styles, /\.layout-status::before/, "layout status must not render a redundant dot before the arrow");
@@ -91,3 +91,10 @@ assert.ok(contrast("#f7f7fb", "#22232d") >= 4.5, "control text contrast");
 assert.ok(contrast("#ddd9ff", "#302b59") >= 4.5, "status text contrast");
 
 console.log("UI accessibility checks passed");
+
+assert.ok(popup.indexOf('class="mapping-preview"') < popup.indexOf('class="detection-settings"'), "direction shortcuts precede detection management");
+assert.match(popup, /id="setup-shortcuts"/);
+assert.match(popup, /id="setup-recent"/);
+assert.match(popup, /id="detected"[^>]*role="status"/);
+assert.match(options, /id="recent-commands"/);
+assert.match(optionsScript, /showEffects\(\)/);

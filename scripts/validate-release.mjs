@@ -61,7 +61,7 @@ for (const file of [
   "manifests/chrome.json", "manifests/firefox.json",
   "src/options.html", "src/popup.html", "src/styles.css",
   "src/api.js", "src/background.js", "src/i18n.js", "src/layout.js",
-  "src/options.js", "src/picker.js", "src/popup.js"
+  "src/options.js", "src/picker.js", "src/popup.js", "src/ui.js"
 ]) {
   assert.doesNotMatch(await readFile(file, "utf8"), /(?:https?|wss?):\/\/(?!\$\{)/, `${file} contains remote code or an endpoint`);
 }
