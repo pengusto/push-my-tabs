@@ -4,21 +4,21 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.3.1 - 2026-10-25
 ### Changed
 
-- Use the purple Wingman penguin on a dark app-icon tile, with a simplified 16-pixel toolbar icon; retain the previous icons for rollback.
-- Match the website logo, favicons and touch/web icons to Wingman, preserving the previous website icons.
-- Describe the website, browser extension and Wingman brand logo with structured data.
+- Refresh the extension icon with the purple Wingman penguin, including a simplified small toolbar version.
+- Match website logos, favicons and touch icons to Wingman and add structured website information.
 
 ### Added
 
-- Add a purple five-screen store kit and a 21-second product walkthrough with Mac, Windows and Linux key-format examples.
+- Prepare a five-screen store presentation of Navigation, TabLoop, Layout, Shortcuts and Settings.
+- Add the English penguin launch spot with Wingman branding and credited music.
 
 ### Fixed
 
-- Resume release retries from their exact tag and recreate temporary CI artifacts without replacing published packages.
-- Match GitHub's immutable repository identity when authenticating automated Chrome Store releases.
-- Explain missing Cloud Shell authorization before attempting release connection setup.
+- Make release retries reuse the exact published source and packages.
+- Correct automated Chrome Store authentication and clarify missing Google Cloud authorization.
 
 ## 1.3.0 - 2026-10-24
 ### Changed

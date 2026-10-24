@@ -1,0 +1,13 @@
+Push My Tabs — Your tabs. Your direction.
+
+Direction-aware tab shortcuts for Chrome and Firefox. Switch tabs, move the active tab, and return to recently used open tabs with TabLoop.
+
+Install and learn more: https://pengusto.github.io/push-my-tabs/
+Source: https://github.com/pengusto/push-my-tabs
+
+Original German Chrome demo shown. Native tab switching uses genuine before/after captures edited into a sequence; TabLoop shows recorded extension UI.
+
+Music: Happy Beats & Business Moves Vol. 12 by Sascha Ende — ende.app
+https://ende.app/en/song/12881-happy-beats-business-moves-vol-12
+License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
+Music excerpted, faded and mixed. Sound effect: Kenney, CC0.
