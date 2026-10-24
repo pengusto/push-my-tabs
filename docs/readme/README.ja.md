@@ -94,6 +94,8 @@ node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
 node tests/shortcuts.test.mjs
+node tests/release.test.mjs
+node tests/store-publishing.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 
@@ -115,11 +117,9 @@ Firefox 142 以降、Node.js 22、`npx`、`zip`、`unzip` が必要です。ビ�
 ./scripts/build-firefox.sh
 ```
 
-## GitHub Release の手動作成
+## リリースの自動化
 
-プッシュのたびに Release が作成されることはありません。GitHub Actions の **Create release** ワークフローで対象のブランチまたはコミットを選択し、両方のマニフェストに一致するタグ（例：`v1.2.0`）を入力します。必要に応じてプレリリースに設定してください。ワークフローは両方のパッケージをビルドし、Chrome と Firefox の ZIP を 1 つの GitHub Release に添付します。
-
-ストアへの公開は別の手動作業です。Chrome ウェブストアと Firefox Add-ons が対応するアーカイブを審査して公開した後、ブラウザーがユーザーの更新を管理します。
+`main` で **Actions → Create release** を実行し、次のタグ（例：`v1.3.0`）を入力してストアへの送信を有効にします。ワークフローはバージョンと変更履歴を準備し、両パッケージを検証・ビルドして GitHub Release を作成します。アカウントを一度接続すると、同じパッケージを Chrome と Firefox に送信します。ストアの審査は非同期です。[設定と再実行](../releasing.md)。
 
 タグ付き Release と対応する Chrome、Firefox のアーカイブは [GitHub Releases ページ](https://github.com/pengusto/push-my-tabs/releases)にあります。
 

@@ -4,33 +4,25 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
-### Improved
+## 1.3.0 - 2026-10-24
+### Changed
 
 - Replace the bulky popup and settings with five shared sidebar views: Navigation, TabLoop, Layout, Shortcut bindings, and Settings.
-- Detect the operating system through the browser API and display actual shortcuts with native Mac symbols or Windows/Linux labels.
-- Run tab actions from the interface with a fixed command allowlist, preserved target tab, explicit success/failure replies, and confirmation when layout changes become uncertain.
-- Rename recently used tab cycling to TabLoop across the interface and documentation.
-- Apply remembered layouts immediately by switching to Automatic mode, and provide supported private-window setup instructions for Firefox and Zen.
-- Distinguish native detection, automatic estimates, and manually set layouts, including saved confirmations.
-- Handle Zen separately: request confirmation instead of trusting its inherited Firefox vertical-tabs setting.
-- Put direction shortcuts first in the popup, with direct setup and collapsible layout help.
-- Keep shortcuts, settings, and permission warnings available during uncertain layout detection; explain where confirmations are saved.
-- Show effective direction actions in settings, and add one-click shortcut suggestions in Firefox.
-- Give TabLoop for recently used tabs its own popup and settings section.
-- Confirm settings changes, serialize saves, and offer retry after failed saves or navigation.
-- Refresh the extension and website with the purple Push P logo, clearer small-size icons, and a complete logo kit.
-- Match README banners to light and dark themes, with clearer compositions for narrow screens.
-- Introduce the tab air-traffic-control README banner while retaining the previous stone-island artwork.
-- Unify README illustrations, mascot, social preview, and optional store artwork around the penguin character while retaining original assets and UI screenshots.
-- Add a shared penguin banner illustrating directional tab navigation across all README languages.
-- Scale the README banner to the full content width on desktop while preserving its proportions on mobile.
-- Add a landing-page sitemap and link the project to its Pengusto author identity. Set the website’s canonical URL.
-- Place language links directly below the banner in every README.
-- Make README banner and demo labels readable on narrow screens with larger text and a compact illustration.
-- Refresh the README and its seven translations with a clearer getting-started flow, illustrated tab actions, and collapsible development details.
-- Link directly to the Chrome Web Store and Firefox Add-ons from the project website and README.
-- Add linked README translations under `docs/readme/` for German, Simplified Chinese, Japanese, Spanish, Korean, Brazilian Portuguese, and French.
-- Organize extension source, tests, and browser manifests into dedicated directories without changing release-package paths.
+- Name recently used open-tab cycling TabLoop, with normal, reverse, and quick actions in its own view.
+- Refresh the extension and website with the purple Push P logo, a complete logo kit, and clearer README artwork and translations.
+
+### Improved
+
+- Display actual shortcut assignments with native Mac symbols or Windows/Linux labels, using the browser's operating-system information.
+- Distinguish native layout detection, automatic estimates, and manually set layouts. Handle Zen separately instead of trusting its inherited Firefox setting.
+- Keep settings and shortcut setup reachable during uncertain detection; simplify Firefox editing with optional suggestions and Chrome's native editor.
+- Prepare releases and submit Chrome/Firefox updates from GitHub Actions after one-time publisher setup, with checksums and explicit review status.
+
+### Fixed
+
+- Await settings saves and tab-action acknowledgements, preserve the target tab, and keep failed actions available for retry.
+- Activate remembered site/geometry layouts immediately by saving Automatic mode with the confirmation.
+- Show supported manual private-window setup instructions in Firefox and Zen instead of opening a blocked browser URL.
 
 ## 1.2.0 - 2026-09-20
 

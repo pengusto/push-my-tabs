@@ -93,6 +93,8 @@ node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
 node tests/shortcuts.test.mjs
+node tests/release.test.mjs
+node tests/store-publishing.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 
@@ -107,9 +109,9 @@ Chrome 빌드에는 Node.js 22, `zip`, `unzip`이 필요합니다. Firefox 빌�
 
 Chrome 개발 사본은 `dist/chrome-dev`를 한 번 로드한 뒤 `./scripts/build-chrome-dev.sh` 실행 후 새로고침하세요.
 
-## 수동 GitHub 릴리스
+## 자동 릴리스
 
-GitHub Actions의 **Create release** 워크플로에서 정확한 브랜치나 커밋을 선택하고 두 매니페스트와 일치하는 태그(예: `v1.2.0`)를 입력합니다. 워크플로는 두 패키지를 빌드해 하나의 GitHub Release에 ZIP 파일을 첨부합니다. Chrome 웹 스토어와 Firefox Add-ons 게시는 별도의 수동 단계입니다.
+`main`에서 **Actions → Create release**를 실행하고 다음 태그(예: `v1.3.0`)를 입력한 뒤 스토어 제출을 켜 두세요. 워크플로는 버전과 변경 기록을 준비하고 두 패키지를 검증·빌드한 다음 GitHub Release를 만듭니다. 계정을 한 번 연결하면 같은 패키지를 Chrome과 Firefox에 제출합니다. 스토어 심사는 비동기입니다. [설정 및 재시도](../releasing.md).
 
 태그된 릴리스는 [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases)에서 확인할 수 있습니다. 기여 방법은 [CONTRIBUTING.md](../../CONTRIBUTING.md), 비공개 취약점 신고 방법은 [SECURITY.md](../../SECURITY.md)를 참고하세요.
 

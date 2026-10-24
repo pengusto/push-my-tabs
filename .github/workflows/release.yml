@@ -1,73 +1,198 @@
 name: Create release
 
 on:
+  push:
+    tags: ["v*"]
   workflow_dispatch:
     inputs:
       release_tag:
-        description: "Release tag, for example v1.2.0"
+        description: "Next release tag, for example v1.3.0 (prepares versions and changelog on main)"
         required: true
         type: string
       prerelease:
-        description: "Mark this GitHub release as a pre-release"
-        required: true
+        description: "Mark as pre-release and skip public stores"
         default: false
+        type: boolean
+      publish_stores:
+        description: "Submit to Chrome Web Store and Firefox Add-ons"
+        default: true
         type: boolean
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.release_tag || github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.metadata.outputs.version }}
+      tag: ${{ steps.metadata.outputs.tag }}
+      commit: ${{ steps.source.outputs.commit }}
     steps:
-      - name: Check out source
-        uses: actions/checkout@v7
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
-
-      - name: Validate release metadata
+      - name: Validate release metadata and tag ownership
         id: metadata
         env:
-          RELEASE_TAG: ${{ inputs.release_tag }}
+          RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
+          EVENT_NAME: ${{ github.event_name }}
+          SOURCE_REF: ${{ github.ref }}
         run: |
           set -euo pipefail
-          version=$(node -p "require('./manifests/chrome.json').version")
-          firefox_version=$(node -p "require('./manifests/firefox.json').version")
-          test "$RELEASE_TAG" = "v$version"
-          test "$version" = "$firefox_version"
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-
+          current_version=$(node -p "require('./manifests/chrome.json').version")
+          if [[ "$EVENT_NAME" == workflow_dispatch && "$RELEASE_TAG" != "v$current_version" ]]; then
+            test "$SOURCE_REF" = refs/heads/main
+            node scripts/prepare-release.mjs "$RELEASE_TAG"
+            echo 'prepared=true' >> "$GITHUB_OUTPUT"
+          fi
+          node --input-type=module <<'JS'
+          import { appendFile, mkdir } from 'node:fs/promises';
+          import { writeReleaseMetadata } from './scripts/lib/release.mjs';
+          await mkdir('dist', { recursive: true });
+          const metadata = await writeReleaseMetadata(process.env.RELEASE_TAG);
+          await appendFile(process.env.GITHUB_OUTPUT, `version=${metadata.version}\ntag=${metadata.tag}\n`);
+          JS
+          if git rev-parse --verify "refs/tags/$RELEASE_TAG" >/dev/null 2>&1; then
+            test "$(git rev-parse "$RELEASE_TAG^{commit}")" = "$(git rev-parse HEAD)"
+          fi
       - name: Build Chrome package
         run: ./scripts/build-chrome.sh
-
       - name: Build Firefox package
         run: ./scripts/build-firefox.sh
-
-      - name: Create GitHub release
+      - name: Checksum release packages
+        run: sha256sum dist/push-my-tabs-*.zip > dist/SHA256SUMS
+      - name: Commit prepared release metadata
+        if: steps.metadata.outputs.prepared == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ inputs.release_tag }}
-          PRERELEASE: ${{ inputs.prerelease }}
-          VERSION: ${{ steps.metadata.outputs.version }}
+          RELEASE_TAG: ${{ steps.metadata.outputs.tag }}
         run: |
           set -euo pipefail
-          notes="$RUNNER_TEMP/release-notes.md"
-          awk -v version="$VERSION" '
-            index($0, "## " version " - ") == 1 { found=1; next }
-            found && /^## / { exit }
-            found { print }
-            END { if (!found) exit 1 }
-          ' CHANGELOG.md > "$notes"
-          test -s "$notes"
-
-          release_args=(--title "$RELEASE_TAG" --notes-file "$notes" --target "$GITHUB_SHA")
-          if [[ "$PRERELEASE" == "true" ]]; then
-            release_args+=(--prerelease)
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add manifests/chrome.json manifests/firefox.json CHANGELOG.md
+          git commit -m "release: prepare $RELEASE_TAG"
+          git push origin HEAD:main
+      - name: Record the exact built source
+        id: source
+        run: echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-packages
+          path: |
+            dist/push-my-tabs-*.zip
+            dist/SHA256SUMS
+            dist/amo-metadata.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Create or verify GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.metadata.outputs.tag }}
+          PRERELEASE: ${{ inputs.prerelease || false }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            # Reruns must keep the existing release and compare immutable package contents.
+            existing="$RUNNER_TEMP/existing-release"
+            mkdir -p "$existing"
+            gh release download "$RELEASE_TAG" --pattern 'push-my-tabs-*.zip' --dir "$existing"
+            for package in dist/push-my-tabs-*.zip; do cmp "$package" "$existing/$(basename "$package")"; done
+          else
+            release_args=(--title "$RELEASE_TAG" --notes-file dist/release-notes.md --target "$(git rev-parse HEAD)")
+            if [[ "$PRERELEASE" == "true" ]]; then release_args+=(--prerelease); fi
+            gh release create "$RELEASE_TAG" dist/push-my-tabs-*.zip dist/SHA256SUMS "${release_args[@]}"
           fi
-          gh release create "$RELEASE_TAG" \
-            "dist/push-my-tabs-chrome-$VERSION.zip" \
-            "dist/push-my-tabs-firefox-$VERSION.zip" \
-            "${release_args[@]}"
+
+  chrome-store:
+    needs: release
+    if: ${{ !inputs.prerelease && (github.event_name == 'push' || inputs.publish_stores) }}
+    runs-on: ubuntu-latest
+    environment: chrome-web-store
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.release.outputs.commit }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: Require one-time Chrome connection
+        env:
+          PROVIDER: ${{ vars.CWS_WORKLOAD_IDENTITY_PROVIDER }}
+          SERVICE_ACCOUNT: ${{ vars.CWS_SERVICE_ACCOUNT }}
+          PUBLISHER_ID: ${{ vars.CWS_PUBLISHER_ID }}
+        run: |
+          test -n "$PROVIDER" && test -n "$SERVICE_ACCOUNT" && test -n "$PUBLISHER_ID" || {
+            echo 'Chrome is not connected yet. Follow docs/releasing.md; no upload was attempted.' >&2
+            exit 1
+          }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: release-packages
+          path: dist
+      - run: sha256sum --check dist/SHA256SUMS
+      - name: Obtain short-lived Chrome publishing token
+        id: google
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.CWS_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.CWS_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_lifetime: 1800s
+          access_token_scopes: https://www.googleapis.com/auth/chromewebstore
+          create_credentials_file: false
+          export_environment_variables: false
+      - name: Upload and submit Chrome package
+        env:
+          CWS_PUBLISHER_ID: ${{ vars.CWS_PUBLISHER_ID }}
+          CWS_EXTENSION_ID: bagfcickffpfkgecknaepmfleikeojik
+          CWS_ACCESS_TOKEN: ${{ steps.google.outputs.access_token }}
+          VERSION: ${{ needs.release.outputs.version }}
+        run: node scripts/publish-chrome.mjs "dist/push-my-tabs-chrome-$VERSION.zip" "$VERSION"
+
+  firefox-store:
+    needs: release
+    if: ${{ !inputs.prerelease && (github.event_name == 'push' || inputs.publish_stores) }}
+    runs-on: ubuntu-latest
+    environment: firefox-addons
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.release.outputs.commit }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: Require one-time Firefox connection
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_API_SECRET }}
+        run: |
+          test -n "$WEB_EXT_API_KEY" && test -n "$WEB_EXT_API_SECRET" || {
+            echo 'Firefox is not connected yet. Follow docs/releasing.md; no upload was attempted.' >&2
+            exit 1
+          }
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: release-packages
+          path: dist
+      - run: sha256sum --check dist/SHA256SUMS
+      - name: Upload and submit Firefox package
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_API_KEY }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_API_SECRET }}
+          VERSION: ${{ needs.release.outputs.version }}
+        run: node scripts/publish-firefox.mjs "dist/push-my-tabs-firefox-$VERSION.zip" "$VERSION"

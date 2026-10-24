@@ -21,8 +21,11 @@ Push My Tabs gives browser-managed arrow-key shortcuts a direction that matches 
 - Follow horizontal or vertical tabs automatically, or force either layout.
 - Choose a built-in preset or create one custom mapping.
 - Optionally wrap tab switching at the first and last tab.
+- Use TabLoop to cycle recently used open tabs across windows.
+- Find Navigation, TabLoop, Layout, Shortcut bindings, and Settings in five compact sidebar views.
+- See actual shortcuts with Mac symbols or Windows/Linux labels automatically.
 
-Chrome does not expose its tab-strip orientation to extensions. Automatic mode therefore uses browser-window geometry and can mistake an open side panel for vertical tabs. If that happens, choose Horizontal or Vertical in the popup. Firefox reads the browser's official vertical-tabs setting instead.
+Chrome does not expose its tab-strip orientation to extensions. Automatic mode therefore uses browser-window geometry and can mistake an open side panel for vertical tabs. If that happens, choose Horizontal or Vertical in the popup. Firefox reads the browser's official vertical-tabs setting instead. Zen has its own tab bar, so its inherited Firefox value is ignored: confirm the estimate or choose a manual layout. The interface distinguishes native detection, estimates, and manually set layouts.
 
 Push My Tabs is free, advertising-free, local-only, and open source under the MIT License. It has no accounts, analytics, telemetry, remote code, host permissions, or content scripts. It reads the active site's origin or exact path only after a shortcut or popup action to apply a local geometry profile; it does not read page content, query parameters, fragments, or browsing history. Only extension settings are stored in local browser storage.
 
@@ -40,11 +43,11 @@ Support: https://github.com/pengusto/push-my-tabs/issues
 
 ### Reviewer instructions
 
-1. Open the extension settings and verify the Layout mode and Shortcut preset controls.
+1. Open the five sidebar views. Find the global mode in Layout and presets/custom mappings under Shortcut bindings → Current mapping.
 2. Confirm the four direction shortcuts and assign any optional shortcuts you want. In Chrome, use `chrome://extensions/shortcuts`; in Firefox, edit supported shortcuts directly in the settings page.
 3. Open several tabs and invoke the four directional commands. The Follow layout preset switches tabs on the visible layout axis and moves tabs on the other axis.
 4. Change Layout mode to Horizontal or Vertical to verify the manual override.
-5. In Chrome, note that Automatic mode is a geometry-based heuristic; an open side panel can require the manual override. In Firefox, Automatic mode reads the official vertical-tabs setting.
+5. In Chrome, Automatic mode estimates geometry; an open side panel can require a manual override. Firefox reads its native setting; Zen requires confirmation. Remembering a site/geometry confirmation activates Automatic mode so the saved layout takes effect.
 
 No account, network service, payment, or external test credential is required.
 
@@ -63,8 +66,11 @@ Push My Tabs gibt browserverwalteten Richtungstasten eine Belegung, die zum sich
 - Horizontalen oder vertikalen Tabs automatisch folgen oder ein Layout fest vorgeben.
 - Ein mitgeliefertes Preset wählen oder eine eigene Zuordnung erstellen.
 - Tabwechsel am ersten und letzten Tab optional fortsetzen.
+- Mit TabLoop fensterübergreifend durch zuletzt verwendete offene Tabs wechseln.
+- Navigation, TabLoop, Anordnung, Tastenbelegung und Einstellungen in fünf kompakten Ansichten nutzen.
+- Aktuelle Kürzel automatisch mit Mac-Symbolen oder Windows-/Linux-Beschriftungen sehen.
 
-Chrome stellt Erweiterungen die Ausrichtung der Tab-Leiste nicht bereit. Der automatische Modus nutzt deshalb die Geometrie des Browserfensters und kann eine geöffnete Seitenleiste mit vertikalen Tabs verwechseln. In diesem Fall lässt sich im Popup Horizontal oder Vertikal fest vorgeben. Firefox liest stattdessen die offizielle Browser-Einstellung für vertikale Tabs.
+Chrome stellt Erweiterungen die Ausrichtung der Tab-Leiste nicht bereit. Der automatische Modus nutzt deshalb die Geometrie des Browserfensters und kann eine geöffnete Seitenleiste mit vertikalen Tabs verwechseln. In diesem Fall lässt sich im Popup Horizontal oder Vertikal fest vorgeben. Firefox liest stattdessen die offizielle Browser-Einstellung für vertikale Tabs. Zen nutzt eine eigene Tab-Leiste; sein geerbter Firefox-Wert wird ignoriert. Bestätige dort die Schätzung oder wähle eine manuelle Anordnung. Die Oberfläche unterscheidet native Erkennung, Schätzung und manuelle Festlegung.
 
 Push My Tabs ist kostenlos, werbefrei, lokal und unter der MIT-Lizenz quelloffen. Es gibt keine Konten, Analysen, Telemetrie, extern geladenen Code, Host-Berechtigungen oder Content-Skripte. Origin oder exakter Pfad des aktiven Tabs werden nur nach einem Shortcut oder dem Öffnen des Popups gelesen, um ein lokales Geometrieprofil anzuwenden. Seiteninhalte, Query-Parameter, Fragmente und Browserverlauf werden nicht gelesen. Nur Erweiterungseinstellungen werden lokal gespeichert.
 
@@ -82,7 +88,7 @@ Support: https://github.com/pengusto/push-my-tabs/issues
 
 ### Hinweise für die Prüfung
 
-1. Erweiterungseinstellungen öffnen und die Steuerelemente für Layout-Modus und Shortcut-Preset prüfen.
+1. Die fünf Ansichten öffnen. Der globale Modus steht unter Anordnung; Presets und eigene Zuordnungen unter Tastenbelegung → Aktuelle Zuordnung.
 2. Die vier Richtungstasten prüfen und bei Bedarf optionale Shortcuts belegen. In Chrome dafür `chrome://extensions/shortcuts` verwenden; in Firefox lassen sich unterstützte Shortcuts direkt in den Einstellungen bearbeiten.
 3. Mehrere Tabs öffnen und die vier Richtungsbefehle ausführen. Das Preset Layout folgen wechselt Tabs auf der sichtbaren Layout-Achse und verschiebt Tabs auf der anderen Achse.
 4. Den Layout-Modus auf Horizontal oder Vertikal stellen, um die manuelle Vorgabe zu prüfen.

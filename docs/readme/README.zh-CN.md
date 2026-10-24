@@ -94,6 +94,8 @@ node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
 node tests/shortcuts.test.mjs
+node tests/release.test.mjs
+node tests/store-publishing.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 
@@ -115,11 +117,9 @@ jq empty manifests/chrome.json manifests/firefox.json
 ./scripts/build-firefox.sh
 ```
 
-## 手动创建 GitHub Release
+## 自动发布
 
-系统不会在每次推送时创建 Release。请在 GitHub Actions 的 **Create release** 工作流中选择准确的分支或提交，输入与两个清单版本一致的标签（例如 `v1.2.0`），并按需标记为预发布版本。工作流会构建两个包，并把 Chrome 和 Firefox ZIP 附加到同一个 GitHub Release。
-
-应用商店发布仍是单独的手动步骤。Chrome 网上应用店和 Firefox Add-ons 审核并发布对应归档后，浏览器会管理用户更新。
+在 `main` 上运行 **Actions → Create release**，输入下一个标签（如 `v1.3.0`），并保持商店提交选项启用。工作流会准备版本和变更日志、验证并构建两个包，然后创建 GitHub Release。一次性连接账号后，会将相同的包提交到 Chrome 和 Firefox。商店审核是异步进行的。[配置与重试](../releasing.md)。
 
 带标签的 Release 及对应的 Chrome 和 Firefox 归档位于 [GitHub Releases 页面](https://github.com/pengusto/push-my-tabs/releases)。
 

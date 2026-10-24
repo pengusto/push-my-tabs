@@ -93,6 +93,8 @@ node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
 node tests/shortcuts.test.mjs
+node tests/release.test.mjs
+node tests/store-publishing.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 
@@ -107,9 +109,9 @@ Chrome requiere Node.js 22, `zip` y `unzip`. Firefox requiere además `npx` y Fi
 
 Para una copia de desarrollo de Chrome, carga `dist/chrome-dev` una vez y actualízala después de ejecutar `./scripts/build-chrome-dev.sh`.
 
-## Publicación manual en GitHub
+## Publicación automatizada
 
-En el flujo **Create release** de GitHub Actions, selecciona la rama o el commit exacto e introduce una etiqueta que coincida con ambos manifiestos, por ejemplo `v1.2.0`. El flujo crea ambos paquetes y adjunta los ZIP a una sola publicación. La publicación en Chrome Web Store y Firefox Add-ons sigue siendo un paso manual independiente.
+Ejecuta **Actions → Create release** en `main`, introduce la siguiente etiqueta (por ejemplo `v1.3.0`) y mantén activado el envío a las tiendas. El flujo prepara versiones y registro de cambios, valida y construye ambos paquetes y crea una publicación en GitHub. Tras conectar las cuentas una vez, envía los mismos paquetes a Chrome y Firefox. La revisión de las tiendas es asíncrona. [Configuración y reintentos](../releasing.md).
 
 Las versiones etiquetadas están en [GitHub Releases](https://github.com/pengusto/push-my-tabs/releases). Consulta [CONTRIBUTING.md](../../CONTRIBUTING.md) para colaborar y [SECURITY.md](../../SECURITY.md) para informar de una vulnerabilidad en privado.
 

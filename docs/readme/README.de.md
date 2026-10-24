@@ -94,6 +94,8 @@ node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
 node tests/shortcuts.test.mjs
+node tests/release.test.mjs
+node tests/store-publishing.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 
@@ -115,11 +117,9 @@ Firefox 142 oder neuer, Node.js 22, `npx`, `zip` und `unzip` werden benötigt. D
 ./scripts/build-firefox.sh
 ```
 
-## Manuelles GitHub-Release
+## Automatisches Release
 
-Releases werden nicht bei jedem Push erstellt. Wähle im GitHub-Actions-Workflow **Create release** den genauen Branch oder Commit, gib ein Tag passend zu beiden Manifesten ein, zum Beispiel `v1.2.0`, und markiere es bei Bedarf als Vorabversion. Der Workflow baut beide Pakete und hängt die Chrome- und Firefox-ZIP-Dateien an ein gemeinsames GitHub Release.
-
-Die Veröffentlichung in den Stores bleibt ein separater manueller Schritt. Chrome Web Store und Firefox Add-ons prüfen und veröffentlichen die passenden Archive; anschließend verwalten die Browser die Updates.
+Starte **Actions → Create release** auf `main`, gib das nächste Tag ein (zum Beispiel `v1.3.0`) und lass die Store-Einreichung aktiviert. Der Workflow aktualisiert Versionen und Changelog, prüft und baut beide Pakete und veröffentlicht einen GitHub-Release. Nach einmaliger Kontoverbindung reicht er dieselben Pakete bei Chrome und Firefox ein. Die Store-Prüfung bleibt asynchron. [Einrichtung und Wiederholung](../releasing.md).
 
 Getaggte Releases und die zugehörigen Chrome- und Firefox-Archive findest du auf der [GitHub-Releases-Seite](https://github.com/pengusto/push-my-tabs/releases).
 

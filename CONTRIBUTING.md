@@ -15,6 +15,8 @@ node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
 node tests/shortcuts.test.mjs
+node tests/release.test.mjs
+node tests/store-publishing.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 
@@ -54,3 +56,5 @@ On 2026-10-24, isolated headless macOS tests exercised all five views, real plat
 UI commands use the explicit allowlist and callback response in `background.js`, compatible with Chrome 127 as well as Firefox. Await acknowledgement before closing the popup. A stale target fails visibly; newly uncertain geometry returns a confirmation requirement. Keyboard command races keep their previous quiet handling. The background and browser tests cover these regressions. SVG namespace identifiers and manifest homepage metadata are allowed by release validation; they are not remote executable resources.
 
 Two regressions found during native acceptance/review are covered in the browser tests: Firefox and Zen reject `tabs.create({url: "about:addons"})`, so private-access settings must use manual instructions instead of a broken link. Saving a geometry/site confirmation must also activate Automatic mode in the same storage write; otherwise a forced global mode silently overrides the saved choice. Explain that change before saving and keep the old mode on failure.
+
+Release preparation and store connections are documented in [releasing.md](docs/releasing.md). Store API tests simulate responses; passing them does not establish a live publisher connection.

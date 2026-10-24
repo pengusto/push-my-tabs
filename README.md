@@ -119,11 +119,11 @@ Firefox 142 or newer, Node.js 22, `npx`, `zip`, and `unzip` are required. The bu
 ./scripts/build-firefox.sh
 ```
 
-## Manual GitHub release
+## Automated release
 
-Releases are not created on every push. From the GitHub Actions **Create release** workflow, choose the exact branch or commit, enter a tag matching both manifests (for example `v1.2.0`), and optionally mark it as a pre-release. The workflow runs both package builds and attaches the Chrome and Firefox ZIPs to one GitHub Release.
+Run **Actions → Create release** on `main`, enter the next tag (for example `v1.3.0`), and leave store submission enabled. The workflow prepares versions and changelog, runs checks, builds both ZIPs, creates a GitHub release, and submits the same packages to Chrome and Firefox after a one-time account connection. A prepared `v*` tag also triggers the workflow. Ordinary source pushes only run CI.
 
-Store publication remains a separate manual step: Chrome Web Store and Firefox Add-ons can then review and publish the matching archives, after which the browsers can manage user updates.
+Chrome uses API v2 and short-lived Google tokens; Firefox uses Mozilla's pinned client. Store reviews remain asynchronous. Missing access or rejected submissions stop explicitly. See [release setup and recovery](docs/releasing.md) and the [store media plan](docs/store-media.md).
 
 Tagged releases and their matching Chrome and Firefox archives are available on the [GitHub Releases page](https://github.com/pengusto/push-my-tabs/releases).
 
