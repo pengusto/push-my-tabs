@@ -1,5 +1,30 @@
 # Release and store updates
 
+## 1.3.1 submission — 2026-10-25
+
+The [verified release run](https://github.com/pengusto/push-my-tabs/actions/runs/40143132958)
+submitted the existing v1.3.1 packages to both stores. All three jobs succeeded:
+Chrome returned `1.3.1: PENDING_REVIEW (submitted)`; Firefox returned
+`1.3.1: SUBMITTED (submitted)`. Firefox's public API still exposed 1.3.0 at the
+final check. These submission results are not a public-availability claim.
+Both packages match the GitHub release and its SHA-256 checksums.
+
+The user authorized withdrawing Chrome's pending 1.3.0 review for the Wingman
+icon and two penguin promotional tiles. Those three images and the updated English
+listing description were saved before resubmission; the five existing penguin
+screenshots were retained. Firefox's listing icon was also updated and saved.
+
+The English Wingman spot is **Unlisted** on the newly created Pengusto channel
+(@pengusto-dev). Its persisted video list confirmed that visibility. The global
+Chrome promotional-video field was saved as
+https://www.youtube.com/watch?v=EZtPIrgby80 before submission. Its description
+includes the music credit; YouTube's upload checks reported no copyright issues.
+The artist's track page identifies CC BY 4.0. Sources and adaptation credits are
+in `store-assets/penguin/v1.3.1/README.md`. Old media remains retained.
+
+No further upload is needed for these submitted packages. Wait for store decisions;
+verify the public downloadable version before reporting publication.
+
 The **Create release** GitHub Actions workflow prepares and publishes a release from `main`. Open **Actions → Create release → Run workflow**, enter the next tag (for example `v1.3.0`), and keep **Submit to Chrome Web Store and Firefox Add-ons** enabled. The workflow:
 
 1. Updates both manifest versions and moves `Unreleased` to a dated changelog section when the requested version is new.

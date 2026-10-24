@@ -21,3 +21,10 @@ Final MP4 fully decoded without errors; codec, duration and 721 video frames che
 Decoded scene contact sheet visually reviewed. Audio retains the earlier mix;
 no claim of a new listening review. Editable HyperFrames composition and review
 reports remain locally in .scratch/brag-ad-wingman-1.3.1/.
+
+## Hosting and store submission
+
+Uploaded on 2026-10-25 to Pengusto (@pengusto-dev), unlisted:
+https://youtu.be/EZtPIrgby80
+The Chrome global promotional-video field was saved before the 1.3.1 submission.
+YouTube upload checks reported no copyright issues; this does not replace license attribution.
