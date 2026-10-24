@@ -4,6 +4,10 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Changed
+
+- Use the purple Wingman penguin on a dark app-icon tile, with a simplified 16-pixel toolbar icon; retain the previous icons for rollback.
+
 ### Added
 
 - Add a purple five-screen store kit and a 21-second product walkthrough with Mac, Windows and Linux key-format examples.

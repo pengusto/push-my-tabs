@@ -2,6 +2,7 @@
 """Rebuild deployed PNG/ICO assets from reviewed 1024px renders. Requires Pillow."""
 import os
 import shutil
+import runpy
 from pathlib import Path
 
 from PIL import Image, ImageDraw
@@ -29,10 +30,9 @@ black = Image.new("RGBA", (1024, 1024), "black")
 black.putalpha(master("symbol-color").getchannel("A"))
 black.save(DIGITAL / "symbol-black-1024.png")
 
-# Keep the counter transparent and the small cut slightly heavier at 16/32 px.
-for size in [16, 32, 48, 128, 1024]:
-    name = "symbol-small" if size <= 32 else "symbol-color"
-    export(name, EXTENSION / f"icon-{size}.png", size)
+# The website retains Push P; rebuilding its kit must preserve the current
+# Wingman extension identity and its independently drawn 16 px cut.
+runpy.run_path("docs/branding/wingman/export-icons.py", run_name="__main__")
 for size in [16, 32, 48]:
     export("symbol-small", DIGITAL / f"favicon-{size}.png", size)
 master("symbol-small").save(
