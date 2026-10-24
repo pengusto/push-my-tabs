@@ -17,6 +17,7 @@ service_account="cws-publisher@$project_id.iam.gserviceaccount.com"
 
 command -v gcloud >/dev/null || { echo 'Google Cloud CLI is required (Cloud Shell includes it).' >&2; exit 1; }
 active_account=$(gcloud auth list --filter=status:ACTIVE --format='value(account)')
+[[ -n "$active_account" ]] || { echo 'Google Cloud CLI is not authorized yet. In embedded Cloud Shell, authorize the current session before retrying; no changes made.' >&2; exit 1; }
 [[ "$active_account" == "$expected_account" ]] || { echo 'Active Google account differs from the approved account; no changes made.' >&2; exit 1; }
 billing=$(gcloud billing projects describe "$project_id" --format='value(billingEnabled)')
 [[ "$billing" == False || "$billing" == false ]] || { echo 'This setup requires a verified project without billing; no changes made.' >&2; exit 1; }

@@ -35,6 +35,12 @@ test('Cloud setup refuses a different Google account before any mutation', async
   assert.notEqual(result.status,0);
   assert.deepEqual(calls.map(a=>a.slice(0,2)),[['auth','list']]);
 });
+test('Cloud setup distinguishes a missing Cloud Shell authorization from a different account', async t => {
+  const {result,calls}=await setup(t,{account:''});
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/not authorized yet.*authorize the current session/);
+  assert.deepEqual(calls.map(a=>a.slice(0,2)),[['auth','list']]);
+});
 for(const billing of ['True','']) test(`Cloud setup refuses unverified disabled billing (${JSON.stringify(billing)})`, async t => {
   const {result,calls}=await setup(t,{billing});
   assert.notEqual(result.status,0);
