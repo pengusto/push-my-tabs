@@ -43,8 +43,8 @@ Actions rapides : dupliquer, épingler, couper le son, aller au premier ou derni
 ## Premiers pas
 
 1. Installez l’extension avec l’un des liens vers les boutiques ci-dessus.
-2. Ouvrez le panneau pour voir les quatre commandes directionnelles et leurs raccourcis actuels.
-3. Réglez les raccourcis dans le navigateur. Commencez par le préréglage adaptatif et choisissez une disposition manuelle au besoin.
+2. Ouvrez Navigation pour les quatre actions directionnelles. La barre latérale contient aussi TabLoop, Disposition, Raccourcis et Paramètres.
+3. Modifiez les raccourcis directement dans Firefox ou avec l’éditeur de Chrome. Les symboles Mac et les libellés Windows/Linux s’affichent automatiquement. Commencez par le préréglage adaptatif et choisissez une disposition manuelle au besoin.
 
 Chrome estime la disposition selon la géométrie de la fenêtre ; un panneau latéral ouvert peut perturber la détection. Firefox 142+ lit directement son réglage des onglets verticaux.
 
@@ -61,7 +61,7 @@ Sans compte, analyse, publicité ni code distant. Les réglages restent dans le 
 
 Les paquets Chrome et Firefox utilisent le même code testé. Firefox 142 ou version ultérieure lit le réglage exact des onglets verticaux et permet de modifier les raccourcis pris en charge depuis les paramètres.
 
-La fenêtre contextuelle et les paramètres affichent les quatre raccourcis directionnels avec leurs affectations actuelles. Les raccourcis facultatifs restent dans une section repliée. La fenêtre contextuelle permet aussi d’atteindre le premier ou le dernier onglet, puis de déplacer, dupliquer, épingler ou couper le son de l’onglet actuel, ou de l’envoyer dans une nouvelle fenêtre.
+Le panneau et les options partagent cinq vues. Navigation propose les actions directionnelles et les autres actions sur les onglets. TabLoop parcourt les onglets ouverts par ordre d’utilisation récente entre les fenêtres. Disposition gère le mode global et les confirmations enregistrées ; Raccourcis contient les commandes, préréglages et associations personnalisées. Paramètres rassemble la langue, le comportement et l’accès aux fenêtres privées.
 
 ## Langues
 
@@ -91,6 +91,8 @@ node tests/background.test.mjs
 node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
+node tests/ui-flow.test.mjs
+node tests/shortcuts.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

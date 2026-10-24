@@ -26,27 +26,26 @@ const base = `http://127.0.0.1:${server.address().port}`;
 const shots = process.env.SCREENSHOT_DIR;
 if (shots) await mkdir(shots, { recursive: true });
 
-async function pageFor(browser, kind, locale, uncertain = false) {
-  const page = await browser.newPage({ viewport: { width: 920, height: 900 } });
-  await page.addInitScript(({ kind, locale, uncertain, manifest, locales, base }) => {
+
+async function pageFor(browser, kind, locale, options = {}) {
+  const page = await browser.newPage({ viewport: { width: 400, height: 560 } });
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.addInitScript(({ kind, locale, options, manifest, base }) => {
+    const os = options.os ?? "mac";
     const saved = JSON.parse(sessionStorage.getItem("mock-settings") || "null") ?? { locale, layoutMode: "auto", presetId: "adaptive" };
-    const commands = Object.entries(manifest.commands).map(([name, entry]) => ({
-      name,
-      description: locales[locale][entry.description.slice(6, -2)].message,
-      shortcut: name.startsWith("arrow-") ? `Alt+${name.slice(6).replace(/^./, (c) => c.toUpperCase())}` : ""
-    }));
-    globalThis.__saved = saved;
-    globalThis.__commands = commands;
-    globalThis.__created = [];
-    globalThis.__closed = false;
-    window.close = () => { globalThis.__closed = true; };
-    Object.defineProperty(navigator, "platform", { value: "MacIntel" });
+    if (options.poison) saved.siteProfiles = { '<img src=x onerror="globalThis.__injected=true">': { '20:120': 'horizontal' } };
+    const commands = Object.entries(manifest.commands).map(([name, entry]) => ({ name, description: name, shortcut: name.startsWith("arrow-") ? `${os === "mac" ? "Command" : "Ctrl"}+${name.slice(6).replace(/^./, c => c.toUpperCase())}` : "" }));
+    const tabs = [{ id: 1, windowId: 1, active: true, incognito: Boolean(options.private), url: "https://example.com/page", width: options.unknown ? undefined : options.uncertain ? 1100 : 1390, height: options.unknown ? undefined : 780 }, { id: 2, windowId: 1 }, { id: 3, windowId: 1 }];
+    const win = { id: 1, width: 1400, height: 900, tabs };
+    Object.assign(globalThis, { __saved: saved, __commands: commands, __created: [], __messages: [], __closed: false, __nativeReads: 0, __loadToken: Math.random() });
+    window.close = () => { __closed = true; };
     const api = {
       storage: { local: {
         get: async (defaults) => ({ ...defaults, ...saved }),
         set: async (value) => {
-          if (globalThis.__failSave) throw new Error("Storage unavailable");
-          if (globalThis.__holdSave) await new Promise((resolve) => { globalThis.__releaseSave = resolve; });
+          if (__failSave) throw new Error("Storage unavailable");
+          if (__holdSave) await new Promise(resolve => { __releaseSave = resolve; });
           Object.assign(saved, value);
           sessionStorage.setItem("mock-settings", JSON.stringify(saved));
         }
@@ -54,143 +53,202 @@ async function pageFor(browser, kind, locale, uncertain = false) {
       commands: { getAll: async () => commands },
       i18n: { getUILanguage: () => locale },
       runtime: {
-        getURL: (path) => `${base}/${path}`,
-        getBrowserInfo: async () => ({ name: "Firefox" }),
-        openOptionsPage: async () => {
-          if (globalThis.__failOptions) throw new Error("Options unavailable");
-          globalThis.__optionsOpened = true;
-        },
-        sendMessage: async () => {}
+        id: "test-extension", getURL: path => `${base}/${path}`,
+        getManifest: () => manifest,
+        getPlatformInfo: async () => ({ os }),
+        getBrowserInfo: async () => options.zen ? ({ name: "Firefox", zen: { version: "1.23.4b" } }) : ({ name: "Firefox" }),
+        sendMessage: async details => { __messages.push(details); return __failCommand ? { ok: false, error: "Unavailable" } : { ok: true }; }
       },
+      extension: { isAllowedIncognitoAccess: async () => false },
       action: { setBadgeText: async () => {} },
-      windows: { getLastFocused: async () => ({
-        id: 1, width: 1400, height: 900,
-        tabs: [{ id: 1, active: true, url: "https://example.com/page", width: uncertain ? 1100 : 1390, height: 780 }]
-      }) },
-      tabs: { create: async (details) => globalThis.__created.push(details) }
+      windows: { getLastFocused: async () => win, get: async () => win, getAll: async () => [win] },
+      tabs: { create: async details => { if (__failCreate) throw new Error("Could not open browser settings"); __created.push(details); } }
     };
     if (kind === "firefox") {
-      api.browserSettings = { verticalTabs: { get: async () => ({ value: true }) } };
+      api.browserSettings = { verticalTabs: { get: async () => { __nativeReads += 1; return { value: options.zen ? false : true }; } } };
       api.commands.update = async ({ name, shortcut }) => {
-        if (globalThis.__failSave) throw new Error("Shortcut rejected");
-        commands.find((command) => command.name === name).shortcut = shortcut;
+        if (__failSave) throw new Error("Shortcut rejected");
+        commands.find(c => c.name === name).shortcut = shortcut;
       };
     }
+    Object.assign(globalThis, { __failSave: false, __holdSave: false, __failCommand: false, __failCreate: false });
     globalThis[kind === "firefox" ? "browser" : "chrome"] = api;
-  }, { kind, locale, uncertain, manifest, locales, base });
-  return page;
+  }, { kind, locale, options, manifest, base });
+  return { page, errors };
 }
-async function screenshot(page, name) {
+async function ready(page, path = "popup.html") {
+  await page.goto(`${base}/${path}`);
+  await page.waitForSelector('#mapping-preview .action-row', { state: 'attached' });
+}
+async function view(page, name) {
+  await page.locator(`[data-view="${name}"]`).click();
+  await page.waitForFunction(name => !document.querySelector(`[data-page="${name}"]`).hidden, name);
+}
+async function shot(page, name) {
+  await page.mouse.move(399, 559);
+  await page.waitForTimeout(160);
+  // Deep-link and keyboard focus behavior are checked separately; captures start at the top.
+  await page.evaluate(async () => {
+    document.activeElement?.blur();
+    window.scrollTo(0, 0);
+    document.querySelector('.workspace').scrollTop = 0;
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  });
   if (shots) await page.screenshot({ path: `${shots}/${name}.png`, fullPage: true });
 }
 async function noOverflow(page) {
-  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth && document.querySelector('.workspace').scrollWidth <= document.querySelector('.workspace').clientWidth + 1), true);
 }
-
 try {
   for (const [kind, engine] of [["chrome", chromium], ["firefox", firefox]]) {
-    const browser = await engine.launch({ headless: true, ...(kind === "firefox" && process.env.FIREFOX_BINARY ? { executablePath: process.env.FIREFOX_BINARY } : {}) });
+    const browser = await engine.launch({ headless: true });
     try {
-      const popup = await pageFor(browser, kind, "de");
-      await popup.setViewportSize({ width: 360, height: 600 });
-      await popup.goto(`${base}/popup.html`);
-      await popup.waitForSelector("#mapping-preview > div");
-      assert.equal(await popup.locator("#mapping-preview > div").count(), 4);
-      assert.match(await popup.locator("#detected").textContent(), kind === "chrome" ? /Automatisch geschätzt: Horizontal/ : /Nativ erkannt: Vertikal/);
-      assert.ok((await popup.locator("#setup-shortcuts").boundingBox()).y < 556);
-      assert.ok((await popup.locator("#options").boundingBox()).y < 556, "daily controls fit in 600px");
-      await noOverflow(popup);
-      await screenshot(popup, `${kind}-popup-de`);
-      if (kind === "chrome") {
-        await popup.locator(".detection-settings > summary").click();
-        await popup.locator("#remember-site").click();
-        await popup.waitForFunction(() => document.querySelector("#detected").textContent.includes("Manuell festgelegt: Horizontal"));
-        assert.equal(await popup.locator("#remember-site").isDisabled(), true);
-        await popup.locator(".detection-settings > summary").click();
+      const { page, errors } = await pageFor(browser, kind, "de");
+      await ready(page);
+      assert.equal(await page.locator('.rail [data-view]').count(), 5);
+      assert.match(await page.locator('#detected').textContent(), kind === "chrome" ? /Automatisch geschätzt: Horizontal/ : /Nativ erkannt: Vertikal/);
+      assert.equal(await page.locator('#mapping-preview kbd').first().textContent(), '⌘←');
+      for (const name of ['navigation', 'tabloop', 'layout', 'shortcuts', 'settings']) {
+        await view(page, name);
+        await noOverflow(page);
+        assert.equal(await page.locator('.rail [aria-current="page"]').getAttribute('data-view'), name);
+        await shot(page, `${kind}-${name}`);
       }
-      await popup.locator("#setup-shortcuts").click();
-      await popup.waitForFunction(() => __created.length === 1);
-      assert.equal(await popup.evaluate(() => __created[0].url), kind === "chrome" ? "chrome://extensions/shortcuts" : `${base}/options.html#direction-shortcuts`);
-      await popup.evaluate(() => { __closed = false; __failOptions = true; });
-      await popup.locator("#options").click();
-      await popup.locator("#retry-save").waitFor({ state: "visible" });
-      assert.equal(await popup.evaluate(() => __closed), false, "failed navigation keeps popup open");
-      await popup.evaluate(() => { __failOptions = false; });
-      await popup.locator("#retry-save").click();
-      await popup.waitForFunction(() => __optionsOpened && __closed);
-
-      const options = await pageFor(browser, kind, "en");
-      await options.goto(`${base}/options.html`);
-      await options.waitForSelector("#shortcuts .effective-action");
-      assert.equal(await options.locator("#recent-commands .shortcut-row").count(), 3);
-      assert.match(await options.locator("#shortcuts .effective-action").first().textContent(), /Horizontal:.*Vertical:/);
-      await options.locator("#layout-mode").selectOption("vertical", { force: true });
-      await options.waitForFunction(() => __saved.layoutMode === "vertical");
-      assert.equal(await options.locator("#shortcuts .effective-action").first().textContent(), locales.en.actionMoveBackward.message);
-      if (kind === "firefox") {
-        const firstShortcut = options.locator("#shortcuts input").first();
-        await firstShortcut.fill("");
-        await firstShortcut.press("Tab");
-        await options.waitForFunction(() => document.querySelector("#shortcut-summary").textContent === "3/4");
-        await options.locator("#shortcuts button").first().click();
-        await options.waitForFunction(() => document.querySelector("#shortcut-summary").textContent === "✓ 4/4");
-        assert.equal(await firstShortcut.inputValue(), "Command+Left");
-        await options.locator("#recent-commands .shortcut-row").filter({ hasText: locales.en.commandRecentTabDescription.message }).locator("button").click();
-        await options.waitForFunction(() => __commands.find((c) => c.name === "recent-tab-switch").shortcut === "Alt+S");
-        assert.equal(await options.locator("#recent-commands .shortcut-row").filter({ hasText: locales.en.commandRecentTabDescription.message }).locator("input").inputValue(), "Alt+S");
+      assert.equal(await page.locator('#private-status').textContent(), 'Nicht erlaubt');
+      if (kind === 'firefox') {
+        await page.locator('#private-help').waitFor({ state: 'visible' });
+        assert.match(await page.locator('#private-help').textContent(), /Erweiterungen und Themes/);
+        assert.equal(await page.locator('[data-open-permissions]:visible').count(), 0, 'Firefox gives manual steps instead of opening a blocked privileged URL');
       } else {
-        assert.equal(await options.locator("#shortcuts input").first().getAttribute("readonly"), "");
+        await page.locator('.private-settings [data-open-permissions]').click();
+        assert.equal(await page.evaluate(() => __created.at(-1).url), 'chrome://extensions/?id=test-extension');
+        await page.evaluate(() => { __closed = false; __created.length = 0; });
       }
-      await options.evaluate(() => { __failSave = true; });
-      await options.locator("#wrap").uncheck();
-      await options.locator("#retry-save").waitFor({ state: "visible" });
-      assert.equal(await options.evaluate(() => __saved.wrapSwitching), undefined, "failed write does not become saved state");
-      await options.evaluate(() => { __failSave = false; });
-      await options.locator("#retry-save").click();
-      await options.waitForFunction(() => __saved.wrapSwitching === false);
-      await options.locator("#retry-save").waitFor({ state: "hidden" });
-      await options.evaluate(() => {
-        __commands.find((c) => c.name === "arrow-left").shortcut = "Alt+Shift+Left";
-        window.dispatchEvent(new Event("focus"));
-      });
-      await options.waitForFunction(() => document.querySelector("#shortcuts input").value === "Alt+Shift+Left");
-      await noOverflow(options);
-      await screenshot(options, `${kind}-settings-en`);
-      await options.setViewportSize({ width: 390, height: 900 });
-      await noOverflow(options);
-      await screenshot(options, `${kind}-settings-narrow`);
-      await options.close();
-      await popup.close();
+      await page.evaluate(() => { __failSave = true; });
+      await page.locator('#wrap').uncheck();
+      await page.locator('#retry-save').waitFor({ state: 'visible' });
+      assert.equal(await page.evaluate(() => __saved.wrapSwitching), undefined);
+      await page.evaluate(() => { __failSave = false; });
+      await page.locator('#retry-save').click();
+      await page.waitForFunction(() => __saved.wrapSwitching === false);
+      await view(page, 'shortcuts');
+      if (kind === 'firefox') {
+        const row = page.locator('[data-shortcut="arrow-left"]');
+        await row.locator('input').fill('');
+        await row.locator('input').press('Tab');
+        await page.waitForFunction(() => __commands.find(c => c.name === 'arrow-left').shortcut === '');
+        await row.locator('button').click();
+        await page.waitForFunction(() => __commands.find(c => c.name === 'arrow-left').shortcut === 'Command+Left');
+        await page.locator('#recent-shortcuts summary').click();
+        await page.locator('[data-shortcut="recent-tab-switch"] button').click();
+        await page.waitForFunction(() => __commands.find(c => c.name === 'recent-tab-switch').shortcut === 'Alt+S');
+      } else {
+        assert.equal(await page.locator('#shortcuts input').count(), 0, 'Chrome has genuine read-only binding displays');
+        await page.evaluate(() => { __failCreate = true; __closed = false; });
+        await page.locator('#shortcut-settings').click();
+        await page.locator('#retry-save').waitFor({ state: 'visible' });
+        assert.equal(await page.evaluate(() => __closed), false);
+        await page.evaluate(() => { __failCreate = false; });
+        await page.locator('#retry-save').click();
+        await page.waitForFunction(() => __closed && __created.length === 1);
+        assert.equal(await page.evaluate(() => __created[0].url), 'chrome://extensions/shortcuts');
+      }
+      await page.evaluate(() => { __commands.find(c => c.name === 'arrow-left').shortcut = 'Alt+Shift+Left'; window.dispatchEvent(new Event('focus')); });
+      await page.waitForFunction(() => document.querySelector('#shortcuts kbd').textContent === '⌥⇧←');
+      await page.locator('#preset-settings summary').click();
+      await page.locator('#preset').selectOption('custom');
+      await page.waitForFunction(() => __saved.presetId === 'custom');
+      await page.locator('[data-mapping="horizontal"] select').first().selectOption('none');
+      await page.waitForFunction(() => __saved.customPreset?.horizontal['arrow-left'] === 'none');
+      assert.equal(await page.evaluate(() => __saved.presetId), 'custom');
+      assert.deepEqual(errors, []);
+      await page.close();
 
-      const rtl = await pageFor(browser, kind, "ar");
-      await rtl.setViewportSize({ width: 360, height: 600 });
-      await rtl.goto(`${base}/popup.html`);
-      await rtl.waitForSelector("#mapping-preview > div");
-      await noOverflow(rtl);
-      await screenshot(rtl, `${kind}-popup-ar`);
+      const rtl = (await pageFor(browser, kind, 'ar')).page;
+      await ready(rtl);
+      for (const name of ['navigation', 'tabloop', 'layout', 'shortcuts', 'settings']) { await view(rtl, name); await noOverflow(rtl); }
+      await shot(rtl, `${kind}-rtl-settings`);
+      assert.equal(await rtl.getAttribute('html','dir'), 'rtl');
       await rtl.close();
-      if (kind === "chrome") {
-        const uncertain = await pageFor(browser, kind, "de", true);
-        await uncertain.setViewportSize({ width: 360, height: 600 });
-        await uncertain.goto(`${base}/popup.html`);
-        await uncertain.locator("#layout-confirmation").waitFor({ state: "visible" });
-        assert.equal(await uncertain.locator("#options").isVisible(), true);
-        assert.equal(await uncertain.locator("#mapping-preview").isVisible(), true);
-        await screenshot(uncertain, "chrome-popup-uncertain");
-        await uncertain.evaluate(() => { __holdSave = true; });
-        await uncertain.locator('[data-layout="horizontal"]').click();
-        await uncertain.waitForFunction(() => typeof __releaseSave === "function");
-        assert.equal(await uncertain.evaluate(() => __saved.siteProfiles), undefined, "confirmation awaits durable save before reload");
-        await uncertain.evaluate(() => { __holdSave = false; __releaseSave(); });
-        await uncertain.waitForFunction(() => document.querySelector("#detected").textContent.includes("Manuell festgelegt: Horizontal"));
-        await screenshot(uncertain, "chrome-popup-confirmed");
-        await uncertain.close();
+
+      const options = (await pageFor(browser, kind, 'en')).page;
+      await options.setViewportSize({ width: 1000, height: 900 });
+      await ready(options, 'options.html#recent-shortcuts');
+      assert.equal(await options.locator('#recent-shortcuts').getAttribute('open'), '');
+      await noOverflow(options);
+      await shot(options, `${kind}-options`);
+      await options.setViewportSize({ width: 390, height: 780 });
+      await view(options, 'settings');
+      await noOverflow(options);
+      await shot(options, `${kind}-options-narrow`);
+      await options.close();
+
+      if (kind === 'chrome') {
+        for (const os of ['win', 'linux']) {
+          const platform = (await pageFor(browser, kind, 'en', { os })).page;
+          await ready(platform);
+          assert.equal(await platform.locator('#mapping-preview kbd').first().textContent(), 'Ctrl+←');
+          await view(platform, 'shortcuts');
+          assert.match(await platform.locator('#platform-caption').textContent(), os === 'win' ? /Windows/ : /Linux/);
+          await shot(platform, `${os}-shortcuts`);
+          await platform.close();
+        }
       }
-      console.log(`${kind}: popup hierarchy, effective actions, CLUT setup, save retry, navigation failure and RTL checks passed (mock extension APIs)`);
-    } finally {
-      await browser.close();
-    }
+      const unsafe = (await pageFor(browser, kind, 'en', { poison:true })).page;
+      await ready(unsafe);
+      await view(unsafe,'layout');
+      await unsafe.locator('#saved-profiles summary').click();
+      assert.equal(await unsafe.locator('#site-profiles img').count(), 0);
+      assert.equal(await unsafe.evaluate(() => globalThis.__injected), undefined, 'profile labels are text, never HTML');
+      await unsafe.close();
+      const forced = (await pageFor(browser, kind, 'de', kind === 'firefox' ? { zen: true } : {})).page;
+      await ready(forced);
+      await view(forced, 'layout');
+      await forced.locator('[name="layout-mode"][value="horizontal"]').check();
+      await forced.waitForFunction(() => __saved.layoutMode === 'horizontal');
+      await forced.locator('#confirmation-auto-help').waitFor({ state: 'visible' });
+      await forced.locator('[data-layout="vertical"]').click();
+      await forced.evaluate(() => { __failSave = true; });
+      await forced.locator('#remember-layout').click();
+      await forced.locator('#retry-save').waitFor({ state: 'visible' });
+      assert.equal(await forced.evaluate(() => __saved.layoutMode), 'horizontal', 'failed confirmation preserves the global mode');
+      assert.equal(await forced.evaluate(() => __saved.siteProfiles), undefined);
+      await forced.evaluate(() => { __failSave = false; });
+      await forced.locator('#retry-save').click();
+      await forced.waitForFunction(() => __saved.layoutMode === 'auto' && Object.values(__saved.siteProfiles || {}).some(profile => Object.values(profile).includes('vertical')));
+      await forced.waitForFunction(() => document.querySelector('#layout-source').textContent.includes('Manuell festgelegt: Vertikal'));
+      assert.equal(await forced.locator('[data-layout="vertical"]').getAttribute('aria-pressed'), 'true', 'a remembered tile becomes the effective layout');
+      assert.equal(await forced.locator('[name="layout-mode"][value="auto"]').isChecked(), true);
+      await forced.close();
+      const ambiguous = (await pageFor(browser, kind, 'de', kind === 'firefox' ? { zen: true } : { uncertain: true })).page;
+      await ready(ambiguous);
+      await ambiguous.locator('#confirmation-notice').waitFor({ state:'visible' });
+      assert.equal(await ambiguous.locator('#mapping-preview button:disabled').count(), 4);
+      const loadToken = await ambiguous.evaluate(() => __loadToken);
+      await view(ambiguous, 'layout');
+      await ambiguous.locator('[data-layout="vertical"]').click();
+      await ambiguous.evaluate(() => { __holdSave = true; });
+      await ambiguous.locator('#remember-layout').click();
+      await ambiguous.waitForFunction(() => typeof __releaseSave === 'function');
+      assert.equal(await ambiguous.evaluate(() => __saved.siteProfiles), undefined);
+      await ambiguous.evaluate(() => { __holdSave = false; __releaseSave(); });
+      await ambiguous.waitForFunction(() => document.querySelector('#layout-source').textContent.includes('Manuell festgelegt: Vertikal'));
+      assert.equal(await ambiguous.evaluate(() => __loadToken), loadToken, 'confirming does not reload or resize popup');
+      if (kind === 'firefox') assert.equal(await ambiguous.evaluate(() => __nativeReads), 0, 'Zen never trusts inherited native setting');
+      await view(ambiguous, 'navigation');
+      await ambiguous.evaluate(() => { __failCommand = true; });
+      await ambiguous.locator('#mapping-preview button').first().click();
+      await ambiguous.locator('#retry-save').waitFor({ state:'visible' });
+      assert.equal(await ambiguous.evaluate(() => __closed), false, 'failed command keeps UI reachable');
+      await ambiguous.evaluate(() => { __failCommand = false; });
+      await ambiguous.locator('#retry-save').click();
+      await ambiguous.waitForFunction(() => __closed);
+      assert.equal(await ambiguous.evaluate(() => __messages.at(-1).targetTabId), 1);
+      await ambiguous.close();
+      console.log(`${kind}: five screens, platform glyphs, save/retry, command acknowledgement, profiles, presets, RTL and options checks passed (mock extension APIs)`);
+    } finally { await browser.close(); }
   }
 } finally {
-  await new Promise((resolve) => server.close(resolve));
+  server.closeAllConnections();
+  await new Promise(resolve => server.close(resolve));
 }

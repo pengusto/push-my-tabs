@@ -4,6 +4,7 @@
   "default_locale": "en",
   "name": "__MSG_extensionName__",
   "version": "1.2.0",
+  "homepage_url": "https://github.com/pengusto/push-my-tabs",
   "description": "__MSG_extensionDescription__",
   "incognito": "spanning",
   "icons": {

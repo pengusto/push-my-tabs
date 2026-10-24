@@ -43,8 +43,8 @@ Ações rápidas: duplicar, fixar, silenciar, ir à primeira ou última aba ou m
 ## Primeiros passos
 
 1. Instale a extensão usando um dos links das lojas acima.
-2. Abra o painel para ver os quatro comandos direcionais e os atalhos atuais.
-3. Ajuste os atalhos no navegador. Comece com a predefinição adaptativa e escolha um layout manual se necessário.
+2. Abra Navegação para ver as quatro ações direcionais. A barra lateral também contém TabLoop, Layout, Atalhos e Configurações.
+3. Altere os atalhos diretamente no Firefox ou pelo editor do Chrome. Os símbolos do Mac e os rótulos do Windows/Linux aparecem automaticamente. Comece com a predefinição adaptativa e escolha um layout manual se necessário.
 
 O Chrome estima o layout pela geometria da janela; um painel lateral aberto pode afetar a detecção. O Firefox 142+ lê diretamente sua configuração de abas verticais.
 
@@ -61,7 +61,7 @@ Sem contas, análises, publicidade ou código remoto. As configurações ficam n
 
 Os pacotes do Chrome e Firefox usam o mesmo código testado. No Firefox 142 ou mais recente, a extensão usa a configuração exata de abas verticais do navegador e permite editar os atalhos compatíveis na página de configurações.
 
-O popup e as configurações mostram os quatro atalhos de direção e suas atribuições atuais. Os atalhos opcionais ficam em uma seção recolhida. O popup também permite ir à primeira ou última aba, além de mover, duplicar, fixar, silenciar ou enviar a aba atual para uma nova janela.
+O popup e as opções compartilham cinco telas. Navegação oferece ações direcionais e outras ações de abas. TabLoop percorre abas abertas pela ordem de uso recente entre janelas. Layout gerencia o modo global e as confirmações salvas; Atalhos contém comandos, predefinições e mapeamentos personalizados. Configurações reúne idioma, comportamento e acesso a janelas privativas.
 
 ## Idiomas
 
@@ -91,6 +91,8 @@ node tests/background.test.mjs
 node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
+node tests/ui-flow.test.mjs
+node tests/shortcuts.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

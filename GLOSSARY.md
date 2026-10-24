@@ -4,6 +4,14 @@ This context describes how users navigate and rearrange browser tabs with layout
 
 ## Language
 
+**TabLoop**:
+Push My Tabs’ function for cycling through recently used open tabs across windows, with normal, reverse, and quick commands. It does not show or store a browsing-history list.
+_Avoid_: CLUT (the name of a separate extension), history, recently closed tabs
+
+**Shortcut Display**:
+A presentation of the browser-reported active command binding, formatted for the operating system from `runtime.getPlatformInfo()`. Display formatting never reassigns keys or substitutes a recommendation for an empty binding; Control and Command remain distinct.
+_Avoid_: OS-based remapping, keyboard-layout detection
+
 **Shortcut Preset**:
 A named, selectable mapping of arrow-key commands to tab actions for horizontal and vertical tab layouts.
 _Avoid_: Template, shortcut variant, profile

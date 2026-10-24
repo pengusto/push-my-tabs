@@ -29,7 +29,7 @@ for (const messageName of Object.values(ACTIONS)) {
   assert.ok(locales.en[messageName], `layout action references missing message ${messageName}`);
 }
 
-for (const file of ["manifests/chrome.json", "manifests/firefox.json", "src/popup.html", "src/options.html"]) {
+for (const file of ["manifests/chrome.json", "manifests/firefox.json", "src/popup.html", "src/options.html", "src/app.html"]) {
   const content = await readFile(file, "utf8");
   const references = [...content.matchAll(/(?:__MSG_|data-i18n(?:-aria-label)?=")([A-Za-z][A-Za-z0-9]*)/g)];
   for (const [, name] of references) {
@@ -38,11 +38,17 @@ for (const file of ["manifests/chrome.json", "manifests/firefox.json", "src/popu
   }
 }
 
-for (const file of ["src/popup.js", "src/options.js", "src/ui.js"]) {
+for (const file of ["src/popup.js", "src/options.js", "src/ui.js", "src/app.js"]) {
   const content = await readFile(file, "utf8");
   for (const [, name] of content.matchAll(/(?:message\(|success\s*=|failure\s*=|success:|failure:)\s*"([A-Za-z][A-Za-z0-9]*)"/g)) {
     assert.ok(locales.en[name], `${file} references missing message ${name}`);
     referencedMessages.add(name);
+  }
+}
+for (const file of ["src/app.html", "src/app.js"]) {
+  const source = await readFile(file, "utf8");
+  for (const [, name] of source.matchAll(/["']([A-Za-z][A-Za-z0-9]*)["']/g)) {
+    if (locales.en[name]) referencedMessages.add(name);
   }
 }
 assert.deepEqual([...referencedMessages].sort(), fallbackKeys, "fallback must not contain unused messages");
@@ -62,15 +68,15 @@ assert.equal(resolveLocale("zh-Hans"), "zh_CN");
 assert.equal(resolveLocale("en-US"), "en");
 assert.equal(resolveLocale("nl-NL"), "en");
 await initializeI18n("browser");
-assert.equal(message("layoutModeLabel"), "Layout-Modus");
+assert.equal(message("layoutModeLabel"), "Globaler Modus");
 assert.equal(message("layoutDetected", "Vertikal"), "Nativ erkannt: Vertikal");
 await initializeI18n("en");
-assert.equal(message("layoutModeLabel"), "Layout mode");
+assert.equal(message("layoutModeLabel"), "Global mode");
 assert.equal(message("missing"), "");
 
 const textElement = { dataset: { i18n: "layoutModeLabel" }, textContent: "" };
 const ariaElement = {
-  dataset: { i18nAriaLabel: "currentMappingAriaLabel" },
+  dataset: { i18nAriaLabel: "navigationHeading" },
   setAttribute: (name, value) => { ariaElement[name] = value; }
 };
 const root = {
@@ -79,19 +85,19 @@ const root = {
 };
 localizeDocument(root);
 assert.equal(root.documentElement.lang, "en");
-assert.equal(textElement.textContent, "Layout mode");
-assert.equal(ariaElement["aria-label"], "Current key mapping");
+assert.equal(textElement.textContent, "Global mode");
+assert.equal(ariaElement["aria-label"], "Navigation");
 
 await initializeI18n("ar");
 localizeDocument(root);
 assert.equal(root.documentElement.lang, "ar");
 assert.equal(root.documentElement.dir, "rtl");
-assert.equal(textElement.textContent, "وضع التخطيط");
+assert.equal(textElement.textContent, "الوضع العام");
 
 await initializeI18n("fa");
 localizeDocument(root);
 assert.equal(root.documentElement.lang, "fa");
 assert.equal(root.documentElement.dir, "rtl");
-assert.equal(textElement.textContent, "حالت چیدمان");
+assert.equal(textElement.textContent, "حالت سراسری");
 
 console.log("i18n checks passed");

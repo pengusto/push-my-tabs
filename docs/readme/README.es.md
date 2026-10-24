@@ -43,8 +43,8 @@ Acciones rápidas: duplicar, fijar, silenciar, ir a la primera o última pestañ
 ## Primeros pasos
 
 1. Instala la extensión desde uno de los enlaces de las tiendas de arriba.
-2. Abre el panel para ver los cuatro comandos direccionales y sus atajos actuales.
-3. Ajusta los atajos en el navegador. Empieza con el preajuste adaptativo y elige una disposición manual si es necesario.
+2. Abre Navegación para ver las cuatro acciones direccionales. La barra lateral también incluye TabLoop, Disposición, Atajos y Configuración.
+3. Cambia las asignaciones en Atajos, directamente en Firefox o con el editor de Chrome. Los símbolos de Mac y las etiquetas de Windows/Linux se muestran automáticamente. Empieza con el preajuste adaptativo y elige una disposición manual si es necesario.
 
 Chrome estima la disposición a partir de la geometría de la ventana; un panel lateral abierto puede afectar la detección. Firefox 142+ lee directamente su ajuste de pestañas verticales.
 
@@ -61,7 +61,7 @@ Sin cuentas, analíticas, publicidad ni código remoto. Los ajustes permanecen e
 
 Los paquetes de Chrome y Firefox comparten el mismo código probado. Firefox 142 o posterior usa el ajuste exacto de pestañas verticales del navegador y permite editar los atajos compatibles desde la página de configuración.
 
-La ventana emergente y la configuración muestran los cuatro atajos de dirección con sus asignaciones actuales. Los atajos opcionales permanecen en una sección plegada. La ventana emergente también permite ir a la primera o última pestaña, mover, duplicar, fijar o silenciar la pestaña actual, o enviarla a una ventana nueva.
+El panel y las opciones comparten cinco vistas. Navegación ofrece acciones direccionales y otras acciones de pestañas. TabLoop recorre las pestañas abiertas por uso reciente entre ventanas. Disposición gestiona el modo global y las confirmaciones guardadas; Atajos contiene los comandos, preajustes y asignaciones personalizadas. Configuración incluye idioma, comportamiento y acceso a ventanas privadas.
 
 ## Idiomas
 
@@ -91,6 +91,8 @@ node tests/background.test.mjs
 node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
+node tests/ui-flow.test.mjs
+node tests/shortcuts.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

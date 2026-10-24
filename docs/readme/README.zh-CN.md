@@ -43,8 +43,8 @@
 ## 开始使用
 
 1. 通过上方商店链接安装扩展。
-2. 打开弹出面板，查看四个方向命令及其当前快捷键。
-3. 在浏览器中调整快捷键。从自适应预设开始，必要时手动选择布局。
+2. 打开“导航”查看四个方向操作。侧边栏还包含 TabLoop、排列、快捷键绑定和设置。
+3. 在“快捷键绑定”中直接修改 Firefox 快捷键，或打开 Chrome 快捷键编辑器。Mac 符号与 Windows/Linux 标签会自动切换。从自适应预设开始，必要时手动选择排列。
 
 Chrome 根据窗口几何信息估算布局；打开侧边栏可能影响识别。Firefox 142 及以上直接读取其纵向标签页设置。
 
@@ -61,7 +61,7 @@ Chrome 根据窗口几何信息估算布局；打开侧边栏可能影响识别�
 
 Chrome 和 Firefox 发布包使用同一套经过测试的源代码。Firefox 142 及更高版本会读取浏览器准确的垂直标签页设置，并允许用户直接在设置页编辑受支持命令的快捷键。
 
-弹出窗口和设置页会显示四个方向快捷键及其当前浏览器分配。可选快捷键放在单独的折叠区域中。弹出窗口还提供快捷操作，可切换到第一个或最后一个标签页，以及移动、复制、固定、静音当前标签页，或将其移到新窗口。
+弹出面板和设置页共用五个视图。导航提供方向操作和其他标签页操作。TabLoop 按最近使用顺序在不同窗口的已打开标签页间切换。排列管理全局模式和已保存的确认；快捷键绑定包含全部命令、预设和自定义映射。设置包含语言、行为和隐私窗口访问。
 
 ## 语言
 
@@ -92,6 +92,8 @@ node tests/background.test.mjs
 node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
+node tests/ui-flow.test.mjs
+node tests/shortcuts.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

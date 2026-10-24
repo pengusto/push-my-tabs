@@ -17,6 +17,7 @@ node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
+node tests/shortcuts.test.mjs
 node scripts/validate-release.mjs
 
 version=$(node -p "require('./$manifest').version")
@@ -24,8 +25,8 @@ repo_root=$PWD
 archive_rel="dist/push-my-tabs-${browser}-${version}.zip"
 archive="$repo_root/$archive_rel"
 files=(
-  api.js background.js i18n.js layout.js options.js picker.js popup.js ui.js
-  options.html popup.html styles.css
+  api.js background.js i18n.js layout.js options.js popup.js ui.js app.js shortcuts.js icons.js
+  options.html popup.html app.html styles.css
   assets/icons/icon-16.png assets/icons/icon-32.png assets/icons/icon-48.png assets/icons/icon-128.png
   assets/icons/browser-language.svg assets/icons/language.svg assets/icons/kurdistan-language.png
 )

@@ -37,7 +37,7 @@ The adaptive preset maps the four direction commands to your tab layout, so swit
 ## Small actions. Fewer interruptions.
 
 - **Navigate by direction.** Switch tabs or move the active tab with the adaptive preset.
-- **Cycle last used tabs (CLUT).** Switch across windows in last-used order, forward or backward. Assign the normal cycle shortcut first; quick cycling is optional.
+- **TabLoop.** Switch across windows in last-used order, forward or backward. Assign the normal cycle shortcut first; quick cycling is optional.
 - **Keep quick actions close.** Duplicate, pin, mute, jump to the first or last tab, or move a tab to a new window.
 - **Make it yours.** Choose your layout and shortcut assignments. Keep optional commands out of the way until you need them.
 
@@ -46,8 +46,9 @@ The adaptive preset maps the four direction commands to your tab layout, so swit
 ## Get started
 
 1. Install from the Chrome Web Store or Firefox Add-ons using the links above.
-2. Open the extension popup to see your four direction commands and their current assignments. Use **Change command shortcuts** to open Chrome’s shortcut editor or jump to the editable Firefox settings.
-3. Set or adjust your shortcuts in your browser. Start with the adaptive preset; choose a manual layout if automatic detection does not match your setup.
+2. Open **Navigation** to see the four direction actions and their current assignments. The sidebar also contains **TabLoop**, **Layout**, **Shortcut bindings**, and **Settings**.
+3. Open **Shortcut bindings** to edit assignments directly in Firefox or open Chrome’s shortcut editor. Actual bindings use Mac symbols or Windows/Linux labels automatically.
+4. Set or adjust your shortcuts in your browser. Start with the adaptive preset; choose a manual layout if automatic detection does not match your setup.
 
 The popup distinguishes **Natively detected**, **Automatically estimated**, and **Manually set** layouts. Chrome estimates from window geometry; an open side panel can affect the result. Firefox 142+ reads its vertical-tabs setting directly. Zen uses its own tab bar, so its inherited Firefox setting is ignored: confirm the estimated layout or choose a manual layout. Saved confirmations are shown as manually set.
 
@@ -65,7 +66,7 @@ Chrome uses temporary `activeTab` access after a shortcut or popup action for lo
 
 Chrome and Firefox release packages share the same tested source. Firefox 142 or newer uses the browser's exact vertical-tabs setting and lets users edit supported command shortcuts directly in the settings page.
 
-The popup and settings page show the four direction shortcuts with their current browser assignments. Optional shortcuts stay in a separate collapsed section. The popup also offers quick actions for switching to the first or last tab, moving the current tab, duplicating, pinning, muting, or moving it to a new window.
+The popup and full settings page share the same five views. Navigation offers the four direction actions and additional tab/window commands. TabLoop cycles through recently used open tabs without a browsing-history list. Layout manages automatic/manual orientation and saved confirmations. Shortcut bindings contains all commands, presets, and custom mappings. Settings contains language, wrapping, close behavior, and private-window access.
 
 ## Languages
 
@@ -95,6 +96,7 @@ node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
 node tests/ui-flow.test.mjs
+node tests/shortcuts.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

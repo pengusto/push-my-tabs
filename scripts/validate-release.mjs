@@ -19,6 +19,9 @@ assert.deepEqual(firefox.browser_specific_settings, {
   }
 });
 for (const manifest of [chrome, firefox]) {
+  assert.equal(manifest.homepage_url, "https://github.com/pengusto/push-my-tabs");
+  const { homepage_url, ...executableManifest } = manifest;
+  assert.doesNotMatch(JSON.stringify(executableManifest), /https?:\/\//, "manifest must not introduce remote resources");
   assert.equal(manifest.manifest_version, 3);
   assert.deepEqual(Object.keys(manifest.commands).sort(), [
     "arrow-down", "arrow-left", "arrow-right", "arrow-up",
@@ -58,12 +61,14 @@ for (const [path, size] of Object.entries({
 })) await checkPng(path, size);
 
 for (const file of [
-  "manifests/chrome.json", "manifests/firefox.json",
+
   "src/options.html", "src/popup.html", "src/styles.css",
   "src/api.js", "src/background.js", "src/i18n.js", "src/layout.js",
-  "src/options.js", "src/picker.js", "src/popup.js", "src/ui.js"
+  "src/options.js", "src/popup.js", "src/ui.js", "src/app.js", "src/app.html", "src/shortcuts.js", "src/icons.js"
 ]) {
-  assert.doesNotMatch(await readFile(file, "utf8"), /(?:https?|wss?):\/\/(?!\$\{)/, `${file} contains remote code or an endpoint`);
+  // SVG namespace identifiers are local DOM metadata, not network endpoints.
+  const source = (await readFile(file, "utf8")).replaceAll("http://www.w3.org/2000/svg", "SVG_NAMESPACE");
+  assert.doesNotMatch(source, /(?:https?|wss?):\/\/(?!\$\{)/, `${file} contains remote code or an endpoint`);
 }
 
 console.log("release checks passed");

@@ -43,8 +43,8 @@ Schnellaktionen: duplizieren, anheften, stummschalten, zum ersten oder letzten T
 ## Loslegen
 
 1. Installiere die Erweiterung über einen der Store-Links oben.
-2. Öffne das Popup: Es zeigt die vier Richtungsbefehle und ihre aktuellen Tastenkombinationen.
-3. Passe die Kürzel im Browser an. Beginne mit dem adaptiven Preset und wähle bei Bedarf ein manuelles Layout.
+2. Öffne Navigation für die vier Richtungsaktionen. Die Seitenleiste enthält außerdem TabLoop, Anordnung, Tastenbelegung und Einstellungen.
+3. Ändere Kürzel unter Tastenbelegung direkt in Firefox oder über Chromes Kürzeleditor. Mac-Symbole und Windows-/Linux-Beschriftungen erscheinen automatisch. Beginne mit dem adaptiven Preset und wähle bei Bedarf eine manuelle Anordnung.
 
 Chrome schätzt das Layout anhand der Fenstergeometrie; eine offene Seitenleiste kann die Erkennung beeinflussen. Firefox 142+ liest seine Einstellung für vertikale Tabs direkt.
 
@@ -61,7 +61,7 @@ Keine Konten, Analysen, Werbung oder Remote-Code. Einstellungen bleiben lokal im
 
 Die Release-Pakete für Chrome und Firefox verwenden denselben getesteten Quellcode. Ab Firefox 142 nutzt die Erweiterung die exakte Einstellung für vertikale Tabs und erlaubt das Bearbeiten unterstützter Befehls-Tastenkürzel direkt in den Einstellungen.
 
-Popup und Einstellungsseite zeigen die vier Richtungskürzel mit ihrer aktuellen Browserbelegung. Optionale Kürzel bleiben in einem separaten eingeklappten Bereich. Das Popup bietet außerdem Schnellaktionen, um zum ersten oder letzten Tab zu wechseln, den aktuellen Tab zu verschieben, zu duplizieren, anzuheften, stummzuschalten oder in ein neues Fenster zu verschieben.
+Popup und Einstellungsseite teilen dieselben fünf Ansichten. Navigation bietet Richtungs- und weitere Tab-Aktionen. TabLoop wechselt fensterübergreifend zwischen zuletzt verwendeten offenen Tabs. Anordnung verwaltet den globalen Modus und gespeicherte Bestätigungen; Tastenbelegung enthält alle Befehle, Presets und eigenen Zuordnungen. Einstellungen enthält Sprache, Verhalten und Zugriff auf private Fenster.
 
 ## Sprachen
 
@@ -92,6 +92,8 @@ node tests/background.test.mjs
 node tests/firefox.test.mjs
 node tests/i18n.test.mjs
 node tests/ui.test.mjs
+node tests/ui-flow.test.mjs
+node tests/shortcuts.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 

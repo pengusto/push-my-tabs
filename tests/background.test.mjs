@@ -62,6 +62,7 @@ await import("../src/background.js");
 function setActive(index, length = 3) {
   tabs = Array.from({ length }, (_, tabIndex) => ({
     id: tabIndex + 10,
+    windowId: 42,
     index: tabIndex,
     active: tabIndex === index,
     width: 1390,
@@ -140,7 +141,10 @@ assert.deepEqual(updates.slice(0, 2), [[13, { active: true }], [9, { active: tru
 assert.deepEqual(moves.slice(-1), [[11, { windowId: 43, index: -1 }]], "window move sends the active tab to the next window");
 
 setActive(1);
-await runtimeListener({ type: "run-command", command: "switch-first" }, { tab: tabs[1] });
+function uiMessage(message, sender = {}) {
+  return new Promise((resolve) => assert.equal(runtimeListener(message, sender, resolve), true));
+}
+assert.deepEqual(await uiMessage({ type: "run-command", command: "switch-first" }, { tab: tabs[1] }), { ok: true });
 assert.deepEqual(updates, [[10, { active: true }]], "popup commands use the sender tab context");
 
 setActive(1);
@@ -258,4 +262,32 @@ tabs = tabs.map((tab) => ({ ...tab, width: 1200, height: 700 }));
 await listener("arrow-up");
 assert.deepEqual(updates, [[10, { active: true }]], "site profile resolves ambiguous geometry");
 
-console.log("background command checks passed");
+settings = { layoutMode: "horizontal", presetId: "adaptive", wrapSwitching: true };
+setActive(1);
+lastFocusedWindowId = 99;
+assert.deepEqual(await uiMessage({ type: "run-command", command: "arrow-left", targetTabId: 11 }), { ok: true });
+assert.deepEqual(updates, [[10, { active: true }]], "UI keeps the target tab even if another window becomes focused");
+lastFocusedWindowId = 42;
+assert.deepEqual(await uiMessage({ type: "run-command", command: "new-tab-after", targetTabId: 11 }), { ok: true });
+assert.deepEqual(creations, [{ windowId: 42, index: 2, openerTabId: 11 }]);
+assert.equal(runtimeListener({ type: "run-command", command: "arbitrary-code" }, {}, () => assert.fail("Unknown UI command replied")), undefined);
+const savedWarn = console.warn;
+console.warn = () => {};
+try {
+  const result = await uiMessage({ type: "run-command", command: "arrow-left", targetTabId: 999 });
+  assert.equal(result.ok, false, "Missing targets must fail rather than silently using a different tab");
+} finally { console.warn = savedWarn; }
+settings = { layoutMode: "auto", presetId: "adaptive" };
+setActive(1);
+tabs = tabs.map(tab => ({ ...tab, width: 1200, height: 700 }));
+assert.deepEqual(await uiMessage({ type: "run-command", command: "arrow-left", targetTabId: 11 }), { ok: false, needsConfirmation: true });
+assert.deepEqual(updates, [], "UI must confirm newly ambiguous geometry before any action");
+settings.layoutMode = "horizontal";
+const originalDuplicate = chrome.tabs.duplicate;
+chrome.tabs.duplicate = async () => { throw new Error("Tab disappeared"); };
+console.warn = () => {};
+try {
+  assert.equal((await uiMessage({ type: "run-command", command: "duplicate-tab", targetTabId: 11 })).ok, false, "UI must not acknowledge swallowed operation failures");
+  await listener("duplicate-tab"); // Keyboard races remain quiet.
+} finally { console.warn = savedWarn; chrome.tabs.duplicate = originalDuplicate; }
+console.log("background command and acknowledged UI-action checks passed");

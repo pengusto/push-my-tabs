@@ -6,12 +6,17 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ### Improved
 
+- Replace the bulky popup and settings with five shared sidebar views: Navigation, TabLoop, Layout, Shortcut bindings, and Settings.
+- Detect the operating system through the browser API and display actual shortcuts with native Mac symbols or Windows/Linux labels.
+- Run tab actions from the interface with a fixed command allowlist, preserved target tab, explicit success/failure replies, and confirmation when layout changes become uncertain.
+- Rename recently used tab cycling to TabLoop across the interface and documentation.
+- Apply remembered layouts immediately by switching to Automatic mode, and provide supported private-window setup instructions for Firefox and Zen.
 - Distinguish native detection, automatic estimates, and manually set layouts, including saved confirmations.
 - Handle Zen separately: request confirmation instead of trusting its inherited Firefox vertical-tabs setting.
 - Put direction shortcuts first in the popup, with direct setup and collapsible layout help.
 - Keep shortcuts, settings, and permission warnings available during uncertain layout detection; explain where confirmations are saved.
 - Show effective direction actions in settings, and add one-click shortcut suggestions in Firefox.
-- Give recently used tab cycling (CLUT) its own popup and settings section.
+- Give TabLoop for recently used tabs its own popup and settings section.
 - Confirm settings changes, serialize saves, and offer retry after failed saves or navigation.
 - Refresh the extension and website with the purple Push P logo, clearer small-size icons, and a complete logo kit.
 - Match README banners to light and dark themes, with clearer compositions for narrow screens.

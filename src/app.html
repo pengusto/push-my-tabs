@@ -1,0 +1,71 @@
+<div class="app-shell">
+  <nav class="rail" aria-label="Push My Tabs">
+    <img class="brand-mark" src="assets/icons/icon-32.png" alt="Push My Tabs" width="28" height="28">
+    <button type="button" data-view="navigation" data-icon="navigation" data-label="navigationHeading"></button>
+    <button type="button" data-view="tabloop" data-icon="clock" data-label="recentTabsHeading"></button>
+    <button type="button" data-view="layout" data-icon="layout" data-label="layoutHeading"></button>
+    <button type="button" data-view="shortcuts" data-icon="keyboard" data-label="shortcutsViewHeading"></button>
+    <button type="button" data-view="settings" data-icon="settings" data-label="settingsHeading"></button>
+  </nav>
+  <main class="workspace">
+    <header class="app-header"><span class="wordmark">Push My Tabs</span><h1 id="view-heading" tabindex="-1"></h1></header>
+    <aside id="incognito-warning" class="notice warning" hidden><p data-i18n="incognitoWarning"></p><button type="button" class="text-button" data-open-permissions data-i18n="openExtensionSettings"></button></aside>
+    <section class="view" data-page="navigation" aria-labelledby="view-heading">
+      <p id="detected" class="layout-status" role="status"></p>
+      <div id="confirmation-notice" class="notice" hidden><p id="mapping-context"></p><button class="text-button" type="button" data-go="layout" data-i18n="layoutNeedsConfirmation"></button></div>
+      <div id="mapping-preview" class="action-list"></div>
+      <button type="button" id="setup-shortcuts" class="text-button" data-go="shortcuts"><span data-icon="edit"></span><span data-i18n="changeShortcuts"></span></button>
+      <details class="section-details"><summary data-i18n="moreActions"></summary><div id="quick-actions" class="action-list"></div></details>
+      <p id="direction-shortcut-status" class="quiet" role="status"></p>
+    </section>
+    <section class="view" data-page="tabloop" hidden aria-labelledby="view-heading">
+      <p data-i18n="recentTabsHelp"></p>
+      <div id="recent-actions" class="action-list"></div>
+      <p id="single-tab-help" class="quiet" data-i18n="singleTabHelp" hidden></p>
+      <button id="setup-recent" class="text-button" type="button" data-go="shortcuts" data-group="recent-shortcuts"><span data-icon="edit"></span><span data-i18n="changeShortcuts"></span></button>
+    </section>
+    <section class="view" data-page="layout" hidden aria-labelledby="view-heading">
+      <fieldset class="mode-field"><legend data-i18n="layoutModeLabel"></legend><div class="segments" id="layout-mode">
+        <label><input type="radio" name="layout-mode" value="auto"><span data-i18n="layoutAuto"></span></label>
+        <label><input type="radio" name="layout-mode" value="horizontal"><span data-i18n="layoutHorizontal"></span></label>
+        <label><input type="radio" name="layout-mode" value="vertical"><span data-i18n="layoutVertical"></span></label>
+      </div></fieldset>
+      <p id="layout-source" class="layout-status" role="status"></p>
+      <p id="estimated-help" class="quiet" data-i18n="estimatedLayoutHelp" hidden></p>
+      <section class="site-editor">
+        <h2 id="site-heading" data-i18n="currentSiteHeading"></h2><p id="site-host" class="quiet"></p>
+        <div class="layout-tiles" role="group" data-i18n-aria-label="layoutNeedsConfirmation">
+          <button type="button" data-layout="horizontal"><span data-icon="horizontal"></span><span data-i18n="layoutHorizontal"></span></button>
+          <button type="button" data-layout="vertical"><span data-icon="vertical"></span><span data-i18n="layoutVertical"></span></button>
+        </div>
+        <label id="scope-field"><span class="sr-only" data-i18n="currentSiteHeading"></span><select id="profile-scope"><option value="origin" data-i18n="siteScope"></option><option value="path" data-i18n="rememberPath"></option></select></label>
+        <p id="confirmation-scope" class="quiet"></p>
+        <p id="confirmation-auto-help" class="quiet" data-i18n="confirmationEnableAuto" hidden></p>
+        <button id="remember-layout" type="button" class="primary" data-i18n="rememberLayout"></button>
+      </section>
+      <details id="saved-profiles" class="section-details"><summary data-i18n="savedConfirmationsHeading"></summary><div id="site-profiles"></div><div id="geometry-profiles"></div><button id="clear-layout-hints" type="button" class="text-button" data-i18n="clearHints"></button></details>
+    </section>
+    <section class="view" data-page="shortcuts" hidden aria-labelledby="view-heading">
+      <p id="platform-caption" class="quiet"></p>
+      <div id="shortcuts"></div>
+      <button id="shortcut-settings" type="button" class="primary" data-i18n="editInChrome"></button>
+      <p id="shortcut-help" class="quiet"></p>
+      <details id="recent-shortcuts" class="section-details"><summary data-i18n="recentTabsHeading"></summary><div id="recent-commands"></div></details>
+      <details id="optional-shortcuts" class="section-details"><summary data-i18n="shortcutsHeading"></summary><div id="optional-commands"></div></details>
+      <details class="section-details" id="preset-settings"><summary data-i18n="currentMapping"></summary>
+        <label class="field"><span data-i18n="presetLabel"></span><select id="preset"><option value="adaptive" data-i18n="presetAdaptive"></option><option value="horizontal" data-i18n="presetHorizontal"></option><option value="vertical" data-i18n="presetVertical"></option><option value="custom" data-i18n="presetCustom"></option></select></label>
+        <section id="custom-section" hidden><p class="quiet" data-i18n="customPresetDescription"></p><fieldset class="mapping-group"><legend data-i18n="layoutHorizontal"></legend><div data-mapping="horizontal"></div></fieldset><fieldset class="mapping-group"><legend data-i18n="layoutVertical"></legend><div data-mapping="vertical"></div></fieldset></section>
+      </details>
+      <p id="key-legend" class="quiet"></p>
+    </section>
+    <section class="view" data-page="settings" hidden aria-labelledby="view-heading">
+      <label class="field"><span data-i18n="languageLabel"></span><select id="language"></select></label>
+      <label class="setting-row"><span><strong data-i18n="tabSwitchingLabel"></strong><small data-i18n="wrapSwitchingLabel"></small></span><input id="wrap" type="checkbox" role="switch"></label>
+      <label class="field"><span data-i18n="closeDirectionLabel"></span><select id="close-direction"><option value="browser" data-i18n="closeDirectionBrowser"></option><option value="backward" data-i18n="closeDirectionBackward"></option><option value="forward" data-i18n="closeDirectionForward"></option></select></label>
+      <div class="private-settings"><h2 data-i18n="privateWindows"></h2><p id="private-status" class="quiet"></p><p id="private-help" class="quiet" data-i18n="privateFirefoxHelp" hidden></p><button type="button" class="text-button" data-open-permissions data-i18n="openExtensionSettings"></button></div>
+      <p class="privacy-note quiet"><span data-icon="info"></span><span data-i18n="localSettingsNote"></span></p>
+      <footer class="app-footer"><span id="app-version"></span><a id="project-link" target="_blank" rel="noreferrer noopener"><span data-i18n="projectLink"></span><span data-icon="external"></span></a></footer>
+    </section>
+    <div class="feedback" hidden><p id="save-status" role="status" aria-live="polite"></p><button id="retry-save" type="button" class="text-button" data-i18n="tryAgain" hidden></button></div>
+  </main>
+</div>

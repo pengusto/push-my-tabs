@@ -1,5 +1,5 @@
 import { api, currentContext, layoutDetection, loadSettings } from "./api.js";
-import { HISTORY_COMMANDS, nextIndex, RECENT_TAB_COMMANDS, selectedAction, TAB_ACTION_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
+import { COMMANDS, HISTORY_COMMANDS, nextIndex, RECENT_TAB_COMMANDS, selectedAction, TAB_ACTION_COMMANDS, TAB_CREATION_COMMANDS } from "./layout.js";
 
 const activeTabs = new Map();
 const recentTabIds = [];
@@ -41,12 +41,23 @@ api.tabs.onRemoved.addListener(async (tabId, { isWindowClosing, windowId }) => {
 });
 
 api.commands.onCommand.addListener((command, commandTab) => executeCommand(command, commandTab));
-api.runtime?.onMessage?.addListener((message, sender) => {
-  if (message?.type !== "run-command" || !TAB_ACTION_COMMANDS.includes(message.command)) return;
-  return executeCommand(message.command, sender.tab);
+const uiCommands = [...COMMANDS, ...RECENT_TAB_COMMANDS, ...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...TAB_ACTION_COMMANDS];
+api.runtime?.onMessage?.addListener((message, sender, sendResponse) => {
+  if (message?.type !== "run-command" || !uiCommands.includes(message.command)) return;
+  // Explicit response works in Firefox and Chrome 127, before Promise replies were supported.
+  (async () => {
+    const target = Number.isInteger(message.targetTabId) ? await api.tabs.get(message.targetTabId) : sender.tab;
+    const result = await executeCommand(message.command, target, true);
+    sendResponse(result?.needsConfirmation ? { ok: false, needsConfirmation: true } : { ok: true });
+  })().catch((error) => {
+    console.warn("Could not run tab action:", error);
+    sendResponse({ ok: false, error: error.message });
+  });
+  return true;
 });
 
-async function executeCommand(command, commandTab) {
+async function executeCommand(command, commandTab, fromUI = false) {
+  const quiet = (error) => { if (fromUI) throw error; };
   if (RECENT_TAB_COMMANDS.includes(command)) {
     await switchRecentTab(command);
     return;
@@ -54,7 +65,7 @@ async function executeCommand(command, commandTab) {
 
   if (HISTORY_COMMANDS.includes(command)) {
     const { activeTab } = await currentContext(commandTab);
-    if (activeTab) await api.tabs[command === "history-back" ? "goBack" : "goForward"](activeTab.id).catch(() => {});
+    if (activeTab) await api.tabs[command === "history-back" ? "goBack" : "goForward"](activeTab.id).catch(quiet);
     return;
   }
 
@@ -73,28 +84,28 @@ async function executeCommand(command, commandTab) {
 
     if (command === "switch-first" || command === "switch-last") {
       const target = command === "switch-first" ? tabs[0] : tabs.at(-1);
-      if (target?.id && target.id !== activeTab.id) await api.tabs.update(target.id, { active: true }).catch(() => {});
+      if (target?.id && target.id !== activeTab.id) await api.tabs.update(target.id, { active: true }).catch(quiet);
     } else if (command === "move-first" || command === "move-last") {
       const index = command === "move-first" ? 0 : Math.max(0, tabs.length - 1);
-      if (index !== activeTab.index) await api.tabs.move(activeTab.id, { index }).catch(() => {});
+      if (index !== activeTab.index) await api.tabs.move(activeTab.id, { index }).catch(quiet);
     } else if (command === "duplicate-tab") {
-      if (api.tabs.duplicate) await api.tabs.duplicate(activeTab.id).catch(() => {});
+      if (api.tabs.duplicate) await api.tabs.duplicate(activeTab.id).catch(quiet);
     } else if (command === "toggle-pin") {
-      await api.tabs.update(activeTab.id, { pinned: !activeTab.pinned }).catch(() => {});
+      await api.tabs.update(activeTab.id, { pinned: !activeTab.pinned }).catch(quiet);
     } else if (command === "toggle-mute") {
-      await api.tabs.update(activeTab.id, { muted: !activeTab.mutedInfo?.muted }).catch(() => {});
+      await api.tabs.update(activeTab.id, { muted: !activeTab.mutedInfo?.muted }).catch(quiet);
     } else if (command === "move-to-new-window") {
-      if (api.windows.create) await api.windows.create({ tabId: activeTab.id }).catch(() => {});
+      if (api.windows.create) await api.windows.create({ tabId: activeTab.id }).catch(quiet);
     } else if (command === "switch-next-window" || command === "switch-previous-window") {
       const target = await adjacentWindow(window.id, command === "switch-next-window" ? 1 : -1);
       const targetTab = target?.tabs?.find(({ active }) => active) ?? target?.tabs?.[0];
-      if (target?.id != null) await api.windows.update(target.id, { focused: true }).catch(() => {});
-      if (targetTab?.id != null) await api.tabs.update(targetTab.id, { active: true }).catch(() => {});
+      if (target?.id != null) await api.windows.update(target.id, { focused: true }).catch(quiet);
+      if (targetTab?.id != null) await api.tabs.update(targetTab.id, { active: true }).catch(quiet);
     } else if (command === "move-to-next-window") {
       const target = await adjacentWindow(window.id, 1);
       if (target?.id != null) {
-        await api.tabs.move(activeTab.id, { windowId: target.id, index: -1 }).catch(() => {});
-        await api.windows.update(target.id, { focused: true }).catch(() => {});
+        await api.tabs.move(activeTab.id, { windowId: target.id, index: -1 }).catch(quiet);
+        await api.windows.update(target.id, { focused: true }).catch(quiet);
       }
     }
     return;
@@ -106,6 +117,7 @@ async function executeCommand(command, commandTab) {
   const detection = layoutMode === "auto" ? await layoutDetection(window, activeTab, settings) : null;
 
   if (detection?.confidence === "uncertain") {
+    if (fromUI) return { needsConfirmation: true };
     if (!window.focused) {
       await api.action.setBadgeText({ tabId: activeTab.id, text: "?" });
       return;
@@ -126,7 +138,7 @@ async function executeCommand(command, commandTab) {
   const offset = action.endsWith("Backward") ? -1 : 1;
 
   if (action === "historyBack" || action === "historyForward") {
-    await api.tabs[action === "historyBack" ? "goBack" : "goForward"](activeTab.id).catch(() => {});
+    await api.tabs[action === "historyBack" ? "goBack" : "goForward"](activeTab.id).catch(quiet);
   } else if (tabs.length < 2) {
     return;
   } else if (action.startsWith("switch")) {
