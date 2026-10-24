@@ -10,7 +10,7 @@ The **Create release** GitHub Actions workflow prepares and publishes a release 
 
 Store review is asynchronous. `PENDING_REVIEW`, `SUBMITTED`, and `APPROVED` are not proof that users have received an update. The job summary reports the API state; only a confirmed public version is reported as `PUBLISHED`. Browsers deliver approved store updates through their existing update mechanism.
 
-Pre-releases and runs with the store checkbox disabled create only a GitHub release. A pushed `v*` tag also runs the pipeline, but its commit must already contain matching versions and an empty `Unreleased` section. A tag or existing release pointing at other source is rejected. Re-running an existing release compares package bytes and never replaces its assets. Re-run only failed store jobs after resolving a failure.
+Pre-releases and runs with the store checkbox disabled create only a GitHub release. A pushed `v*` tag also runs the pipeline, but its commit must already contain matching versions and an empty `Unreleased` section. A repeat of a prepared release checks out its tag, preserving the release commit from the first attempt. Its source must match the existing GitHub release target. Re-running compares package bytes and never replaces public release assets; only temporary CI artifacts are recreated. Re-run only failed store jobs after resolving a failure.
 
 For local preparation, `node scripts/prepare-release.mjs v1.3.0` updates the two manifests and changelog without committing, tagging, or publishing. Release notes always come from `CHANGELOG.md`.
 
