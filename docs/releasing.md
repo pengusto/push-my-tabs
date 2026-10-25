@@ -1,5 +1,25 @@
 # Release and store updates
 
+## 1.3.2 preparation — 2026-10-25
+
+The user authorized withdrawing Chrome's pending 1.3.1 review to submit the
+larger transparent Wingman icon and German promotional video together.
+Chrome confirmed the withdrawal. The German localized video was saved and
+verified after reloading the listing; the English global video remains set.
+The exact unlisted German URL remains in the local handoff notes.
+
+[Release build 40222679560](https://github.com/pengusto/push-my-tabs/actions/runs/40222679560)
+passed both package builds, tests and Firefox lint. Both downloaded release ZIPs
+have manifest version 1.3.2, match SHA256SUMS, and contain all four transparent
+extension icons byte-for-byte from source, including the separate 16-pixel drawing.
+Old icon variants and immutable 1.3.1 release packages are retained.
+
+Store submission uses the same immutable v1.3.2 release assets through
+[run 40223070851](https://github.com/pengusto/push-my-tabs/actions/runs/40223070851).
+All jobs succeeded: Chrome returned `1.3.2: PENDING_REVIEW (submitted)` and
+Firefox returned `1.3.2: SUBMITTED (submitted)`. This confirms submission;
+public availability remains subject to store review and delivery.
+
 ## 1.3.1 submission — 2026-10-25
 
 The [verified release run](https://github.com/pengusto/push-my-tabs/actions/runs/40143132958)
@@ -109,10 +129,10 @@ package. The former dark extension icon set is retained in
 
 The German film is in `store-assets/penguin/wingman-de/`. Set its hosted URL in
 Chrome's German localized promotional-video field when the listing is editable;
-keep the existing English URL as global video. Do not withdraw an ongoing review
-only to change the localized video.
+keep the existing English URL as global video. Withdrawing a review requires
+explicit user authorization; the 1.3.2 update above records that authorization.
 
 German video hosting is complete (unlisted, Pengusto); the exact URL is retained
 in local handoff notes rather than added to this public documentation. Localized
-Store-link persistence remains unverified because foreground user activity
-interrupted dashboard inspection. No pending review was withdrawn.
+Store-link persistence was verified after reloading the German listing during
+the authorized 1.3.2 preparation above.
