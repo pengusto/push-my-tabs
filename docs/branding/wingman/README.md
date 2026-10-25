@@ -58,3 +58,15 @@ the native 16 px ICO frame and all foreground pixels within the maskable safe
 circle were verified. Keep individual ICO frames: resizing one large frame would
 lose the separate tiny drawing. The maskable export places a 288 px tile inside
 a 512 px opaque canvas, including antialiased tile edges within the safe circle.
+
+## Transparent extension variant
+
+The next extension package uses `wingman-extension.svg` / `extension-1024.png`
+without the dark tile. Its tighter 232-unit viewBox enlarges the penguin, while
+`wingman-extension-small.svg` / `extension-small-16.png` retain the independent
+16 px drawing. White face/belly remain deliberately opaque; the surrounding
+canvas is transparent. Header/footer and website icons keep the reviewed dark tile.
+The full previous dark extension set is retained in `previous-dark-extension/`.
+The exporter keeps these two applications separate; never substitute the web tile
+for the transparent extension PNGs. Version 1.3.1 already submitted to stores is
+unchanged; a new store package needs a higher version after its review.

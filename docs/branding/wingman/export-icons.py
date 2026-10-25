@@ -11,17 +11,16 @@ DIGITAL = HERE.parent / "digital"
 
 
 def export():
-    with Image.open(HERE / "app-dark-1024.png") as master:
+    with Image.open(HERE / "extension-1024.png") as master:
         if master.size != (1024, 1024) or master.mode != "RGBA":
-            raise ValueError("Wingman master must be a 1024 px RGBA render")
+            raise ValueError("Extension master must be a 1024 px RGBA render")
         for size in (32, 48, 128, 1024):
             master.resize((size, size), Image.Resampling.LANCZOS).save(ICONS / f"icon-{size}.png")
-    # Preserve the separately drawn, pixel-aligned cut; do not shrink the full face.
-    with Image.open(HERE / "app-dark-small-16.png") as small:
+    with Image.open(HERE / "extension-small-16.png") as small:
         if small.size != (16, 16) or small.mode != "RGBA":
-            raise ValueError("Small Wingman master must be a 16 px RGBA render")
-    shutil.copyfile(HERE / "app-dark-small-16.png", ICONS / "icon-16.png")
-    shutil.copyfile(HERE / "wingman-app-dark.svg", ICONS / "logo.svg")
+            raise ValueError("Small extension master must be a 16 px RGBA render")
+    shutil.copyfile(HERE / "extension-small-16.png", ICONS / "icon-16.png")
+    shutil.copyfile(HERE / "wingman-extension.svg", ICONS / "logo.svg")
     shutil.copyfile(HERE / "wingman-app-dark.svg", WEBSITE / "logo.svg")
     shutil.copyfile(HERE / "wingman-app-small.svg", WEBSITE / "favicon.svg")
     with Image.open(HERE / "app-dark-1024.png") as master:

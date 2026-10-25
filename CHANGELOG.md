@@ -4,6 +4,10 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Changed
+
+- Enlarge the Wingman extension icon and remove its dark background, retaining the separate tiny toolbar drawing.
+
 ## 1.3.1 - 2026-10-25
 ### Changed
 

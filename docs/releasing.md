@@ -96,3 +96,18 @@ The connection test rebuilt both packages and matched their checksums and bytes 
 This validates GitHub-to-store authentication and access to both existing listings. It deliberately reused the current version and did not upload or replace an already submitted package. Upload/publish behavior is covered by the API tests; a future new version will exercise the actual upload branch. Chrome's pending review remains external to GitHub and is not a live-publication claim.
 
 Unit tests cover version/changelog preparation, asynchronous Chrome uploads, failed uploads, duplicate submissions, warning/review states, immutable GitHub identity, missing session authorization, and Firefox authentication/status handling. For future stable releases, run **Create release** from `main` with the next tag and leave store submission enabled, or push a correctly prepared `v*` tag. After an error, rerun the failed job from the current attempt; GitHub does not let an older attempt's job ID be restarted.
+
+## Next icon and German-video preparation
+
+The next package uses a larger transparent Wingman extension icon; website and
+store tiles retain their dark backgrounds. The previously submitted 1.3.1 ZIPs
+and tag are unchanged. Local test builds at dist/ can contain the next artwork
+while retaining the manifest version: never upload those over 1.3.1. Use the
+immutable GitHub release assets for 1.3.1 and increase the version for a future
+package. The former dark extension icon set is retained in
+`docs/branding/wingman/previous-dark-extension/`.
+
+The German film is in `store-assets/penguin/wingman-de/`. Set its hosted URL in
+Chrome's German localized promotional-video field when the listing is editable;
+keep the existing English URL as global video. Do not withdraw an ongoing review
+only to change the localized video.
