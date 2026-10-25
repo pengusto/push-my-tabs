@@ -111,3 +111,8 @@ The German film is in `store-assets/penguin/wingman-de/`. Set its hosted URL in
 Chrome's German localized promotional-video field when the listing is editable;
 keep the existing English URL as global video. Do not withdraw an ongoing review
 only to change the localized video.
+
+German video hosting is complete (unlisted, Pengusto); the exact URL is retained
+in local handoff notes rather than added to this public documentation. Localized
+Store-link persistence remains unverified because foreground user activity
+interrupted dashboard inspection. No pending review was withdrawn.

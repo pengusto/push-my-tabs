@@ -16,3 +16,9 @@ Excerpted, mixed and faded. Sound effect: Kenney, CC0.
 Ziel: nicht gelistet auf Pengusto (@pengusto-dev), anschließend deutscher
 lokalisierter Chrome-Videolink. Der globale englische Link bleibt erhalten.
 Die ausstehende Store-Prüfung nicht für diese Änderung abbrechen.
+
+Hosting: German edition uploaded to Pengusto as unlisted. The exact URL is retained
+only in local handoff notes until the authorized Chrome listing integration is done.
+YouTube upload checks reported no copyright issues. The German Chrome link is not
+yet verified as saved; foreground browser activity interrupted dashboard inspection.
+The existing global English video is unchanged. No ongoing review was withdrawn.
