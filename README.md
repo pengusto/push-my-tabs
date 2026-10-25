@@ -52,6 +52,8 @@ The adaptive preset maps the four direction commands to your tab layout, so swit
 
 The popup distinguishes **Natively detected**, **Automatically estimated**, and **Manually set** layouts. Chrome estimates from window geometry; an open side panel can affect the result. Firefox 142+ reads its vertical-tabs setting directly. Zen uses its own tab bar, so its inherited Firefox setting is ignored: confirm the estimated layout or choose a manual layout. Saved confirmations are shown as manually set.
 
+In **Layout**, confirmations now default to **All sites with this browser layout**. Confirm horizontal and vertical arrangements as needed; Automatic mode reuses the matching confirmation on other tabs when a command runs or the popup opens. Small measurement changes are allowed, but conflicting nearby confirmations and measurements near the estimation thresholds require confirmation. Larger unknown changes may also require confirmation. This is a conservative geometry estimate, not Chrome's native orientation setting or a live orientation-change event. Existing site/path exceptions stay scoped and take precedence; they are not automatically made global. A new shared confirmation also updates any matching exception for the current site/path so it takes effect immediately.
+
 ## Your tabs stay yours
 
 No accounts, analytics, advertising, or remote code. Settings stay in your browser.

@@ -262,6 +262,31 @@ tabs = tabs.map((tab) => ({ ...tab, width: 1200, height: 700 }));
 await listener("arrow-up");
 assert.deepEqual(updates, [[10, { active: true }]], "site profile resolves ambiguous geometry");
 
+settings = {
+  layoutMode: "auto", presetId: "adaptive", wrapSwitching: true,
+  layoutHints: { "200:200": "vertical", "200:240": "horizontal" }
+};
+setActive(1);
+tabs = tabs.map(tab => ({ ...tab, url: "https://other.example/", width: 1200, height: 700 }));
+const opensBeforeShared = popupOpens;
+await listener("arrow-up");
+assert.deepEqual(updates, [[10, { active: true }]], "global confirmation works on another site's keyboard command");
+assert.equal(popupOpens, opensBeforeShared);
+setActive(1);
+tabs = tabs.map(tab => ({ ...tab, width: 1180, height: 700 }));
+await listener("arrow-up");
+assert.deepEqual(updates, [[10, { active: true }]], "small width variation keeps the confirmed mapping");
+setActive(1);
+tabs = tabs.map(tab => ({ ...tab, width: 1200, height: 680 }));
+await listener("arrow-up");
+assert.deepEqual(updates, [], "conflicting measurements must not switch or move a tab");
+assert.deepEqual(moves, []);
+assert.equal(popupOpens, opensBeforeShared + 1);
+setActive(1);
+tabs = tabs.map(tab => ({ ...tab, width: 1200, height: 660 }));
+await listener("arrow-left");
+assert.deepEqual(updates, [[10, { active: true }]], "a known horizontal layout immediately uses left/right for switching");
+
 settings = { layoutMode: "horizontal", presetId: "adaptive", wrapSwitching: true };
 setActive(1);
 lastFocusedWindowId = 99;

@@ -33,12 +33,12 @@ async function pageFor(browser, kind, locale, options = {}) {
   page.on("pageerror", (error) => errors.push(error.message));
   await page.addInitScript(({ kind, locale, options, manifest, base }) => {
     const os = options.os ?? "mac";
-    const saved = JSON.parse(sessionStorage.getItem("mock-settings") || "null") ?? { locale, layoutMode: "auto", presetId: "adaptive" };
+    const saved = JSON.parse(sessionStorage.getItem("mock-settings") || "null") ?? { locale, layoutMode: "auto", presetId: "adaptive", ...options.saved };
     if (options.poison) saved.siteProfiles = { '<img src=x onerror="globalThis.__injected=true">': { '20:120': 'horizontal' } };
     const commands = Object.entries(manifest.commands).map(([name, entry]) => ({ name, description: name, shortcut: name.startsWith("arrow-") ? `${os === "mac" ? "Command" : "Ctrl"}+${name.slice(6).replace(/^./, c => c.toUpperCase())}` : "" }));
     const tabs = [{ id: 1, windowId: 1, active: true, incognito: Boolean(options.private), url: "https://example.com/page", width: options.unknown ? undefined : options.uncertain ? 1100 : 1390, height: options.unknown ? undefined : 780 }, { id: 2, windowId: 1 }, { id: 3, windowId: 1 }];
     const win = { id: 1, width: 1400, height: 900, tabs };
-    Object.assign(globalThis, { __saved: saved, __commands: commands, __created: [], __messages: [], __closed: false, __nativeReads: 0, __loadToken: Math.random() });
+    Object.assign(globalThis, { __tabs: tabs, __saved: saved, __commands: commands, __created: [], __messages: [], __closed: false, __nativeReads: 0, __loadToken: Math.random() });
     window.close = () => { __closed = true; };
     const api = {
       storage: { local: {
@@ -215,7 +215,7 @@ try {
       assert.equal(await forced.evaluate(() => __saved.siteProfiles), undefined);
       await forced.evaluate(() => { __failSave = false; });
       await forced.locator('#retry-save').click();
-      await forced.waitForFunction(() => __saved.layoutMode === 'auto' && Object.values(__saved.siteProfiles || {}).some(profile => Object.values(profile).includes('vertical')));
+      await forced.waitForFunction(() => __saved.layoutMode === 'auto' && Object.values(__saved.layoutHints || {}).includes('vertical'));
       await forced.waitForFunction(() => document.querySelector('#layout-source').textContent.includes('Manuell festgelegt: Vertikal'));
       assert.equal(await forced.locator('[data-layout="vertical"]').getAttribute('aria-pressed'), 'true', 'a remembered tile becomes the effective layout');
       assert.equal(await forced.locator('[name="layout-mode"][value="auto"]').isChecked(), true);
@@ -226,6 +226,7 @@ try {
       assert.equal(await ambiguous.locator('#mapping-preview button:disabled').count(), 4);
       const loadToken = await ambiguous.evaluate(() => __loadToken);
       await view(ambiguous, 'layout');
+      assert.equal(await ambiguous.locator('#profile-scope').inputValue(), 'geometry', 'confirmations default to reuse across sites');
       await ambiguous.locator('[data-layout="vertical"]').click();
       await ambiguous.evaluate(() => { __holdSave = true; });
       await ambiguous.locator('#remember-layout').click();
@@ -233,6 +234,7 @@ try {
       assert.equal(await ambiguous.evaluate(() => __saved.siteProfiles), undefined);
       await ambiguous.evaluate(() => { __holdSave = false; __releaseSave(); });
       await ambiguous.waitForFunction(() => document.querySelector('#layout-source').textContent.includes('Manuell festgelegt: Vertikal'));
+      assert.deepEqual(await ambiguous.evaluate(() => __saved.siteProfiles), {}, 'shared calibration does not store a new site URL');
       assert.equal(await ambiguous.evaluate(() => __loadToken), loadToken, 'confirming does not reload or resize popup');
       if (kind === 'firefox') assert.equal(await ambiguous.evaluate(() => __nativeReads), 0, 'Zen never trusts inherited native setting');
       await view(ambiguous, 'navigation');
@@ -245,6 +247,34 @@ try {
       await ambiguous.waitForFunction(() => __closed);
       assert.equal(await ambiguous.evaluate(() => __messages.at(-1).targetTabId), 1);
       await ambiguous.close();
+
+      // Existing explicit site/path overrides remain supported. A new global
+      // confirmation must take effect on the current tab despite older overrides.
+      const calibrated = (await pageFor(browser, kind, 'en', {
+        uncertain: true, ...(kind === 'firefox' ? { zen: true } : {}),
+        saved: { siteProfiles: { 'https://example.com': { '300:120': 'horizontal' }, 'https://example.com/page': { '300:120': 'horizontal' } } }
+      })).page;
+      await ready(calibrated);
+      await view(calibrated, 'layout');
+      await calibrated.locator('[data-layout="vertical"]').click();
+      await calibrated.locator('#remember-layout').click();
+      await calibrated.waitForFunction(() => __saved.layoutHints?.['300:120'] === 'vertical');
+      assert.equal(await calibrated.evaluate(() => __saved.siteProfiles['https://example.com/page']['300:120']), 'vertical');
+      assert.match(await calibrated.locator('#layout-source').textContent(), /Manually set: Vertical/);
+      await calibrated.evaluate(() => { __tabs[0].url = 'https://another.example/'; __tabs[0].width = 1080; });
+      await calibrated.locator('[name="layout-mode"][value="horizontal"]').check();
+      await calibrated.waitForFunction(() => __saved.layoutMode === 'horizontal');
+      await calibrated.locator('[name="layout-mode"][value="auto"]').check();
+      await calibrated.waitForFunction(() => __saved.layoutMode === 'auto');
+      assert.match(await calibrated.locator('#detected').textContent(), /Manually set: Vertical/);
+      assert.equal(await calibrated.locator('#confirmation-notice').isVisible(), false);
+      await view(calibrated, 'layout');
+      await calibrated.locator('#profile-scope').selectOption('path');
+      await calibrated.locator('[data-layout="horizontal"]').click();
+      await calibrated.locator('#remember-layout').click();
+      await calibrated.waitForFunction(() => __saved.siteProfiles['https://another.example/']?.['320:120'] === 'horizontal');
+      assert.equal(await calibrated.evaluate(() => __saved.layoutHints['300:120']), 'vertical', 'path-specific saves do not overwrite the shared calibration');
+      await calibrated.close();
       console.log(`${kind}: five screens, platform glyphs, save/retry, command acknowledgement, profiles, presets, RTL and options checks passed (mock extension APIs)`);
     } finally { await browser.close(); }
   }
