@@ -181,10 +181,12 @@ async function startApp(popup) {
     for (const input of all('[name="layout-mode"]')) input.checked = input.value === settings.layoutMode;
     for (const button of all("[data-layout]")) button.setAttribute("aria-pressed", String(button.dataset.layout === chosenLayout));
     const hasGeometry = Boolean(detection.key);
+    const siteScope = $("#profile-scope").value !== "geometry";
     $("#scope-field").hidden = !origin || !hasGeometry;
     $("#site-host").textContent = origin ? $("#profile-scope").value === "path" ? path : origin : "";
-    $("#site-heading").textContent = origin && hasGeometry ? message("currentSiteHeading") : message("layoutNeedsConfirmation");
-    $("#confirmation-scope").textContent = origin && hasGeometry
+    $("#site-host").hidden = !siteScope;
+    $("#site-heading").textContent = origin && hasGeometry && siteScope ? message("currentSiteHeading") : message("layoutNeedsConfirmation");
+    $("#confirmation-scope").textContent = origin && hasGeometry && siteScope
       ? message("confirmationSite", new URL(origin).host)
       : hasGeometry ? message("confirmationGeometry") : message("confirmationManual");
     $("#confirmation-auto-help").hidden = !hasGeometry || settings.layoutMode === "auto";
@@ -208,7 +210,7 @@ async function startApp(popup) {
     const layout = chosenLayout;
     const scope = $("#profile-scope").value;
     run(async () => {
-      if (origin && detection.key) {
+      if (origin && detection.key && scope !== "geometry") {
         const next = { ...settings, siteProfiles: { ...settings.siteProfiles } };
         saveSiteLayoutHint(next, activeTab, detection.key, layout, scope);
         await api.storage.local.set({ siteProfiles: next.siteProfiles, layoutMode: "auto" });
@@ -216,8 +218,15 @@ async function startApp(popup) {
         settings.layoutMode = "auto";
       } else if (detection.key) {
         const hints = { ...settings.layoutHints, [detection.key]: layout };
-        await api.storage.local.set({ layoutHints: hints, layoutMode: "auto" });
+        const profiles = { ...settings.siteProfiles };
+        // The confirmation must also take effect on this tab if an older
+        // site/path confirmation would otherwise override the shared hint.
+        for (const profile of [origin, path]) {
+          if (profiles[profile]?.[detection.key]) profiles[profile] = { ...profiles[profile], [detection.key]: layout };
+        }
+        await api.storage.local.set({ layoutHints: hints, siteProfiles: profiles, layoutMode: "auto" });
         settings.layoutHints = hints;
+        settings.siteProfiles = profiles;
         settings.layoutMode = "auto";
       } else {
         await api.storage.local.set({ layoutMode: layout });

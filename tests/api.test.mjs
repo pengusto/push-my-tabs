@@ -61,4 +61,51 @@ assert.deepEqual(await layoutDetection(
   }
 ), { layout: "horizontal", confidence: "remembered", key: "360:200" });
 
-console.log("settings checks passed");
+const shared = {
+  layoutHints: { "360:200": "vertical", "360:240": "horizontal" },
+  siteProfiles: {}
+};
+const browserWindow = { width: 1512, height: 864 };
+const active = { width: 1156, height: 664, url: "https://example.com/a" };
+for (const url of [active.url, "https://another.example/b", "chrome://newtab/"]) {
+  assert.deepEqual(await layoutDetection(browserWindow, { ...active, url }, shared), {
+    layout: "vertical", confidence: "remembered", key: "360:200"
+  }, "a shared confirmation survives navigation and switching sites");
+}
+assert.deepEqual(await layoutDetection(browserWindow, { ...active, width: 1136 }, shared), {
+  layout: "vertical", confidence: "remembered", key: "380:200"
+}, "one rounding step of width jitter does not reverse the layout");
+assert.deepEqual(await layoutDetection(browserWindow, { ...active, height: 644 }, shared), {
+  layout: null, confidence: "uncertain", key: "360:220"
+}, "conflicting nearby orientations require confirmation instead of guessing");
+assert.deepEqual(await layoutDetection(browserWindow, { ...active, height: 624 }, shared), {
+  layout: "horizontal", confidence: "remembered", key: "360:240"
+}, "switching to a separately confirmed orientation takes effect immediately");
+assert.deepEqual(await layoutDetection(browserWindow, { ...active, width: 1116 }, shared), {
+  layout: "horizontal", confidence: "uncertain", key: "400:200"
+}, "a nearby reuse never expands into another rounding step");
+assert.equal((await layoutDetection(browserWindow, { ...active, width: 1136, height: 644 }, shared)).confidence, "uncertain",
+  "diagonal changes exceed the single-step allowance");
+assert.equal((await layoutDetection(browserWindow, { ...active, width: 770 }, shared)).confidence, "uncertain",
+  "an added side panel is not covered by an unrelated calibration");
+assert.equal((await layoutDetection(browserWindow, { ...active, width: undefined }, shared)).layout, null,
+  "remembered state never invents missing dimensions");
+assert.equal((await layoutDetection(browserWindow, active, {
+  ...shared, siteProfiles: { "https://example.com/a": { "360:200": "horizontal" } }
+})).layout, "horizontal", "explicit path overrides still take precedence");
+assert.deepEqual(shared.layoutHints, { "360:200": "vertical", "360:240": "horizontal" },
+  "detection never persists inferred measurements or drifts its calibration");
+for (const width of [1473, 1471]) {
+  assert.equal((await layoutDetection(browserWindow, { width, height: 784 })).confidence, "uncertain",
+    "a two-pixel change across the side threshold does not confidently reverse commands");
+}
+for (const height of [765, 763]) {
+  assert.equal((await layoutDetection(browserWindow, { width: 1200, height })).confidence, "uncertain",
+    "a two-pixel change across the top threshold needs confirmation");
+}
+assert.deepEqual(await layoutDetection(browserWindow, { width: 1156, height: 784 }, {
+  layoutHints: { "360:100": "horizontal" }
+}), { layout: null, confidence: "uncertain", key: "360:80" },
+"a nearby horizontal hint cannot mask a clear vertical estimate");
+
+console.log("settings and conservative cross-site layout checks passed");

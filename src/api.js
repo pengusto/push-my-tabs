@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS, detectLayout, geometryKey, siteLayoutHint } from "./layout.js";
+import { DEFAULT_SETTINGS, detectLayout, geometryKey, geometryLayoutHint, siteLayoutHint } from "./layout.js";
 
 export const api = globalThis.browser ?? globalThis.chrome;
 
@@ -64,7 +64,16 @@ export async function layoutDetection(window, activeTab, settings = DEFAULT_SETT
   if (!key) return { layout: null, confidence: "uncertain", key: null };
   const siteHint = siteLayoutHint(settings, activeTab, key);
   if (siteHint) return { layout: siteHint, confidence: "remembered", key };
-  if (settings.layoutHints?.[key]) return { layout: settings.layoutHints[key], confidence: "remembered", key };
+  const geometryHint = geometryLayoutHint(settings.layoutHints, key);
+  if (geometryHint) {
+    const estimated = detectLayout(window.width, window.height, activeTab.width, activeTab.height);
+    // A nearby confirmation must not carry the old orientation across a clear
+    // heuristic boundary. Exact confirmations remain explicit overrides.
+    if (!settings.layoutHints?.[key] && geometryHint.layout && geometryHint.layout !== estimated && !isLayoutDetectionAmbiguous(window, activeTab)) {
+      return { layout: null, confidence: "uncertain", key };
+    }
+    return { ...geometryHint, key };
+  }
 
   return {
     layout: detectLayout(window.width, window.height, activeTab.width, activeTab.height),
@@ -76,7 +85,13 @@ export async function layoutDetection(window, activeTab, settings = DEFAULT_SETT
 export function isLayoutDetectionAmbiguous(window, activeTab) {
   if (window.width == null || window.height == null || activeTab?.width == null || activeTab.height == null) return true;
 
-  return window.width - activeTab.width >= 40 && window.height - activeTab.height > 100;
+  const side = window.width - activeTab.width;
+  const top = window.height - activeTab.height;
+  // Half a rounding bucket around either threshold is inconclusive, rather
+  // than letting a few pixels silently reverse directional commands.
+  return (side >= 30 && side <= 50)
+    || (side >= 30 && top >= 90 && top <= 110)
+    || (side >= 40 && top > 100);
 }
 
 export function recommendedAmbiguousLayout(window, activeTab) {

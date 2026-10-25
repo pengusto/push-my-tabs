@@ -94,6 +94,32 @@ export function siteLayoutHint(settings, tab, key) {
   return settings.siteProfiles?.[path]?.[key] ?? settings.siteProfiles?.[origin]?.[key] ?? null;
 }
 
+export function geometryLayoutHint(hints, key) {
+  const measures = (value) => {
+    if (!/^-?\d+:-?\d+$/.test(value)) return null;
+    return value.split(":").map(Number);
+  };
+  const current = measures(key);
+  if (!current) return null;
+  const validLayout = (layout) => ["horizontal", "vertical"].includes(layout);
+  // A confirmed exact measurement takes precedence over nearby measurements.
+  if (validLayout(hints?.[key])) return { layout: hints[key], confidence: "remembered" };
+
+  const matches = new Set();
+  for (const [savedKey, layout] of Object.entries(hints ?? {})) {
+    const saved = measures(savedKey);
+    if (!saved || !validLayout(layout)) continue;
+    // One 20px rounding step in one dimension only. Never learn from a match:
+    // otherwise repeated small changes could drift into another real layout.
+    const distance = Math.abs(saved[0] - current[0]) + Math.abs(saved[1] - current[1]);
+    if (distance <= 20) matches.add(layout);
+  }
+  if (!matches.size) return null;
+  return matches.size === 1
+    ? { layout: [...matches][0], confidence: "remembered" }
+    : { layout: null, confidence: "uncertain" };
+}
+
 export function saveSiteLayoutHint(settings, tab, key, layout, scope = "origin") {
   const profile = siteProfileKey(tab?.url, scope);
   if (!profile || !key) return false;

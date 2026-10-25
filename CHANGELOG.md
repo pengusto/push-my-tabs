@@ -4,6 +4,12 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.3.3 - 2026-10-26
+### Improved
+
+- Reuse layout confirmations across sites by default, with a small allowance for measurement changes; site and path exceptions remain available.
+- Ask for confirmation near detection thresholds or when nearby saved layouts disagree, instead of prematurely reversing directional shortcuts.
+
 ## 1.3.2 - 2026-10-25
 ### Changed
 

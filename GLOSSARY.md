@@ -38,6 +38,8 @@ _Avoid_: Forced site mode, URL history, content rule
 
 **Layout Hint**:
 A locally stored confirmation for one rounded browser window/tab geometry. A site or path profile takes precedence over a global hint; both can be removed from settings.
+
+New confirmations default to a global Layout Hint, reusable across sites. A nearby match allows one 20px step in either rounded gap, never both; conflicting nearby orientations require confirmation. Matching does not write new hints. Explicit site/path confirmations retain their scope.
 _Avoid_: Guaranteed detection, forced site mode
 
 **Layout Mapping**:
