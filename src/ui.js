@@ -38,18 +38,14 @@ export async function openShortcutSetup(section = "direction-shortcuts") {
 
 export function recommendedShortcuts(platform) {
   const mac = platform.toLowerCase().includes("mac");
+  if (!mac && !/win|linux|cros|bsd/.test(platform.toLowerCase())) return {};
   const modifier = mac ? "Command" : "Alt";
   return {
     "arrow-left": `${modifier}+Left`,
     "arrow-right": `${modifier}+Right`,
     "arrow-up": `${modifier}+Up`,
     "arrow-down": `${modifier}+Down`,
-    "history-back": mac ? "Command+Alt+Down" : "Alt+Shift+Down",
-    "history-forward": mac ? "Command+Alt+Up" : "Alt+Shift+Up",
-    "new-tab-before": "Alt+H",
     "new-tab-after": "Alt+T",
-    "new-tab-end": "Alt+E",
-    "recent-tab-quick-switch": "Alt+W",
     "recent-tab-switch": "Alt+S",
     "recent-tab-switch-reverse": "Alt+Shift+S"
   };

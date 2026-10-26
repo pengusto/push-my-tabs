@@ -53,3 +53,6 @@ _Avoid_: Shortcut, key binding
 **Command Shortcut**:
 A browser-managed key combination that invokes one command. The extension calls it a “Shortcut” or “Tastenkombination”; users edit it in the browser while presets determine the behavior of the four direction shortcuts.
 _Avoid_: Hotkey, app-managed shortcut
+
+**Shortcut Recommendation**:
+An optional, platform-formatted suggestion for a Command Shortcut. It is separate from the actual browser-reported assignment and never implies that a key combination is free on the user's computer. Some supported commands deliberately have no recommendation. Chrome edits remain in its browser editor; Firefox can apply a suggestion through its commands API.

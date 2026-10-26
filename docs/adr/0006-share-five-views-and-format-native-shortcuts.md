@@ -13,3 +13,12 @@ Saving a site or geometry confirmation activates Automatic mode atomically with 
 Sources: [Platform information](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/getPlatformInfo), [active command bindings](https://developer.chrome.com/docs/extensions/reference/api/commands), [Firefox shortcut editing](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/commands/update).
 
 Private-window instructions follow [Mozilla's browser settings guide](https://support.mozilla.org/en-US/kb/extensions-private-browsing).
+
+
+Shortcut bindings is also the command inventory: each supported command shows actual assignment status and a distinct recommendation or no-standard-recommendation message. Count only supported commands, not the toolbar action or unknown browser entries. Refresh status and counts both on focus and after a successful Firefox save; retain focused inputs during those updates. TabLoop's binding group comes first and starts expanded; Chrome's edit button precedes the inventory. Reuse this destination rather than add another competing sidebar menu.
+
+Keep curated recommendations in `ui.js` as the single source, limited to direction commands, normal/reverse TabLoop and new-tab-after. Do not invent suggestions when the OS is unknown or imply that a suggested shortcut is free. Existing assignments remain unchanged. The former Mac `Command+Alt+Up/Down` history suggestions collide with Chrome's documented toolbar/dialog focus navigation and were removed. Fast cycling and uncommon commands do not need a standard shortcut. `tests/ui-flow.test.mjs` checks the curated set and internal uniqueness; `tests/ui-browser.test.mjs` checks separate actual/recommended values, unassigned rows, counts, focus refresh and Firefox saves. [Chrome's keyboard shortcuts](https://support.google.com/chrome/answer/157179) document the native conflict. Cross-extension checks require inspection outside this extension: `commands.getAll()` returns only its own commands.
+
+Display the shortcut inventory in two columns with stacked labels, actual keys and recommendations. Below 280px of available view width, use one column. Let Firefox editing controls wrap within each cell.
+
+Mark installation defaults from each packaged manifest’s `suggested_key` with a separate badge. The badge describes the supplied default, not the origin of the current assignment; browser conflicts and user changes can alter actual bindings. Optional recommendations such as TabLoop are not installation defaults.

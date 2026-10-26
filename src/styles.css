@@ -104,18 +104,26 @@ input[role="switch"]:checked::after { inset-inline-start: 17px; }
 .app-footer { display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 10px; border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); }
 .app-footer a { display: inline-flex; gap: 5px; align-items: center; }
 .app-footer svg { width: 12px; height: 12px; }
-.shortcut-row { padding: 11px 0; border-bottom: 1px solid var(--line); }
-.shortcut-line { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+[data-page="shortcuts"] { container-type: inline-size; }
+#shortcuts, #recent-commands, #optional-commands { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+.shortcut-row { min-width: 0; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.shortcut-recommendation { font-size: 11px; margin: 6px 0 0; }
+#shortcut-summary { margin-bottom: 6px; }
+.shortcut-group-title { margin-top: 20px; }
+.shortcut-line { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.shortcut-line kbd { max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
 .shortcut-name { min-width: 0; }
 .shortcut-name strong { font-weight: 500; }
 .shortcut-name small { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; }
+.shortcut-name .shortcut-default { display: inline-block; padding: 1px 5px; border-radius: 4px; color: #e1d9ff; background: var(--accent-soft); }
 .shortcut-row input { max-width: 145px; font-size: 12px; }
 .shortcut-row input:read-only { color: var(--muted); }
-.shortcut-controls { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 7px; }
+.shortcut-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 7px; }
 .shortcut-controls .text-button { font-size: 10px; min-height: 28px; }
 .shortcut-error { color: var(--danger); font-size: 11px; margin-top: 7px; }
-#shortcut-settings { margin: 16px 0 8px; }
-#platform-caption { margin-bottom: 10px; }
+#shortcut-settings { margin: 10px 0 6px; }
+#platform-caption { margin-bottom: 4px; }
+@container (max-width: 279px) { #shortcuts, #recent-commands, #optional-commands { grid-template-columns: minmax(0, 1fr); } }
 #key-legend { margin-top: 22px; }
 .mapping-group { margin-top: 18px; }
 .mapping-group label { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: center; margin-bottom: 8px; }

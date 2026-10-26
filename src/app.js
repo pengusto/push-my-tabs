@@ -282,6 +282,8 @@ async function startApp(popup) {
 
   function renderShortcuts() {
     const targets = [[$("#shortcuts"), COMMANDS], [$("#recent-commands"), RECENT_TAB_COMMANDS], [$("#optional-commands"), [...HISTORY_COMMANDS, ...TAB_CREATION_COMMANDS, ...TAB_ACTION_COMMANDS]]];
+    const supported = targets.flatMap(([, names]) => names).map(name => commands.find(command => command.name === name)).filter(Boolean);
+    $("#shortcut-summary").textContent = message("shortcutAssignmentSummary", [supported.filter(command => command.shortcut?.trim()).length, supported.length]);
     for (const [container, names] of targets) {
       container.replaceChildren(...names.map((name) => commands.find((command) => command.name === name)).filter(Boolean).map((command) => {
         const row = document.createElement("div");
@@ -294,6 +296,19 @@ async function startApp(popup) {
         const label = document.createElement("strong");
         label.textContent = commandLabel(command);
         name.append(label);
+        const defaults = manifest.commands?.[command.name]?.suggested_key;
+        const defaultKey = defaults?.[os] || defaults?.default;
+        if (defaultKey) {
+          const badge = document.createElement("small");
+          badge.className = "shortcut-default";
+          badge.textContent = message("shortcutInstallDefault");
+          badge.title = message("shortcutInstallDefaultHelp", shortcutLabel(defaultKey, os));
+          name.append(badge);
+        }
+        const assignment = document.createElement("small");
+        assignment.className = "shortcut-assignment";
+        assignment.textContent = message(command.shortcut?.trim() ? "shortcutAssigned" : "shortcutUnassigned");
+        name.append(assignment);
         if (COMMANDS.includes(command.name) && settings.layoutMode === "auto") {
           const horizontal = message(ACTIONS[selectedAction(settings, "horizontal", command.name)]);
           const vertical = message(ACTIONS[selectedAction(settings, "vertical", command.name)]);
@@ -306,6 +321,12 @@ async function startApp(popup) {
         }
         line.append(name, keycap(command.shortcut));
         row.append(line);
+        const recommendation = document.createElement("p");
+        recommendation.className = "shortcut-recommendation quiet";
+        recommendation.textContent = suggestions[command.name]
+          ? message("shortcutRecommended", shortcutLabel(suggestions[command.name], os))
+          : message("shortcutNoRecommendation");
+        row.append(recommendation);
         if (canEditHere) {
           const controls = document.createElement("div");
           controls.className = "shortcut-controls";
@@ -327,9 +348,12 @@ async function startApp(popup) {
                 for (const current of commands) {
                   const existing = document.querySelector(`[data-shortcut="${current.name}"]`);
                   existing?.querySelector("kbd")?.replaceWith(keycap(current.shortcut));
+                  const assignment = existing?.querySelector(".shortcut-assignment");
+                  if (assignment) assignment.textContent = message(current.shortcut?.trim() ? "shortcutAssigned" : "shortcutUnassigned");
                   const field = existing?.querySelector("input");
                   if (field && (field === input || document.activeElement !== field)) field.value = current.shortcut || "";
                 }
+                $("#shortcut-summary").textContent = message("shortcutAssignmentSummary", [commands.filter(command => supported.some(item => item.name === command.name) && command.shortcut?.trim()).length, supported.length]);
                 input.removeAttribute("aria-invalid");
                 error.hidden = true;
               } catch (failure) {
@@ -362,7 +386,7 @@ async function startApp(popup) {
     await api.tabs.create({ url: "chrome://extensions/shortcuts" });
     if (popup) window.close();
   }, { success: null, failure: "actionFailed" }));
-  $("#platform-caption").textContent = platformName(os) ? `${platformName(os)} · ${message("layoutAuto")}` : message("platformUnknown");
+  $("#platform-caption").textContent = platformName(os) || message("platformUnknown");
   $("#key-legend").textContent = os === "mac" ? "⌘ Command · ⌥ Option · ⇧ Shift · ⌃ Control" : "Ctrl · Alt · Shift · ← ↑ ↓ →";
   window.addEventListener("focus", async () => {
     if ($(":focus")?.matches("[data-shortcut] input")) return;

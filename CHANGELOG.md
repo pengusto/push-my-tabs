@@ -4,6 +4,13 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Improved
+
+- Mark shortcuts supplied at installation separately from optional recommendations and current assignments.
+- Arrange shortcut functions in two compact columns, falling back to one column in narrow views.
+- Show each command's assigned/unassigned state and optional recommendation on Chrome and Firefox, with a live assignment count and TabLoop shortcuts first.
+- Keep recommendations focused on direction keys, TabLoop and new-tab placement; remove conflicting browser-history suggestions and leave less common actions without a standard recommendation.
+
 ## 1.3.3 - 2026-10-26
 ### Improved
 
