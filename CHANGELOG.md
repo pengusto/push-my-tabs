@@ -4,6 +4,7 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+## 1.3.4 - 2026-10-26
 ### Improved
 
 - Mark shortcuts supplied at installation separately from optional recommendations and current assignments.
