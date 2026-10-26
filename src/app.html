@@ -47,10 +47,13 @@
     </section>
     <section class="view" data-page="shortcuts" hidden aria-labelledby="view-heading">
       <p id="platform-caption" class="quiet"></p>
-      <div id="shortcuts"></div>
+      <p id="shortcut-summary" role="status" aria-live="polite"></p>
+      <p class="quiet" data-i18n="shortcutRecommendationsHelp"></p>
       <button id="shortcut-settings" type="button" class="primary" data-i18n="editInChrome"></button>
       <p id="shortcut-help" class="quiet"></p>
-      <details id="recent-shortcuts" class="section-details"><summary data-i18n="recentTabsHeading"></summary><div id="recent-commands"></div></details>
+      <details id="recent-shortcuts" class="section-details" open><summary data-i18n="recentTabsHeading"></summary><div id="recent-commands"></div></details>
+      <h2 class="shortcut-group-title" data-i18n="currentMapping"></h2>
+      <div id="shortcuts"></div>
       <details id="optional-shortcuts" class="section-details"><summary data-i18n="shortcutsHeading"></summary><div id="optional-commands"></div></details>
       <details class="section-details" id="preset-settings"><summary data-i18n="currentMapping"></summary>
         <label class="field"><span data-i18n="presetLabel"></span><select id="preset"><option value="adaptive" data-i18n="presetAdaptive"></option><option value="horizontal" data-i18n="presetHorizontal"></option><option value="vertical" data-i18n="presetVertical"></option><option value="custom" data-i18n="presetCustom"></option></select></label>

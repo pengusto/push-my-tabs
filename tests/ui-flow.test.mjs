@@ -70,4 +70,13 @@ assert.deepEqual(opened.pop(), { url: "extension://options.html#recent-shortcuts
 assert.equal(recommendedShortcuts("MacIntel")["recent-tab-switch"], "Alt+S");
 assert.equal(recommendedShortcuts("Win32")["recent-tab-switch-reverse"], "Alt+Shift+S");
 assert.equal(recommendedShortcuts("MacIntel")["arrow-left"], "Command+Left");
+for (const platform of ["mac", "win", "linux", "cros"]) {
+  const recommendations = recommendedShortcuts(platform);
+  assert.deepEqual(Object.keys(recommendations).sort(), ["arrow-left", "arrow-right", "arrow-up", "arrow-down", "recent-tab-switch", "recent-tab-switch-reverse", "new-tab-after"].sort());
+  assert.equal(new Set(Object.values(recommendations)).size, Object.values(recommendations).length,
+    "recommended shortcuts do not collide with each other");
+  assert.equal(recommendations["history-back"], undefined, "native browser focus shortcuts must not be suggested for history");
+  assert.equal(recommendations["recent-tab-quick-switch"], undefined, "fast cycling is optional, without a competing default");
+}
+assert.deepEqual(recommendedShortcuts("unknown"), {}, "an unknown platform does not invent a recommendation");
 console.log("UI save/retry ordering and browser-specific shortcut setup checks passed");

@@ -132,6 +132,18 @@ try {
       await page.locator('#retry-save').click();
       await page.waitForFunction(() => __saved.wrapSwitching === false);
       await view(page, 'shortcuts');
+      const functionCount = await page.locator('[data-shortcut]').count();
+      assert.equal(await page.locator('.shortcut-default').count(), 4, 'only manifest installation defaults are marked');
+      assert.equal(await page.locator('[data-shortcut="arrow-left"] .shortcut-default').textContent(), 'Installationsstandard');
+      assert.equal(await page.locator('[data-shortcut="recent-tab-switch"] .shortcut-default').count(), 0, 'recommendations are not installation defaults');
+      assert.equal(await page.locator('#shortcut-summary').textContent(), `4 von ${functionCount} Funktionen belegt`);
+      assert.equal(await page.locator('.shortcut-recommendation').count(), functionCount, 'all functions explain their recommendation status');
+      assert.equal(await page.locator('#recent-shortcuts').getAttribute('open'), '', 'TabLoop bindings are visible by default');
+      const tabloopRow = page.locator('[data-shortcut="recent-tab-switch"]');
+      assert.equal(await tabloopRow.locator('.shortcut-recommendation').textContent(), 'Empfehlung: ⌥S');
+      assert.equal(await tabloopRow.locator('.shortcut-assignment').textContent(), 'Nicht belegt');
+      assert.equal(await page.locator('[data-shortcut="recent-tab-quick-switch"] .shortcut-recommendation').textContent(), 'Keine Standardempfehlung');
+      assert.equal(await page.evaluate(() => __commands.find(c => c.name === 'recent-tab-switch').shortcut), '', 'displaying a recommendation never assigns it');
       if (kind === 'firefox') {
         const row = page.locator('[data-shortcut="arrow-left"]');
         await row.locator('input').fill('');
@@ -139,9 +151,10 @@ try {
         await page.waitForFunction(() => __commands.find(c => c.name === 'arrow-left').shortcut === '');
         await row.locator('button').click();
         await page.waitForFunction(() => __commands.find(c => c.name === 'arrow-left').shortcut === 'Command+Left');
-        await page.locator('#recent-shortcuts summary').click();
         await page.locator('[data-shortcut="recent-tab-switch"] button').click();
         await page.waitForFunction(() => __commands.find(c => c.name === 'recent-tab-switch').shortcut === 'Alt+S');
+        await page.waitForFunction(() => document.querySelector('[data-shortcut="recent-tab-switch"] .shortcut-assignment').textContent === 'Belegt');
+        assert.equal(await page.locator('#shortcut-summary').textContent(), `5 von ${functionCount} Funktionen belegt`);
       } else {
         assert.equal(await page.locator('#shortcuts input').count(), 0, 'Chrome has genuine read-only binding displays');
         await page.evaluate(() => { __failCreate = true; __closed = false; });
@@ -153,8 +166,10 @@ try {
         await page.waitForFunction(() => __closed && __created.length === 1);
         assert.equal(await page.evaluate(() => __created[0].url), 'chrome://extensions/shortcuts');
       }
-      await page.evaluate(() => { __commands.find(c => c.name === 'arrow-left').shortcut = 'Alt+Shift+Left'; window.dispatchEvent(new Event('focus')); });
+      await page.evaluate(() => { __commands.find(c => c.name === 'arrow-left').shortcut = 'Alt+Shift+Left'; __commands.find(c => c.name === 'recent-tab-switch').shortcut = 'Alt+S'; window.dispatchEvent(new Event('focus')); });
       await page.waitForFunction(() => document.querySelector('#shortcuts kbd').textContent === '⌥⇧←');
+      assert.equal(await page.locator('#shortcut-summary').textContent(), `5 von ${functionCount} Funktionen belegt`);
+      assert.equal(await page.locator('[data-shortcut="arrow-left"] .shortcut-recommendation').textContent(), 'Empfehlung: ⌘←', 'actual binding and recommendation remain distinct');
       await page.locator('#preset-settings summary').click();
       await page.locator('#preset').selectOption('custom');
       await page.waitForFunction(() => __saved.presetId === 'custom');
