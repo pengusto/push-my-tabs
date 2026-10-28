@@ -122,3 +122,7 @@ Chrome 개발 사본은 `dist/chrome-dev`를 한 번 로드한 뒤 `./scripts/bu
 ## 라이선스
 
 [MIT](../../LICENSE) · [README 이미지 출처](../assets/README.md)
+
+## 개발 지원
+
+Push My Tabs이 유용하다면 [제 오픈 소스 활동을 후원](https://github.com/sponsors/pengusto)하실 수 있습니다.

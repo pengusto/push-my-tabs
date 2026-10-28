@@ -137,6 +137,10 @@ The extension uses no host permissions, content scripts, accounts, analytics, ad
 
 </details>
 
+## Support development
+
+If Push My Tabs makes browsing easier for you, you can [support my open-source work](https://github.com/sponsors/pengusto). Your support helps me maintain the extension, test browser compatibility, and improve documentation.
+
 ## Brand assets
 
 [Logo kit and usage guide](docs/branding/README.md): SVG logos, app icons, favicons, and the purple Push P identity.

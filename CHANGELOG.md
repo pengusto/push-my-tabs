@@ -4,6 +4,10 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Added
+
+- Add an optional GitHub Sponsors link in the repository and README translations.
+
 ## 1.3.4 - 2026-10-26
 ### Improved
 

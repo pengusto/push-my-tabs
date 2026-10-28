@@ -132,3 +132,7 @@ Die Erweiterung verwendet keine Host-Berechtigungen, Content-Skripte, Konten, An
 ## Lizenz
 
 [MIT](../../LICENSE) · [Herkunft der README-Grafiken](../assets/README.md)
+
+## Entwicklung unterstützen
+
+Wenn dir Push My Tabs hilft, kannst du [meine Open-Source-Arbeit unterstützen](https://github.com/sponsors/pengusto).

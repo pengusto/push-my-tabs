@@ -132,3 +132,7 @@ jq empty manifests/chrome.json manifests/firefox.json
 ## 许可证
 
 [MIT](../../LICENSE) · [README 图片来源](../assets/README.md)
+
+## 支持开发
+
+如果 Push My Tabs 对你有帮助，欢迎[支持我的开源工作](https://github.com/sponsors/pengusto)。

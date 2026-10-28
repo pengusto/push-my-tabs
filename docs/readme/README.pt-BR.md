@@ -122,3 +122,7 @@ A extensão não usa permissões de host, scripts de conteúdo, contas, análise
 ## Licença
 
 [MIT](../../LICENSE) · [Origem das ilustrações](../assets/README.md)
+
+## Apoie o desenvolvimento
+
+Se o Push My Tabs é útil para você, pode [apoiar meu trabalho de código aberto](https://github.com/sponsors/pengusto).

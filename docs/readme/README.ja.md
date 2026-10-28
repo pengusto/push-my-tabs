@@ -132,3 +132,7 @@ Firefox 142 以降、Node.js 22、`npx`、`zip`、`unzip` が必要です。ビ�
 ## ライセンス
 
 [MIT](../../LICENSE) · [README 画像の出典](../assets/README.md)
+
+## 開発を支援
+
+Push My Tabs が役に立ったら、[私のオープンソース活動を支援](https://github.com/sponsors/pengusto)していただけます。
