@@ -4,6 +4,12 @@ All notable user-facing changes to Push My Tabs are documented here.
 
 ## Unreleased
 
+### Changed
+
+- Bring back a richer purple Matrix background, with a pause control and reduced-motion support.
+- Use official browser and GitHub logos, with matching black or white browser-logo backgrounds for each theme.
+- Redesign the landing page around side-by-side interactive tab examples, with purple styling, dark mode by default and a remembered light-mode toggle.
+
 ### Added
 
 - Add an optional GitHub Sponsors link in the repository and README translations.

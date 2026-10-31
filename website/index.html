@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
     <meta name="author" content="Pengusto (Enis Uysal)">
     <meta name="description" content="Direction-aware keyboard shortcuts for switching and moving browser tabs.">
     <meta property="og:title" content="Push My Tabs">
-    <meta property="og:description" content="Tabs should move the way they look.">
+    <meta property="og:description" content="Switch and move tabs with shortcuts that follow your tab layout.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pengusto.github.io/push-my-tabs/">
     <meta property="og:image" content="https://raw.githubusercontent.com/pengusto/push-my-tabs/main/store-assets/penguin/promo/push-my-tabs-1400x560.png">
@@ -18,6 +18,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
+    <script src="theme.js"></script>
+    <link rel="preload" href="fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script type="application/ld+json">
     {
@@ -82,145 +84,63 @@
       ]
     }
     </script>
+    <script src="matrix.js" defer></script>
     <script src="app.js" defer></script>
   </head>
-  <body>
+  <body class="landing">
+    <div class="matrix-field" id="matrix-field" aria-hidden="true" inert></div>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="signal-field" id="signal-field" aria-hidden="true"></div>
-
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Push My Tabs home">
-        <img class="brand-mark" src="logo.svg" width="38" height="38" alt="">
-        <span>Push My Tabs</span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="#privacy">Privacy</a>
-        <a class="nav-source" href="https://github.com/pengusto/push-my-tabs" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-      </nav>
+    <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+<symbol id="home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11h-7v-7h-4v7H3Z"/></symbol>
+<symbol id="book" viewBox="0 0 24 24"><path d="M12 5v16M3 4c4-1 6-1 9 1 3-2 5-2 9-1v15c-4-1-6-1-9 2-3-3-5-3-9-2Z"/></symbol>
+<symbol id="keys" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h1m4 0h1m4 0h1M6 13h1m4 0h1m4 0h1M8 16h8"/></symbol>
+<symbol id="pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v2m0 18v2M1 12h2m18 0h2M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></symbol>
+<symbol id="help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 8a3 3 0 0 1 6 0c0 3-3 2-3 5m0 3v1"/></symbol>
+<symbol id="file" viewBox="0 0 24 24"><path d="M5 2h9l5 5v15H5ZM14 2v6h5M8 12h8m-8 4h6"/></symbol>
+</defs></svg>
+    <header class="side-rail">
+      <a class="brand" href="#top" aria-label="Push My Tabs home"><img src="logo.svg" width="64" height="64" alt=""><span>Push My Tabs</span></a>
+      <nav aria-label="Main navigation"><a href="#top" aria-current="page"><svg class="icon " aria-hidden="true"><use href="#home"/></svg><span>Home</span></a><a href="#how-it-works"><svg class="icon " aria-hidden="true"><use href="#book"/></svg><span>How it works</span></a><a href="#shortcuts"><svg class="icon " aria-hidden="true"><use href="#keys"/></svg><span>Shortcuts</span></a><a href="https://github.com/pengusto/push-my-tabs/issues"><svg class="icon " aria-hidden="true"><use href="#help"/></svg><span>Support</span></a><a href="https://github.com/pengusto/push-my-tabs"><span class="github-mark" aria-hidden="true"><img class="github-dark" src="github-white.svg" width="24" height="24" alt=""><img class="github-light" src="github-black.svg" width="24" height="24" alt=""></span><span>GitHub</span></a></nav>
+      <div class="appearance-controls"><button class="motion-toggle" type="button" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#pause"/></svg><span>Pause background</span></button>
+      <button class="theme-toggle" type="button" aria-pressed="false" hidden><svg class="icon " aria-hidden="true"><use href="#sun"/></svg><span>Light mode</span></button></div>
     </header>
-
     <main id="main">
-      <section class="hero" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span> Chrome + Firefox · Direction-aware tab shortcuts</p>
-          <h1>Tabs should move<br> <em>the way they look.</em></h1>
-          <p class="lede">Switch and rearrange tabs with directional shortcuts that adapt to horizontal or vertical layouts.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik">Install for Chrome <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="https://addons.mozilla.org/firefox/addon/push-my-tabs/">Install for Firefox <span aria-hidden="true">↗</span></a>
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="title-band"><h1 id="hero-title">Go where your tabs go.</h1><p>Switch and move tabs with shortcuts that follow your tab layout.</p><div class="mobile-store-links" aria-label="Get Push My Tabs"><a href="https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik">Get for Chrome</a><a href="https://addons.mozilla.org/firefox/addon/push-my-tabs/">Get for Firefox</a></div></div>
+        <div class="hero-content">
+          <div class="demo-comparison" id="how-it-works"><article class="demo-panel" data-layout="horizontal" aria-labelledby="horizontal-title">
+ <div class="demo-heading"><h2 id="horizontal-title">Horizontal tabs</h2><div class="example-binding" aria-label="Example Mac binding: Command plus right"><kbd>Cmd</kbd><span>+</span><kbd>Right</kbd><svg class="icon direction-arrow " aria-hidden="true"><use href="#arrow"/></svg></div></div>
+ <div class="browser-demo ">
+ <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+ <div class="browser-stage"><div class="tab-list" role="group" aria-label="Horizontal tabs: choose a tab"><button class="demo-tab" type="button" aria-pressed="false"><svg class="icon " aria-hidden="true"><use href="#file"/></svg><span>Inbox</span></button><button class="demo-tab is-active" type="button" aria-pressed="true"><svg class="icon " aria-hidden="true"><use href="#file"/></svg><span>Research</span></button><button class="demo-tab" type="button" aria-pressed="false"><svg class="icon " aria-hidden="true"><use href="#file"/></svg><span>Draft</span></button></div>
+ <div class="page-ghost" aria-hidden="true"><div class="ghost-title"></div><div class="ghost-columns"><div class="ghost-column"></div><div class="ghost-column selected"><i></i><i></i><i></i><i></i></div><div class="ghost-column"></div></div><svg class="icon page-direction " aria-hidden="true"><use href="#arrow"/></svg></div></div>
+ <div class="command-row" role="group" aria-label="Horizontal tabs: try switching and moving" hidden><button type="button" data-command="previous" aria-label="Horizontal tabs: switch left"><svg class="icon arrow-left" aria-hidden="true"><use href="#arrow"/></svg><span>Switch left</span></button><button type="button" data-command="next" aria-label="Horizontal tabs: switch right"><svg class="icon " aria-hidden="true"><use href="#arrow"/></svg><span>Switch right</span></button><button type="button" data-command="backward" aria-label="Horizontal tabs: move left"><svg class="icon arrow-up" aria-hidden="true"><use href="#arrow"/></svg><span>Move left</span></button><button type="button" data-command="forward" aria-label="Horizontal tabs: move right"><svg class="icon arrow-down" aria-hidden="true"><use href="#arrow"/></svg><span>Move right</span></button></div></div>
+ <p class="demo-status" role="status" aria-live="polite">Research is active. Draft is to the right.</p>
+ </article><article class="demo-panel" data-layout="vertical" aria-labelledby="vertical-title">
+ <div class="demo-heading"><h2 id="vertical-title">Vertical tabs</h2><div class="example-binding" aria-label="Example Mac binding: Command plus down"><kbd>Cmd</kbd><span>+</span><kbd>Down</kbd><svg class="icon direction-arrow arrow-down" aria-hidden="true"><use href="#arrow"/></svg></div></div>
+ <div class="browser-demo is-vertical">
+ <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+ <div class="browser-stage"><div class="tab-list" role="group" aria-label="Vertical tabs: choose a tab"><button class="demo-tab" type="button" aria-pressed="false"><svg class="icon " aria-hidden="true"><use href="#file"/></svg><span>Inbox</span></button><button class="demo-tab is-active" type="button" aria-pressed="true"><svg class="icon " aria-hidden="true"><use href="#file"/></svg><span>Research</span></button><button class="demo-tab" type="button" aria-pressed="false"><svg class="icon " aria-hidden="true"><use href="#file"/></svg><span>Draft</span></button></div>
+ <div class="page-ghost" aria-hidden="true"><div class="ghost-title"></div><div class="ghost-columns"><div class="ghost-column"></div><div class="ghost-column selected"><i></i><i></i><i></i><i></i></div><div class="ghost-column"></div></div><svg class="icon page-direction arrow-down" aria-hidden="true"><use href="#arrow"/></svg></div></div>
+ <div class="command-row" role="group" aria-label="Vertical tabs: try switching and moving" hidden><button type="button" data-command="previous" aria-label="Vertical tabs: switch up"><svg class="icon arrow-up" aria-hidden="true"><use href="#arrow"/></svg><span>Switch up</span></button><button type="button" data-command="next" aria-label="Vertical tabs: switch down"><svg class="icon arrow-down" aria-hidden="true"><use href="#arrow"/></svg><span>Switch down</span></button><button type="button" data-command="backward" aria-label="Vertical tabs: move up"><svg class="icon arrow-left" aria-hidden="true"><use href="#arrow"/></svg><span>Move up</span></button><button type="button" data-command="forward" aria-label="Vertical tabs: move down"><svg class="icon " aria-hidden="true"><use href="#arrow"/></svg><span>Move down</span></button></div></div>
+ <p class="demo-status" role="status" aria-live="polite">Research is active. Draft is below.</p>
+ </article></div>
+          <div class="explanation" id="shortcuts"><div><h2>Research to Draft: right with horizontal tabs, down with vertical tabs.</h2><p>Example Mac bindings with the adaptive Shortcut Preset. Check or change assignments in your browser.</p></div><div class="mapping" aria-label="Adaptive Shortcut Preset"><p><strong>Horizontal:</strong> Left/Right switch · Up/Down move</p><p><strong>Vertical:</strong> Up/Down switch · Left/Right move</p></div></div>
+          <div class="store-actions" aria-label="Get Push My Tabs">
+            <a class="store-link" href="https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik"><img class="store-icon" src="chrome.svg" width="48" height="48" alt=""><span>Install for Chrome</span><svg class="icon " aria-hidden="true"><use href="#arrow"/></svg></a>
+            <a class="store-link" href="https://addons.mozilla.org/firefox/addon/push-my-tabs/"><img class="store-icon" src="firefox.svg" width="48" height="48" alt=""><span>Install for Firefox</span><svg class="icon " aria-hidden="true"><use href="#arrow"/></svg></a>
           </div>
-          <p class="install-note">Open source · Local only · No analytics</p>
-        </div>
-
-        <div class="demo-wrap">
-          <div class="demo-label"><span>LIVE COMMAND DECK</span><span id="demo-status" aria-live="polite">Horizontal layout</span></div>
-          <div class="browser-demo" id="browser-demo">
-            <div class="browser-bar">
-              <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-              <div class="address">push://tabs</div>
-              <div class="mode-switch" aria-label="Demo tab layout">
-                <button class="is-active" type="button" data-mode="horizontal" aria-pressed="true" title="Horizontal tabs">↔</button>
-                <button type="button" data-mode="vertical" aria-pressed="false" title="Vertical tabs">↕</button>
-              </div>
-            </div>
-            <div class="browser-stage">
-              <div class="tab-list" id="tab-list">
-                <button class="demo-tab" type="button"><span>01</span> Inbox</button>
-                <button class="demo-tab is-active" type="button"><span>02</span> Build</button>
-                <button class="demo-tab" type="button"><span>03</span> Docs</button>
-                <button class="demo-tab" type="button"><span>04</span> Ship</button>
-              </div>
-              <div class="page-ghost" aria-hidden="true">
-                <div class="ghost-title"></div>
-                <div class="ghost-line wide"></div>
-                <div class="ghost-line"></div>
-                <div class="ghost-grid"><i></i><i></i><i></i></div>
-              </div>
-            </div>
-          </div>
-          <div class="command-row" aria-label="Try the tab commands">
-            <button type="button" data-command="previous"><kbd>←</kbd><span>Previous</span></button>
-            <button type="button" data-command="next"><kbd>→</kbd><span>Next</span></button>
-            <button type="button" data-command="backward"><kbd>↑</kbd><span>Move back</span></button>
-            <button type="button" data-command="forward"><kbd>↓</kbd><span>Move forward</span></button>
-          </div>
+          <div class="compatibility"><p>Chrome 127+ · Firefox 142+ <span>Local settings · No analytics</span></p><div><a href="privacy.html">Privacy</a><a href="https://github.com/pengusto/push-my-tabs">GitHub</a></div></div>
         </div>
       </section>
-
-      <section class="proof-strip" aria-label="Product principles">
-        <p><span>01</span> Follows your tab axis</p>
-        <p><span>02</span> Learns tricky pages locally</p>
-        <p><span>03</span> Reads no page content</p>
+      <section class="details" id="features" aria-labelledby="features-title">
+        <div><h2 id="features-title">Your layout. Your shortcuts.</h2><p>Horizontal tabs switch left and right. Vertical tabs switch up and down. The other axis moves the active tab. Start with the adaptive Shortcut Preset, or choose your own mapping.</p></div>
+        <div class="detail-list"><article><h3>A layout you can confirm</h3><p>Firefox reads its vertical-tabs setting. Chrome estimates the layout from window geometry. Confirm an estimate or choose a manual layout whenever you need to.</p></article><article><h3>Shortcuts under your control</h3><p>Edit assignments in Firefox or open Chrome’s shortcut editor. The examples here don’t change your browser’s keys.</p></article><article><h3>More small actions, close at hand</h3><p>Use TabLoop to cycle across windows in last-used order. Optional commands also duplicate, pin or mute a tab, or move it to a new window.</p></article></div>
       </section>
-
-      <section class="features section" id="features">
-        <div class="section-intro">
-          <p class="eyebrow">ONE MENTAL MODEL</p>
-          <h2>Direction in.<br> Tabs obey.</h2>
-          <p>No modes to memorize while working. The same four commands switch or move tabs according to the layout you can see.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card feature-primary">
-            <span class="feature-icon" aria-hidden="true">↔ / ↕</span>
-            <h3>Layout aware</h3>
-            <p>Automatic mode interprets the same shortcuts for horizontal and vertical tab bars. Force either mode whenever you want.</p>
-            <div class="axis-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-          </article>
-          <article class="feature-card">
-            <span class="feature-icon" aria-hidden="true">⌘</span>
-            <h3>Your mapping</h3>
-            <p>Start with a sensible preset or map every direction separately. Chrome keeps the actual shortcuts under your control.</p>
-          </article>
-          <article class="feature-card">
-            <span class="feature-icon" aria-hidden="true">◎</span>
-            <h3>Site memory</h3>
-            <p>Save a layout for a complete site or one exact path. Push My Tabs remembers the browser geometry that worked.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="privacy section" id="privacy">
-        <div class="privacy-terminal" aria-label="Privacy status">
-          <div class="terminal-head"><span>privacy.check</span><span>LOCAL</span></div>
-          <div class="terminal-body">
-            <p><span class="prompt">›</span> accounts <strong>none</strong></p>
-            <p><span class="prompt">›</span> analytics <strong>none</strong></p>
-            <p><span class="prompt">›</span> page content <strong>never read</strong></p>
-            <p><span class="prompt">›</span> remote code <strong>none</strong></p>
-            <p class="terminal-ok"><span class="prompt">✓</span> settings stay in browser storage</p>
-          </div>
-        </div>
-        <div class="privacy-copy">
-          <p class="eyebrow">PRIVATE BY ABSENCE</p>
-          <h2>Nothing to send.<br> Nothing to profile.</h2>
-          <p>No accounts, ads, telemetry, host permissions, content scripts, or remote code. Site geometry profiles stay inside your browser.</p>
-          <a class="text-link" href="https://github.com/pengusto/push-my-tabs/blob/main/PRIVACY.md">Read the privacy policy <span aria-hidden="true">→</span></a>
-        </div>
-      </section>
-
-      <section class="final-cta section">
-        <div>
-          <p class="eyebrow">READY WHEN YOUR TABS ARE</p>
-          <h2>Stop translating<br> direction in your head.</h2>
-        </div>
-        <div class="final-actions">
-          <a class="button button-primary" href="https://chromewebstore.google.com/detail/bagfcickffpfkgecknaepmfleikeojik">Install for Chrome <span aria-hidden="true">↗</span></a>
-          <p><a href="https://addons.mozilla.org/firefox/addon/push-my-tabs/">Firefox 142+</a> · Chrome 127+ · <a href="https://github.com/pengusto/push-my-tabs/releases/tag/v1.3.0">v1.3.0</a> · MIT licensed</p>
-        </div>
-      </section>
+      <section class="privacy-section details" id="privacy" aria-labelledby="privacy-title"><div><h2 id="privacy-title">Your tabs stay yours.</h2><p>No accounts, analytics, advertising or remote code. Settings and saved layout profiles stay in your browser.</p><a class="text-link" href="https://github.com/pengusto/push-my-tabs/blob/main/PRIVACY.md">Read the extension privacy policy <svg class="icon " aria-hidden="true"><use href="#arrow"/></svg></a></div><div><p>Chrome uses temporary active-tab access after a shortcut or popup action for local layout profiles. Firefox uses storage and browser settings without reading page data.</p><p>No extension data is transmitted to the developer or third parties. This website is hosted by GitHub Pages; see the <a href="privacy.html">website privacy notice</a> for hosting details.</p></div></section>
+      <footer class="landing-footer"><p>By <a href="https://github.com/pengusto">Pengusto</a> · Open source</p><nav aria-label="Footer navigation"><a href="https://github.com/pengusto/push-my-tabs/issues">Support</a><a href="imprint.html">Legal notice</a><a href="privacy.html">Privacy</a><a href="https://github.com/pengusto/push-my-tabs/blob/main/LICENSE">MIT</a></nav></footer>
     </main>
-
-    <footer>
-      <a class="brand footer-brand" href="#top"><img class="brand-mark" src="logo.svg" width="38" height="38" alt=""><span>Push My Tabs</span></a>
-      <p>By <a href="https://github.com/pengusto">Pengusto</a> · Built for people with too many tabs.</p>
-      <div>
-        <a href="https://github.com/pengusto/push-my-tabs/issues">Support</a>
-        <a href="https://github.com/pengusto/push-my-tabs">Source</a>
-        <a href="imprint.html">Legal notice</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="https://github.com/pengusto/push-my-tabs/blob/main/LICENSE">MIT</a>
-      </div>
-    </footer>
   </body>
 </html>

@@ -19,6 +19,7 @@ node tests/release.test.mjs
 node tests/store-publishing.test.mjs
 node tests/store-connection.test.mjs
 node tests/website-schema.test.mjs
+node tests/website.test.mjs
 jq empty manifests/chrome.json manifests/firefox.json
 ```
 
